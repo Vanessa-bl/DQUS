@@ -1,0 +1,281 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Icon Styles */
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding-top: 7px;
+}
+
+.logo-svg {
+  width: 35px;
+  height: 35px;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.15));
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logo-svg {
+  filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.25));
+}
+
+/* SVG Elements */
+.main-shape {
+  transition: all 0.3s ease;
+}
+
+.code-brackets {
+  transition: all 0.3s ease;
+}
+
+.center-dot {
+  transition: all 0.3s ease;
+}
+
+.connection-lines {
+  transition: all 0.3s ease;
+}
+
+.bottom-accent {
+  transition: all 0.3s ease;
+}
+
+/* Text Styles */
+.logo-text {
+  display: flex;
+  align-items: baseline;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo-dev {
+  color: #111111;
+}
+
+.logo-queens {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #7c3aed 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.logo-us {
+  color: #666666;
+  font-weight: 500;
+}
+
+/* Size Variants */
+.logo-sm {
+  font-size: 18px;
+}
+
+.logo-sm .logo-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.logo-sm .logo-container {
+  gap: 8px;
+}
+
+.logo-md {
+  font-size: 24px;
+}
+
+.logo-md .logo-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.logo-lg {
+  font-size: 32px;
+}
+
+.logo-lg .logo-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-lg .logo-container {
+  gap: 16px;
+}
+
+/* Color Variants */
+.logo-white .logo-dev,
+.logo-white .logo-us {
+  color: #ffffff;
+}
+
+.logo-white .logo-queens {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-white .main-shape {
+  fill: url(#logoGradientWhite);
+}
+
+.logo-white .code-brackets {
+  stroke: rgba(139, 92, 246, 0.8);
+}
+
+.logo-white .center-dot {
+  fill: rgba(139, 92, 246, 0.9);
+}
+
+.logo-white .connection-lines {
+  stroke: rgba(139, 92, 246, 0.7);
+}
+
+.logo-white .logo-svg {
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
+}
+
+.logo-white:hover .logo-svg {
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.25));
+}
+
+.logo-dark .logo-dev,
+.logo-dark .logo-us {
+  color: #1f2937;
+}
+
+.logo-dark .logo-queens {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover Effects */
+.logo:hover .main-shape {
+  filter: brightness(1.1);
+}
+
+.logo:hover .code-brackets {
+  stroke-width: 2.5;
+}
+
+.logo:hover .center-dot {
+  r: 2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo-lg {
+    font-size: 28px;
+  }
+
+  .logo-lg .logo-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logo-md {
+    font-size: 20px;
+  }
+
+  .logo-md .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-lg {
+    font-size: 24px;
+  }
+
+  .logo-lg .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-lg .logo-container {
+    gap: 5px;
+  }
+
+  .logo-md {
+    font-size: 18px;
+  }
+
+  .logo-md .logo-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .logo-md .logo-container {
+    gap: 8px;
+  }
+}
+
+/* Animation Enhancements */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.logo:hover .center-dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+  0% {
+    stroke-dasharray: 0 20;
+  }
+  100% {
+    stroke-dasharray: 20 0;
+  }
+}
+
+.logo:hover .connection-lines {
+  animation: slideIn 1.5s ease-in-out infinite;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .logo-svg,
+  .logo:hover .center-dot,
+  .logo:hover .connection-lines {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .logo-dev,
+  .logo-us {
+    color: #000000;
+  }
+
+  .logo-queens {
+    background: #000000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

@@ -1,0 +1,41 @@
+.btn {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-sans-body);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.no-transitions .btn {
+  transition: none !important;
+}
+
+.btn .wave {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: var(--btn-text);
+  border-radius: 50%;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) scale(0);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn .content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  color: var(--btn-text);
+}

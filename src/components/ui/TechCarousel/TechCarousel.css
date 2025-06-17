@@ -1,0 +1,50 @@
+/* src/components/TechCarousel/TechCarousel.css */
+
+.tech-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  padding: 38px 0;
+}
+
+.tech-carousel-track {
+  display: flex;
+  /* El ancho se establece dinámicamente desde el componente */
+}
+
+.tech-carousel-group {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* Espacio uniforme entre items */
+}
+
+.tech-carousel-item {
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.tech-carousel-item:hover {
+  cursor: default;
+}
+
+/* Responsivo: ajustamos tamaño de fuente y gap en pantallas pequeñas */
+@media (max-width: 768px) {
+  .tech-carousel-item {
+    font-size: 1.2rem;
+  }
+  .tech-carousel-group {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-carousel-item {
+    font-size: 1rem;
+  }
+  .tech-carousel-group {
+    gap: 12px;
+  }
+}

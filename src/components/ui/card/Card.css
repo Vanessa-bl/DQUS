@@ -1,0 +1,79 @@
+.card {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  padding: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:focus {
+  outline: 2px solid var(--focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
+.card .wave {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: var(--card-text);
+  border-radius: 50%;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) scale(0);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  z-index: 2;
+}
+
+.card-area p,
+.card-title h3 {
+  color: inherit;
+}
+
+.card-divider {
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-area {
+  font-size: 14px;
+  padding: 7px 0 4px;
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.card-content {
+  font-size: 1rem;
+  padding-bottom: 1.2rem;
+}
+
+.card-footer {
+  width: fit-content;
+}

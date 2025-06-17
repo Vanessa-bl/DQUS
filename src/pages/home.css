@@ -1,0 +1,112 @@
+/* Contenedor general para secciones */
+.container {
+  max-width: 1200px;
+  margin: 0 auto; /* centra horizontalmente */
+  padding: 0 1rem; /* padding lateral */
+  box-sizing: border-box;
+}
+
+/* Separación vertical entre secciones */
+.section {
+  margin: 4rem 0; /* espacio superior e inferior */
+}
+
+/* =========================
+   1) Diseño enriquecido para home-intro e insights-intro
+   ========================= */
+.enhanced-section {
+  border-left: 4px solid #0066cc; /* acento de color */
+  padding: 2rem 1rem; /* espacio interno */
+  border-radius: 0.5rem; /* esquinas redondeadas */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* sombra ligera */
+}
+
+.enhanced-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem; /* separación entre columnas */
+}
+
+.enhanced-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #003366;
+  flex: 1; /* ocupa proporción 1 */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.enhanced-text {
+  flex: 1.5; /* ocupa más espacio para texto */
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}
+
+/* Tablet (≤768px): apilar vertical y reducir tamaños */
+@media screen and (max-width: 768px) {
+  .enhanced-content {
+    flex-direction: column;
+  }
+  .enhanced-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .enhanced-text {
+    font-size: 1rem;
+  }
+}
+
+/* Móvil (≤480px): menos padding */
+@media screen and (max-width: 480px) {
+  .enhanced-section {
+    padding: 1.5rem 0.75rem;
+  }
+  .enhanced-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* =========================
+   2) Grid fijo de 4 tarjetas
+   ========================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 3rem 0 3rem; /* espacio superior */
+}
+
+/* Tablet entre 769px y 1024px: 2 columnas */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile ≤768px: 1 columna */
+@media screen and (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   3) Estilos anteriores (reseteos generales, títulos básicos, etc.)
+   ========================= */
+
+/* Títulos de sección (si aún los usas en otras partes) */
+.home-intro-title,
+.insights-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.home-intro-text,
+.insights-text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}

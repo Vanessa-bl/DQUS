@@ -1,0 +1,32 @@
+.simple-card {
+  color: var(--card-text, #333333);
+  border-radius: 4px;
+}
+
+.simple-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: underline;
+  letter-spacing: 1px;
+  text-transform: math-auto;
+}
+
+.simple-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.simple-card-link:focus {
+  outline: 2px solid var(--focus-color, #005fcc);
+  outline-offset: 2px;
+}
+
+.simple-card-description {
+  text-transform: math-auto;
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: inherit;
+}
