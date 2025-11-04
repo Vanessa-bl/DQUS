@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
 import Logo from "../Logo/Logo";
+import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -37,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
       }}
     >
       <button
-        className="button-header"
+        className="button-header mobile-only"
         aria-label="Abrir menú"
         onClick={onMenuClick}
       >
@@ -46,20 +47,33 @@ export const Header: React.FC<HeaderProps> = ({
 
       <Logo />
 
-      <nav className="header__nav" aria-label="Redes sociales">
+      <nav className="header__desktop-nav" aria-label="Main navigation">
         <ul>
-          {/* 
-                      <li>
-            <a href="#" aria-label="LinkedIn">
-              <Linkedin size={20} />
-            </a>
+          <li>
+            <AnimatedLink to="/" size="1rem" aria-label="Ir a Home">
+              Home
+            </AnimatedLink>
           </li>
           <li>
-            <a href="#" aria-label="Soporte">
-              <Headset size={20} />
-            </a>
+            <AnimatedLink to="/services" size="1rem" aria-label="Ir a Services">
+              Services
+            </AnimatedLink>
           </li>
-          */}
+          <li>
+            <AnimatedLink to="/about" size="1rem" aria-label="Ir a About">
+              About
+            </AnimatedLink>
+          </li>
+          <li>
+            <AnimatedLink to="/contact" size="1rem" aria-label="Ir a Contact">
+              Contact
+            </AnimatedLink>
+          </li>
+        </ul>
+      </nav>
+
+      <nav className="header__nav" aria-label="Redes sociales">
+        <ul>
           <li>
             <button
               className="button-header"
