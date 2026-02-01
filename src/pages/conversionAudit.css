@@ -1,0 +1,35 @@
+.conversion-audit {
+  font-family: "Inter", "DM Sans", sans-serif;
+}
+
+.conversion-audit h1,
+.conversion-audit h2,
+.conversion-audit h3,
+.conversion-audit h4 {
+  letter-spacing: -0.02em;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #9366ff;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.section-tag::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 100%;
+  height: 1px;
+  background: rgba(147, 102, 255, 0.3);
+}

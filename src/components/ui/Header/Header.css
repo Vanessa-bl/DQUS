@@ -22,6 +22,12 @@
   /* background-color eliminado, ahora se maneja con framer-motion */
 }
 
+.header--minimal {
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: none;
+}
+
 .header__title {
   margin: 0;
   font-size: 1.5rem;

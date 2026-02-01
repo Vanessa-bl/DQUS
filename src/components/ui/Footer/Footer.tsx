@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 import "./footer.css";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  minimal?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
   const currentYear = new Date().getFullYear();
 
   const containerVariants = {
@@ -77,62 +81,68 @@ const Footer: React.FC = () => {
           </motion.div>
 
           {/* Services Section */}
-          <motion.div className="footer-section" variants={itemVariants}>
-            <h4 className="section-title">Services</h4>
-            <nav className="footer-nav">
-              {services.map((service) => (
+          {!minimal && (
+            <motion.div className="footer-section" variants={itemVariants}>
+              <h4 className="section-title">Services</h4>
+              <nav className="footer-nav">
+                {services.map((service) => (
+                  <AnimatedLink
+                    key={service}
+                    to="/services"
+                    className="nav-link contact-link"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {service}
+                  </AnimatedLink>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+
+          {/* Company Section */}
+          {!minimal && (
+            <motion.div className="footer-section" variants={itemVariants}>
+              <h4 className="section-title">Company</h4>
+              <nav className="footer-nav">
                 <AnimatedLink
-                  key={service}
-                  to="/services"
+                  to="/about"
                   className="nav-link contact-link"
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  {service}
+                  About us
                 </AnimatedLink>
-              ))}
-            </nav>
-          </motion.div>
-
-          {/* Company Section */}
-          <motion.div className="footer-section" variants={itemVariants}>
-            <h4 className="section-title">Company</h4>
-            <nav className="footer-nav">
-              <AnimatedLink
-                to="/about"
-                className="nav-link contact-link"
-                whileHover={{ x: 4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                About us
-              </AnimatedLink>
-              <AnimatedLink
-                to="/contact"
-                className="nav-link contact-link"
-                whileHover={{ x: 4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                Contact
-              </AnimatedLink>
-            </nav>
-          </motion.div>
+                <AnimatedLink
+                  to="/contact"
+                  className="nav-link contact-link"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  Contact
+                </AnimatedLink>
+              </nav>
+            </motion.div>
+          )}
 
           {/* CTA Section */}
-          <motion.div className="footer-cta" variants={itemVariants}>
-            <h4 className="cta-title">Ready to Get Started?</h4>
-            <p className="cta-description">
-              Let’s talk about your next digital project.
-            </p>
-            <motion.a
-              href="mailto:hello@devqueensus.com"
-              className="cta-button"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
-              Start a Project
-            </motion.a>
-          </motion.div>
+          {!minimal && (
+            <motion.div className="footer-cta" variants={itemVariants}>
+              <h4 className="cta-title">Ready to Get Started?</h4>
+              <p className="cta-description">
+                Let’s talk about your next digital project.
+              </p>
+              <motion.a
+                href="mailto:hello@devqueensus.com"
+                className="cta-button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                Start a Project
+              </motion.a>
+            </motion.div>
+          )}
         </div>
 
         {/* Divider */}

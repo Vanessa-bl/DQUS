@@ -5,15 +5,18 @@ import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
 import Logo from "../Logo/Logo";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
+import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
 
 interface HeaderProps {
-  onMenuClick: () => void;
+  onMenuClick?: () => void;
   shrinkPointPx?: number;
+  minimal?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onMenuClick,
   shrinkPointPx = 200,
+  minimal = false,
 }) => {
   const { scrollY } = useScroll();
 
@@ -28,60 +31,70 @@ export const Header: React.FC<HeaderProps> = ({
 
   const { theme, toggleTheme } = useTheme();
 
+  const handleMenuClick = onMenuClick ?? (() => {});
+
   return (
     <motion.header
       role="banner"
-      className="header"
+      className={`header${minimal ? " header--minimal" : ""}`}
       style={{
         width,
         backgroundColor,
       }}
     >
-      <button
-        className="button-header mobile-only"
-        aria-label="Abrir menú"
-        onClick={onMenuClick}
-      >
-        <Menu />
-      </button>
+      {!minimal && (
+        <button
+          className="button-header mobile-only"
+          aria-label="Abrir menú"
+          onClick={handleMenuClick}
+        >
+          <Menu />
+        </button>
+      )}
 
       <Logo />
 
-      <nav className="header__desktop-nav" aria-label="Main navigation">
-        <ul>
-          <li>
-            <AnimatedLink to="/" size="1rem" aria-label="Ir a Home">
-              Home
-            </AnimatedLink>
-          </li>
-          <li>
-            <AnimatedLink to="/services" size="1rem" aria-label="Ir a Services">
-              Services
-            </AnimatedLink>
-          </li>
-          <li>
-            <AnimatedLink to="/about" size="1rem" aria-label="Ir a About">
-              About
-            </AnimatedLink>
-          </li>
-          <li>
-            <AnimatedLink to="/contact" size="1rem" aria-label="Ir a Contact">
-              Contact
-            </AnimatedLink>
-          </li>
-        </ul>
-      </nav>
+      {!minimal && (
+        <nav className="header__desktop-nav" aria-label="Main navigation">
+          <ul>
+            <li>
+              <AnimatedLink to="/" size="1rem" aria-label="Ir a Home">
+                Home
+              </AnimatedLink>
+            </li>
+            <li>
+              <AnimatedLink to="/services" size="1rem" aria-label="Ir a Services">
+                Services
+              </AnimatedLink>
+            </li>
+            <li>
+              <AnimatedLink to="/about" size="1rem" aria-label="Ir a About">
+                About
+              </AnimatedLink>
+            </li>
+            <li>
+              <AnimatedLink to="/contact" size="1rem" aria-label="Ir a Contact">
+                Contact
+              </AnimatedLink>
+            </li>
+          </ul>
+        </nav>
+      )}
 
       <nav className="header__nav" aria-label="Redes sociales">
         <ul>
           <li>
-            <button
-              className="button-header"
-              onClick={toggleTheme}
-              style={{ fontSize: "1.1rem" }}
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
+            {minimal ? (
+              <ThemeSwitch />
+            ) : (
+              <button
+                className="button-header"
+                onClick={toggleTheme}
+                style={{ fontSize: "1.1rem" }}
+              >
+                {theme === "dark" ? "☀️" : "🌙"}
+              </button>
+            )}
           </li>
         </ul>
       </nav>
