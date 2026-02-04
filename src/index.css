@@ -1,5 +1,49 @@
 @import "tailwindcss";
 
+@layer components {
+  .btn-primary {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    background: linear-gradient(135deg, #7c7fc6, #a855f7);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 127, 198, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 127, 198, 0.4);
+  }
+
+  .btn-secondary {
+    align-items: center;
+    background: transparent;
+    display: flex;
+    gap: 10px;
+    border: 2px solid var(--color-text);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: var(--btn-bg);
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
 /* src/index.css */
 
 @layer base {

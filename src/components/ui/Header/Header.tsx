@@ -11,12 +11,14 @@ interface HeaderProps {
   onMenuClick?: () => void;
   shrinkPointPx?: number;
   minimal?: boolean;
+  showThemeSwitch?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onMenuClick,
   shrinkPointPx = 200,
   minimal = false,
+  showThemeSwitch = true,
 }) => {
   const { scrollY } = useScroll();
 
@@ -84,17 +86,18 @@ export const Header: React.FC<HeaderProps> = ({
       <nav className="header__nav" aria-label="Redes sociales">
         <ul>
           <li>
-            {minimal ? (
-              <ThemeSwitch />
-            ) : (
-              <button
-                className="button-header"
-                onClick={toggleTheme}
-                style={{ fontSize: "1.1rem" }}
-              >
-                {theme === "dark" ? "☀️" : "🌙"}
-              </button>
-            )}
+            {showThemeSwitch &&
+              (minimal ? (
+                <ThemeSwitch />
+              ) : (
+                <button
+                  className="button-header"
+                  onClick={toggleTheme}
+                  style={{ fontSize: "1.1rem" }}
+                >
+                  {theme === "dark" ? "☀️" : "🌙"}
+                </button>
+              ))}
           </li>
         </ul>
       </nav>

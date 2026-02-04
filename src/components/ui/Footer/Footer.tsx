@@ -1,14 +1,24 @@
 import type React from "react";
 import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./footer.css";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
+import { getLocaleFromPath, toLocalePath } from "../../../i18n/locale";
+import type { Locale } from "../../../i18n";
 
 interface FooterProps {
   minimal?: boolean;
+  showLocaleSwitcher?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
+const Footer: React.FC<FooterProps> = ({
+  minimal = false,
+  showLocaleSwitcher = false,
+}) => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentLocale = getLocaleFromPath(location.pathname);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -21,6 +31,19 @@ const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
         staggerChildren: 0.15,
       },
     },
+  };
+
+  const handleLocaleChange = (locale: Locale) => {
+    if (locale === currentLocale) {
+      return;
+    }
+
+    const nextPath =
+      toLocalePath(location.pathname, locale) +
+      location.search +
+      location.hash;
+
+    navigate(nextPath);
   };
 
   const itemVariants = {
@@ -179,18 +202,26 @@ const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
             </div>
           </div>
 
-          {/*
           <div className="footer-bottom-right">
-            <div className="legal-links">
-              <a href="#" className="legal-link">
-                Privacy Policy
-              </a>
-              <a href="#" className="legal-link">
-                Terms &amp; Conditions
-              </a>
-            </div>
+            {showLocaleSwitcher ? (
+              <div className="footer-locale" aria-label="Locale switcher">
+                <button
+                  type="button"
+                  className={`locale-button${currentLocale === "en" ? " is-active" : ""}`}
+                  onClick={() => handleLocaleChange("en")}
+                >
+                  EN
+                </button>
+                <button
+                  type="button"
+                  className={`locale-button${currentLocale === "es" ? " is-active" : ""}`}
+                  onClick={() => handleLocaleChange("es")}
+                >
+                  ES
+                </button>
+              </div>
+            ) : null}
           </div>
-          */}
         </motion.div>
       </div>
     </motion.footer>

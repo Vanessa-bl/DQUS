@@ -1,39 +1,34 @@
 import React from "react";
 import { SectionTag } from "./SectionTag";
 
-const deliverables = [
-  {
-    icon: "description",
-    title: "Executive Summary for Stakeholders",
-  },
-  {
-    icon: "list_alt",
-    title: "Prioritized Fix List (Low vs High Effort)",
-  },
-  {
-    icon: "camera_alt",
-    title: "Annotated Screenshots of Issues",
-  },
-  {
-    icon: "trending_up",
-    title: "Expected Impact Estimations",
-  },
-];
+interface DeliverableItem {
+  icon: string;
+  title: string;
+}
 
-export const DeliverablesSection: React.FC = () => {
+interface DeliverablesSectionProps {
+  tag: string;
+  title: string;
+  intro: string;
+  items: DeliverableItem[];
+}
+
+export const DeliverablesSection: React.FC<DeliverablesSectionProps> = ({
+  tag,
+  title,
+  intro,
+  items,
+}) => {
   return (
     <section className="max-w-6xl mx-auto px-6 py-24" id="deliverables">
       <div className="bg-[#9366ff]/5 rounded-3xl p-10 md:p-16 border border-[#9366ff]/10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <SectionTag>THE OUTPUT</SectionTag>
-            <h2 className="text-4xl font-extrabold mb-8">The PDF Report</h2>
-            <p className="text-lg text-gray-600 mb-10 font-medium">
-              This isn&apos;t an automated scan. It&apos;s a curated, human-written
-              document containing:
-            </p>
+            <SectionTag>{tag}</SectionTag>
+            <h2 className="text-4xl font-extrabold mb-8">{title}</h2>
+            <p className="text-lg text-gray-600 mb-10 font-medium">{intro}</p>
             <ul className="space-y-6">
-              {deliverables.map((item) => (
+              {items.map((item) => (
                 <li key={item.title} className="flex items-center gap-4">
                   <span className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#9366ff]">
                     <span className="material-symbols-outlined">

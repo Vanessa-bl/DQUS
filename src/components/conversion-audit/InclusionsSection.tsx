@@ -1,22 +1,18 @@
 import React from "react";
 
-const includedItems = [
-  "Complete UX Friction Audit",
-  "Technical Performance Benchmark",
-  "Copy Clarity Analysis",
-  "Actionable Improvement Checklist",
-  "Final PDF Executive Report",
-];
+interface InclusionsSectionProps {
+  includedTitle: string;
+  excludedTitle: string;
+  includedItems: string[];
+  excludedItems: string[];
+}
 
-const excludedItems = [
-  "Implementation or Coding",
-  "Graphic Design or UI Assets",
-  "Ongoing SEO Management",
-  "Content Writing Services",
-  "Advertising/PPC Management",
-];
-
-export const InclusionsSection: React.FC = () => {
+export const InclusionsSection: React.FC<InclusionsSectionProps> = ({
+  includedTitle,
+  excludedTitle,
+  includedItems,
+  excludedItems,
+}) => {
   return (
     <section className="bg-gray-50 py-24 border-y border-gray-100">
       <div className="max-w-6xl mx-auto px-6">
@@ -29,7 +25,7 @@ export const InclusionsSection: React.FC = () => {
                     task_alt
                   </span>
                 </span>
-                Included
+                {includedTitle}
               </h3>
               <ul className="space-y-4">
                 {includedItems.map((item) => (
@@ -52,7 +48,7 @@ export const InclusionsSection: React.FC = () => {
                     block
                   </span>
                 </span>
-                Not Included
+                {excludedTitle}
               </h3>
               <ul className="space-y-4 text-gray-500 font-medium">
                 {excludedItems.map((item) => (
