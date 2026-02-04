@@ -1,0 +1,136 @@
+{
+  "conversionAudit": {
+    "hero": {
+      "tag": "Website Conversion Audit",
+      "titleLead": "Stop leaking conversions with",
+      "titleHighlight": "professional",
+      "titleTail": "diagnosis.",
+      "description": "A one-time, expert audit of your website's UX, technical performance, and copy clarity to identify exactly where you are losing customers.",
+      "primaryCta": "Get Started Now",
+      "secondaryCta": "View Sample Report"
+    },
+    "qualification": {
+      "tag": "Qualification",
+      "title": "Is this for you?",
+      "forYouTitle": "For you if",
+      "notForYouTitle": "Not for you if",
+      "forYouItems": [
+        "You have an established product with steady traffic.",
+        "You want to optimize existing conversion paths for better ROI.",
+        "You suspect your UX or copy is causing friction."
+      ],
+      "notForYouItems": [
+        "You are in the pre-launch phase with zero traffic.",
+        "You need a full website redesign from scratch.",
+        "You are looking for long-term SEO or marketing management."
+      ]
+    },
+    "scope": {
+      "tag": "Audit Details",
+      "title": "The Diagnosis Scope",
+      "analysisTag": "WHAT IT ANALYZES",
+      "analysisItems": [
+        {
+          "title": "Technical Foundation",
+          "copy": "We measure LCP, CLS, and FID metrics to ensure your technical performance isn't scaring off users before the page even loads."
+        },
+        {
+          "title": "Cognitive Load & Copy",
+          "copy": "Evaluation of headline clarity, value proposition positioning, and the '5-second test' effectiveness across landing pages."
+        },
+        {
+          "title": "UX Friction Points",
+          "copy": "Identifying 'dead-clicks', confusing navigation patterns, and form abandonment triggers in your funnel."
+        }
+      ],
+      "problemsTag": "PROBLEMS IT DETECTS",
+      "problemItems": [
+        {
+          "title": "Conversion Leaks",
+          "copy": "Specific steps in your checkout or signup flow where users drop off at higher-than-average rates."
+        },
+        {
+          "title": "Device Inconsistency",
+          "copy": "Breakages on specific mobile browsers or screen resolutions that are invisible on desktop."
+        }
+      ]
+    },
+    "inclusions": {
+      "includedTitle": "Included",
+      "excludedTitle": "Not Included",
+      "includedItems": [
+        "Complete UX Friction Audit",
+        "Technical Performance Benchmark",
+        "Copy Clarity Analysis",
+        "Actionable Improvement Checklist",
+        "Final PDF Executive Report"
+      ],
+      "excludedItems": [
+        "Implementation or Coding",
+        "Graphic Design or UI Assets",
+        "Ongoing SEO Management",
+        "Content Writing Services",
+        "Advertising/PPC Management"
+      ]
+    },
+    "process": {
+      "tag": "How it works",
+      "title": "Our 3-Step Process",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Onboarding & Access",
+          "copy": "You provide URL and brief context. We request temporary read-only access to your analytics to see real-world behavior."
+        },
+        {
+          "number": "02",
+          "title": "Deep-Dive Analysis",
+          "copy": "Our specialists manually audit your site through 50+ conversion checkpoints using our proprietary diagnostic framework."
+        },
+        {
+          "number": "03",
+          "title": "The PDF Delivery",
+          "copy": "Receive a comprehensive PDF report with clear, ranked action items to improve your site's conversion rate immediately."
+        }
+      ]
+    },
+    "deliverables": {
+      "tag": "THE OUTPUT",
+      "title": "The PDF Report",
+      "intro": "This isn't an automated scan. It's a curated, human-written document containing:",
+      "items": [
+        {
+          "icon": "description",
+          "title": "Executive Summary for Stakeholders"
+        },
+        {
+          "icon": "list_alt",
+          "title": "Prioritized Fix List (Low vs High Effort)"
+        },
+        {
+          "icon": "camera_alt",
+          "title": "Annotated Screenshots of Issues"
+        },
+        {
+          "icon": "trending_up",
+          "title": "Expected Impact Estimations"
+        }
+      ]
+    },
+    "pricing": {
+      "tag": "INVESTMENT",
+      "title": "Simple Transparent Pricing",
+      "price": "$1,495",
+      "feeLabel": "One-Time Flat Fee",
+      "description": "A fixed investment for a complete diagnostic report. No hidden costs, no recurring fees, and a 100% money-back guarantee if we find zero critical issues.",
+      "button": "Get My Diagnosis",
+      "availability": "Currently 3 spots available for this month"
+    },
+    "cta": {
+      "title": "Ready to fix your conversion leaks?",
+      "description": "Professional clarity for your website is just one report away. No pressure, just data and actionable steps.",
+      "button": "Start Your Website Audit",
+      "trust": "Trusted by 200+ companies worldwide"
+    }
+  }
+}

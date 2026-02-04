@@ -1,139 +1,179 @@
+@import "tailwindcss";
+
+@layer components {
+  .btn-primary {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    background: linear-gradient(135deg, #7c7fc6, #a855f7);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 127, 198, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 127, 198, 0.4);
+  }
+
+  .btn-secondary {
+    align-items: center;
+    background: transparent;
+    display: flex;
+    gap: 10px;
+    border: 2px solid var(--color-text);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: var(--btn-bg);
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
 /* src/index.css */
 
-/* 1) Reset mínimo */
-html,
-body {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  /* 1) Reset mínimo */
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
 
-/* 2) Variables de tema para el modo “light” (valores de :root) */
-:root {
-  --font-sans-heading: "DM Sans", sans-serif;
-  --font-sans-body: "Nunito Sans", sans-serif;
+  /* 2) Variables de tema para el modo “light” (valores de :root) */
+  :root {
+    --font-sans-heading: "DM Sans", sans-serif;
+    --font-sans-body: "Nunito Sans", sans-serif;
 
-  --color-bg: #f4f4f4;
-  --color-text: #222;
+    --color-bg: #f4f4f4;
+    --color-text: #222;
 
-  --link-var: #222;
+    --link-var: #222;
 
-  --card-bg: #ffffff; /* fondo de la card en light */
-  --card-text: #222; /* texto de la card en light */
-  --card-text-regular: #475569;
+    --card-bg: #ffffff; /* fondo de la card en light */
+    --card-text: #222; /* texto de la card en light */
+    --card-text-regular: #475569;
 
-  --carousel-bg: #ffffff;
+    --carousel-bg: #ffffff;
 
-  --drawer-bg: #ffffff;
+    --drawer-bg: #ffffff;
 
-  --btn-bg: #222;
-  --btn-text: #fff;
+    --btn-bg: #222;
+    --btn-text: #fff;
 
-  --hero-card: #f2f0ea;
+    --hero-card: #f2f0ea;
 
-  --pattern-line-light: rgba(0, 0, 0, 0.03);
+    --pattern-line-light: rgba(0, 0, 0, 0.03);
 
-  /* Color de líneas en modo oscuro (claro sobre fondo oscuro) */
-  --pattern-line-dark: rgba(255, 255, 255, 0.03);
-}
+    /* Color de líneas en modo oscuro (claro sobre fondo oscuro) */
+    --pattern-line-dark: rgba(255, 255, 255, 0.03);
+  }
 
-/* 3) Variables para el modo “dark” */
-[data-theme="dark"] {
-  --color-bg: #222;
-  --color-text: #f4f4f4;
+  /* 3) Variables para el modo “dark” */
+  [data-theme="dark"] {
+    --color-bg: #222;
+    --color-text: #f4f4f4;
 
-  --card-bg: #282828; /* fondo de la card en dark */
-  --card-text: #f4f4f4; /* texto de la card en dark */
-  --card-text-regular: #f4f4f4;
+    --card-bg: #282828; /* fondo de la card en dark */
+    --card-text: #f4f4f4; /* texto de la card en dark */
+    --card-text-regular: #f4f4f4;
 
-  --link-var: #f4f4f4;
+    --link-var: #f4f4f4;
 
-  --carousel-bg: #282828;
+    --carousel-bg: #282828;
 
-  --drawer-bg: #282828;
+    --drawer-bg: #282828;
 
-  --btn-bg: #f4f4f4;
-  --btn-text: #222;
+    --btn-bg: #f4f4f4;
+    --btn-text: #222;
 
-  --hero-card: #282828;
-}
+    --hero-card: #282828;
+  }
 
-/* 4) Variables para cualquier elemento con data-theme="light" (sirve para la ola) */
-[data-theme="light"] {
-  --color-bg: #f4f4f4;
-  --color-text: #222;
+  /* 4) Variables para cualquier elemento con data-theme="light" (sirve para la ola) */
+  [data-theme="light"] {
+    --color-bg: #f4f4f4;
+    --color-text: #222;
 
-  --card-bg: #ffffff;
-  --card-text: #222;
-  --card-text-regular: #475569;
+    --card-bg: #ffffff;
+    --card-text: #222;
+    --card-text-regular: #475569;
 
-  --link-var: #222;
+    --link-var: #222;
 
-  --drawer-bg: #ffffff;
+    --drawer-bg: #ffffff;
 
-  --btn-bg: #222;
-  --btn-text: #fff;
+    --btn-bg: #222;
+    --btn-text: #fff;
 
-  --hero-card: #f2f0ea;
-}
+    --hero-card: #f2f0ea;
+  }
 
-[data-theme="light"] .tech-grid {
-  background-image: linear-gradient(
-      var(--pattern-line-light) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, var(--pattern-line-light) 1px, transparent 1px);
-}
+  [data-theme="light"] .tech-grid {
+    background-image: linear-gradient(
+        var(--pattern-line-light) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, var(--pattern-line-light) 1px, transparent 1px);
+  }
 
-/* 3) Cuando el tema es “dark”, usamos líneas claras */
-[data-theme="dark"] .tech-grid {
-  background-image: linear-gradient(
-      var(--pattern-line-dark) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, var(--pattern-line-dark) 1px, transparent 1px);
-}
-/* 5) Tipografía global, sin fondo */
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-button,
-span {
-  font-family: var(--font-sans-body);
-  color: var(--color-text);
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  /* 3) Cuando el tema es “dark”, usamos líneas claras */
+  [data-theme="dark"] .tech-grid {
+    background-image: linear-gradient(
+        var(--pattern-line-dark) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, var(--pattern-line-dark) 1px, transparent 1px);
+  }
 
-/* 6) SOLO el body pinta el fondo general de la página */
-body {
-  background-color: var(--color-bg);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+  /* 5) Tipografía global, sin fondo */
+  :where(html, body) {
+    font-family: var(--font-sans-body);
+  }
 
-/* 7) Cuando <html class="no-transitions">, desactivamos TODAS las transiciones */
-html.no-transitions *,
-html.no-transitions {
-  transition: none !important;
-}
+  :where(h1, h2, h3, h4, h5, h6, p, a, button, span) {
+    margin: 0;
+    padding: 0;
+  }
 
-/* 8) Ajustes de font-smoothing */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* 6) SOLO el body pinta el fondo general de la página */
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-/* 9) Ejemplo de regla para link (sin fondo) */
-a {
-  text-decoration: none;
+  /* 7) Cuando <html class="no-transitions">, desactivamos TODAS las transiciones */
+  html.no-transitions *,
+  html.no-transitions {
+    transition: none !important;
+  }
+
+  /* 8) Ajustes de font-smoothing */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 9) Ejemplo de regla para link (sin fondo) */
+  a {
+    text-decoration: none;
+  }
 }

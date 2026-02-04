@@ -1,0 +1,138 @@
+{
+  "conversionAudit": {
+    "hero": {
+      "tag": "Diagnóstico Web Express",
+      "titleLead": "Tu web está activa",
+      "titleHighlight": "pero algo",
+      "titleTail": "no está funcionando.",
+      "description": "Si inviertes en marketing, tráfico o contenido y los resultados no acompañan, el problema suele estar en la web. Este diagnóstico identifica qué está fallando y por qué, sin rediseños ni implementaciones.",
+      "primaryCta": "Solicitar diagnóstico",
+      "secondaryCta": "Ver cómo funciona"
+    },
+    "qualification": {
+      "tag": "Filtro",
+      "title": "Antes de avanzar",
+      "forYouTitle": "Es para ti si",
+      "notForYouTitle": "No es para ti si",
+      "forYouItems": [
+        "Tienes una web activa y un negocio en marcha.",
+        "Sientes que la web no convierte como debería.",
+        "Inviertes en tráfico, anuncios o contenido.",
+        "Necesitas claridad rápida para decidir próximos pasos."
+      ],
+      "notForYouItems": [
+        "Buscas que alguien implemente cambios por ti.",
+        "Quieres soporte continuo o acompañamiento mensual.",
+        "Esperas promesas de resultados o ventas garantizadas.",
+        "Tu web aún no existe o está en fase de idea."
+      ]
+    },
+    "scope": {
+      "tag": "El diagnóstico",
+      "title": "Qué analiza exactamente",
+      "analysisTag": "QUÉ ANALIZA",
+      "analysisItems": [
+        {
+          "title": "Mensaje y propuesta de valor",
+          "copy": "Claridad del mensaje, jerarquía de información y coherencia entre lo que ofreces y lo que el usuario entiende."
+        },
+        {
+          "title": "Flujo del usuario",
+          "copy": "Cómo navega una persona real por la web y dónde aparecen fricciones, dudas o bloqueos."
+        },
+        {
+          "title": "Estructura y decisiones",
+          "copy": "Orden de secciones, llamadas a la acción y señales que influyen en la toma de decisiones."
+        }
+      ],
+      "problemsTag": "PROBLEMAS QUE DETECTA",
+      "problemItems": [
+        {
+          "title": "Puntos de abandono",
+          "copy": "Secciones o pasos donde los usuarios se detienen o abandonan sin avanzar."
+        },
+        {
+          "title": "Incoherencias clave",
+          "copy": "Desalineaciones entre tráfico, intención del usuario y contenido de la web."
+        }
+      ]
+    },
+    "inclusions": {
+      "includedTitle": "Qué incluye",
+      "excludedTitle": "Qué NO incluye",
+      "includedItems": [
+        "Análisis completo de una web o landing principal",
+        "Evaluación estratégica desde el punto de vista del negocio",
+        "Diagnóstico claro y priorizado",
+        "Recomendaciones concretas y accionables",
+        "Documento final en PDF"
+      ],
+      "excludedItems": [
+        "Desarrollo o implementación",
+        "Diseño visual o rediseños",
+        "Accesos técnicos o a servidores",
+        "Soporte posterior a la entrega",
+        "Consultoría continua"
+      ]
+    },
+    "process": {
+      "tag": "Proceso",
+      "title": "Cómo funciona",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Solicitud y contexto",
+          "copy": "Confirmas el servicio, realizas el pago y completas un breve formulario con información clave."
+        },
+        {
+          "number": "02",
+          "title": "Análisis",
+          "copy": "Se realiza el diagnóstico sin necesidad de accesos técnicos ni reuniones."
+        },
+        {
+          "number": "03",
+          "title": "Entrega",
+          "copy": "Recibes el diagnóstico completo con los problemas detectados y recomendaciones claras."
+        }
+      ]
+    },
+    "deliverables": {
+      "tag": "Entrega",
+      "title": "Qué recibes",
+      "intro": "Un diagnóstico claro y reutilizable para tomar decisiones informadas:",
+      "items": [
+        {
+          "icon": "description",
+          "title": "Documento PDF estructurado y fácil de leer"
+        },
+        {
+          "icon": "list_alt",
+          "title": "Listado priorizado de problemas detectados"
+        },
+        {
+          "icon": "insights",
+          "title": "Recomendaciones prácticas y accionables"
+        },
+        {
+          "icon": "check_circle",
+          "title": "Base clara para decidir próximos pasos internos o con terceros"
+        }
+      ]
+    },
+    "pricing": {
+      "tag": "Precio",
+      "title": "Precio único y cerrado",
+      "price": "290 €",
+      "feeLabel": "Pago único",
+      "description": "Un solo pago por el diagnóstico completo. Sin rangos, sin costes ocultos y sin compromisos posteriores.",
+      "button": "Solicitar diagnóstico",
+      "availability": ""
+    },
+    "cta": {
+      "title": "Claridad antes de invertir más",
+      "description": "Si tu web ya existe y necesitas entender qué está fallando antes de seguir invirtiendo tiempo o dinero, este diagnóstico es el primer paso lógico.",
+      "button": "Solicitar Diagnóstico Web Express",
+      "trust": ""
+    }
+  }
+}

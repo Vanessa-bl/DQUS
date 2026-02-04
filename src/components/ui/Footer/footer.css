@@ -244,6 +244,42 @@
   justify-self: end;
 }
 
+.footer-locale {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.locale-button {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  color: var(--card-text-regular);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.locale-button.is-active {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+  color: white;
+}
+
+.locale-button:hover {
+  color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+.locale-button.is-active:hover {
+  color: white;
+}
+
 .copyright {
   color: var(--card-text-regular);
   font-size: 14px;

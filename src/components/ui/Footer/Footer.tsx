@@ -1,10 +1,24 @@
 import type React from "react";
 import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./footer.css";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
+import { getLocaleFromPath, toLocalePath } from "../../../i18n/locale";
+import type { Locale } from "../../../i18n";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  minimal?: boolean;
+  showLocaleSwitcher?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({
+  minimal = false,
+  showLocaleSwitcher = false,
+}) => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentLocale = getLocaleFromPath(location.pathname);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -17,6 +31,19 @@ const Footer: React.FC = () => {
         staggerChildren: 0.15,
       },
     },
+  };
+
+  const handleLocaleChange = (locale: Locale) => {
+    if (locale === currentLocale) {
+      return;
+    }
+
+    const nextPath =
+      toLocalePath(location.pathname, locale) +
+      location.search +
+      location.hash;
+
+    navigate(nextPath);
   };
 
   const itemVariants = {
@@ -77,62 +104,68 @@ const Footer: React.FC = () => {
           </motion.div>
 
           {/* Services Section */}
-          <motion.div className="footer-section" variants={itemVariants}>
-            <h4 className="section-title">Services</h4>
-            <nav className="footer-nav">
-              {services.map((service) => (
+          {!minimal && (
+            <motion.div className="footer-section" variants={itemVariants}>
+              <h4 className="section-title">Services</h4>
+              <nav className="footer-nav">
+                {services.map((service) => (
+                  <AnimatedLink
+                    key={service}
+                    to="/services"
+                    className="nav-link contact-link"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {service}
+                  </AnimatedLink>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+
+          {/* Company Section */}
+          {!minimal && (
+            <motion.div className="footer-section" variants={itemVariants}>
+              <h4 className="section-title">Company</h4>
+              <nav className="footer-nav">
                 <AnimatedLink
-                  key={service}
-                  to="/services"
+                  to="/about"
                   className="nav-link contact-link"
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  {service}
+                  About us
                 </AnimatedLink>
-              ))}
-            </nav>
-          </motion.div>
-
-          {/* Company Section */}
-          <motion.div className="footer-section" variants={itemVariants}>
-            <h4 className="section-title">Company</h4>
-            <nav className="footer-nav">
-              <AnimatedLink
-                to="/about"
-                className="nav-link contact-link"
-                whileHover={{ x: 4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                About us
-              </AnimatedLink>
-              <AnimatedLink
-                to="/contact"
-                className="nav-link contact-link"
-                whileHover={{ x: 4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                Contact
-              </AnimatedLink>
-            </nav>
-          </motion.div>
+                <AnimatedLink
+                  to="/contact"
+                  className="nav-link contact-link"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  Contact
+                </AnimatedLink>
+              </nav>
+            </motion.div>
+          )}
 
           {/* CTA Section */}
-          <motion.div className="footer-cta" variants={itemVariants}>
-            <h4 className="cta-title">Ready to Get Started?</h4>
-            <p className="cta-description">
-              Let’s talk about your next digital project.
-            </p>
-            <motion.a
-              href="mailto:hello@devqueensus.com"
-              className="cta-button"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
-              Start a Project
-            </motion.a>
-          </motion.div>
+          {!minimal && (
+            <motion.div className="footer-cta" variants={itemVariants}>
+              <h4 className="cta-title">Ready to Get Started?</h4>
+              <p className="cta-description">
+                Let’s talk about your next digital project.
+              </p>
+              <motion.a
+                href="mailto:hello@devqueensus.com"
+                className="cta-button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                Start a Project
+              </motion.a>
+            </motion.div>
+          )}
         </div>
 
         {/* Divider */}
@@ -169,18 +202,26 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/*
           <div className="footer-bottom-right">
-            <div className="legal-links">
-              <a href="#" className="legal-link">
-                Privacy Policy
-              </a>
-              <a href="#" className="legal-link">
-                Terms &amp; Conditions
-              </a>
-            </div>
+            {showLocaleSwitcher ? (
+              <div className="footer-locale" aria-label="Locale switcher">
+                <button
+                  type="button"
+                  className={`locale-button${currentLocale === "en" ? " is-active" : ""}`}
+                  onClick={() => handleLocaleChange("en")}
+                >
+                  EN
+                </button>
+                <button
+                  type="button"
+                  className={`locale-button${currentLocale === "es" ? " is-active" : ""}`}
+                  onClick={() => handleLocaleChange("es")}
+                >
+                  ES
+                </button>
+              </div>
+            ) : null}
           </div>
-          */}
         </motion.div>
       </div>
     </motion.footer>

@@ -89,6 +89,7 @@
 .btn-primary {
   align-items: center;
   display: flex;
+  justify-content: center;
   gap: 10px;
   background: linear-gradient(135deg, #7c7fc6, #a855f7);
   color: white;
