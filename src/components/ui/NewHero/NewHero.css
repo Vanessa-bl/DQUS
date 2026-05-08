@@ -11,9 +11,7 @@
   margin: 25px auto;
   border-radius: 15px;
 }
-
 /* ── TOP ROW ── */
-
 .nh__top {
   display: grid;
   grid-template-columns: 1fr 1fr;
