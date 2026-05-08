@@ -6,7 +6,7 @@ function calcParallaxRange(textEl: HTMLElement | null): number {
   if (!textEl) return 14;
   const textW = textEl.scrollWidth;
   const viewW = window.innerWidth;
-  if (textW <= viewW) return window.innerWidth < 768 ? 15 : 0;
+  if (textW <= viewW) return window.innerWidth < 768 ? 18 : 0;
   return ((textW - viewW) / textW) * 63;
 }
 
@@ -15,7 +15,7 @@ const VIDEO_SRC = "https://res.cloudinary.com/djqiqpilh/video/upload/v1778251145
 export default function VideoMaskHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  const rangeRef = useRef(typeof window !== "undefined" && window.innerWidth < 768 ? 12 : 12);
+  const rangeRef = useRef(typeof window !== "undefined" && window.innerWidth < 768 ? 18 : 12);
   const [range, setRange] = useState(rangeRef.current);
 
   const { scrollYProgress } = useScroll({

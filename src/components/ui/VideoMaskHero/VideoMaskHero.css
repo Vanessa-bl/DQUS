@@ -77,13 +77,8 @@
     transform: translateZ(0);
   }
 
-  .video-mask-hero__screen {
-    mix-blend-mode: normal;
-    background: rgba(255, 255, 255, 0.88);
-  }
-
   .video-mask-hero__text {
-    font-size: clamp(5rem, 30vw, 12rem);
+    font-size: clamp(9rem, 52vw, 18rem);
     text-rendering: optimizeSpeed;
   }
 }
