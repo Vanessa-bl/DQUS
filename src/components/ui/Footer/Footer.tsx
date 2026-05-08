@@ -1,226 +1,252 @@
 import type React from "react";
 import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
 import "./footer.css";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
-import { getLocaleFromPath, toLocalePath } from "../../../i18n/locale";
-import type { Locale } from "../../../i18n";
+import { useT } from "../../../i18n/useT";
+import { useLocale } from "../../../i18n/provider";
 
 interface FooterProps {
   minimal?: boolean;
   showLocaleSwitcher?: boolean;
+  landingLinks?: { id: string; label: string }[];
 }
 
 const Footer: React.FC<FooterProps> = ({
   minimal = false,
   showLocaleSwitcher = false,
+  landingLinks,
 }) => {
   const currentYear = new Date().getFullYear();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const currentLocale = getLocaleFromPath(location.pathname);
+  const t = useT();
+  const { locale, setLocale } = useLocale();
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    visible: (i = 0) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        staggerChildren: 0.15,
-      },
-    },
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.08 * i },
+    }),
   };
 
-  const handleLocaleChange = (locale: Locale) => {
-    if (locale === currentLocale) {
-      return;
-    }
-
-    const nextPath =
-      toLocalePath(location.pathname, locale) +
-      location.search +
-      location.hash;
-
-    navigate(nextPath);
+  const linkStyle: React.CSSProperties = {
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "0.9rem",
+    fontWeight: 500,
+    color: "var(--card-text-regular)",
   };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
-
-  const services = ["All services"];
-  {
-    /*const socialLinks = [{ name: "LinkedIn", href: "#" }];*/
-  }
 
   return (
     <motion.footer
       className="footer"
-      variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       role="contentinfo"
     >
       <div className="footer-container">
-        {/* Main Content */}
-        <div className="footer-content">
-          {/* Brand Section */}
-          <motion.div className="footer-brand" variants={itemVariants}>
-            <motion.h3 className="footer-logo" variants={titleVariants}>
-              <span className="animated-title">DevQueens</span>
-            </motion.h3>
-            <p className="footer-description">
-              We deliver exceptional digital experiences that drive growth and
-              innovation.
+        <div className="footer-content" style={landingLinks ? { gridTemplateColumns: "2fr 1fr 1.5fr" } : undefined}>
+          <motion.div className="footer-brand" custom={0} variants={fadeUp}>
+            <h3
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: "1.5rem",
+                color: "var(--card-text)",
+                margin: "0 0 12px",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              DevQueens
+            </h3>
+            <p
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif",
+                fontSize: "0.9rem",
+                lineHeight: 1.7,
+                color: "var(--card-text-regular)",
+                marginBottom: "24px",
+              }}
+            >
+              {t("footer.description", "We deliver exceptional digital experiences that drive growth and innovation.")}
             </p>
-            <div className="footer-contact-info">
-              <a href="mailto:hello@devqueensus.com" className="contact-link">
-                hello@devqueensus.com
-              </a>
-            </div>
+            <a
+              href="mailto:hello@devqueensus.com"
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                color: "var(--card-text)",
+                textDecoration: "none",
+              }}
+            >
+              {t("footer.email", "hello@devqueensus.com")}
+            </a>
           </motion.div>
 
-          {/* Services Section */}
           {!minimal && (
-            <motion.div className="footer-section" variants={itemVariants}>
-              <h4 className="section-title">Services</h4>
-              <nav className="footer-nav">
-                {services.map((service) => (
-                  <AnimatedLink
-                    key={service}
-                    to="/services"
-                    className="nav-link contact-link"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    {service}
+            <motion.div className="footer-section" custom={1} variants={fadeUp}>
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.85rem",
+                  color: "var(--card-text)",
+                  marginBottom: "20px",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {landingLinks ? t("footer.sections", "Secciones") : t("footer.services", "Services")}
+              </h4>
+              <nav className="footer-nav" style={landingLinks ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 24px" } : undefined}>
+                {landingLinks ? (
+                  landingLinks.map((link) => (
+                    <a
+                      key={link.id}
+                      href={`#${link.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      style={{
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontSize: "0.9rem",
+                        fontWeight: 500,
+                        color: "var(--card-text-regular)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  ))
+                ) : (
+                  <AnimatedLink to="/services" size="0.9rem" style={linkStyle}>
+                    {t("footer.services.all", "All services")}
                   </AnimatedLink>
-                ))}
+                )}
               </nav>
             </motion.div>
           )}
 
-          {/* Company Section */}
-          {!minimal && (
-            <motion.div className="footer-section" variants={itemVariants}>
-              <h4 className="section-title">Company</h4>
+          {!minimal && !landingLinks && (
+            <motion.div className="footer-section" custom={2} variants={fadeUp}>
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.85rem",
+                  color: "var(--card-text)",
+                  marginBottom: "20px",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {t("footer.company", "Company")}
+              </h4>
               <nav className="footer-nav">
-                <AnimatedLink
-                  to="/about"
-                  className="nav-link contact-link"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  About us
+                <AnimatedLink to="/about" size="0.9rem" style={linkStyle}>
+                  {t("footer.company.about", "About us")}
                 </AnimatedLink>
-                <AnimatedLink
-                  to="/contact"
-                  className="nav-link contact-link"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  Contact
+                <AnimatedLink to="/contact" size="0.9rem" style={linkStyle}>
+                  {t("footer.company.contact", "Contact")}
                 </AnimatedLink>
               </nav>
             </motion.div>
           )}
 
-          {/* CTA Section */}
           {!minimal && (
-            <motion.div className="footer-cta" variants={itemVariants}>
-              <h4 className="cta-title">Ready to Get Started?</h4>
-              <p className="cta-description">
-                Let’s talk about your next digital project.
+            <motion.div className="footer-cta" custom={3} variants={fadeUp}>
+              <div
+                style={{
+                  position: "absolute",
+                  width: "160px",
+                  height: "160px",
+                  background: "rgba(251,146,60,0.2)",
+                  borderRadius: "50%",
+                  top: "-60px",
+                  right: "-40px",
+                  filter: "blur(40px)",
+                  pointerEvents: "none",
+                }}
+              />
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "1.1rem",
+                  color: "#fff",
+                  marginBottom: "6px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {t("footer.cta.title", "Ready to Get Started?")}
+              </h4>
+              <p
+                style={{
+                  fontFamily: "'Nunito Sans', sans-serif",
+                  fontSize: "0.85rem",
+                  color: "rgba(255,255,255,0.75)",
+                  marginBottom: "20px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {t("footer.cta.desc", "Let's talk about your next digital project.")}
               </p>
               <motion.a
                 href="mailto:hello@devqueensus.com"
-                className="cta-button"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                style={{
+                  display: "inline-block",
+                  fontFamily: "'Nunito Sans', sans-serif",
+                  fontSize: "0.85rem",
+                  fontWeight: 700,
+                  color: "var(--card-text)",
+                  background: "#fff",
+                  padding: "0.65rem 1.5rem",
+                  borderRadius: "999px",
+                  textDecoration: "none",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+                whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                Start a Project
+                {t("footer.cta.button", "Start a Project")}
               </motion.a>
             </motion.div>
           )}
         </div>
 
-        {/* Divider */}
-        <motion.div
-          className="footer-divider"
-          variants={itemVariants}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        />
+        <div className="footer-divider" />
 
-        {/* Bottom Section */}
-        <motion.div className="footer-bottom" variants={itemVariants}>
+        <motion.div className="footer-bottom" custom={4} variants={fadeUp}>
           <div className="footer-bottom-left">
             <p className="copyright">
-              © {currentYear} DevQueens. All Rights Reserved.
+              &copy; {currentYear} {t("footer.copyright", "DevQueens. All Rights Reserved.")}
             </p>
           </div>
 
-          <div className="footer-bottom-center">
-            <div className="social-links">
-              {/*{socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  className="social-link"
-                  whileHover={{ y: -2 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  {social.name}
-                </motion.a>
-              ))}
-                */}
-            </div>
-          </div>
-
           <div className="footer-bottom-right">
-            {showLocaleSwitcher ? (
+            {showLocaleSwitcher && (
               <div className="footer-locale" aria-label="Locale switcher">
                 <button
                   type="button"
-                  className={`locale-button${currentLocale === "en" ? " is-active" : ""}`}
-                  onClick={() => handleLocaleChange("en")}
+                  className={`locale-button${locale === "en" ? " is-active" : ""}`}
+                  onClick={() => setLocale("en")}
                 >
                   EN
                 </button>
                 <button
                   type="button"
-                  className={`locale-button${currentLocale === "es" ? " is-active" : ""}`}
-                  onClick={() => handleLocaleChange("es")}
+                  className={`locale-button${locale === "es" ? " is-active" : ""}`}
+                  onClick={() => setLocale("es")}
                 >
                   ES
                 </button>
               </div>
-            ) : null}
+            )}
           </div>
         </motion.div>
       </div>

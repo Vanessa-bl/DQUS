@@ -1,5 +1,6 @@
 import type React from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../../../theme/ThemeContext";
 import "./logo.css";
 
 interface LogoProps {
@@ -15,6 +16,13 @@ const Logo: React.FC<LogoProps> = ({
   animated = true,
   className = "",
 }) => {
+  const { theme } = useTheme();
+  const logoSrc =
+    variant === "white" ? "/logo-white.svg"
+    : variant === "dark" ? "/logo.svg"
+    : theme === "dark" ? "/logo-white.svg"
+    : "/logo.svg";
+
   const sizeClasses = {
     sm: "logo-sm",
     md: "logo-md",
@@ -52,7 +60,7 @@ const Logo: React.FC<LogoProps> = ({
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <motion.img
-        src="/logo.svg"
+        src={logoSrc}
         alt="DevQueens logo"
         className="logo-svg"
         draggable={false}

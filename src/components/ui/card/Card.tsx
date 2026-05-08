@@ -8,6 +8,7 @@ type BaseProps = {
   areaService?: string;
   title?: string;
   content?: string;
+  inverted?: boolean;
 };
 
 type LinkCardProps = BaseProps & HTMLMotionProps<"a"> & { href: string };
@@ -16,12 +17,12 @@ export type CardProps = LinkCardProps | DivCardProps;
 
 export const Card: React.FC<CardProps> = (props) => {
   if ("href" in props && props.href) {
-    const { areaService, title, content, href, ...linkProps } = props;
+    const { areaService, title, content, href, inverted, ...linkProps } = props;
     return (
       <motion.a
         href={href}
         {...linkProps}
-        className="card"
+        className={`card${inverted ? " card--inverted" : ""}`}
         initial="initial"
         whileHover="hover"
         animate="initial"
@@ -90,11 +91,11 @@ export const Card: React.FC<CardProps> = (props) => {
       </motion.a>
     );
   } else {
-    const { areaService, title, content, ...divProps } = props as DivCardProps;
+    const { areaService, title, content, inverted, ...divProps } = props as DivCardProps;
     return (
       <motion.div
         {...divProps}
-        className="card"
+        className={`card${inverted ? " card--inverted" : ""}`}
         initial="initial"
         whileHover="hover"
         animate="initial"

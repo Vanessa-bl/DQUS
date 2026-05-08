@@ -1,8 +1,10 @@
 import React from "react";
-import { Menu } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
+import { useT } from "../../../i18n/useT";
+import { useLocale } from "../../../i18n/provider";
 import Logo from "../Logo/Logo";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
 import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
@@ -12,6 +14,7 @@ interface HeaderProps {
   shrinkPointPx?: number;
   minimal?: boolean;
   showThemeSwitch?: boolean;
+  anchorNav?: { id: string; label: string }[];
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -19,29 +22,46 @@ export const Header: React.FC<HeaderProps> = ({
   shrinkPointPx = 200,
   minimal = false,
   showThemeSwitch = true,
+  anchorNav,
 }) => {
   const { scrollY } = useScroll();
 
-  // ancho que se reduce al hacer scroll
-  const width = useTransform(scrollY, [0, shrinkPointPx], ["100%", "90%"]);
-  // background que pasa de transparente a semitransparente al hacer scroll
-  const backgroundColor = useTransform(
+  const borderColor = useTransform(
     scrollY,
     [0, shrinkPointPx],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.5)"]
+    ["rgba(0,0,0,0)", "rgba(0,0,0,0.06)"]
+  );
+
+  const boxShadow = useTransform(
+    scrollY,
+    [0, shrinkPointPx],
+    [
+      "0 0 0 rgba(0,0,0,0)",
+      "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
+    ]
   );
 
   const { theme, toggleTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = useT();
 
   const handleMenuClick = onMenuClick ?? (() => {});
+
+  const navLinkStyle: React.CSSProperties = {
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "var(--card-text)",
+    letterSpacing: "0.01em",
+  };
 
   return (
     <motion.header
       role="banner"
       className={`header${minimal ? " header--minimal" : ""}`}
       style={{
-        width,
-        backgroundColor,
+        borderColor,
+        boxShadow,
       }}
     >
       {!minimal && (
@@ -50,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label="Abrir menú"
           onClick={handleMenuClick}
         >
-          <Menu />
+          <Menu size={20} color="var(--card-text)" />
         </button>
       )}
 
@@ -59,26 +79,53 @@ export const Header: React.FC<HeaderProps> = ({
       {!minimal && (
         <nav className="header__desktop-nav" aria-label="Main navigation">
           <ul>
-            <li>
-              <AnimatedLink to="/" size="1rem" aria-label="Ir a Home">
-                Home
-              </AnimatedLink>
-            </li>
-            <li>
-              <AnimatedLink to="/services" size="1rem" aria-label="Ir a Services">
-                Services
-              </AnimatedLink>
-            </li>
-            <li>
-              <AnimatedLink to="/about" size="1rem" aria-label="Ir a About">
-                About
-              </AnimatedLink>
-            </li>
-            <li>
-              <AnimatedLink to="/contact" size="1rem" aria-label="Ir a Contact">
-                Contact
-              </AnimatedLink>
-            </li>
+            {anchorNav ? (
+              anchorNav.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    style={{
+                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontSize: "0.85rem",
+                      fontWeight: 600,
+                      color: "var(--card-text)",
+                      letterSpacing: "0.01em",
+                      textDecoration: "none",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const el = document.getElementById(item.id);
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            ) : (
+              <>
+                <li>
+                  <AnimatedLink to="/" size="0.85rem" aria-label="Ir a Home" style={navLinkStyle}>
+                    {t("header.home", "Home")}
+                  </AnimatedLink>
+                </li>
+                <li>
+                  <AnimatedLink to="/services" size="0.85rem" aria-label="Ir a Services" style={navLinkStyle}>
+                    {t("header.services", "Services")}
+                  </AnimatedLink>
+                </li>
+                <li>
+                  <AnimatedLink to="/about" size="0.85rem" aria-label="Ir a About" style={navLinkStyle}>
+                    {t("header.about", "About")}
+                  </AnimatedLink>
+                </li>
+                <li>
+                  <AnimatedLink to="/contact" size="0.85rem" aria-label="Ir a Contact" style={navLinkStyle}>
+                    {t("header.contact", "Contact")}
+                  </AnimatedLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       )}
@@ -86,16 +133,38 @@ export const Header: React.FC<HeaderProps> = ({
       <nav className="header__nav" aria-label="Redes sociales">
         <ul>
           <li>
+            <div className="header__locale">
+              <button
+                className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
+                onClick={() => setLocale("en")}
+                aria-label="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
+                onClick={() => setLocale("es")}
+                aria-label="Cambiar a Español"
+              >
+                ES
+              </button>
+            </div>
+          </li>
+          <li>
             {showThemeSwitch &&
               (minimal ? (
                 <ThemeSwitch />
               ) : (
                 <button
-                  className="button-header"
+                  className="button-header button-header--theme"
                   onClick={toggleTheme}
-                  style={{ fontSize: "1.1rem" }}
+                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                 >
-                  {theme === "dark" ? "☀️" : "🌙"}
+                  {theme === "dark" ? (
+                    <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
+                  ) : (
+                    <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
+                  )}
                 </button>
               ))}
           </li>
