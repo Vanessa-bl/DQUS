@@ -4,6 +4,7 @@ import { Card } from "../components/ui/card/Card";
 import { TechCarousel } from "../components/ui/TechCarousel/TechCarousel";
 import "./pageStyles.css";
 import { Layout } from "./layout";
+import { useT } from "../i18n/useT";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -44,6 +45,7 @@ const featurePillStyle: React.CSSProperties = {
 
 export const About: React.FC = () => {
   const isMobile = window.innerWidth < 768;
+  const t = useT();
 
   return (
     <Layout>
@@ -68,7 +70,7 @@ export const About: React.FC = () => {
           variants={fadeUp}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}
         >
-          <span style={badgeStyle}>ABOUT US</span>
+          <span style={badgeStyle}>{t("about.hero.badge", "ABOUT US")}</span>
 
           <h1
             id="hero-title"
@@ -82,7 +84,7 @@ export const About: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Who We
+            {t("about.hero.title.line1", "Who We")}
             <br />
             <span
               style={{
@@ -91,20 +93,7 @@ export const About: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Are
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("about.hero.title.line2", "Are")}
             </span>
           </h1>
 
@@ -136,7 +125,7 @@ export const About: React.FC = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>OUR STORY</span>
+          <span style={badgeStyle}>{t("about.story.badge", "OUR STORY")}</span>
         </div>
 
         <div
@@ -176,12 +165,11 @@ export const About: React.FC = () => {
                 margin: 0,
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {t("about.story.text", "What began as a small team of developers and designers with a shared vision has grown into a full-service digital agency serving clients worldwide. We've delivered over 100 projects across industries including fintech, healthcare, e-commerce, and education. Our approach combines agile methodologies with deep technical expertise, ensuring every solution we build is scalable, maintainable, and aligned with our clients' strategic goals.")}
             </p>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginTop: "1.5rem" }}>
-              {["Founded in 2020", "100+ Projects Delivered", "Global Reach"].map((feat) => (
+              {[t("about.story.features.0", "Founded in 2020"), t("about.story.features.1", "100+ Projects Delivered"), t("about.story.features.2", "Global Reach")].map((feat) => (
                 <span key={feat} style={featurePillStyle}>
                   {feat}
                 </span>
@@ -203,15 +191,15 @@ export const About: React.FC = () => {
           >
             <Card
               inverted
-              areaService="MISSION"
-              title="Our Mission"
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac neque nec purus ultricies venenatis."
+              areaService={t("about.mission.area", "MISSION")}
+              title={t("about.mission.title", "Our Mission")}
+              content="To bridge the gap between innovative technology and exceptional user experiences, delivering digital solutions that drive measurable business growth."
             />
             <Card
               inverted
-              areaService="VISION"
-              title="Our Vision"
-              content="Suspendisse potenti. Duis at velit maximus, molestie est a, tempor magna."
+              areaService={t("about.vision.area", "VISION")}
+              title={t("about.vision.title", "Our Vision")}
+              content="To become the most trusted technology partner for forward-thinking companies worldwide, setting the standard for quality, creativity, and client satisfaction in digital services."
             />
           </motion.div>
         </div>
@@ -231,7 +219,7 @@ export const About: React.FC = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>MEET THE TEAM</span>
+          <span style={badgeStyle}>{t("about.team.badge", "MEET THE TEAM")}</span>
 
           <h2
             id="team-title"
@@ -245,7 +233,7 @@ export const About: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Passionate
+            {t("about.team.title.line1", "Passionate")}
             <br />
             <span
               style={{
@@ -254,20 +242,7 @@ export const About: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Experts
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("about.team.title.line2", "Experts")}
             </span>
           </h2>
         </div>
@@ -281,21 +256,21 @@ export const About: React.FC = () => {
         >
           <Card
             inverted
-            areaService="CEO"
-            title="Jane Doe"
-            content="Chief Executive Officer"
+            areaService={t("about.team.member1.area", "CEO")}
+            title={t("about.team.member1.name", "Jane Doe")}
+            content={t("about.team.member1.role", "Chief Executive Officer")}
           />
           <Card
             inverted
-            areaService="CTO"
-            title="John Smith"
-            content="Chief Technology Officer"
+            areaService={t("about.team.member2.area", "CTO")}
+            title={t("about.team.member2.name", "John Smith")}
+            content={t("about.team.member2.role", "Chief Technology Officer")}
           />
           <Card
             inverted
-            areaService="DESIGN"
-            title="Alice Johnson"
-            content="Lead Designer"
+            areaService={t("about.team.member3.area", "DESIGN")}
+            title={t("about.team.member3.name", "Alice Johnson")}
+            content={t("about.team.member3.role", "Lead Designer")}
           />
         </div>
       </section>

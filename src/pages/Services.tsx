@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Card } from "../components/ui/card/Card";
 import "./pageStyles.css";
 import { Layout } from "./layout";
+import { useT } from "../i18n/useT";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -31,6 +32,7 @@ const badgeStyle: React.CSSProperties = {
 
 export const Services: React.FC = () => {
   const isMobile = window.innerWidth < 768;
+  const t = useT();
 
   return (
     <Layout>
@@ -55,7 +57,7 @@ export const Services: React.FC = () => {
           variants={fadeUp}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}
         >
-          <span style={badgeStyle}>OUR SERVICES</span>
+          <span style={badgeStyle}>{t("services.hero.badge", "OUR SERVICES")}</span>
 
           <h1
             id="services-hero-title"
@@ -69,7 +71,7 @@ export const Services: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            What We
+            {t("services.hero.title.line1", "What We")}
             <br />
             <span
               style={{
@@ -78,20 +80,7 @@ export const Services: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Offer
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("services.hero.title.line2", "Offer")}
             </span>
           </h1>
 
@@ -136,44 +125,44 @@ export const Services: React.FC = () => {
           <Card
             inverted
             aria-label="Corporate Branding: Graphic Design"
-            areaService="GRAPHIC DESIGN"
-            title="Corporate Branding"
-            content="Creamos identidades visuales únicas que reflejan la esencia de tu marca y conectan con tu audiencia."
+            areaService={t("services.card1.area", "GRAPHIC DESIGN")}
+            title={t("services.card1.title", "Corporate Branding")}
+            content={t("services.card1.content", "We create unique visual identities that reflect your brand essence and connect with your audience.")}
           />
           <Card
             inverted
-            aria-label="Web Development"
-            areaService="WEB DEVELOPMENT"
-            title="Web Development"
-            content="Desarrollamos sitios web rápidos, seguros y optimizados para SEO utilizando las últimas tecnologías."
+            aria-label={t("services.card2.title", "Web Development")}
+            areaService={t("services.card2.area", "WEB DEVELOPMENT")}
+            title={t("services.card2.title", "Web Development")}
+            content={t("services.card2.content", "We build fast, secure and SEO-optimized websites using the latest technologies.")}
           />
           <Card
             inverted
-            aria-label="Mobile Apps"
-            areaService="MOBILE SOLUTIONS"
-            title="Mobile Apps"
-            content="Diseñamos y desarrollamos aplicaciones móviles nativas e híbridas con UX intuitivo."
+            aria-label={t("services.card3.title", "Mobile Apps")}
+            areaService={t("services.card3.area", "MOBILE SOLUTIONS")}
+            title={t("services.card3.title", "Mobile Apps")}
+            content={t("services.card3.content", "We design and develop native and hybrid mobile applications with intuitive UX.")}
           />
           <Card
             inverted
-            aria-label="Digital Consulting"
-            areaService="DIGITAL CONSULTING"
-            title="Digital Consulting"
-            content="Te asesoramos en estrategia digital, marketing online y transformación tecnológica."
+            aria-label={t("services.card4.title", "Digital Consulting")}
+            areaService={t("services.card4.area", "DIGITAL CONSULTING")}
+            title={t("services.card4.title", "Digital Consulting")}
+            content={t("services.card4.content", "We advise you on digital strategy, online marketing and technological transformation.")}
           />
           <Card
             inverted
-            aria-label="SEO & Positioning"
-            areaService="SEO"
-            title="SEO & Positioning"
-            content="Mejoramos tu visibilidad en buscadores con técnicas de SEO on-page y off-page."
+            aria-label={t("services.card5.title", "SEO & Positioning")}
+            areaService={t("services.card5.area", "SEO")}
+            title={t("services.card5.title", "SEO & Positioning")}
+            content={t("services.card5.content", "We improve your search engine visibility with on-page and off-page SEO techniques.")}
           />
           <Card
             inverted
-            aria-label="UI/UX Design"
-            areaService="UI/UX DESIGN"
-            title="UI/UX Design"
-            content="Optimiza la experiencia de usuario y la interfaz de tu producto para maximizar conversiones."
+            aria-label={t("services.card6.title", "UI/UX Design")}
+            areaService={t("services.card6.area", "UI/UX DESIGN")}
+            title={t("services.card6.title", "UI/UX Design")}
+            content={t("services.card6.content", "Optimize your product user experience and interface to maximize conversions.")}
           />
         </div>
       </section>
@@ -192,7 +181,7 @@ export const Services: React.FC = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>OUR PROCESS</span>
+          <span style={badgeStyle}>{t("services.process.badge", "OUR PROCESS")}</span>
 
           <h2
             id="process-title"
@@ -206,7 +195,7 @@ export const Services: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            How We
+            {t("services.process.title.line1", "How We")}
             <br />
             <span
               style={{
@@ -215,20 +204,7 @@ export const Services: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Work
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("services.process.title.line2", "Work")}
             </span>
           </h2>
 
@@ -254,10 +230,10 @@ export const Services: React.FC = () => {
           }}
         >
           {[
-            { step: "1", title: "Discovery", text: "Investigación, análisis de requisitos y definición de objetivos." },
-            { step: "2", title: "Design", text: "Wireframes, prototipos y validación de usabilidad." },
-            { step: "3", title: "Development", text: "Construcción del producto con prácticas de código limpio y pruebas." },
-            { step: "4", title: "Delivery & Support", text: "Lanzamiento, monitoreo y soporte continuo." },
+            { step: "1", title: t("services.process.step1.title", "Discovery"), text: t("services.process.step1.text", "Research, requirements analysis and goal definition.") },
+            { step: "2", title: t("services.process.step2.title", "Design"), text: t("services.process.step2.text", "Wireframes, prototypes and usability validation.") },
+            { step: "3", title: t("services.process.step3.title", "Development"), text: t("services.process.step3.text", "Product construction with clean code practices and testing.") },
+            { step: "4", title: t("services.process.step4.title", "Delivery & Support"), text: t("services.process.step4.text", "Launch, monitoring and continuous support.") },
           ].map((item, i) => (
             <motion.div
               key={item.step}

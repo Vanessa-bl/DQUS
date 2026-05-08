@@ -17,6 +17,7 @@
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",
     "react-focus-lock": "^2.13.6",
+    "react-intl": "^10.1.5",
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {

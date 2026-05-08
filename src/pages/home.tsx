@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { TechCarousel } from "../components/ui/TechCarousel/TechCarousel";
 import { Layout } from "./layout";
+import { useT } from "../i18n/useT";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -30,6 +31,7 @@ const useParallaxY = (ref: React.RefObject<HTMLElement | null>, range: [number, 
 
 export const Home: React.FC = () => {
   const isMobile = window.innerWidth < 768;
+  const t = useT();
   const welcomeRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
@@ -92,7 +94,7 @@ export const Home: React.FC = () => {
                 width: "fit-content",
               }}
             >
-              WELCOME TO DEVQUEENS
+              {t("home.welcome.badge", "WELCOME TO DEVQUEENS")}
             </span>
 
             <h1
@@ -107,7 +109,7 @@ export const Home: React.FC = () => {
                 letterSpacing: "-0.02em",
               }}
             >
-              Your Strategic Partner
+              {t("home.welcome.title.line1", "Your Strategic Partner")}
               <br />
               <span
                 style={{
@@ -116,20 +118,7 @@ export const Home: React.FC = () => {
                   display: "inline-block",
                 }}
               >
-                for Digital Excellence
-                <span
-                  style={{
-                    content: '""',
-                    position: "absolute",
-                    bottom: "2px",
-                    left: 0,
-                    width: "100%",
-                    height: "3px",
-                    background: "var(--card-text)",
-                    borderRadius: "2px",
-                    display: "block",
-                  }}
-                />
+                {t("home.welcome.title.line2", "for Digital Excellence")}
               </span>
             </h1>
           </motion.div>
@@ -178,10 +167,10 @@ export const Home: React.FC = () => {
               }}
             >
               {[
-                "Enterprise-Grade Solutions",
-                "24/7 Technical Support",
-                "Agile Development Process",
-                "Scalable Architecture",
+                t("home.welcome.features.0", "Enterprise-Grade Solutions"),
+                t("home.welcome.features.1", "24/7 Technical Support"),
+                t("home.welcome.features.2", "Agile Development Process"),
+                t("home.welcome.features.3", "Scalable Architecture"),
               ].map((feat) => (
                 <span
                   key={feat}
@@ -214,19 +203,19 @@ export const Home: React.FC = () => {
           {[
             {
               Icon: UsersRound,
-              title: "Collaborative Approach",
-              subtitle: "Partnership-driven development",
+              title: t("home.cards.collaborative.title", "Collaborative Approach"),
+              subtitle: t("home.cards.collaborative.subtitle", "Partnership-driven development"),
               text: "We don't just build solutions — we build partnerships. Our collaborative approach ensures every project aligns with your business goals and exceeds expectations.",
-              gradient: "linear-gradient(135deg, #1a1230 0%, #2d1a4a 40%, #4a2070 100%)",
-              glow: "rgba(124,127,198,0.35)",
+              gradient: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
+              glow: "rgba(249,115,22,0.35)",
             },
             {
               Icon: Medal,
               title: "Excellence Recognition",
               subtitle: "Award-winning quality",
               text: "Our commitment to excellence has been recognized with industry awards and client accolades, reflecting the high standards we maintain in every project.",
-              gradient: "linear-gradient(135deg, #1a1030 0%, #3d1a5a 40%, #6b21a8 100%)",
-              glow: "rgba(168,85,247,0.35)",
+              gradient: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
+              glow: "rgba(251,146,60,0.35)",
             },
           ].map((item, i) => (
             <motion.div
@@ -369,7 +358,7 @@ export const Home: React.FC = () => {
               width: "fit-content",
             }}
           >
-            Our Services
+            {t("home.services.badge", "Our Services")}
           </span>
 
           <h2
@@ -384,7 +373,7 @@ export const Home: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Comprehensive
+            {t("home.services.title.line1", "Comprehensive")}
             <br />
             <span
               style={{
@@ -393,20 +382,7 @@ export const Home: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Digital Solutions
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("home.services.title.line2", "Digital Solutions")}
             </span>
           </h2>
 
@@ -431,31 +407,31 @@ export const Home: React.FC = () => {
             inverted
             rel="noopener noreferrer"
             aria-label="Corporate Branding: Graphic Design"
-            areaService="GRAPHIC DESIGN"
-            title="Corporate Branding"
+            areaService={t("home.services.card1.area", "GRAPHIC DESIGN")}
+            title={t("home.services.card1.title", "Corporate Branding")}
             content="We create unique visual identities that perfectly reflect your company's mission and values."
           />
           <Card
             href="#"
             inverted
             aria-label="Fast Code & Deployment: Web Development"
-            areaService="WEB DEVELOPMENT"
-            title="Fast Code &amp; Deployment"
+            areaService={t("home.services.card2.area", "WEB DEVELOPMENT")}
+            title={t("home.services.card2.title", "Fast Code & Deployment")}
             content="From concept to launch, we streamline your e-commerce or business website in record time."
           />
           <Card
             href="#"
             inverted
             aria-label="Seamless Integration: Mobile Solutions"
-            areaService="MOBILE SOLUTIONS"
-            title="Seamless Integration"
+            areaService={t("home.services.card3.area", "MOBILE SOLUTIONS")}
+            title={t("home.services.card3.title", "Seamless Integration")}
             content="Build cross-platform mobile apps that deliver native performance and unmatched user experience."
           />
           <Card
             inverted
             aria-label="Strategic Guidance: Digital Consulting"
-            areaService="DIGITAL CONSULTING"
-            title="Strategic Guidance"
+            areaService={t("home.services.card4.area", "DIGITAL CONSULTING")}
+            title={t("home.services.card4.title", "Strategic Guidance")}
             content="Leverage our expert insights to refine your digital strategy, optimize processes, and boost ROI."
           />
         </div>
@@ -496,7 +472,7 @@ export const Home: React.FC = () => {
               width: "fit-content",
             }}
           >
-            ABOUT US
+            {t("home.about.badge", "ABOUT US")}
           </span>
 
           <h2
@@ -511,7 +487,7 @@ export const Home: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Stay Ahead of
+            {t("home.about.title.line1", "Stay Ahead of")}
             <br />
             <span
               style={{
@@ -520,20 +496,7 @@ export const Home: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              the Curve
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("home.about.title.line2", "the Curve")}
             </span>
           </h2>
         </div>
@@ -590,10 +553,10 @@ export const Home: React.FC = () => {
               }}
             >
               {[
-                "Expert Tutorials",
-                "Best Practices",
-                "Industry Insights",
-                "Case Studies",
+                t("home.about.features.0", "Expert Tutorials"),
+                t("home.about.features.1", "Best Practices"),
+                t("home.about.features.2", "Industry Insights"),
+                t("home.about.features.3", "Case Studies"),
               ].map((feat) => (
                 <span
                   key={feat}
@@ -679,7 +642,7 @@ export const Home: React.FC = () => {
             <div
               style={{
                 position: "relative",
-                background: "linear-gradient(135deg, #1a1230 0%, #2d1a4a 40%, #4a2070 100%)",
+                background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
                 borderRadius: "20px",
                 padding: "1.75rem 2rem",
                 overflow: "hidden",
@@ -690,7 +653,7 @@ export const Home: React.FC = () => {
                   position: "absolute",
                   width: "200px",
                   height: "200px",
-                  background: "rgba(168,85,247,0.15)",
+                  background: "rgba(251,146,60,0.15)",
                   borderRadius: "50%",
                   top: "-80px",
                   right: "-40px",
@@ -779,19 +742,6 @@ export const Home: React.FC = () => {
               }}
             >
               Moves Brands Forward
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
             </span>
           </h2>
 
@@ -813,26 +763,26 @@ export const Home: React.FC = () => {
         <div className="cards-grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)" }}>
           <Card
             inverted
-            areaService="Accessibility"
-            title="Improving Accessibility in React"
+            areaService={t("home.expertise.card1.area", "Accessibility")}
+            title={t("home.expertise.card1.title", "Improving Accessibility in React")}
             content="Learn best practices to ensure your React components are fully accessible and compliant with WCAG standards, creating inclusive digital experiences."
           />
           <Card
             inverted
-            areaService="Web Development"
-            title="Optimizing Performance with Next.js"
+            areaService={t("home.expertise.card2.area", "Web Development")}
+            title={t("home.expertise.card2.title", "Optimizing Performance with Next.js")}
             content="Discover advanced techniques to boost page speed and SEO, from image optimization to smart caching strategies and Core Web Vitals improvement."
           />
           <Card
             inverted
-            areaService="UI/UX Design"
-            title="UI/UX Design Best Practices"
+            areaService={t("home.expertise.card3.area", "UI/UX Design")}
+            title={t("home.expertise.card3.title", "UI/UX Design Best Practices")}
             content="Explore design principles that create intuitive interfaces and memorable user experiences, backed by research and real-world case studies."
           />
           <Card
             inverted
-            areaService="Seo and Positioning"
-            title="SEO Strategies for Modern Web Apps"
+            areaService={t("home.expertise.card4.area", "Seo and Positioning")}
+            title={t("home.expertise.card4.title", "SEO Strategies for Modern Web Apps")}
             content="Understand how to structure content, optimize meta tags, and implement technical SEO strategies to improve search rankings and visibility."
           />
         </div>

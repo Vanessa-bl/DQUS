@@ -1,6 +1,7 @@
 .video-mask-hero {
   height: 200vh;
   height: 200dvh;
+  position: relative;
 }
 
 .video-mask-hero__sticky {

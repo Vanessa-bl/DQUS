@@ -71,6 +71,41 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+.header__locale {
+  display: flex;
+  gap: 2px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.header__locale-btn {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--card-text-regular);
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header__locale-btn.is-active {
+  background: var(--card-text);
+  color: var(--card-bg);
+}
+
+.header__locale-btn:hover:not(.is-active) {
+  color: var(--card-text);
+}
+
+[data-theme="dark"] .header__locale {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .header__desktop-nav {
   grid-column: 2;
   display: flex;

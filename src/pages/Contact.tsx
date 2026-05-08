@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "./pageStyles.css";
 import { Layout } from "./layout";
+import { useT } from "../i18n/useT";
 
 const badgeStyle: React.CSSProperties = {
   display: "inline-flex",
@@ -43,6 +44,7 @@ const labelStyle: React.CSSProperties = {
 
 export const Contact: React.FC = () => {
   const isMobile = window.innerWidth < 768;
+  const t = useT();
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const handleChange = (
@@ -80,7 +82,7 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}
         >
-          <span style={badgeStyle}>CONTACT US</span>
+          <span style={badgeStyle}>{t("contact.hero.badge", "CONTACT US")}</span>
 
           <h1
             id="contact-hero-title"
@@ -94,7 +96,7 @@ export const Contact: React.FC = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Get In
+            {t("contact.hero.title.line1", "Get In")}
             <br />
             <span
               style={{
@@ -103,20 +105,7 @@ export const Contact: React.FC = () => {
                 display: "inline-block",
               }}
             >
-              Touch
-              <span
-                style={{
-                  content: '""',
-                  position: "absolute",
-                  bottom: "2px",
-                  left: 0,
-                  width: "100%",
-                  height: "3px",
-                  background: "var(--card-text)",
-                  borderRadius: "2px",
-                  display: "block",
-                }}
-              />
+              {t("contact.hero.title.line2", "Touch")}
             </span>
           </h1>
 
@@ -166,7 +155,7 @@ export const Contact: React.FC = () => {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-            <label htmlFor="name" style={labelStyle}>Nombre</label>
+            <label htmlFor="name" style={labelStyle}>{t("contact.form.name.label", "Name")}</label>
             <input
               type="text"
               id="name"
@@ -174,7 +163,7 @@ export const Contact: React.FC = () => {
               value={form.name}
               onChange={handleChange}
               required
-              placeholder="Tu nombre"
+              placeholder={t("contact.form.name.placeholder", "Your name")}
               style={inputStyle}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = "rgba(124,127,198,0.5)";
@@ -188,7 +177,7 @@ export const Contact: React.FC = () => {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-            <label htmlFor="email" style={labelStyle}>Email</label>
+            <label htmlFor="email" style={labelStyle}>{t("contact.form.email.label", "Email")}</label>
             <input
               type="email"
               id="email"
@@ -196,7 +185,7 @@ export const Contact: React.FC = () => {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder="Tu correo electrónico"
+              placeholder={t("contact.form.email.placeholder", "Your email address")}
               style={inputStyle}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = "rgba(124,127,198,0.5)";
@@ -210,7 +199,7 @@ export const Contact: React.FC = () => {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-            <label htmlFor="message" style={labelStyle}>Mensaje</label>
+            <label htmlFor="message" style={labelStyle}>{t("contact.form.message.label", "Message")}</label>
             <textarea
               id="message"
               name="message"
@@ -218,7 +207,7 @@ export const Contact: React.FC = () => {
               value={form.message}
               onChange={handleChange}
               required
-              placeholder="Escribe tu mensaje aquí"
+              placeholder={t("contact.form.message.placeholder", "Write your message here")}
               style={{
                 ...inputStyle,
                 resize: "vertical",
@@ -258,7 +247,7 @@ export const Contact: React.FC = () => {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}
           >
-            Enviar Mensaje
+            {t("contact.form.submit", "Send Message")}
           </button>
         </motion.form>
       </section>

@@ -1,24 +1,24 @@
 import type React from "react";
 import { motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
 import "./footer.css";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
-import { getLocaleFromPath, toLocalePath } from "../../../i18n/locale";
-import type { Locale } from "../../../i18n";
+import { useT } from "../../../i18n/useT";
+import { useLocale } from "../../../i18n/provider";
 
 interface FooterProps {
   minimal?: boolean;
   showLocaleSwitcher?: boolean;
+  landingLinks?: { id: string; label: string }[];
 }
 
 const Footer: React.FC<FooterProps> = ({
   minimal = false,
   showLocaleSwitcher = false,
+  landingLinks,
 }) => {
   const currentYear = new Date().getFullYear();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const currentLocale = getLocaleFromPath(location.pathname);
+  const t = useT();
+  const { locale, setLocale } = useLocale();
 
   const fadeUp = {
     hidden: { opacity: 0, y: 16 },
@@ -28,17 +28,6 @@ const Footer: React.FC<FooterProps> = ({
       transition: { duration: 0.5, ease: "easeOut", delay: 0.08 * i },
     }),
   };
-
-  const handleLocaleChange = (locale: Locale) => {
-    if (locale === currentLocale) return;
-    const nextPath =
-      toLocalePath(location.pathname, locale) +
-      location.search +
-      location.hash;
-    navigate(nextPath);
-  };
-
-  const services = ["All services"];
 
   const linkStyle: React.CSSProperties = {
     fontFamily: "'Nunito Sans', sans-serif",
@@ -56,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({
       role="contentinfo"
     >
       <div className="footer-container">
-        <div className="footer-content">
+        <div className="footer-content" style={landingLinks ? { gridTemplateColumns: "2fr 1fr 1.5fr" } : undefined}>
           <motion.div className="footer-brand" custom={0} variants={fadeUp}>
             <h3
               style={{
@@ -79,8 +68,7 @@ const Footer: React.FC<FooterProps> = ({
                 marginBottom: "24px",
               }}
             >
-              We deliver exceptional digital experiences that drive growth and
-              innovation.
+              {t("footer.description", "We deliver exceptional digital experiences that drive growth and innovation.")}
             </p>
             <a
               href="mailto:hello@devqueensus.com"
@@ -92,7 +80,7 @@ const Footer: React.FC<FooterProps> = ({
                 textDecoration: "none",
               }}
             >
-              hello@devqueensus.com
+              {t("footer.email", "hello@devqueensus.com")}
             </a>
           </motion.div>
 
@@ -109,24 +97,39 @@ const Footer: React.FC<FooterProps> = ({
                   textTransform: "uppercase",
                 }}
               >
-                Services
+                {landingLinks ? t("footer.sections", "Secciones") : t("footer.services", "Services")}
               </h4>
-              <nav className="footer-nav">
-                {services.map((service) => (
-                  <AnimatedLink
-                    key={service}
-                    to="/services"
-                    size="0.9rem"
-                    style={linkStyle}
-                  >
-                    {service}
+              <nav className="footer-nav" style={landingLinks ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 24px" } : undefined}>
+                {landingLinks ? (
+                  landingLinks.map((link) => (
+                    <a
+                      key={link.id}
+                      href={`#${link.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      style={{
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontSize: "0.9rem",
+                        fontWeight: 500,
+                        color: "var(--card-text-regular)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  ))
+                ) : (
+                  <AnimatedLink to="/services" size="0.9rem" style={linkStyle}>
+                    {t("footer.services.all", "All services")}
                   </AnimatedLink>
-                ))}
+                )}
               </nav>
             </motion.div>
           )}
 
-          {!minimal && (
+          {!minimal && !landingLinks && (
             <motion.div className="footer-section" custom={2} variants={fadeUp}>
               <h4
                 style={{
@@ -139,14 +142,14 @@ const Footer: React.FC<FooterProps> = ({
                   textTransform: "uppercase",
                 }}
               >
-                Company
+                {t("footer.company", "Company")}
               </h4>
               <nav className="footer-nav">
                 <AnimatedLink to="/about" size="0.9rem" style={linkStyle}>
-                  About us
+                  {t("footer.company.about", "About us")}
                 </AnimatedLink>
                 <AnimatedLink to="/contact" size="0.9rem" style={linkStyle}>
-                  Contact
+                  {t("footer.company.contact", "Contact")}
                 </AnimatedLink>
               </nav>
             </motion.div>
@@ -159,7 +162,7 @@ const Footer: React.FC<FooterProps> = ({
                   position: "absolute",
                   width: "160px",
                   height: "160px",
-                  background: "rgba(168,85,247,0.2)",
+                  background: "rgba(251,146,60,0.2)",
                   borderRadius: "50%",
                   top: "-60px",
                   right: "-40px",
@@ -178,7 +181,7 @@ const Footer: React.FC<FooterProps> = ({
                   zIndex: 1,
                 }}
               >
-                Ready to Get Started?
+                {t("footer.cta.title", "Ready to Get Started?")}
               </h4>
               <p
                 style={{
@@ -190,7 +193,7 @@ const Footer: React.FC<FooterProps> = ({
                   zIndex: 1,
                 }}
               >
-                Let's talk about your next digital project.
+                {t("footer.cta.desc", "Let's talk about your next digital project.")}
               </p>
               <motion.a
                 href="mailto:hello@devqueensus.com"
@@ -200,7 +203,7 @@ const Footer: React.FC<FooterProps> = ({
                   fontSize: "0.85rem",
                   fontWeight: 700,
                   color: "var(--card-text)",
-                  background: "var(--card-bg)",
+                  background: "#fff",
                   padding: "0.65rem 1.5rem",
                   borderRadius: "999px",
                   textDecoration: "none",
@@ -210,7 +213,7 @@ const Footer: React.FC<FooterProps> = ({
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                Start a Project
+                {t("footer.cta.button", "Start a Project")}
               </motion.a>
             </motion.div>
           )}
@@ -221,7 +224,7 @@ const Footer: React.FC<FooterProps> = ({
         <motion.div className="footer-bottom" custom={4} variants={fadeUp}>
           <div className="footer-bottom-left">
             <p className="copyright">
-              &copy; {currentYear} DevQueens. All Rights Reserved.
+              &copy; {currentYear} {t("footer.copyright", "DevQueens. All Rights Reserved.")}
             </p>
           </div>
 
@@ -230,15 +233,15 @@ const Footer: React.FC<FooterProps> = ({
               <div className="footer-locale" aria-label="Locale switcher">
                 <button
                   type="button"
-                  className={`locale-button${currentLocale === "en" ? " is-active" : ""}`}
-                  onClick={() => handleLocaleChange("en")}
+                  className={`locale-button${locale === "en" ? " is-active" : ""}`}
+                  onClick={() => setLocale("en")}
                 >
                   EN
                 </button>
                 <button
                   type="button"
-                  className={`locale-button${currentLocale === "es" ? " is-active" : ""}`}
-                  onClick={() => handleLocaleChange("es")}
+                  className={`locale-button${locale === "es" ? " is-active" : ""}`}
+                  onClick={() => setLocale("es")}
                 >
                   ES
                 </button>

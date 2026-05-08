@@ -6,6 +6,7 @@ import { Services } from "./pages/Services";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { ConversionAudit } from "./pages/ConversionAudit";
+import { AccountantsLanding } from "./pages/AccountantsLanding";
 
 const LenisController: React.FC = () => {
   const location = useLocation();
@@ -29,6 +30,8 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/conversion-audit" element={<ConversionAudit locale="en" />} />
         <Route path="/es/conversion-audit" element={<ConversionAudit locale="es" />} />
+        <Route path="/contadores" element={<AccountantsLanding />} />
+        <Route path="/accountants" element={<AccountantsLanding />} />
       </Routes>
     </BrowserRouter>
   );

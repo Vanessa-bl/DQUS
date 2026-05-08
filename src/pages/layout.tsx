@@ -7,15 +7,17 @@ import Footer from "../components/ui/Footer/Footer";
 
 interface LayoutProps {
   children: ReactNode;
+  anchorNav?: { id: string; label: string }[];
+  landingFooterLinks?: { id: string; label: string }[];
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, anchorNav, landingFooterLinks }) => {
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
 
   return (
     <>
       <header>
-        <Header onMenuClick={openDrawer} shrinkPointPx={200} />
+        <Header onMenuClick={openDrawer} shrinkPointPx={200} anchorNav={anchorNav} />
         <AnimatedDrawer
           isOpen={isOpen}
           onClose={closeDrawer}
@@ -61,7 +63,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <main>{children}</main>
 
-      <Footer />
+      <Footer showLocaleSwitcher={!!landingFooterLinks} landingLinks={landingFooterLinks} />
     </>
   );
 };
