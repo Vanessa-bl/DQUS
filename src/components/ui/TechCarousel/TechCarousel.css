@@ -1,50 +1,37 @@
-/* src/components/TechCarousel/TechCarousel.css */
-
 .tech-carousel-container {
   width: 100%;
   overflow: hidden;
-  background-color: var(--card-bg);
-  padding: 38px 0;
-}
-
-.tech-carousel-track {
-  display: flex;
-  /* El ancho se establece dinámicamente desde el componente */
-}
-
-.tech-carousel-group {
-  display: flex;
-  align-items: center;
-  gap: 24px; /* Espacio uniforme entre items */
+  background: #0a0a0a;
+  padding: 20px 0;
+  user-select: none;
 }
 
 .tech-carousel-item {
-  flex: 0 0 auto;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--color-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
+  letter-spacing: -0.01em;
+  padding: 0 20px;
+  transition: color 0.2s ease;
 }
 
 .tech-carousel-item:hover {
+  color: #a855f7;
   cursor: default;
 }
 
-/* Responsivo: ajustamos tamaño de fuente y gap en pantallas pequeñas */
 @media (max-width: 768px) {
   .tech-carousel-item {
-    font-size: 1.2rem;
-  }
-  .tech-carousel-group {
-    gap: 16px;
+    font-size: 1.1rem;
+    padding: 0 14px;
   }
 }
 
 @media (max-width: 480px) {
   .tech-carousel-item {
-    font-size: 1rem;
-  }
-  .tech-carousel-group {
-    gap: 12px;
+    font-size: 0.95rem;
+    padding: 0 10px;
   }
 }

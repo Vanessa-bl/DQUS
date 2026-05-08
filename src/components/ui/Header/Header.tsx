@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
@@ -22,26 +22,40 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const { scrollY } = useScroll();
 
-  // ancho que se reduce al hacer scroll
-  const width = useTransform(scrollY, [0, shrinkPointPx], ["100%", "90%"]);
-  // background que pasa de transparente a semitransparente al hacer scroll
-  const backgroundColor = useTransform(
+  const borderColor = useTransform(
     scrollY,
     [0, shrinkPointPx],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.5)"]
+    ["rgba(0,0,0,0)", "rgba(0,0,0,0.06)"]
+  );
+
+  const boxShadow = useTransform(
+    scrollY,
+    [0, shrinkPointPx],
+    [
+      "0 0 0 rgba(0,0,0,0)",
+      "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
+    ]
   );
 
   const { theme, toggleTheme } = useTheme();
 
   const handleMenuClick = onMenuClick ?? (() => {});
 
+  const navLinkStyle: React.CSSProperties = {
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "var(--card-text)",
+    letterSpacing: "0.01em",
+  };
+
   return (
     <motion.header
       role="banner"
       className={`header${minimal ? " header--minimal" : ""}`}
       style={{
-        width,
-        backgroundColor,
+        borderColor,
+        boxShadow,
       }}
     >
       {!minimal && (
@@ -50,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label="Abrir menú"
           onClick={handleMenuClick}
         >
-          <Menu />
+          <Menu size={20} color="var(--card-text)" />
         </button>
       )}
 
@@ -60,22 +74,22 @@ export const Header: React.FC<HeaderProps> = ({
         <nav className="header__desktop-nav" aria-label="Main navigation">
           <ul>
             <li>
-              <AnimatedLink to="/" size="1rem" aria-label="Ir a Home">
+              <AnimatedLink to="/" size="0.85rem" aria-label="Ir a Home" style={navLinkStyle}>
                 Home
               </AnimatedLink>
             </li>
             <li>
-              <AnimatedLink to="/services" size="1rem" aria-label="Ir a Services">
+              <AnimatedLink to="/services" size="0.85rem" aria-label="Ir a Services" style={navLinkStyle}>
                 Services
               </AnimatedLink>
             </li>
             <li>
-              <AnimatedLink to="/about" size="1rem" aria-label="Ir a About">
+              <AnimatedLink to="/about" size="0.85rem" aria-label="Ir a About" style={navLinkStyle}>
                 About
               </AnimatedLink>
             </li>
             <li>
-              <AnimatedLink to="/contact" size="1rem" aria-label="Ir a Contact">
+              <AnimatedLink to="/contact" size="0.85rem" aria-label="Ir a Contact" style={navLinkStyle}>
                 Contact
               </AnimatedLink>
             </li>
@@ -91,11 +105,15 @@ export const Header: React.FC<HeaderProps> = ({
                 <ThemeSwitch />
               ) : (
                 <button
-                  className="button-header"
+                  className="button-header button-header--theme"
                   onClick={toggleTheme}
-                  style={{ fontSize: "1.1rem" }}
+                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                 >
-                  {theme === "dark" ? "☀️" : "🌙"}
+                  {theme === "dark" ? (
+                    <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
+                  ) : (
+                    <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
+                  )}
                 </button>
               ))}
           </li>

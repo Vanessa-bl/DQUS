@@ -1,6 +1,45 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "./pageStyles.css";
 import { Layout } from "./layout";
+
+const badgeStyle: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.4rem",
+  background: "var(--pill-bg)",
+  color: "var(--pill-text)",
+  fontFamily: "'Nunito Sans', sans-serif",
+  fontSize: "0.78rem",
+  fontWeight: 700,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  padding: "0.4rem 1rem",
+  borderRadius: "999px",
+  width: "fit-content",
+};
+
+const inputStyle: React.CSSProperties = {
+  fontFamily: "'Nunito Sans', sans-serif",
+  fontSize: "0.95rem",
+  padding: "0.85rem 1rem",
+  border: "1px solid var(--feature-pill-border)",
+  borderRadius: "12px",
+  background: "var(--feature-pill-bg)",
+  color: "var(--card-text)",
+  outline: "none",
+  transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+  width: "100%",
+  boxSizing: "border-box",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontFamily: "'Nunito Sans', sans-serif",
+  fontSize: "0.85rem",
+  fontWeight: 600,
+  color: "var(--card-text-regular)",
+  letterSpacing: "0.01em",
+};
 
 export const Contact: React.FC = () => {
   const isMobile = window.innerWidth < 768;
@@ -21,37 +60,113 @@ export const Contact: React.FC = () => {
 
   return (
     <Layout>
-      <section aria-labelledby="contact-hero-title" className="contact-hero">
-        <div className="contact-hero__content">
-          <p className="hero-title-accent">CONTACT US</p>
-          <h1 id="contact-hero-title" className="hero-title">
-            Get In Touch
+      <section
+        aria-labelledby="contact-hero-title"
+        style={{
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          padding: "5rem 3rem 4rem",
+          background: "var(--card-bg)",
+          borderRadius: "15px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2.5rem",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}
+        >
+          <span style={badgeStyle}>CONTACT US</span>
+
+          <h1
+            id="contact-hero-title"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 800,
+              fontSize: isMobile ? "2rem" : "clamp(2.2rem, 3.5vw, 3rem)",
+              lineHeight: 1.1,
+              color: "var(--card-text)",
+              margin: 0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Get In
+            <br />
+            <span
+              style={{
+                color: "var(--card-text)",
+                position: "relative",
+                display: "inline-block",
+              }}
+            >
+              Touch
+              <span
+                style={{
+                  content: '""',
+                  position: "absolute",
+                  bottom: "2px",
+                  left: 0,
+                  width: "100%",
+                  height: "3px",
+                  background: "var(--card-text)",
+                  borderRadius: "2px",
+                  display: "block",
+                }}
+              />
+            </span>
           </h1>
-          <p className="hero-text">
+
+          <p
+            style={{
+              fontFamily: "'Nunito Sans', sans-serif",
+              fontSize: "1rem",
+              lineHeight: 1.75,
+              color: "var(--card-text-regular)",
+              margin: 0,
+            }}
+          >
             ¿Tienes preguntas? ¡Nos encantaría saber de ti! Completa el
             formulario y te responderemos lo antes posible.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       <section
         aria-labelledby="contact-form-title"
         style={{
-          padding: "4rem 2rem",
-          maxWidth: "50rem",
-          margin: "auto",
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          padding: "5rem 3rem 4rem",
+          background: "var(--card-bg)",
+          borderRadius: "15px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
         }}
       >
         <h2 id="contact-form-title" className="sr-only">
           Contact Form
         </h2>
-        <form
+        <motion.form
           onSubmit={handleSubmit}
-          className="contact-form"
-          aria-labelledby="contact-form-title"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.5rem",
+            maxWidth: "600px",
+            width: "100%",
+          }}
         >
-          <div className="form-group">
-            <label htmlFor="name">Nombre</label>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <label htmlFor="name" style={labelStyle}>Nombre</label>
             <input
               type="text"
               id="name"
@@ -60,11 +175,20 @@ export const Contact: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="Tu nombre"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(124,127,198,0.5)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,127,198,0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--feature-pill-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <label htmlFor="email" style={labelStyle}>Email</label>
             <input
               type="email"
               id="email"
@@ -73,11 +197,20 @@ export const Contact: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="Tu correo electrónico"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(124,127,198,0.5)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,127,198,0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--feature-pill-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="message">Mensaje</label>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <label htmlFor="message" style={labelStyle}>Mensaje</label>
             <textarea
               id="message"
               name="message"
@@ -86,13 +219,48 @@ export const Contact: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="Escribe tu mensaje aquí"
+              style={{
+                ...inputStyle,
+                resize: "vertical",
+                minHeight: "120px",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(124,127,198,0.5)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,127,198,0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--feature-pill-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             />
           </div>
 
-          <button type="submit" className="btn-submit">
+          <button
+            type="submit"
+            style={{
+              fontFamily: "'Nunito Sans', sans-serif",
+              fontSize: "0.9rem",
+              fontWeight: 700,
+              color: "var(--btn-text)",
+              background: "var(--btn-bg)",
+              border: "none",
+              borderRadius: "999px",
+              padding: "0.85rem 2.25rem",
+              cursor: "pointer",
+              letterSpacing: "0.01em",
+              width: "fit-content",
+              transition: "transform 0.2s ease, opacity 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+            }}
+          >
             Enviar Mensaje
           </button>
-        </form>
+        </motion.form>
       </section>
     </Layout>
   );

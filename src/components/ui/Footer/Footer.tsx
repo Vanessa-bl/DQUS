@@ -20,101 +20,104 @@ const Footer: React.FC<FooterProps> = ({
   const navigate = useNavigate();
   const currentLocale = getLocaleFromPath(location.pathname);
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    visible: (i = 0) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        staggerChildren: 0.15,
-      },
-    },
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.08 * i },
+    }),
   };
 
   const handleLocaleChange = (locale: Locale) => {
-    if (locale === currentLocale) {
-      return;
-    }
-
+    if (locale === currentLocale) return;
     const nextPath =
       toLocalePath(location.pathname, locale) +
       location.search +
       location.hash;
-
     navigate(nextPath);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
-
   const services = ["All services"];
-  {
-    /*const socialLinks = [{ name: "LinkedIn", href: "#" }];*/
-  }
+
+  const linkStyle: React.CSSProperties = {
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "0.9rem",
+    fontWeight: 500,
+    color: "var(--card-text-regular)",
+  };
 
   return (
     <motion.footer
       className="footer"
-      variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       role="contentinfo"
     >
       <div className="footer-container">
-        {/* Main Content */}
         <div className="footer-content">
-          {/* Brand Section */}
-          <motion.div className="footer-brand" variants={itemVariants}>
-            <motion.h3 className="footer-logo" variants={titleVariants}>
-              <span className="animated-title">DevQueens</span>
-            </motion.h3>
-            <p className="footer-description">
+          <motion.div className="footer-brand" custom={0} variants={fadeUp}>
+            <h3
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: "1.5rem",
+                color: "var(--card-text)",
+                margin: "0 0 12px",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              DevQueens
+            </h3>
+            <p
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif",
+                fontSize: "0.9rem",
+                lineHeight: 1.7,
+                color: "var(--card-text-regular)",
+                marginBottom: "24px",
+              }}
+            >
               We deliver exceptional digital experiences that drive growth and
               innovation.
             </p>
-            <div className="footer-contact-info">
-              <a href="mailto:hello@devqueensus.com" className="contact-link">
-                hello@devqueensus.com
-              </a>
-            </div>
+            <a
+              href="mailto:hello@devqueensus.com"
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                color: "var(--card-text)",
+                textDecoration: "none",
+              }}
+            >
+              hello@devqueensus.com
+            </a>
           </motion.div>
 
-          {/* Services Section */}
           {!minimal && (
-            <motion.div className="footer-section" variants={itemVariants}>
-              <h4 className="section-title">Services</h4>
+            <motion.div className="footer-section" custom={1} variants={fadeUp}>
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.85rem",
+                  color: "var(--card-text)",
+                  marginBottom: "20px",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Services
+              </h4>
               <nav className="footer-nav">
                 {services.map((service) => (
                   <AnimatedLink
                     key={service}
                     to="/services"
-                    className="nav-link contact-link"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    size="0.9rem"
+                    style={linkStyle}
                   >
                     {service}
                   </AnimatedLink>
@@ -123,43 +126,88 @@ const Footer: React.FC<FooterProps> = ({
             </motion.div>
           )}
 
-          {/* Company Section */}
           {!minimal && (
-            <motion.div className="footer-section" variants={itemVariants}>
-              <h4 className="section-title">Company</h4>
+            <motion.div className="footer-section" custom={2} variants={fadeUp}>
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.85rem",
+                  color: "var(--card-text)",
+                  marginBottom: "20px",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Company
+              </h4>
               <nav className="footer-nav">
-                <AnimatedLink
-                  to="/about"
-                  className="nav-link contact-link"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
+                <AnimatedLink to="/about" size="0.9rem" style={linkStyle}>
                   About us
                 </AnimatedLink>
-                <AnimatedLink
-                  to="/contact"
-                  className="nav-link contact-link"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
+                <AnimatedLink to="/contact" size="0.9rem" style={linkStyle}>
                   Contact
                 </AnimatedLink>
               </nav>
             </motion.div>
           )}
 
-          {/* CTA Section */}
           {!minimal && (
-            <motion.div className="footer-cta" variants={itemVariants}>
-              <h4 className="cta-title">Ready to Get Started?</h4>
-              <p className="cta-description">
-                Let’s talk about your next digital project.
+            <motion.div className="footer-cta" custom={3} variants={fadeUp}>
+              <div
+                style={{
+                  position: "absolute",
+                  width: "160px",
+                  height: "160px",
+                  background: "rgba(168,85,247,0.2)",
+                  borderRadius: "50%",
+                  top: "-60px",
+                  right: "-40px",
+                  filter: "blur(40px)",
+                  pointerEvents: "none",
+                }}
+              />
+              <h4
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "1.1rem",
+                  color: "#fff",
+                  marginBottom: "6px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                Ready to Get Started?
+              </h4>
+              <p
+                style={{
+                  fontFamily: "'Nunito Sans', sans-serif",
+                  fontSize: "0.85rem",
+                  color: "rgba(255,255,255,0.75)",
+                  marginBottom: "20px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                Let's talk about your next digital project.
               </p>
               <motion.a
                 href="mailto:hello@devqueensus.com"
-                className="cta-button"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                style={{
+                  display: "inline-block",
+                  fontFamily: "'Nunito Sans', sans-serif",
+                  fontSize: "0.85rem",
+                  fontWeight: 700,
+                  color: "var(--card-text)",
+                  background: "var(--card-bg)",
+                  padding: "0.65rem 1.5rem",
+                  borderRadius: "999px",
+                  textDecoration: "none",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+                whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
                 Start a Project
@@ -168,42 +216,17 @@ const Footer: React.FC<FooterProps> = ({
           )}
         </div>
 
-        {/* Divider */}
-        <motion.div
-          className="footer-divider"
-          variants={itemVariants}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        />
+        <div className="footer-divider" />
 
-        {/* Bottom Section */}
-        <motion.div className="footer-bottom" variants={itemVariants}>
+        <motion.div className="footer-bottom" custom={4} variants={fadeUp}>
           <div className="footer-bottom-left">
             <p className="copyright">
-              © {currentYear} DevQueens. All Rights Reserved.
+              &copy; {currentYear} DevQueens. All Rights Reserved.
             </p>
           </div>
 
-          <div className="footer-bottom-center">
-            <div className="social-links">
-              {/*{socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  className="social-link"
-                  whileHover={{ y: -2 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  {social.name}
-                </motion.a>
-              ))}
-                */}
-            </div>
-          </div>
-
           <div className="footer-bottom-right">
-            {showLocaleSwitcher ? (
+            {showLocaleSwitcher && (
               <div className="footer-locale" aria-label="Locale switcher">
                 <button
                   type="button"
@@ -220,7 +243,7 @@ const Footer: React.FC<FooterProps> = ({
                   ES
                 </button>
               </div>
-            ) : null}
+            )}
           </div>
         </motion.div>
       </div>

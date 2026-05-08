@@ -77,3 +77,13 @@
 .card-footer {
   width: fit-content;
 }
+
+.card--inverted {
+  --card-bg: #1a1a1a;
+  --card-text: #ffffff;
+}
+
+[data-theme="dark"] .card--inverted {
+  --card-bg: #f4f4f4;
+  --card-text: #1a1a1a;
+}

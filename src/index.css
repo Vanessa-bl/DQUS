@@ -80,31 +80,45 @@
 
     --hero-card: #f2f0ea;
 
+    --pill-bg: #f0f0f0;
+    --pill-text: #444;
+    --feature-pill-bg: #f8f8f8;
+    --feature-pill-border: rgba(0, 0, 0, 0.06);
+    --section-border: rgba(0, 0, 0, 0.06);
+    --section-soft: #f8f8f8;
+
     --pattern-line-light: rgba(0, 0, 0, 0.03);
 
     /* Color de líneas en modo oscuro (claro sobre fondo oscuro) */
     --pattern-line-dark: rgba(255, 255, 255, 0.03);
   }
 
-  /* 3) Variables para el modo “dark” */
+  /* 3) Variables para el modo "dark" */
   [data-theme="dark"] {
     --color-bg: #222;
     --color-text: #f4f4f4;
 
-    --card-bg: #282828; /* fondo de la card en dark */
+    --card-bg: #1a1a1a; /* fondo de la card en dark */
     --card-text: #f4f4f4; /* texto de la card en dark */
-    --card-text-regular: #f4f4f4;
+    --card-text-regular: rgba(255, 255, 255, 0.7);
 
     --link-var: #f4f4f4;
 
-    --carousel-bg: #282828;
+    --carousel-bg: #1a1a1a;
 
-    --drawer-bg: #282828;
+    --drawer-bg: #1a1a1a;
 
     --btn-bg: #f4f4f4;
     --btn-text: #222;
 
-    --hero-card: #282828;
+    --hero-card: #1a1a1a;
+
+    --pill-bg: rgba(255, 255, 255, 0.08);
+    --pill-text: rgba(255, 255, 255, 0.7);
+    --feature-pill-bg: rgba(255, 255, 255, 0.06);
+    --feature-pill-border: rgba(255, 255, 255, 0.08);
+    --section-border: rgba(255, 255, 255, 0.06);
+    --section-soft: rgba(255, 255, 255, 0.04);
   }
 
   /* 4) Variables para cualquier elemento con data-theme="light" (sirve para la ola) */
@@ -124,6 +138,13 @@
     --btn-text: #fff;
 
     --hero-card: #f2f0ea;
+
+    --pill-bg: #f0f0f0;
+    --pill-text: #444;
+    --feature-pill-bg: #f8f8f8;
+    --feature-pill-border: rgba(0, 0, 0, 0.06);
+    --section-border: rgba(0, 0, 0, 0.06);
+    --section-soft: #f8f8f8;
   }
 
   [data-theme="light"] .tech-grid {

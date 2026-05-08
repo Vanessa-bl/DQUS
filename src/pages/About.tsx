@@ -1,121 +1,298 @@
 import React from "react";
-import { CircleCheckBig } from "lucide-react";
+import { motion } from "framer-motion";
 import { Card } from "../components/ui/card/Card";
 import { TechCarousel } from "../components/ui/TechCarousel/TechCarousel";
 import "./pageStyles.css";
 import { Layout } from "./layout";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut", delay: 0.12 * i },
+  }),
+};
+
+const badgeStyle: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.4rem",
+  background: "var(--pill-bg)",
+  color: "var(--pill-text)",
+  fontFamily: "'Nunito Sans', sans-serif",
+  fontSize: "0.78rem",
+  fontWeight: 700,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  padding: "0.4rem 1rem",
+  borderRadius: "999px",
+  width: "fit-content",
+};
+
+const featurePillStyle: React.CSSProperties = {
+  fontFamily: "'Nunito Sans', sans-serif",
+  fontSize: "0.78rem",
+  fontWeight: 600,
+  color: "var(--card-text-regular)",
+  background: "var(--feature-pill-bg)",
+  padding: "0.4rem 0.9rem",
+  borderRadius: "999px",
+  border: "1px solid var(--feature-pill-border)",
+  whiteSpace: "nowrap",
+};
 
 export const About: React.FC = () => {
   const isMobile = window.innerWidth < 768;
 
   return (
     <Layout>
-      <section aria-labelledby="hero-title" className="about-hero">
-        <div className="about-hero__content">
-          <p className="hero-title-accent">ABOUT US</p>
-          <h1 id="hero-title" className="hero-title">
-            Who We Are
+      <section
+        aria-labelledby="hero-title"
+        style={{
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          padding: "5rem 3rem 4rem",
+          background: "var(--card-bg)",
+          borderRadius: "15px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2.5rem",
+        }}
+      >
+        <motion.div
+          custom={0}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}
+        >
+          <span style={badgeStyle}>ABOUT US</span>
+
+          <h1
+            id="hero-title"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 800,
+              fontSize: isMobile ? "2rem" : "clamp(2.2rem, 3.5vw, 3rem)",
+              lineHeight: 1.1,
+              color: "var(--card-text)",
+              margin: 0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Who We
+            <br />
+            <span
+              style={{
+                color: "var(--card-text)",
+                position: "relative",
+                display: "inline-block",
+              }}
+            >
+              Are
+              <span
+                style={{
+                  content: '""',
+                  position: "absolute",
+                  bottom: "2px",
+                  left: 0,
+                  width: "100%",
+                  height: "3px",
+                  background: "var(--card-text)",
+                  borderRadius: "2px",
+                  display: "block",
+                }}
+              />
+            </span>
           </h1>
-          <p className="hero-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nec iaculis mauris.
+
+          <p
+            style={{
+              fontFamily: "'Nunito Sans', sans-serif",
+              fontSize: "1rem",
+              lineHeight: 1.75,
+              color: "var(--card-text-regular)",
+              margin: 0,
+            }}
+          >
+            Desde la concepción hasta el diseño, aportamos conocimientos estratégicos y soluciones creativas a cada proyecto. Nuestro equipo comparte ideas prácticas, técnicas probadas y las mejores prácticas del sector.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       <section
         aria-labelledby="story-title"
         style={{
-          padding: "4rem 2rem",
-          maxWidth: "79rem",
-          margin: "auto",
-          display: "grid",
-          gap: "3rem",
-          gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 1fr))",
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          padding: "5rem 3rem 4rem",
+          background: "var(--card-bg)",
+          borderRadius: "15px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2.5rem",
         }}
       >
-        <div>
-          <p className="hero-title-accent">OUR STORY</p>
-          <div className="card-divider" style={{ marginBottom: "1rem" }} />
-          <h2
-            id="story-title"
-            style={{ fontSize: "2rem", marginBottom: "1rem" }}
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
+          <span style={badgeStyle}>OUR STORY</span>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: "3rem",
+            alignItems: "flex-start",
+          }}
+        >
+          <motion.div
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            Our Story
-          </h2>
-          <p style={{ fontSize: "1.2rem" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <ul
+            <h2
+              id="story-title"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: isMobile ? "1.5rem" : "2rem",
+                color: "var(--card-text)",
+                margin: "0 0 1rem",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Our Story
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif",
+                fontSize: "1rem",
+                lineHeight: 1.75,
+                color: "var(--card-text-regular)",
+                margin: 0,
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginTop: "1.5rem" }}>
+              {["Founded in 2020", "100+ Projects Delivered", "Global Reach"].map((feat) => (
+                <span key={feat} style={featurePillStyle}>
+                  {feat}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
             style={{
-              listStyle: "none",
-              paddingLeft: 0,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              marginTop: "1rem",
+              display: "grid",
+              gridTemplateColumns: "repeat(1, 1fr)",
+              gap: "16px",
             }}
           >
-            <li style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <CircleCheckBig size={20} color="purple" aria-hidden="true" />
-              <strong>Founded in 2020</strong>
-            </li>
-            <li style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <CircleCheckBig size={20} color="purple" aria-hidden="true" />
-              <strong>100+ Projects Delivered</strong>
-            </li>
-            <li style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <CircleCheckBig size={20} color="purple" aria-hidden="true" />
-              <strong>Global Reach</strong>
-            </li>
-          </ul>
-        </div>
-        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-          <Card
-            areaService="MISSION"
-            title="Our Mission"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac neque nec purus ultricies venenatis."
-          />
-          <Card
-            areaService="VISION"
-            title="Our Vision"
-            content="Suspendisse potenti. Duis at velit maximus, molestie est a, tempor magna."
-          />
+            <Card
+              inverted
+              areaService="MISSION"
+              title="Our Mission"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac neque nec purus ultricies venenatis."
+            />
+            <Card
+              inverted
+              areaService="VISION"
+              title="Our Vision"
+              content="Suspendisse potenti. Duis at velit maximus, molestie est a, tempor magna."
+            />
+          </motion.div>
         </div>
       </section>
 
       <section
         aria-labelledby="team-title"
         style={{
-          padding: "4rem 2rem",
-          textAlign: "center",
+          maxWidth: "1280px",
+          margin: "80px auto 0",
+          padding: "5rem 3rem 4rem",
+          background: "var(--card-bg)",
+          borderRadius: "15px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2.5rem",
         }}
       >
-        <p className="hero-title-accent">MEET THE TEAM</p>
-        <h2 id="team-title" className="hero-title" style={{ margin: "1rem 0" }}>
-          Passionate Experts
-        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
+          <span style={badgeStyle}>MEET THE TEAM</span>
+
+          <h2
+            id="team-title"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 800,
+              fontSize: isMobile ? "1.8rem" : "clamp(2rem, 3.5vw, 2.8rem)",
+              lineHeight: 1.1,
+              color: "var(--card-text)",
+              margin: 0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Passionate
+            <br />
+            <span
+              style={{
+                color: "var(--card-text)",
+                position: "relative",
+                display: "inline-block",
+              }}
+            >
+              Experts
+              <span
+                style={{
+                  content: '""',
+                  position: "absolute",
+                  bottom: "2px",
+                  left: 0,
+                  width: "100%",
+                  height: "3px",
+                  background: "var(--card-text)",
+                  borderRadius: "2px",
+                  display: "block",
+                }}
+              />
+            </span>
+          </h2>
+        </div>
+
         <div
           style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-            gap: "2rem",
-            maxWidth: "79rem",
-            margin: "auto",
+            gap: "20px",
           }}
         >
           <Card
+            inverted
             areaService="CEO"
             title="Jane Doe"
             content="Chief Executive Officer"
           />
           <Card
+            inverted
             areaService="CTO"
             title="John Smith"
             content="Chief Technology Officer"
           />
           <Card
+            inverted
             areaService="DESIGN"
             title="Alice Johnson"
             content="Lead Designer"
@@ -123,7 +300,9 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      <TechCarousel aria-label="Technologies Carousel" />
+      <div style={{ margin: "80px 0 0" }}>
+        <TechCarousel aria-label="Technologies Carousel" />
+      </div>
     </Layout>
   );
 };
