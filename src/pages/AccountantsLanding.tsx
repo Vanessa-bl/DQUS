@@ -370,7 +370,7 @@ export const AccountantsLanding: React.FC = () => {
               {t("accountants.offer.desc", "Incluye diseño personalizado, desarrollo web y mobile, optimización SEO básica y asesoría inicial. Todo lo que necesitás para empezar.")}
             </p>
           </div>
-          <a href="#buy" onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
+          <a href="#buy" data-umami-event="cta-aprovechar-oferta" onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
             style={{
               fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
               color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
@@ -520,7 +520,7 @@ export const AccountantsLanding: React.FC = () => {
                 {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
               </p>
             </div>
-            <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203"
+            <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203" data-umami-event="cta-comprar-stripe"
               style={{
                 fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
                 color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
@@ -599,7 +599,7 @@ export const AccountantsLanding: React.FC = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               style={{ display: "flex", flexDirection: "column", gap: "1.5rem", flex: "1 1 50%" }}
             >
-              <input type="text" name="_honey" style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0, tabIndex: -1 }} autoComplete="off" />
+              <input type="text" name="_honey" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }} autoComplete="off" />
 
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                 <label htmlFor="al-name" style={labelStyle}>{t("accountants.form.name", "Nombre completo")}</label>
@@ -624,7 +624,7 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               )}
 
-              <button type="submit" disabled={submitting}
+              <button type="submit" disabled={submitting} data-umami-event="cta-formulario-contacto"
                 style={{
                   fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
                   color: "var(--btn-text)", background: "var(--btn-bg)", border: "none",
