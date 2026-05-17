@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+google-apps-script.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
