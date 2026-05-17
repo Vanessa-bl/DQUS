@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
 import { Card } from "../components/ui/card/Card";
@@ -53,6 +53,8 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: "0.01em",
 };
 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
+
 const anchorLinks = [
   { id: "hero", label: "Inicio" },
   { id: "about", label: "Nosotros" },
@@ -61,42 +63,116 @@ const anchorLinks = [
   { id: "offer", label: "Oferta" },
   { id: "process", label: "Proceso" },
   { id: "compare", label: "Comparación" },
+  { id: "buy", label: "Comprar" },
   { id: "contact", label: "Contacto" },
 ];
 
 export const AccountantsLanding: React.FC = () => {
-  const isMobile = window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+  );
+  const sectionPad = isMobile ? "3rem 1.2rem 2.5rem" : "5rem 3rem 4rem";
+  const sectionMargin = isMobile ? "50px auto 0" : "80px auto 0";
   const t = useT();
   const { setLocale } = useLocale();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [lastSubmit, setLastSubmit] = useState(0);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     setLocale("es");
   }, [setLocale]);
 
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    if (formError) setFormError("");
   };
+
+  const validateForm = useCallback((): string | null => {
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+    if (name.length < 2 || name.length > 100) return "El nombre debe tener entre 2 y 100 caracteres.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Ingresá un email válido.";
+    if (form.phone.trim() && !/^[\d\s\-\+\(\)]{4,25}$/.test(form.phone.trim())) return "El teléfono no tiene un formato válido.";
+    if (message.length < 5) return "El mensaje debe tener al menos 5 caracteres.";
+    if (message.length > 2000) return "El mensaje no puede exceder los 2000 caracteres.";
+    return null;
+  }, [form]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await fetch("https://formsubmit.co/ajax/davisprojectjr@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone || "—",
-          message: form.message,
-          _subject: "Nueva consulta - Asesoría Contadores",
-        }),
-      });
+    setFormError("");
+
+    if (Date.now() - lastSubmit < 5000) {
+      setFormError("Esperá unos segundos antes de enviar de nuevo.");
+      return;
+    }
+
+    if (submitting) return;
+
+    const validationError = validateForm();
+    if (validationError) {
+      setFormError(validationError);
+      return;
+    }
+
+    if ((e.target as HTMLFormElement).querySelector<HTMLInputElement>('input[name="_honey"]')?.value) {
       setSent(true);
       setForm({ name: "", email: "", phone: "", message: "" });
-    } catch {
-      alert("Hubo un error. Intenta de nuevo.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const controller = new AbortController();
+      abortRef.current = controller;
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim() || "",
+          message: form.message.trim(),
+          _honey: "",
+        }),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+      setSent(true);
+      setForm({ name: "", email: "", phone: "", message: "" });
+      setLastSubmit(Date.now());
+    } catch (err: unknown) {
+      const error = err as Error;
+      if (error?.name === "AbortError") {
+        setFormError("La solicitud tardó demasiado. Intenta de nuevo.");
+      } else {
+        setFormError("Hubo un error al enviar. Intenta de nuevo.");
+      }
+    } finally {
+      setSubmitting(false);
+      abortRef.current = null;
     }
   };
 
@@ -106,7 +182,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="hero"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -129,7 +205,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="about"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -144,7 +220,7 @@ export const AccountantsLanding: React.FC = () => {
             </span>
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "3rem", alignItems: "flex-start" }}>
+        <div className="about-grid" style={{ gap: "3rem", alignItems: "flex-start" }}>
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: "0 0 1rem" }}>
               {t("accountants.about.p1", "En DevQueens nos especializamos en crear presencia digital para profesionales contables. Entendemos los desafíos únicos de tu industria: necesitás transmitir confianza, experiencia y profesionalismo en cada punto de contacto con tus clientes.")}
@@ -217,7 +293,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="why"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -228,7 +304,7 @@ export const AccountantsLanding: React.FC = () => {
             {t("accountants.why.title", "Tus Clientes Te Buscan en Internet. ¿Te Encuentran?")}
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "20px" }}>
+        <div className="why-grid" style={{ gap: "20px" }}>
           {[
             { num: "93%", title: t("accountants.why.stat1.title", "Investigan Online"), text: t("accountants.why.stat1.text", "De los clientes potenciales investigan en internet antes de contratar un servicio profesional.") },
             { num: "75%", title: t("accountants.why.stat2.title", "Confían Más"), text: t("accountants.why.stat2.text", "Un sitio web profesional aumenta la confianza y credibilidad de tu servicio contable.") },
@@ -248,7 +324,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="services"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -262,7 +338,7 @@ export const AccountantsLanding: React.FC = () => {
             </span>
           </h2>
         </div>
-        <div className="cards-grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)" }}>
+        <div className="cards-grid cards-grid--2col">
           <Card inverted areaService={t("accountants.services.card1.area", "SITIO WEB")} title={t("accountants.services.card1.title", "Web Profesional Personalizada")} content={t("accountants.services.card1.content", "Diseñamos tu sitio web a medida con información clara sobre tus servicios, experiencia y valores. Adaptado a web y mobile para que te vean impecable en cualquier dispositivo.")} />
           <Card inverted areaService={t("accountants.services.card2.area", "CATÁLOGO")} title={t("accountants.services.card2.title", "Catálogo de Servicios")} content={t("accountants.services.card2.content", "Presenta tus servicios contables de forma organizada y profesional. Tus clientes entenderán exactamente qué ofreces y por qué deberían elegirte.")} />
           <Card inverted areaService={t("accountants.services.card3.area", "SEO & MARKETING")} title={t("accountants.services.card3.title", "Optimización para Marketing")} content={t("accountants.services.card3.content", "Tu web lista para campañas de publicidad y marketing digital. Optimizada para SEO, Google Ads y redes sociales desde el día uno.")} />
@@ -272,14 +348,14 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="offer"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "0",
+          maxWidth: "1280px", margin: sectionMargin, padding: "0",
           background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
           borderRadius: "20px", overflow: "hidden", position: "relative",
         }}
       >
         <div style={{ position: "absolute", width: "300px", height: "300px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-80px", right: "-60px", filter: "blur(60px)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.15)", borderRadius: "50%", bottom: "-60px", left: "-40px", filter: "blur(50px)", pointerEvents: "none" }} />
-        <div style={{ position: "relative", zIndex: 1, padding: "4rem 3rem", display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "center", justifyContent: "space-between", gap: "2rem" }}>
+        <div className="offer-row" style={{ position: "relative", zIndex: 1, padding: isMobile ? "2.5rem 1.2rem" : "4rem 3rem", gap: "2rem" }}>
           <div>
             <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginBottom: "0.75rem" }}>
               {t("accountants.offer.badge", "OFERTA LANZAMIENTO")}
@@ -294,7 +370,7 @@ export const AccountantsLanding: React.FC = () => {
               {t("accountants.offer.desc", "Incluye diseño personalizado, desarrollo web y mobile, optimización SEO básica y asesoría inicial. Todo lo que necesitás para empezar.")}
             </p>
           </div>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+          <a href="#buy" data-umami-event="cta-aprovechar-oferta" onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
             style={{
               fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
               color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
@@ -310,7 +386,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="process"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -321,7 +397,7 @@ export const AccountantsLanding: React.FC = () => {
             {t("accountants.process.title", "Del Primer Contacto a Tu Web Publicada")}
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "20px" }}>
+        <div className="process-grid" style={{ gap: "20px" }}>
           {[
             { step: "01", title: t("accountants.process.step1.title", "Consultoría Gratuita"), text: t("accountants.process.step1.text", "Conversamos sobre tu práctica contable, tus objetivos y cómo querés mostrarte al mundo.") },
             { step: "02", title: t("accountants.process.step2.title", "Diseño a Tu Medida"), text: t("accountants.process.step2.text", "Creamos propuestas de diseño alineadas a tu identidad. Vos elegís o traés tus propias ideas.") },
@@ -341,7 +417,7 @@ export const AccountantsLanding: React.FC = () => {
 
       <section id="compare"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
           display: "flex", flexDirection: "column", gap: "2.5rem",
         }}
@@ -355,7 +431,7 @@ export const AccountantsLanding: React.FC = () => {
             </span>
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "24px" }}>
+        <div className="compare-grid" style={{ gap: "24px" }}>
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             style={{ border: "1px solid var(--feature-pill-border)", borderRadius: "20px", padding: "2rem", background: "var(--feature-pill-bg)" }}
           >
@@ -388,11 +464,106 @@ export const AccountantsLanding: React.FC = () => {
         </div>
       </section>
 
+      <section id="buy"
+        style={{
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
+          background: "var(--card-bg)", borderRadius: "15px",
+          display: "flex", flexDirection: "column", gap: "2.5rem",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
+          <span style={badgeStyle}>{t("accountants.buy.badge", "COMENZAR AHORA")}</span>
+          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
+            {t("accountants.buy.title.line1", "Obten Tu Sitio Web")}<br />
+            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
+              {t("accountants.buy.title.line2", "Listo para Atraer Clientes")}
+            </span>
+          </h2>
+          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: 0 }}>
+            {t("accountants.buy.desc", "En menos de una semana tendrás tu sitio web profesional publicado, optimizado para atraer clientes y preparado para campañas de marketing digital. Sin complicaciones, sin letras chicas.")}
+          </p>
+        </div>
+
+        <div className="buy-grid" style={{ gap: "24px" }}>
+          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            style={{
+              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
+              borderRadius: "24px", padding: isMobile ? "2rem" : "2.5rem",
+              position: "relative", overflow: "hidden",
+              display: "flex", flexDirection: "column", justifyContent: "space-between",
+            }}
+          >
+            <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", width: "120px", height: "120px", background: "rgba(251,146,60,0.12)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.1)" }} />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.4rem", color: "#fff", margin: "0 0 1.25rem", lineHeight: 1.3 }}>
+                {t("accountants.buy.includes.title", "Qué Incluye:")}
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                {[
+                  t("accountants.buy.includes.1", "Diseño web profesional personalizado"),
+                  t("accountants.buy.includes.2", "Optimizado para SEO desde el día uno"),
+                  t("accountants.buy.includes.3", "Adaptado a mobile y todos los dispositivos"),
+                  t("accountants.buy.includes.4", "Listo para Google Ads y redes sociales"),
+                  t("accountants.buy.includes.5", "Soporte y acompañamiento continuo"),
+                ].map((item, i) => (
+                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                    <span style={{ color: "#fb923c", flexShrink: 0 }}>✓</span>{item}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.75rem" }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "2.5rem", color: "#fff", lineHeight: 1 }}>$100</span>
+                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>USD</span>
+              </div>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", margin: "0 0 1.5rem" }}>
+                {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
+              </p>
+            </div>
+            <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203" data-umami-event="cta-comprar-stripe"
+              style={{
+                fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
+                color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
+                padding: "0.9rem 2.5rem", cursor: "pointer", letterSpacing: "0.01em",
+                textDecoration: "none", display: "inline-block", width: "fit-content",
+                transition: "transform 0.2s ease", position: "relative", zIndex: 1,
+              }}
+            >
+              {t("accountants.buy.cta", "Obtener Mi Sitio Web Ahora")}
+            </a>
+          </motion.div>
+
+          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            style={{
+              display: "flex", flexDirection: "column", gap: "20px", justifyContent: "center",
+            }}
+          >
+            {[
+              { emoji: "💬", title: t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo"), text: t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.") },
+              { emoji: "🎨", title: t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca"), text: t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.") },
+              { emoji: "📈", title: t("accountants.buy.perk3.title", "Preparado para Crecer"), text: t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.") },
+            ].map((item, i) => (
+              <div key={i} style={{
+                background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
+                borderRadius: "16px", padding: "1.5rem",
+                display: "flex", gap: "1rem", alignItems: "flex-start",
+              }}>
+                <span style={{ fontSize: "1.5rem", flexShrink: 0, lineHeight: 1 }}>{item.emoji}</span>
+                <div>
+                  <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{item.title}</h3>
+                  <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       <section id="contact"
         style={{
-          maxWidth: "1280px", margin: "80px auto 0", padding: "5rem 3rem 4rem",
+          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
           background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem", overflow: "hidden", position: "relative",
+          display: "flex", flexDirection: "column", gap: "2.5rem", position: "relative",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
@@ -405,7 +576,7 @@ export const AccountantsLanding: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: "flex", gap: isMobile ? "2rem" : "3rem", flexDirection: isMobile ? "column" : "row", alignItems: "stretch" }}>
+        <div className="contact-row" style={{ gap: isMobile ? "2rem" : "3rem" }}>
           {sent ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
@@ -428,24 +599,41 @@ export const AccountantsLanding: React.FC = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               style={{ display: "flex", flexDirection: "column", gap: "1.5rem", flex: "1 1 50%" }}
             >
+              <input type="text" name="_honey" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }} autoComplete="off" />
+
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                 <label htmlFor="al-name" style={labelStyle}>{t("accountants.form.name", "Nombre completo")}</label>
-                <input type="text" id="al-name" name="name" value={form.name} onChange={handleChange} required placeholder={t("accountants.form.name.placeholder", "Tu nombre y apellido")} style={inputStyle} />
+                <input type="text" id="al-name" name="name" value={form.name} onChange={handleChange} required maxLength={100} placeholder={t("accountants.form.name.placeholder", "Tu nombre y apellido")} style={inputStyle} />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                 <label htmlFor="al-email" style={labelStyle}>{t("accountants.form.email", "Email")}</label>
-                <input type="email" id="al-email" name="email" value={form.email} onChange={handleChange} required placeholder={t("accountants.form.email.placeholder", "Tu correo electrónico")} style={inputStyle} />
+                <input type="email" id="al-email" name="email" value={form.email} onChange={handleChange} required maxLength={254} placeholder={t("accountants.form.email.placeholder", "Tu correo electrónico")} style={inputStyle} />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                 <label htmlFor="al-phone" style={labelStyle}>{t("accountants.form.phone", "Teléfono (opcional)")}</label>
-                <input type="tel" id="al-phone" name="phone" value={form.phone} onChange={handleChange} placeholder={t("accountants.form.phone.placeholder", "Tu número de contacto")} style={inputStyle} />
+                <input type="tel" id="al-phone" name="phone" value={form.phone} onChange={handleChange} maxLength={20} placeholder={t("accountants.form.phone.placeholder", "Tu número de contacto")} style={inputStyle} />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                 <label htmlFor="al-message" style={labelStyle}>{t("accountants.form.message", "Contanos sobre tu práctica")}</label>
-                <textarea id="al-message" name="message" rows={4} value={form.message} onChange={handleChange} placeholder={t("accountants.form.message.placeholder", "¿Qué servicios ofrecés? ¿Tenés alguna idea para tu web?")} style={{ ...inputStyle, resize: "vertical", minHeight: "100px" }} />
+                <textarea id="al-message" name="message" rows={4} value={form.message} onChange={handleChange} required maxLength={2000} placeholder={t("accountants.form.message.placeholder", "¿Qué servicios ofrecés? ¿Tenés alguna idea para tu web?")} style={{ ...inputStyle, resize: "vertical", minHeight: "100px" }} />
               </div>
-              <button type="submit" style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "var(--btn-text)", background: "var(--btn-bg)", border: "none", borderRadius: "999px", padding: "0.9rem 2.5rem", cursor: "pointer", letterSpacing: "0.01em", width: "fit-content", transition: "transform 0.2s ease" }}>
-                {t("accountants.form.submit", "Quiero Mi Asesoría Gratuita")}
+
+              {formError && (
+                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", color: "#dc2626", margin: 0, padding: "0.6rem 1rem", background: "rgba(220,38,38,0.08)", borderRadius: "10px" }}>
+                  {formError}
+                </p>
+              )}
+
+              <button type="submit" disabled={submitting} data-umami-event="cta-formulario-contacto"
+                style={{
+                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
+                  color: "var(--btn-text)", background: "var(--btn-bg)", border: "none",
+                  borderRadius: "999px", padding: "0.9rem 2.5rem", cursor: submitting ? "not-allowed" : "pointer",
+                  letterSpacing: "0.01em", width: "fit-content", transition: "transform 0.2s ease",
+                  opacity: submitting ? 0.6 : 1,
+                }}
+              >
+                {submitting ? "Enviando..." : t("accountants.form.submit", "Quiero Mi Asesoría Gratuita")}
               </button>
             </motion.form>
           )}

@@ -302,3 +302,58 @@
   font-size: 1rem;
   line-height: 1.5;
 }
+
+/* ================================
+   Accountants Landing - Responsive Layouts
+   ================================ */
+
+/* -- Grid containers -- */
+.about-grid,
+.why-grid,
+.process-grid,
+.compare-grid,
+.buy-grid {
+  display: grid;
+}
+
+/* -- Flex containers -- */
+.offer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-row {
+  display: flex;
+  align-items: stretch;
+}
+
+/* -- cards-grid 2-column override -- */
+.cards-grid--2col {
+  grid-template-columns: inherit;
+}
+
+/* Mobile (default): single column */
+.about-grid,
+.why-grid,
+.process-grid,
+.compare-grid,
+.buy-grid,
+.offer-row,
+.contact-row,
+.cards-grid--2col {
+  grid-template-columns: 1fr;
+  flex-direction: column;
+}
+
+/* Desktop: 768px+ */
+@media screen and (min-width: 768px) {
+  .about-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .process-grid { grid-template-columns: repeat(4, 1fr); }
+  .compare-grid { grid-template-columns: repeat(2, 1fr); }
+  .buy-grid { grid-template-columns: repeat(2, 1fr); }
+  .cards-grid--2col { grid-template-columns: repeat(2, 1fr); }
+  .offer-row { flex-direction: row; }
+  .contact-row { flex-direction: row; }
+}

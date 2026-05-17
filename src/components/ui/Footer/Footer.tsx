@@ -16,6 +16,7 @@ const Footer: React.FC<FooterProps> = ({
   showLocaleSwitcher = false,
   landingLinks,
 }) => {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const currentYear = new Date().getFullYear();
   const t = useT();
   const { locale, setLocale } = useLocale();
@@ -45,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({
       role="contentinfo"
     >
       <div className="footer-container">
-        <div className="footer-content" style={landingLinks ? { gridTemplateColumns: "2fr 1fr 1.5fr" } : undefined}>
+        <div className="footer-content" style={landingLinks ? { gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1.5fr" } : undefined}>
           <motion.div className="footer-brand" custom={0} variants={fadeUp}>
             <h3
               style={{

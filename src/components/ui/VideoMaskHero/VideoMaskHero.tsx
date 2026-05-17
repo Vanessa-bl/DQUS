@@ -3,11 +3,11 @@ import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import "./VideoMaskHero.css";
 
 function calcParallaxRange(textEl: HTMLElement | null): number {
-  if (!textEl) return 14;
+  if (!textEl) return 0;
   const textW = textEl.scrollWidth;
   const viewW = window.innerWidth;
-  if (textW <= viewW) return window.innerWidth < 768 ? 18 : 0;
-  return ((textW - viewW) / textW) * 63;
+  if (textW <= viewW) return window.innerWidth < 768 ? 8 : 0;
+  return ((textW - viewW) / textW) * 50;
 }
 
 const VIDEO_SRC = "https://res.cloudinary.com/djqiqpilh/video/upload/v1778251145/7308093-hd_1280_720_24fps_j1oug7.mp4";
@@ -15,7 +15,7 @@ const VIDEO_SRC = "https://res.cloudinary.com/djqiqpilh/video/upload/v1778251145
 export default function VideoMaskHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  const rangeRef = useRef(typeof window !== "undefined" && window.innerWidth < 768 ? 18 : 12);
+  const rangeRef = useRef(0);
   const [range, setRange] = useState(rangeRef.current);
 
   const { scrollYProgress } = useScroll({
@@ -41,8 +41,16 @@ export default function VideoMaskHero() {
 
   useEffect(() => {
     updateRange();
-    window.addEventListener("resize", updateRange);
-    return () => window.removeEventListener("resize", updateRange);
+    const orientationMql = window.matchMedia("(orientation: portrait)");
+    const handleChange = () => {
+      requestAnimationFrame(updateRange);
+    };
+    window.addEventListener("resize", handleChange);
+    orientationMql.addEventListener("change", handleChange);
+    return () => {
+      window.removeEventListener("resize", handleChange);
+      orientationMql.removeEventListener("change", handleChange);
+    };
   }, [updateRange]);
 
   return (
