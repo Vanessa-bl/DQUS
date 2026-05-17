@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import { MessageCircle, Palette, TrendingUp } from "lucide-react";
 import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
 import { Card } from "../components/ui/card/Card";
 import "./pageStyles.css";
@@ -258,7 +259,7 @@ export const AccountantsLanding: React.FC = () => {
             }}>
               <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>100+</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.7)", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat1", "Proyectos Entregados")}</p>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat1", "Proyectos Entregados")}</p>
             </div>
             <div style={{
               background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
@@ -267,7 +268,7 @@ export const AccountantsLanding: React.FC = () => {
             }}>
               <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>5+</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.7)", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat2", "Años de Experiencia")}</p>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat2", "Años de Experiencia")}</p>
             </div>
             <div style={{
               background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
@@ -276,7 +277,7 @@ export const AccountantsLanding: React.FC = () => {
             }}>
               <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>100%</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.7)", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat3", "Clientes Satisfechos")}</p>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat3", "Clientes Satisfechos")}</p>
             </div>
             <div style={{
               background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
@@ -285,7 +286,7 @@ export const AccountantsLanding: React.FC = () => {
             }}>
               <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>24/7</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.7)", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat4", "Soporte Continuo")}</p>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat4", "Soporte Continuo")}</p>
             </div>
           </motion.div>
         </div>
@@ -316,7 +317,7 @@ export const AccountantsLanding: React.FC = () => {
               <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(30px)", pointerEvents: "none" }} />
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 8px", position: "relative", zIndex: 1 }}>{item.num}</p>
               <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#fff", margin: "0 0 6px", position: "relative", zIndex: 1 }}>{item.title}</h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: "rgba(255,255,255,0.75)", margin: 0, position: "relative", zIndex: 1 }}>{item.text}</p>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{item.text}</p>
             </motion.div>
           ))}
         </div>
@@ -357,7 +358,7 @@ export const AccountantsLanding: React.FC = () => {
         <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.15)", borderRadius: "50%", bottom: "-60px", left: "-40px", filter: "blur(50px)", pointerEvents: "none" }} />
         <div className="offer-row" style={{ position: "relative", zIndex: 1, padding: isMobile ? "2.5rem 1.2rem" : "4rem 3rem", gap: "2rem" }}>
           <div>
-            <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginBottom: "0.75rem" }}>
+            <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", marginBottom: "0.75rem" }}>
               {t("accountants.offer.badge", "OFERTA LANZAMIENTO")}
             </span>
             <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "2rem" : "clamp(2.2rem, 4vw, 3.5rem)", lineHeight: 1.1, color: "#fff", margin: "0 0 0.75rem" }}>
@@ -366,7 +367,7 @@ export const AccountantsLanding: React.FC = () => {
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: isMobile ? "3rem" : "clamp(3rem, 6vw, 5rem)", color: "#fff", margin: 0, lineHeight: 1 }}>
               $100 <span style={{ fontSize: "0.4em", fontWeight: 700, opacity: 0.7 }}>USD</span>
             </p>
-            <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.75)", margin: "1rem 0 0", maxWidth: "400px" }}>
+            <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "#fff", margin: "1rem 0 0", maxWidth: "400px" }}>
               {t("accountants.offer.desc", "Incluye diseño personalizado, desarrollo web y mobile, optimización SEO básica y asesoría inicial. Todo lo que necesitás para empezar.")}
             </p>
           </div>
@@ -435,7 +436,7 @@ export const AccountantsLanding: React.FC = () => {
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             style={{ border: "1px solid var(--feature-pill-border)", borderRadius: "20px", padding: "2rem", background: "var(--feature-pill-bg)" }}
           >
-            <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "var(--card-text-regular)", margin: "0 0 1rem", opacity: 0.6 }}>
+            <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "var(--card-text)", margin: "0 0 1rem" }}>
               {t("accountants.compare.left.title", "Sin Presencia Online")}
             </h3>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -455,8 +456,8 @@ export const AccountantsLanding: React.FC = () => {
             </h3>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem", position: "relative", zIndex: 1 }}>
               {[t("accountants.compare.right.1", "Web profesional 100% personalizada"), t("accountants.compare.right.2", "Lista para campañas de Google y redes"), t("accountants.compare.right.3", "Refleja tu experiencia y seriedad"), t("accountants.compare.right.4", "Flujo constante de nuevos clientes")].map((item, i) => (
-                <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "rgba(255,255,255,0.85)", display: "flex", gap: "8px", alignItems: "flex-start" }}>
-                  <span style={{ color: "#fb923c", fontSize: "1.1rem", lineHeight: 1 }}>✓</span>{item}
+                <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "#fff", display: "flex", gap: "8px", alignItems: "flex-start" }}>
+                  <span style={{ color: "#fed7aa", fontSize: "1.1rem", lineHeight: 1 }}>✓</span>{item}
                 </li>
               ))}
             </ul>
@@ -507,16 +508,16 @@ export const AccountantsLanding: React.FC = () => {
                   t("accountants.buy.includes.4", "Listo para Google Ads y redes sociales"),
                   t("accountants.buy.includes.5", "Soporte y acompañamiento continuo"),
                 ].map((item, i) => (
-                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                    <span style={{ color: "#fb923c", flexShrink: 0 }}>✓</span>{item}
+                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.92rem", color: "#fff", display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                    <span style={{ color: "#fed7aa", flexShrink: 0 }}>✓</span>{item}
                   </li>
                 ))}
               </ul>
               <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.75rem" }}>
                 <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "2.5rem", color: "#fff", lineHeight: 1 }}>$100</span>
-                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", fontWeight: 600 }}>USD</span>
+                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "#fff", fontWeight: 600 }}>USD</span>
               </div>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", margin: "0 0 1.5rem" }}>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.8)", margin: "0 0 1.5rem" }}>
                 {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
               </p>
             </div>
@@ -538,23 +539,45 @@ export const AccountantsLanding: React.FC = () => {
               display: "flex", flexDirection: "column", gap: "20px", justifyContent: "center",
             }}
           >
-            {[
-              { emoji: "💬", title: t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo"), text: t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.") },
-              { emoji: "🎨", title: t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca"), text: t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.") },
-              { emoji: "📈", title: t("accountants.buy.perk3.title", "Preparado para Crecer"), text: t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.") },
-            ].map((item, i) => (
-              <div key={i} style={{
-                background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
-                borderRadius: "16px", padding: "1.5rem",
-                display: "flex", gap: "1rem", alignItems: "flex-start",
-              }}>
-                <span style={{ fontSize: "1.5rem", flexShrink: 0, lineHeight: 1 }}>{item.emoji}</span>
-                <div>
-                  <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{item.title}</h3>
-                  <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{item.text}</p>
-                </div>
+            <div style={{
+              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
+              borderRadius: "16px", padding: "1.5rem",
+              display: "flex", gap: "1rem", alignItems: "flex-start",
+            }}>
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <MessageCircle size={20} color="#fff" />
               </div>
-            ))}
+              <div>
+                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo")}</h3>
+                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.")}</p>
+              </div>
+            </div>
+            <div style={{
+              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
+              borderRadius: "16px", padding: "1.5rem",
+              display: "flex", gap: "1rem", alignItems: "flex-start",
+            }}>
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Palette size={20} color="#fff" />
+              </div>
+              <div>
+                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca")}</h3>
+                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.")}</p>
+              </div>
+            </div>
+            <div style={{
+              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
+              borderRadius: "16px", padding: "1.5rem",
+              display: "flex", gap: "1rem", alignItems: "flex-start",
+            }}>
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <TrendingUp size={20} color="#fff" />
+              </div>
+              <div>
+                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk3.title", "Preparado para Crecer")}</h3>
+                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.")}</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -661,8 +684,8 @@ export const AccountantsLanding: React.FC = () => {
                     t("accountants.form.side.3", "Te acompañamos en cada decisión"),
                     t("accountants.form.side.4", "Web lista para marketing y publicidad"),
                   ].map((item, i) => (
-                    <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                      <span style={{ color: "#fb923c", flexShrink: 0 }}>✓</span>{item}
+                    <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "#fff", display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                      <span style={{ color: "#fed7aa", flexShrink: 0 }}>✓</span>{item}
                     </li>
                   ))}
                 </ul>
