@@ -4,6 +4,7 @@ import { useDrawer } from "../hooks/useDrawer";
 import { AnimatedDrawer } from "../components/ui/AnimatedDrawer/AnimatedDrawer";
 import { AnimatedLink } from "../components/ui/Link/AnimatedLink/AnimatedLink";
 import Footer from "../components/ui/Footer/Footer";
+import { useT } from "../i18n/useT";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,6 +14,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, anchorNav, landingFooterLinks }) => {
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
+  const t = useT();
 
   return (
     <>
@@ -29,31 +31,31 @@ export const Layout: React.FC<LayoutProps> = ({ children, anchorNav, landingFoot
             <h2 className="visually-hidden">DevQueens</h2>
             <ul className="header-drawer__list">
               <li>
-                <AnimatedLink to="/" size="1.4rem" aria-label="Ir a Home">
-                  Home
+                <AnimatedLink to="/" size="1.4rem" aria-label={t("header.nav.home", "Go to Home")}>
+                  {t("header.home", "Home")}
                 </AnimatedLink>
               </li>
               <li>
                 <AnimatedLink
                   to="/services"
                   size="1.4rem"
-                  aria-label="Ir a Services"
+                  aria-label={t("header.nav.services", "Go to Services")}
                 >
-                  Services
+                  {t("header.services", "Services")}
                 </AnimatedLink>
               </li>
               <li>
-                <AnimatedLink to="/about" size="1.4rem" aria-label="Ir a About">
-                  About
+                <AnimatedLink to="/about" size="1.4rem" aria-label={t("header.nav.about", "Go to About")}>
+                  {t("header.about", "About")}
                 </AnimatedLink>
               </li>
               <li>
                 <AnimatedLink
                   to="/contact"
                   size="1.4rem"
-                  aria-label="Ir a Contact"
+                  aria-label={t("header.nav.contact", "Go to Contact")}
                 >
-                  Contact
+                  {t("header.contact", "Contact")}
                 </AnimatedLink>
               </li>
             </ul>
