@@ -14,7 +14,7 @@ interface HeaderProps {
   shrinkPointPx?: number;
   minimal?: boolean;
   showThemeSwitch?: boolean;
-  anchorNav?: { id: string; label: string }[];
+  anchorNav?: { id: string; label: string; labelKey?: string }[];
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
       {!minimal && (
         <button
           className="button-header mobile-only"
-          aria-label="Abrir menú"
+          aria-label={t("header.menu.open", "Open menu")}
           onClick={handleMenuClick}
         >
           <Menu size={20} color="var(--card-text)" />
@@ -98,29 +98,29 @@ export const Header: React.FC<HeaderProps> = ({
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }}
                   >
-                    {item.label}
+                    {item.labelKey ? t(item.labelKey, item.label) : item.label}
                   </a>
                 </li>
               ))
             ) : (
               <>
                 <li>
-                  <AnimatedLink to="/" size="0.85rem" aria-label="Ir a Home" style={navLinkStyle}>
+                  <AnimatedLink to="/" size="0.85rem" aria-label={t("header.nav.home", "Go to Home")} style={navLinkStyle}>
                     {t("header.home", "Home")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/services" size="0.85rem" aria-label="Ir a Services" style={navLinkStyle}>
+                  <AnimatedLink to="/services" size="0.85rem" aria-label={t("header.nav.services", "Go to Services")} style={navLinkStyle}>
                     {t("header.services", "Services")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/about" size="0.85rem" aria-label="Ir a About" style={navLinkStyle}>
+                  <AnimatedLink to="/about" size="0.85rem" aria-label={t("header.nav.about", "Go to About")} style={navLinkStyle}>
                     {t("header.about", "About")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/contact" size="0.85rem" aria-label="Ir a Contact" style={navLinkStyle}>
+                  <AnimatedLink to="/contact" size="0.85rem" aria-label={t("header.nav.contact", "Go to Contact")} style={navLinkStyle}>
                     {t("header.contact", "Contact")}
                   </AnimatedLink>
                 </li>

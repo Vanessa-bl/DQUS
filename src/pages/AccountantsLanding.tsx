@@ -57,15 +57,15 @@ const labelStyle: React.CSSProperties = {
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
 
 const anchorLinks = [
-  { id: "hero", label: "Inicio" },
-  { id: "about", label: "Nosotros" },
-  { id: "why", label: "Por Qué" },
-  { id: "services", label: "Servicios" },
-  { id: "offer", label: "Oferta" },
-  { id: "process", label: "Proceso" },
-  { id: "compare", label: "Comparación" },
-  { id: "buy", label: "Comprar" },
-  { id: "contact", label: "Contacto" },
+  { id: "hero", label: "Inicio", labelKey: "header.anchorNav.hero" },
+  { id: "about", label: "Nosotros", labelKey: "header.anchorNav.about" },
+  { id: "why", label: "Por Qué", labelKey: "header.anchorNav.why" },
+  { id: "services", label: "Servicios", labelKey: "header.anchorNav.services" },
+  { id: "offer", label: "Oferta", labelKey: "header.anchorNav.offer" },
+  { id: "process", label: "Proceso", labelKey: "header.anchorNav.process" },
+  { id: "compare", label: "Comparación", labelKey: "header.anchorNav.compare" },
+  { id: "buy", label: "Comprar", labelKey: "header.anchorNav.buy" },
+  { id: "contact", label: "Contacto", labelKey: "header.anchorNav.contact" },
 ];
 
 export const AccountantsLanding: React.FC = () => {
