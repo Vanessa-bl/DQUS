@@ -13,7 +13,7 @@ const fadeUp = {
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut", delay: 0.12 * i },
+    transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.12 * i },
   }),
 };
 
@@ -603,7 +603,7 @@ export const AccountantsLanding: React.FC = () => {
           {sent ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" as const }}
               style={{ flex: "1 1 50%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "2rem" }}
             >
               <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "#c2410c", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
@@ -619,7 +619,7 @@ export const AccountantsLanding: React.FC = () => {
           ) : (
             <motion.form onSubmit={handleSubmit}
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" as const }}
               style={{ display: "flex", flexDirection: "column", gap: "1.5rem", flex: "1 1 50%" }}
             >
               <input type="text" name="_honey" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }} autoComplete="off" />

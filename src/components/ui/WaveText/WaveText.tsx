@@ -23,7 +23,7 @@ export const WaveText: React.FC<WaveTextProps> = ({ text }) => {
     hover: {
       scale: 1.2,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 500,
         damping: 20,
         yoyo: 1,

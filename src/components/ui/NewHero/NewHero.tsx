@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useT } from "../../../i18n/useT";
 import "./NewHero.css";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.15 * i },
+    transition: { duration: 0.6, ease: "easeOut" as const, delay: 0.15 * i },
   }),
 };
 
