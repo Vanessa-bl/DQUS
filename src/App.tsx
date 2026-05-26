@@ -1,7 +1,6 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import "./App.css";
-import { useLenis } from "./hooks/useLenis";
 import { Home } from "./pages/home";
 import { Services } from "./pages/Services";
 import { About } from "./pages/About";
@@ -20,23 +19,6 @@ const LazyPaymentError = lazy(() =>
   import("./pages/PaymentError").then((m) => ({ default: m.PaymentError }))
 );
 
-const LenisController: React.FC = () => {
-  const location = useLocation();
-  const disableLenis =
-    location.pathname === "/conversion-audit" ||
-    location.pathname === "/es/conversion-audit" ||
-    location.pathname === "/pago-exitoso" ||
-    location.pathname === "/payment-success" ||
-    location.pathname === "/pago-error" ||
-    location.pathname === "/payment-error" ||
-    location.pathname === "/contadores" ||
-    location.pathname === "/accountants";
-
-  useLenis(!disableLenis);
-
-  return null;
-};
-
 const PageFallback = () => (
   <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
     <div style={{ width: "32px", height: "32px", border: "3px solid var(--feature-pill-border)", borderTopColor: "#c2410c", borderRadius: "50%", animation: "spin 0.6s linear infinite" }} />
@@ -46,7 +28,6 @@ const PageFallback = () => (
 export default function App() {
   return (
     <BrowserRouter>
-      <LenisController />
       <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route path="/" element={<Home />} />
