@@ -7,7 +7,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: "easeOut" as const },
     },
   };
   const buttonVariants = {
@@ -15,7 +15,7 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.4 },
+      transition: { duration: 0.6, ease: "easeOut" as const, delay: 0.4 },
     },
   };
 
