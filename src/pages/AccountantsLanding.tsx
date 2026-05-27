@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Palette, TrendingUp } from "lucide-react";
 import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
+import NewHero from "../components/ui/NewHero/NewHero";
 import { Card } from "../components/ui/card/Card";
+import { ImageCard } from "../components/ui/ImageCard/ImageCard";
 import "./pageStyles.css";
 import { Layout } from "./layout";
 import { useT } from "../i18n/useT";
@@ -181,28 +183,7 @@ export const AccountantsLanding: React.FC = () => {
     <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks}>
       <VideoMaskHero />
 
-      <section id="hero"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-          style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "720px" }}
-        >
-          <span style={badgeStyle}>{t("accountants.hero.badge", "SOLUCIONES PARA CONTADORES")}</span>
-          <h1 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.8rem" : "clamp(2.2rem, 3.5vw, 3rem)", lineHeight: 1.1, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
-            {t("accountants.hero.title.line1", "Tu Presencia Online")}<br />
-            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
-              {t("accountants.hero.title.line2", "Como Contador Profesional")}
-            </span>
-          </h1>
-          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: 0 }}>
-            {t("accountants.hero.desc", "Creamos sitios web profesionales diseñados específicamente para contadores. Una presencia online que refleja tu experiencia, atrae nuevos clientes y te posiciona como el referente que eres en tu mercado.")}
-          </p>
-        </motion.div>
-      </section>
+      <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" hideLine3 />
 
       <section id="about"
         style={{
@@ -306,6 +287,8 @@ export const AccountantsLanding: React.FC = () => {
           </h2>
         </div>
         <div className="why-grid" style={{ gap: "20px" }}>
+          {/* ── OLD: orange gradient cards ── */}
+          {/*
           {[
             { num: "93%", title: t("accountants.why.stat1.title", "Investigan Online"), text: t("accountants.why.stat1.text", "De los clientes potenciales investigan en internet antes de contratar un servicio profesional.") },
             { num: "75%", title: t("accountants.why.stat2.title", "Confían Más"), text: t("accountants.why.stat2.text", "Un sitio web profesional aumenta la confianza y credibilidad de tu servicio contable.") },
@@ -320,6 +303,30 @@ export const AccountantsLanding: React.FC = () => {
               <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{item.text}</p>
             </motion.div>
           ))}
+          */}
+
+          {/* ── NEW: modern image cards ── */}
+          <ImageCard
+            index={0}
+            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg"
+            stat="93%"
+            title={t("accountants.why.stat1.title", "Investigan Online")}
+            description={t("accountants.why.stat1.text", "De los clientes potenciales investigan en internet antes de contratar un servicio profesional.")}
+          />
+          <ImageCard
+            index={1}
+            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg"
+            stat="75%"
+            title={t("accountants.why.stat2.title", "Confían Más")}
+            description={t("accountants.why.stat2.text", "Un sitio web profesional aumenta la confianza y credibilidad de tu servicio contable.")}
+          />
+          <ImageCard
+            index={2}
+            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-three_hktgir.jpg"
+            stat="3x"
+            title={t("accountants.why.stat3.title", "Más Oportunidades")}
+            description={t("accountants.why.stat3.text", "Los contadores con presencia online reciben hasta 3 veces más consultas de nuevos clientes.")}
+          />
         </div>
       </section>
 
@@ -350,13 +357,16 @@ export const AccountantsLanding: React.FC = () => {
       <section id="offer"
         style={{
           maxWidth: "1280px", margin: sectionMargin, padding: "0",
-          background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
+          backgroundImage: "url(/main1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           borderRadius: "20px", overflow: "hidden", position: "relative",
         }}
       >
-        <div style={{ position: "absolute", width: "300px", height: "300px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-80px", right: "-60px", filter: "blur(60px)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.15)", borderRadius: "50%", bottom: "-60px", left: "-40px", filter: "blur(50px)", pointerEvents: "none" }} />
-        <div className="offer-row" style={{ position: "relative", zIndex: 1, padding: isMobile ? "2.5rem 1.2rem" : "4rem 3rem", gap: "2rem" }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, #000000bd 0%, #000000ab 40%, #0000003d 100%)", borderRadius: "20px" }} />
+        <div style={{ position: "absolute", width: "300px", height: "300px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-80px", right: "-60px", filter: "blur(60px)", pointerEvents: "none", zIndex: 1 }} />
+        <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.15)", borderRadius: "50%", bottom: "-60px", left: "-40px", filter: "blur(50px)", pointerEvents: "none", zIndex: 1 }} />
+        <div className="offer-row" style={{ position: "relative", zIndex: 2, padding: isMobile ? "2.5rem 1.2rem" : "4rem 3rem", gap: "2rem" }}>
           <div>
             <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", marginBottom: "0.75rem" }}>
               {t("accountants.offer.badge", "OFERTA LANZAMIENTO")}
@@ -486,21 +496,41 @@ export const AccountantsLanding: React.FC = () => {
         </div>
 
         <div className="buy-grid" style={{ gap: "24px" }}>
+          {/* ── Package 1: $100 ── */}
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             style={{
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "24px", padding: isMobile ? "2rem" : "2.5rem",
-              position: "relative", overflow: "hidden",
-              display: "flex", flexDirection: "column", justifyContent: "space-between",
+              borderRadius: "24px", overflow: "hidden", position: "relative",
+              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg)",
+              backgroundSize: "cover", backgroundPosition: "center",
+              display: "flex", flexDirection: "column",
             }}
           >
-            <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", width: "120px", height: "120px", background: "rgba(251,146,60,0.12)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.1)" }} />
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.4rem", color: "#fff", margin: "0 0 1.25rem", lineHeight: 1.3 }}>
-                {t("accountants.buy.includes.title", "Qué Incluye:")}
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)", borderRadius: "24px", zIndex: 0 }} />
+            <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
+            <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.1)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)", zIndex: 1 }} />
+            <div style={{
+              position: "relative", zIndex: 2,
+              background: "rgba(255,255,255,0.04)",
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "20px",
+              margin: "1.5rem",
+              padding: "2.25rem 1.75rem",
+              display: "flex", flexDirection: "column",
+              flex: 1,
+            }}>
+              <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "rgba(249,115,22,0.35)", padding: "0.3rem 0.9rem", borderRadius: "999px", width: "fit-content", marginBottom: "1.25rem" }}>
+                {t("accountants.pack1.badge", "BÁSICO")}
+              </span>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: isMobile ? "1.6rem" : "clamp(1.6rem, 2.5vw, 2rem)", color: "#fff", margin: "0 0 0.5rem", lineHeight: 1.15 }}>
+                {t("accountants.pack1.title", "Sitio Web Profesional")}
+              </h3>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: "0 0 1.5rem" }}>
+                {t("accountants.pack1.desc", "Todo lo esencial para tu presencia online.")}
               </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.75rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1 }}>
                 {[
                   t("accountants.buy.includes.1", "Diseño web profesional personalizado"),
                   t("accountants.buy.includes.2", "Optimizado para SEO desde el día uno"),
@@ -508,35 +538,128 @@ export const AccountantsLanding: React.FC = () => {
                   t("accountants.buy.includes.4", "Listo para Google Ads y redes sociales"),
                   t("accountants.buy.includes.5", "Soporte y acompañamiento continuo"),
                 ].map((item, i) => (
-                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.92rem", color: "#fff", display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                    <span style={{ color: "#fed7aa", flexShrink: 0 }}>✓</span>{item}
+                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "#fff", display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "20px", height: "20px", borderRadius: "50%", background: "rgba(249,115,22,0.5)", color: "#fff", fontSize: "0.65rem", fontWeight: 700, flexShrink: 0, marginTop: "2px" }}>✓</span>
+                    {item}
                   </li>
                 ))}
               </ul>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.75rem" }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "2.5rem", color: "#fff", lineHeight: 1 }}>$100</span>
-                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "#fff", fontWeight: 600 }}>USD</span>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "1.25rem", justifyContent: "center" }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "3.2rem", color: "#fff", lineHeight: 1 }}>$100</span>
+                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.65)", fontWeight: 600 }}>USD</span>
               </div>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.8)", margin: "0 0 1.5rem" }}>
+              <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203" data-umami-event="cta-comprar-stripe-basic"
+                style={{
+                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", fontWeight: 700,
+                  color: "#c2410c", background: "#fff", border: "1.5px solid #fff", borderRadius: "999px",
+                  padding: "0.95rem 2rem", cursor: "pointer", letterSpacing: "0.02em",
+                  textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)";
+                }}
+              >
+                {t("accountants.buy.cta", "Obtener Mi Sitio Web Ahora")}
+              </a>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "1rem 0 0", textAlign: "center" }}>
                 {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
               </p>
             </div>
-            <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203" data-umami-event="cta-comprar-stripe"
-              style={{
-                fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
-                color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
-                padding: "0.9rem 2.5rem", cursor: "pointer", letterSpacing: "0.01em",
-                textDecoration: "none", display: "inline-block", width: "fit-content",
-                transition: "transform 0.2s ease", position: "relative", zIndex: 1,
-              }}
-            >
-              {t("accountants.buy.cta", "Obtener Mi Sitio Web Ahora")}
-            </a>
           </motion.div>
 
+          {/* ── Package 2: $150 ── */}
           <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             style={{
-              display: "flex", flexDirection: "column", gap: "20px", justifyContent: "center",
+              borderRadius: "24px", overflow: "hidden", position: "relative",
+              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg)",
+              backgroundSize: "cover", backgroundPosition: "center",
+              display: "flex", flexDirection: "column",
+              boxShadow: "0 0 0 2px rgba(249,115,22,0.4), 0 8px 32px rgba(249,115,22,0.15)",
+            }}
+          >
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)", borderRadius: "24px", zIndex: 0 }} />
+            <div style={{ position: "absolute", width: "220px", height: "220px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
+            <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.12)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)", zIndex: 1 }} />
+            <div style={{
+              position: "relative", zIndex: 2,
+              background: "rgba(255,255,255,0.04)",
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "20px",
+              margin: "1.5rem",
+              padding: "2.25rem 1.75rem",
+              display: "flex", flexDirection: "column",
+              flex: 1,
+            }}>
+              <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c2410c", background: "#fff", padding: "0.3rem 0.9rem", borderRadius: "999px", width: "fit-content", marginBottom: "1.25rem", boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>
+                {t("accountants.pack2.badge", "AVANZADO · MÁS POPULAR")}
+              </span>
+              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: isMobile ? "1.6rem" : "clamp(1.6rem, 2.5vw, 2rem)", color: "#fff", margin: "0 0 0.5rem", lineHeight: 1.15 }}>
+                {t("accountants.pack2.title", "Web + Fanpage + Campaña")}
+              </h3>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: "0 0 1.5rem" }}>
+                {t("accountants.pack2.desc", "Presencia digital completa con publicidad incluida.")}
+              </p>
+              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.75rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1 }}>
+                {[
+                  t("accountants.pack2.includes.1", "Diseño web profesional personalizado"),
+                  t("accountants.pack2.includes.2", "Creación y optimización de Fanpage de Facebook"),
+                  t("accountants.pack2.includes.3", "Configuración de 1 campaña publicitaria"),
+                  t("accountants.pack2.includes.4", "Acompañamiento en cada etapa del proceso"),
+                  t("accountants.pack2.includes.5", "Soporte continuo"),
+                ].map((item, i) => (
+                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "#fff", display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "20px", height: "20px", borderRadius: "50%", background: "rgba(249,115,22,0.5)", color: "#fff", fontSize: "0.65rem", fontWeight: 700, flexShrink: 0, marginTop: "2px" }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "1.25rem", justifyContent: "center" }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "3.2rem", color: "#fff", lineHeight: 1 }}>$150</span>
+                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.65)", fontWeight: 600 }}>USD</span>
+              </div>
+              <a href="https://buy.stripe.com/14AfZh9YA3rraMraXaaR204" data-umami-event="cta-comprar-stripe-pro"
+                style={{
+                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", fontWeight: 700,
+                  color: "#c2410c", background: "#fff", border: "1.5px solid #fff", borderRadius: "999px",
+                  padding: "0.95rem 2rem", cursor: "pointer", letterSpacing: "0.02em",
+                  textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)";
+                }}
+              >
+                {t("accountants.pack2.cta", "Obtener Mi Plan Avanzado")}
+              </a>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "1rem 0 0", textAlign: "center" }}>
+                {t("accountants.pack2.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* ── Perks (full-width row below packages) ── */}
+          <motion.div custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+              gap: "20px",
+              gridColumn: isMobile ? "auto" : "1 / -1",
             }}
           >
             <div style={{
@@ -664,28 +787,39 @@ export const AccountantsLanding: React.FC = () => {
           {!isMobile && (
             <div style={{
               flex: "1 1 50%",
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "24px", padding: "2.5rem",
+              borderRadius: "24px", padding: "2rem",
               position: "relative", overflow: "hidden",
               display: "flex", flexDirection: "column", justifyContent: "center",
               minHeight: "400px",
+              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/formulario_gfpual.jpg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}>
-              <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none" }} />
-              <div style={{ position: "absolute", width: "120px", height: "120px", background: "rgba(251,146,60,0.15)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.1)" }} />
-              <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(255,255,255,0.06)", borderRadius: "50%", top: "40%", left: "20px" }} />
-              <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.6rem", color: "#fff", margin: "0 0 1rem", lineHeight: 1.2 }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.45) 100%)", borderRadius: "24px" }} />
+              <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", width: "120px", height: "120px", background: "rgba(251,146,60,0.1)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)" }} />
+              <div style={{
+                position: "relative", zIndex: 1,
+                background: "rgba(255,255,255,0.05)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: "20px",
+                padding: "2rem 1.75rem",
+              }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.8rem", color: "#fff", margin: "0 0 1.25rem", lineHeight: 1.2 }}>
                   {t("accountants.form.side.title", "¿Por qué elegirnos?")}
                 </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
                   {[
                     t("accountants.form.side.1", "Primer asesoramiento sin costo"),
                     t("accountants.form.side.2", "Diseños personalizados o traé el tuyo"),
                     t("accountants.form.side.3", "Te acompañamos en cada decisión"),
                     t("accountants.form.side.4", "Web lista para marketing y publicidad"),
                   ].map((item, i) => (
-                    <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "#fff", display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                      <span style={{ color: "#fed7aa", flexShrink: 0 }}>✓</span>{item}
+                    <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1.05rem", color: "#fff", display: "flex", gap: "12px", alignItems: "center" }}>
+                      <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "22px", height: "22px", borderRadius: "50%", background: "linear-gradient(135deg, #c2410c 0%, #f97316 100%)", color: "#fff", fontSize: "0.7rem", fontWeight: 700, flexShrink: 0 }}>✓</span>
+                      {item}
                     </li>
                   ))}
                 </ul>
