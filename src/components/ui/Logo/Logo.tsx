@@ -1,6 +1,5 @@
 import type React from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "../../../theme/ThemeContext";
 import "./logo.css";
 
 interface LogoProps {
@@ -16,7 +15,6 @@ const Logo: React.FC<LogoProps> = ({
   animated = true,
   className = "",
 }) => {
-  const { theme } = useTheme();
   const logoSrc = "/logodq.png";
 
   const sizeClasses = {
