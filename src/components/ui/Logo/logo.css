@@ -4,6 +4,7 @@
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease;
+  line-height: 0;
 }
 
 .logo-container {
@@ -22,8 +23,11 @@
 }
 
 .logo-svg {
-  width: 200px;
-  height: 30px;
+  width: 170px;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+
   filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.15));
   transition: all 0.3s ease;
 }

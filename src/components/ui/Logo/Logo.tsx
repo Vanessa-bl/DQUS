@@ -17,11 +17,7 @@ const Logo: React.FC<LogoProps> = ({
   className = "",
 }) => {
   const { theme } = useTheme();
-  const logoSrc =
-    variant === "white" ? "/logo-white.svg"
-    : variant === "dark" ? "/logo.svg"
-    : theme === "dark" ? "/logo-white.svg"
-    : "/logo.svg";
+  const logoSrc = "/logodq.png";
 
   const sizeClasses = {
     sm: "logo-sm",

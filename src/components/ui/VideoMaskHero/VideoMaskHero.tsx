@@ -70,7 +70,7 @@ export default function VideoMaskHero() {
 
         <div className="video-mask-hero__screen">
           <h1 ref={textRef} className="video-mask-hero__text">
-            DevQueens
+            We Build
           </h1>
         </div>
       </div>
