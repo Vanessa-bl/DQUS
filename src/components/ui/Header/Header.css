@@ -64,10 +64,49 @@
 }
 
 .header__locale {
-  display: flex;
+  display: none;
   gap: 2px;
   border-radius: 10px;
   padding: 2px;
+}
+
+.header__cta {
+  display: inline-flex;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ba155e 0%, #e93370 55%, #ff507a 100%);
+  border: none;
+  height: 46px;
+  padding: 0 1.2rem;
+  border-radius: 0;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.3s ease;
+}
+
+.header__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.header__cta:hover {
+  color: #131120;
+}
+
+.header__cta:hover::before {
+  transform: scaleY(1);
 }
 
 .header__locale-btn {

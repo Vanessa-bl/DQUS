@@ -1,5 +1,6 @@
 import { motion, type Variants } from "framer-motion";
 import { useT } from "../../../i18n/useT";
+import HeroPulse from "./HeroPulse";
 import "./SplitHero.css";
 
 const fadeUp: Variants = {
@@ -101,7 +102,7 @@ export default function SplitHero() {
       </div>
 
       <div className="split-hero__media" aria-hidden="true">
-        {/* Espacio reservado para la imagen del hero */}
+        <HeroPulse />
       </div>
       </div>
     </section>

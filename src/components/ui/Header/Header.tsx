@@ -20,7 +20,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   onMenuClick,
   minimal = false,
-  showThemeSwitch = true,
+  showThemeSwitch = false,
   transparent = false,
   anchorNav,
 }) => {
@@ -112,6 +112,11 @@ export const Header: React.FC<HeaderProps> = ({
 
       <nav className="header__nav" aria-label="Redes sociales">
         <ul>
+          <li>
+            <a className="header__cta" href="/contact">
+              {t("header.letsTalk", "Let's Talk")}
+            </a>
+          </li>
           <li>
             <div className="header__locale">
               <button

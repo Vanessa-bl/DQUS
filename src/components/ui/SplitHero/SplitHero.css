@@ -3,14 +3,15 @@
   background: #131120;
   padding: 7.5rem 3rem 4rem;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .split-hero__inner {
-  max-width: 1280px;
+  max-width: 1209px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2rem;
   align-items: center;
   min-height: calc(100vh - 11.5rem);
 }
@@ -19,6 +20,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
 .split-hero__pre-title {
@@ -36,7 +39,7 @@
   font-weight: 900;
   font-size: 7rem;
   line-height: 1.02;
-  letter-spacing: -0.03em;
+  letter-spacing: 1px;
   color: #fff;
   margin: 0 0 1.75rem;
   text-transform: uppercase;
@@ -85,11 +88,11 @@
   font-weight: 700;
   color: #fff;
   background: linear-gradient(135deg, #ba155e 0%, #e93370 55%, #ff507a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   height: 43px;
   padding: 0 1.8rem;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 0;
   text-decoration: none;
   cursor: pointer;
   transition: filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -118,8 +121,19 @@
 
 .split-hero__media {
   min-height: 420px;
-  height: 100%;
-  border-radius: 20px;
+  align-self: stretch;
+  position: relative;
+}
+
+.split-hero__pulse {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 130%;
+  height: 130%;
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
@@ -137,6 +151,6 @@
   }
 
   .split-hero__media {
-    min-height: 260px;
+    min-height: 300px;
   }
 }
