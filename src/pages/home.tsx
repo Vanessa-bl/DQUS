@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import NewHero from "../components/ui/NewHero/NewHero";
-import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
+import SplitHero from "../components/ui/SplitHero/SplitHero";
 import "./pageStyles.css";
 import { Card } from "../components/ui/card/Card";
 import {
@@ -41,8 +41,8 @@ export const Home: React.FC = () => {
   const aboutParallax = useParallaxY(aboutRef, [-10, 10]);
   const expertiseParallax = useParallaxY(expertiseRef, [-8, 8]);
   return (
-    <Layout>
-      <VideoMaskHero />
+    <Layout transparentHeader>
+      <SplitHero />
       <NewHero />
       <motion.section
         ref={welcomeRef}

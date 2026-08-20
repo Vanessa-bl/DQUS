@@ -1,0 +1,142 @@
+.split-hero {
+  width: 100%;
+  background: #131120;
+  padding: 7.5rem 3rem 4rem;
+  box-sizing: border-box;
+}
+
+.split-hero__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: calc(100vh - 11.5rem);
+}
+
+.split-hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.split-hero__pre-title {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+
+.split-hero__title {
+  font-family: "Figtree", sans-serif;
+  font-weight: 900;
+  font-size: 7rem;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 1.75rem;
+  text-transform: uppercase;
+}
+
+.split-hero__title .word-parent {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.split-hero__title .word-child {
+  display: inline-block;
+}
+
+.split-hero__intro {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.split-hero__body {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 2rem;
+  max-width: 560px;
+}
+
+.split-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.split-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ba155e 0%, #e93370 55%, #ff507a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  height: 43px;
+  padding: 0 1.8rem;
+  box-sizing: border-box;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.split-hero__btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 51, 112, 0.3);
+}
+
+.split-hero__cta-link {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  transition: opacity 0.2s ease;
+}
+
+.split-hero__cta-link:hover {
+  opacity: 0.7;
+}
+
+.split-hero__media {
+  min-height: 420px;
+  height: 100%;
+  border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .split-hero {
+    padding: 6.5rem 1.5rem 2.5rem;
+  }
+
+  .split-hero__title {
+    font-size: 3rem;
+  }
+
+  .split-hero__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .split-hero__media {
+    min-height: 260px;
+  }
+}

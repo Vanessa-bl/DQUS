@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, Sun, Moon } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
 import { useT } from "../../../i18n/useT";
@@ -11,36 +11,19 @@ import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
 
 interface HeaderProps {
   onMenuClick?: () => void;
-  shrinkPointPx?: number;
   minimal?: boolean;
   showThemeSwitch?: boolean;
+  transparent?: boolean;
   anchorNav?: { id: string; label: string; labelKey?: string }[];
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onMenuClick,
-  shrinkPointPx = 200,
   minimal = false,
   showThemeSwitch = true,
+  transparent = false,
   anchorNav,
 }) => {
-  const { scrollY } = useScroll();
-
-  const borderColor = useTransform(
-    scrollY,
-    [0, shrinkPointPx],
-    ["rgba(0,0,0,0)", "rgba(0,0,0,0.06)"]
-  );
-
-  const boxShadow = useTransform(
-    scrollY,
-    [0, shrinkPointPx],
-    [
-      "0 0 0 rgba(0,0,0,0)",
-      "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
-    ]
-  );
-
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
   const t = useT();
@@ -58,11 +41,8 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <motion.header
       role="banner"
-      className={`header${minimal ? " header--minimal" : ""}`}
-      style={{
-        borderColor,
-        boxShadow,
-      }}
+      className={`header${minimal ? " header--minimal" : ""}${transparent ? " header--transparent" : ""}`}
+      {...(transparent ? { "data-theme": "dark" } : {})}
     >
       {!minimal && (
         <button
