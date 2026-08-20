@@ -6,7 +6,8 @@ type Dot = {
   jitter: number;
   speed: number;
   size: number;
-  color: string;
+  white: boolean;
+  tint: number;
   twinkle: number;
 };
 
@@ -58,22 +59,36 @@ export default function HeroPulse() {
     const dots: Dot[] = [];
     RINGS.forEach((ring, ri) => {
       for (let i = 0; i < ring.count; i++) {
-        const rose = Math.random() < 0.3;
+        const accent = Math.random() < 0.14;
         dots.push({
           ring: ri,
           angle: (i / ring.count) * Math.PI * 2 + Math.random() * 0.08,
           jitter: Math.random() * Math.PI * 2,
           speed: ring.speed * ring.dir,
-          size: 1 + Math.random() * 1.8,
-          color: rose
-            ? Math.random() < 0.5
-              ? "233,51,112"
-              : "255,80,122"
-            : "255,255,255",
+          size: accent ? 5 + Math.random() * 3.5 : 2.2 + Math.random() * 3,
+          white: Math.random() < 0.3,
+          tint: Math.random() * 0.35 - 0.175,
           twinkle: 0.4 + Math.random() * 0.6,
         });
       }
     });
+
+    // Degradado angular tipo "donut": magenta a la izquierda, naranja a la
+    // derecha (mismo lenguaje que el hero de referencia).
+    const MAGENTA = [186, 21, 94];
+    const ROSE = [233, 51, 112];
+    const ORANGE = [255, 145, 60];
+    const lerp3 = (a: number[], b: number[], t: number) =>
+      a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    const angularColor = (a: number, tint: number) => {
+      let t = (Math.cos(a) + 1) / 2 + tint;
+      t = Math.min(1, Math.max(0, t));
+      const c =
+        t < 0.5
+          ? lerp3(MAGENTA, ROSE, t * 2)
+          : lerp3(ROSE, ORANGE, (t - 0.5) * 2);
+      return `${c[0]},${c[1]},${c[2]}`;
+    };
 
     const draw = (tMs: number) => {
       const t = tMs / 1000;
@@ -114,6 +129,10 @@ export default function HeroPulse() {
       }
 
       const sigma = maxR * 0.06;
+      // Blending aditivo: las partículas se suman como luz (look bokeh,
+      // sin bordes duros). Solo aplica a los puntos, no a las ondas.
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
       for (const d of dots) {
         const ring = RINGS[d.ring];
         const breathe = 1 + 0.025 * Math.sin(t * 0.5 + d.ring * 1.3);
@@ -129,21 +148,45 @@ export default function HeroPulse() {
 
         const a = d.angle + (reduced ? 0 : t * d.speed);
         const alpha = reduced
-          ? 0.45
-          : 0.16 +
-            0.1 * Math.abs(Math.sin(t * d.twinkle * 0.4 + d.jitter)) +
-            0.45 * excite;
+          ? 0.55
+          : 0.28 +
+            0.14 * Math.abs(Math.sin(t * d.twinkle * 0.4 + d.jitter)) +
+            0.5 * excite;
+        const color = d.white
+          ? "255,255,255"
+          : angularColor(a, d.tint);
+        const size = d.size * (1 + 0.5 * excite);
+        const x = cx + Math.cos(a) * r;
+        const y = cy + Math.sin(a) * r;
+
+        if (d.white) {
+          // Destellos: puntos mínimos y nítidos, como polvo de estrellas.
+          ctx.beginPath();
+          ctx.arc(x, y, Math.min(size * 0.35, 1.2), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.7).toFixed(3)})`;
+          ctx.fill();
+          continue;
+        }
+
+        // Orbe suave: gradiente radial sin borde definido.
+        const bloom = size * 3;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, bloom);
+        const aCore = Math.min(1, alpha * 0.9);
+        g.addColorStop(0, `rgba(${color},${aCore.toFixed(3)})`);
+        g.addColorStop(0.3, `rgba(${color},${(aCore * 0.35).toFixed(3)})`);
+        g.addColorStop(1, `rgba(${color},0)`);
         ctx.beginPath();
-        ctx.arc(
-          cx + Math.cos(a) * r,
-          cy + Math.sin(a) * r,
-          d.size * (1 + 0.5 * excite),
-          0,
-          Math.PI * 2
-        );
-        ctx.fillStyle = `rgba(${d.color},${alpha.toFixed(3)})`;
+        ctx.arc(x, y, bloom, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+
+        // Núcleo pequeño y definido para que no se vea borroso.
+        ctx.beginPath();
+        ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${Math.min(1, alpha * 1.1).toFixed(3)})`;
         ctx.fill();
       }
+      ctx.restore();
     };
 
     resize();
