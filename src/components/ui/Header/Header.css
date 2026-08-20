@@ -157,27 +157,41 @@
 }
 
 @media (max-width: 768px) {
-  .header {
+  .header,
+  .header.header--transparent {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0 0.75rem;
+    gap: 0.5rem;
   }
 
   .mobile-only {
     display: flex;
+    flex-shrink: 0;
   }
 
   .header__desktop-nav {
     display: none;
   }
 
+  .header .logo {
+    position: static;
+    flex-shrink: 0;
+  }
+
+  /* Empuja el botón al extremo derecho */
   .header__nav {
     margin-left: auto;
+    flex-shrink: 0;
   }
 
   .header__cta {
     font-size: 0.85rem;
     height: 40px;
-    padding: 0 0.9rem;
+    padding: 0 1rem;
+    white-space: nowrap;
   }
 }
 

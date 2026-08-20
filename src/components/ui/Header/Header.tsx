@@ -50,7 +50,11 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label={t("header.menu.open", "Open menu")}
           onClick={handleMenuClick}
         >
-          <Menu size={20} color="var(--card-text)" />
+          <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
+            <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
         </button>
       )}
 
