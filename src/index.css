@@ -63,7 +63,7 @@
     --font-sans-heading: "DM Sans", sans-serif;
     --font-sans-body: "Nunito Sans", sans-serif;
 
-    --color-bg: #f4f4f4;
+    --color-bg: #fff;
     --color-text: #222;
 
     --link-var: #222;
@@ -122,7 +122,7 @@
 
   /* 4) Variables para cualquier elemento con data-theme="light" */
   [data-theme="light"] {
-    --color-bg: #f4f4f4;
+    --color-bg: #fff;
     --color-text: #222;
 
     --card-bg: #ffffff;

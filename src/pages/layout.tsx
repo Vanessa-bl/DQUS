@@ -10,16 +10,22 @@ interface LayoutProps {
   children: ReactNode;
   anchorNav?: { id: string; label: string }[];
   landingFooterLinks?: { id: string; label: string }[];
+  transparentHeader?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, anchorNav, landingFooterLinks }) => {
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  anchorNav,
+  landingFooterLinks,
+  transparentHeader = false,
+}) => {
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
   const t = useT();
 
   return (
     <>
       <header>
-        <Header onMenuClick={openDrawer} shrinkPointPx={200} anchorNav={anchorNav} />
+        <Header onMenuClick={openDrawer} anchorNav={anchorNav} transparent={transparentHeader} />
         <AnimatedDrawer
           isOpen={isOpen}
           onClose={closeDrawer}

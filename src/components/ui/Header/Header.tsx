@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, Sun, Moon } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
 import { useT } from "../../../i18n/useT";
@@ -11,36 +11,19 @@ import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
 
 interface HeaderProps {
   onMenuClick?: () => void;
-  shrinkPointPx?: number;
   minimal?: boolean;
   showThemeSwitch?: boolean;
+  transparent?: boolean;
   anchorNav?: { id: string; label: string; labelKey?: string }[];
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onMenuClick,
-  shrinkPointPx = 200,
   minimal = false,
-  showThemeSwitch = true,
+  showThemeSwitch = false,
+  transparent = false,
   anchorNav,
 }) => {
-  const { scrollY } = useScroll();
-
-  const borderColor = useTransform(
-    scrollY,
-    [0, shrinkPointPx],
-    ["rgba(0,0,0,0)", "rgba(0,0,0,0.06)"]
-  );
-
-  const boxShadow = useTransform(
-    scrollY,
-    [0, shrinkPointPx],
-    [
-      "0 0 0 rgba(0,0,0,0)",
-      "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
-    ]
-  );
-
   const { theme, toggleTheme } = useTheme();
   const { locale, setLocale } = useLocale();
   const t = useT();
@@ -58,11 +41,8 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <motion.header
       role="banner"
-      className={`header${minimal ? " header--minimal" : ""}`}
-      style={{
-        borderColor,
-        boxShadow,
-      }}
+      className={`header${minimal ? " header--minimal" : ""}${transparent ? " header--transparent" : ""}`}
+      {...(transparent ? { "data-theme": "dark" } : {})}
     >
       {!minimal && (
         <button
@@ -70,7 +50,11 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label={t("header.menu.open", "Open menu")}
           onClick={handleMenuClick}
         >
-          <Menu size={20} color="var(--card-text)" />
+          <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
+            <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
         </button>
       )}
 
@@ -132,6 +116,11 @@ export const Header: React.FC<HeaderProps> = ({
 
       <nav className="header__nav" aria-label="Redes sociales">
         <ul>
+          <li>
+            <a className="header__cta" href="/contact">
+              {t("header.letsTalk", "Let's Talk")}
+            </a>
+          </li>
           <li>
             <div className="header__locale">
               <button
