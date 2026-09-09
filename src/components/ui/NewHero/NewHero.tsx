@@ -30,21 +30,29 @@ type NewHeroProps = {
   hideLine3?: boolean;
 };
 
-export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProjectTarget, hideLine3 }: NewHeroProps) {
+export default function NewHero({
+  tPrefix = "nh",
+  id,
+  btnStartTarget,
+  btnProjectTarget,
+  hideLine3 = false,
+}: NewHeroProps) {
   const t = useT();
+  const startHref = btnStartTarget ? `#${btnStartTarget}` : "mailto:hello@devqueensus.com";
+  const projectHref = btnProjectTarget ? `#${btnProjectTarget}` : "mailto:hello@devqueensus.com";
 
   return (
-    <section className="nh">
+    <section className="nh" id={id}>
       {/* TOP: headline (left) / desc + CTA (right) */}
       <div className="nh__top">
         <div className="nh__top-left">
           <span className="nh__eyebrow">
-            {t("nh.eyebrow", "Digital Product Studio")}
+            {t(`${tPrefix}.eyebrow`, "Digital Product Studio")}
           </span>
           <h2 className="nh__headline">
-            {t("nh.headline.line1", "We Build Products")}<br />
+            {t(`${tPrefix}.headline.line1`, "We Build Products")}<br />
             <span className="nh__headline-mark">
-              {t("nh.headline.line2", "Users Actually Love")}
+              {t(`${tPrefix}.headline.line2`, "Users Actually Love")}
             </span>
           </h2>
         </div>
@@ -52,12 +60,12 @@ export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProje
         <div className="nh__top-right">
           <p className="nh__desc">
             {t(
-              "nh.desc",
+              `${tPrefix}.desc`,
               "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out — and stand up to scrutiny."
             )}
           </p>
-          <a href="mailto:hello@devqueensus.com" className="nh__cta">
-            {t("nh.cta", "Start a project")}
+          <a href={startHref} className="nh__cta">
+            {t(`${tPrefix}.cta`, "Start a project")}
             <svg
               width="15"
               height="15"
@@ -82,8 +90,8 @@ export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProje
         {FEATURES.map((f) => (
           <div key={f.key} className="nh__feat">
             <span className={`nh__feat-dot nh__feat-dot--${f.dot}`} aria-hidden="true" />
-            <h3 className="nh__feat-title">{t(`nh.${f.key}.title`, f.title)}</h3>
-            <p className="nh__feat-desc">{t(`nh.${f.key}.desc`, f.desc)}</p>
+            <h3 className="nh__feat-title">{t(`${tPrefix}.${f.key}.title`, f.title)}</h3>
+            <p className="nh__feat-desc">{t(`${tPrefix}.${f.key}.desc`, f.desc)}</p>
           </div>
         ))}
       </div>
@@ -91,11 +99,15 @@ export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProje
       {/* DARK BANNER */}
       <div className="nh__banner">
         <p className="nh__quote">
-          {t("nh.quote.line1", "Designed to impress.")}
+          {t(`${tPrefix}.quote.line1`, "Designed to impress.")}
           <br />
-          {t("nh.quote.line2", "Engineered to perform.")}
-          <br />
-          {t("nh.quote.line3", "Built to last.")}
+          {t(`${tPrefix}.quote.line2`, "Engineered to perform.")}
+          {!hideLine3 && (
+            <>
+              <br />
+              {t(`${tPrefix}.quote.line3`, "Built to last.")}
+            </>
+          )}
         </p>
 
         <div className="nh__banner-aside">
@@ -103,25 +115,25 @@ export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProje
             <div className="nh__stat">
               <span className="nh__stat-num">50+</span>
               <span className="nh__stat-label">
-                {t("nh.stat.projects", "Projects delivered")}
+                {t(`${tPrefix}.stat.projects`, "Projects delivered")}
               </span>
             </div>
             <div className="nh__stat">
               <span className="nh__stat-num">100%</span>
               <span className="nh__stat-label">
-                {t("nh.stat.satisfaction", "Client satisfaction")}
+                {t(`${tPrefix}.stat.satisfaction`, "Client satisfaction")}
               </span>
             </div>
             <div className="nh__stat">
               <span className="nh__stat-num">24/7</span>
               <span className="nh__stat-label">
-                {t("nh.stat.support", "Ongoing support")}
+                {t(`${tPrefix}.stat.support`, "Ongoing support")}
               </span>
             </div>
           </div>
 
-          <a href="mailto:hello@devqueensus.com" className="nh__banner-cta">
-            {t("nh.banner.cta", "Work with us")}
+          <a href={projectHref} className="nh__banner-cta">
+            {t(`${tPrefix}.banner.cta`, "Work with us")}
             <svg
               width="13"
               height="13"
