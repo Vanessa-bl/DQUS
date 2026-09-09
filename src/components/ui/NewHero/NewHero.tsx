@@ -18,7 +18,7 @@ const FEATURES = [
     dot: "3",
     key: "feat3",
     title: "Performance you can count on at every stage",
-    desc: "Speed, reliability, and scalability are non-negotiable. We engineer for where your product is going — not just where it is today.",
+    desc: "Speed, reliability, and scalability are non-negotiable. We engineer for where your product is going, not just where it is today.",
   },
 ] as const;
 
@@ -61,7 +61,7 @@ export default function NewHero({
           <p className="nh__desc">
             {t(
               `${tPrefix}.desc`,
-              "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out — and stand up to scrutiny."
+              "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out, and stand up to scrutiny."
             )}
           </p>
           <a href={startHref} className="nh__cta">
