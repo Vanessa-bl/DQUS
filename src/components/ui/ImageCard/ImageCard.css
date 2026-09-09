@@ -1,0 +1,113 @@
+.img-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  cursor: default;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.img-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(194, 65, 12, 0.3);
+}
+
+.img-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+.img-card:hover .img-card__bg {
+  transform: scale(1.05);
+}
+
+.img-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 10, 2, 0.88) 0%,
+    rgba(80, 20, 10, 0.45) 45%,
+    rgba(150, 60, 20, 0.15) 100%
+  );
+  z-index: 1;
+}
+
+.img-card__glass {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1rem;
+  right: 1rem;
+  top: 55%;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  z-index: 1;
+  transition: border-color 0.35s ease, background 0.35s ease;
+}
+
+.img-card:hover .img-card__glass {
+  border-color: rgba(251, 146, 60, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.img-card__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.img-card__stat {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.img-card__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  margin: 0;
+}
+
+.img-card__desc {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  max-width: 320px;
+}
+
+@media (max-width: 480px) {
+  .img-card {
+    min-height: 240px;
+    padding: 1.5rem;
+  }
+
+  .img-card__stat {
+    font-size: 2.2rem;
+  }
+
+  .img-card__glass {
+    top: 60%;
+    bottom: 1rem;
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+}

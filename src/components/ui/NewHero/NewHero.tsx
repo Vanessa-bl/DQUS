@@ -22,7 +22,15 @@ const FEATURES = [
   },
 ] as const;
 
-export default function NewHero() {
+type NewHeroProps = {
+  tPrefix?: string;
+  id?: string;
+  btnStartTarget?: string;
+  btnProjectTarget?: string;
+  hideLine3?: boolean;
+};
+
+export default function NewHero({ tPrefix = "hero", id, btnStartTarget, btnProjectTarget, hideLine3 }: NewHeroProps) {
   const t = useT();
 
   return (
