@@ -4,7 +4,8 @@
       "Bash(brew install *)",
       "Bash(node *)",
       "Bash(npx tsc *)",
-      "Bash(rg -l \"tailwind|@tailwind|@apply\" /Users/vanessabarrera/Documents/working/DQUS --type-add 'conf:*.{json,ts,js,mjs,cjs,css}' -tconf)"
+      "Bash(git rm *)",
+      "Bash(git check-ignore *)"
     ]
   }
 }
