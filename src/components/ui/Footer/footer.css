@@ -33,11 +33,58 @@
 }
 
 .footer-cta {
-  background: linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%);
-  padding: 28px;
-  border-radius: 20px;
   position: relative;
   overflow: hidden;
+  padding: 28px;
+  background: #f2f0ea;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+}
+
+.footer-cta__glow {
+  position: absolute;
+  top: -70px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  background: rgba(233, 51, 111, 0.18);
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.footer-cta__title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 6px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.footer-cta__desc {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 20px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.footer-cta__button {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  background: #e9336f;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(233, 51, 111, 0.25);
+  color: #fff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .footer-divider {

@@ -69,7 +69,7 @@ const Footer: React.FC<FooterProps> = ({
                 marginBottom: "24px",
               }}
             >
-              {t("footer.description", "We deliver exceptional digital experiences that drive growth and innovation.")}
+              {t("footer.description", "Small, senior team fixing ecommerce and logistics stacks when they start bleeding revenue.")}
             </p>
             <a
               href="mailto:hello@devqueensus.com"
@@ -158,63 +158,20 @@ const Footer: React.FC<FooterProps> = ({
 
           {!minimal && (
             <motion.div className="footer-cta" custom={3} variants={fadeUp}>
-              <div
-                style={{
-                  position: "absolute",
-                  width: "160px",
-                  height: "160px",
-                  background: "rgba(251,146,60,0.2)",
-                  borderRadius: "50%",
-                  top: "-60px",
-                  right: "-40px",
-                  filter: "blur(40px)",
-                  pointerEvents: "none",
-                }}
-              />
-              <h4
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "1.1rem",
-                  color: "#fff",
-                  marginBottom: "6px",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {t("footer.cta.title", "Ready to Get Started?")}
+              <div className="footer-cta__glow" aria-hidden="true" />
+              <h4 className="footer-cta__title">
+                {t("footer.cta.title", "Something breaking?")}
               </h4>
-              <p
-                style={{
-                  fontFamily: "'Nunito Sans', sans-serif",
-                  fontSize: "0.85rem",
-                  color: "rgba(255,255,255,0.75)",
-                  marginBottom: "20px",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {t("footer.cta.desc", "Let's talk about your next digital project.")}
+              <p className="footer-cta__desc">
+                {t("footer.cta.desc", "Book a free 30-min audit. We'll show you where you're leaking revenue and what it takes to fix.")}
               </p>
               <motion.a
                 href="mailto:hello@devqueensus.com"
-                style={{
-                  display: "inline-block",
-                  fontFamily: "'Nunito Sans', sans-serif",
-                  fontSize: "0.85rem",
-                  fontWeight: 700,
-                  color: "var(--card-text)",
-                  background: "#fff",
-                  padding: "0.65rem 1.5rem",
-                  borderRadius: "999px",
-                  textDecoration: "none",
-                  position: "relative",
-                  zIndex: 1,
-                }}
+                className="footer-cta__button"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                {t("footer.cta.button", "Start a Project")}
+                {t("footer.cta.button", "Book a Free Audit")}
               </motion.a>
             </motion.div>
           )}

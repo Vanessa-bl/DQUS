@@ -1,141 +1,134 @@
-import { motion, type Variants } from "framer-motion";
 import { useT } from "../../../i18n/useT";
 import "./NewHero.css";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const, delay: 0.15 * i },
-  }),
-};
+const FEATURES = [
+  {
+    dot: "1",
+    key: "feat1",
+    title: "Built for brands that refuse to settle",
+    desc: "We bring the same obsessive craft to every engagement: deliberate UX, clean architecture, and interfaces that feel effortless from the very first interaction.",
+  },
+  {
+    dot: "2",
+    key: "feat2",
+    title: "Intelligence built into every layer",
+    desc: "From system design to micro-interactions, every decision is intentional. We ask the hard questions before we write the first line of code.",
+  },
+  {
+    dot: "3",
+    key: "feat3",
+    title: "Performance you can count on at every stage",
+    desc: "Speed, reliability, and scalability are non-negotiable. We engineer for where your product is going — not just where it is today.",
+  },
+] as const;
 
 export default function NewHero() {
   const t = useT();
+
   return (
     <section className="nh">
-      {/* ── TOP ROW: meta left / title right ── */}
+      {/* TOP: headline (left) / desc + CTA (right) */}
       <div className="nh__top">
-        <motion.div
-          className="nh__meta"
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-        >
-          <div className="nh__badge-grid">
-            <div className="nh__badge-row">
-              <span className="nh__badge">{t("hero.badge.web", "Web Development")}</span>
-              <span className="nh__badge">{t("hero.badge.mobile", "Mobile Development")}</span>
-              <span className="nh__badge">{t("hero.badge.app", "App Development")}</span>
-            </div>
-            <div className="nh__badge-row">
-              <span className="nh__badge">{t("hero.badge.ux", "User Experience")}</span>
-              <span className="nh__badge">{t("hero.badge.uiux", "UI/UX Design")}</span>
-            </div>
-            <div className="nh__badge-row">
-              <span className="nh__badge">{t("hero.badge.a11y", "Accessibility")}</span>
-              <span className="nh__badge">{t("hero.badge.seo", "SEO")}</span>
-              <span className="nh__badge">{t("hero.badge.perf", "Optimization")}</span>
-            </div>
-            <div className="nh__badge-row">
-              <span className="nh__badge">{t("hero.badge.cloud", "Cloud & DevOps")}</span>
-              <span className="nh__badge nh__badge--main">{t("hero.badge", "Tech Solutions")}</span>
-            </div>
-          </div>
-          <div className="nh__meta-row nh__meta-row--info">
-            <div className="nh__meta-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>{t("hero.meta.web", "Specialist in Web & Mobile Development")}</span>
-            </div>
-            <div className="nh__meta-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span>{t("hero.meta.location", "Remote • Worldwide")}</span>
-            </div>
-          </div>
-        </motion.div>
+        <div className="nh__top-left">
+          <span className="nh__eyebrow">
+            {t("nh.eyebrow", "Digital Product Studio")}
+          </span>
+          <h2 className="nh__headline">
+            {t("nh.headline.line1", "We Build Products")}<br />
+            <span className="nh__headline-mark">
+              {t("nh.headline.line2", "Users Actually Love")}
+            </span>
+          </h2>
+        </div>
 
-        <motion.h1
-          className="nh__title"
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-        >
-          {t("hero.title.line1", "We Turn Your")}<br />
-          <span className="nh__title-accent">{t("hero.title.line2", "Digital Ideas")}</span><br />
-          {t("hero.title.line3", "into Reality")}
-        </motion.h1>
+        <div className="nh__top-right">
+          <p className="nh__desc">
+            {t(
+              "nh.desc",
+              "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out — and stand up to scrutiny."
+            )}
+          </p>
+          <a href="mailto:hello@devqueensus.com" className="nh__cta">
+            {t("nh.cta", "Start a project")}
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
 
-      {/* ── BANNER ── */}
-      <motion.div
-        className="nh__banner"
-        custom={2}
-        initial="hidden"
-        animate="visible"
-        variants={fadeUp}
-      >
-        <div className="nh__banner-inner">
-          <div className="nh__shape nh__shape--1" />
-          <div className="nh__shape nh__shape--2" />
-          <div className="nh__shape nh__shape--3" />
-          <div className="nh__shape nh__shape--4" />
-          <div className="nh__shape nh__shape--5" />
-          <div className="nh__shape nh__shape--6" />
-          <div className="nh__banner-overlay" />
-        </div>
-      </motion.div>
+      <div className="nh__divider" />
 
-      {/* ── BOTTOM: desc left / stats + buttons right ── */}
-      <div className="nh__bottom">
-        <motion.p
-          className="nh__desc"
-          custom={3}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-        >
-          {t("hero.desc", "At DevQueens, we craft exceptional digital experiences. From innovative UI/UX to cutting-edge web and mobile development, we elevate your business to the next level of technology.")}
-        </motion.p>
+      {/* FEATURE GRID */}
+      <div className="nh__features">
+        {FEATURES.map((f) => (
+          <div key={f.key} className="nh__feat">
+            <span className={`nh__feat-dot nh__feat-dot--${f.dot}`} aria-hidden="true" />
+            <h3 className="nh__feat-title">{t(`nh.${f.key}.title`, f.title)}</h3>
+            <p className="nh__feat-desc">{t(`nh.${f.key}.desc`, f.desc)}</p>
+          </div>
+        ))}
+      </div>
 
-        <motion.div
-          className="nh__bottom-right"
-          custom={4}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-        >
+      {/* DARK BANNER */}
+      <div className="nh__banner">
+        <p className="nh__quote">
+          {t("nh.quote.line1", "Designed to impress.")}
+          <br />
+          {t("nh.quote.line2", "Engineered to perform.")}
+          <br />
+          {t("nh.quote.line3", "Built to last.")}
+        </p>
+
+        <div className="nh__banner-aside">
           <div className="nh__stats">
             <div className="nh__stat">
               <span className="nh__stat-num">50+</span>
-              <span className="nh__stat-label">{t("hero.stat.projects", "Projects")}</span>
+              <span className="nh__stat-label">
+                {t("nh.stat.projects", "Projects delivered")}
+              </span>
             </div>
             <div className="nh__stat">
               <span className="nh__stat-num">100%</span>
-              <span className="nh__stat-label">{t("hero.stat.satisfaction", "Satisfaction")}</span>
+              <span className="nh__stat-label">
+                {t("nh.stat.satisfaction", "Client satisfaction")}
+              </span>
             </div>
             <div className="nh__stat">
               <span className="nh__stat-num">24/7</span>
-              <span className="nh__stat-label">{t("hero.stat.support", "Support")}</span>
+              <span className="nh__stat-label">
+                {t("nh.stat.support", "Ongoing support")}
+              </span>
             </div>
           </div>
 
-          <div className="nh__btns">
-            <button
-              className="nh__btn-primary"
-              onClick={() =>
-                window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-              }
+          <a href="mailto:hello@devqueensus.com" className="nh__banner-cta">
+            {t("nh.banner.cta", "Work with us")}
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
             >
-              {t("hero.btn.start", "Get Started")}
-            </button>
-            <a href="mailto:hello@devqueensus.com" className="nh__btn-secondary">
-              {t("hero.btn.project", "Start a Project")}
-            </a>
-          </div>
-        </motion.div>
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -160,10 +160,16 @@ export default function HeroPulse() {
         const y = cy + Math.sin(a) * r;
 
         if (d.white) {
-          // Destellos: puntos mínimos y nítidos, como polvo de estrellas.
+          // Micro-bokeh: orbe blanco con halo suave, no punto plano.
+          const wr = Math.min(size * 0.45, 1.6);
+          const wg = ctx.createRadialGradient(x, y, 0, x, y, wr * 2.8);
+          const wa = alpha * 0.72;
+          wg.addColorStop(0,    `rgba(255,255,255,${wa.toFixed(3)})`);
+          wg.addColorStop(0.35, `rgba(255,235,245,${(wa * 0.28).toFixed(3)})`);
+          wg.addColorStop(1,    "rgba(255,255,255,0)");
           ctx.beginPath();
-          ctx.arc(x, y, Math.min(size * 0.35, 1.2), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${(alpha * 0.7).toFixed(3)})`;
+          ctx.arc(x, y, wr * 2.8, 0, Math.PI * 2);
+          ctx.fillStyle = wg;
           ctx.fill();
           continue;
         }
@@ -184,6 +190,21 @@ export default function HeroPulse() {
         ctx.beginPath();
         ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${color},${Math.min(1, alpha * 1.1).toFixed(3)})`;
+        ctx.fill();
+
+        // Shine especular: punto blanco offset arriba-izquierda — simula luz
+        // refractada en una esfera de vidrio (elimina el look "retro flat").
+        const sR  = size * 0.52;
+        const sOx = -size * 0.26;
+        const sOy = -size * 0.30;
+        const sg  = ctx.createRadialGradient(x + sOx, y + sOy, 0, x + sOx, y + sOy, sR);
+        const sA  = Math.min(0.88, alpha * 0.70);
+        sg.addColorStop(0,    `rgba(255,255,255,${sA.toFixed(3)})`);
+        sg.addColorStop(0.45, `rgba(255,255,255,${(sA * 0.08).toFixed(3)})`);
+        sg.addColorStop(1,    "rgba(255,255,255,0)");
+        ctx.beginPath();
+        ctx.arc(x + sOx, y + sOy, sR, 0, Math.PI * 2);
+        ctx.fillStyle = sg;
         ctx.fill();
       }
       ctx.restore();
