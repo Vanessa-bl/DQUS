@@ -17,6 +17,9 @@ google-apps-script.js
 # gentle-ai skill-registry (auto-generated, local only)
 .atl/
 
+# Claude Code — per-user local settings (never commit)
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
