@@ -51,7 +51,7 @@ export const Contact: React.FC = () => {
           <p className="page-lede">
             {t(
               "contact.hero.lede",
-              "Skip the templated pitch. Tell us the real version of what you want to make. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
+              "Skip the templated pitch. Tell us the real version of what you want to make, even the parts still forming. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
             )}
           </p>
         </motion.div>
