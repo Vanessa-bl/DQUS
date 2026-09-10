@@ -346,23 +346,14 @@
   padding-top: 0;
 }
 
-.page-section--dark-indigo {
-  background: linear-gradient(
-    to right,
-    #141a2e 0%,
-    #141a2e 50%,
-    transparent 50%
-  );
+.page-section--dark-indigo .contact-form {
+  background: #141a2e;
+  padding: 2.5rem;
+  border-radius: 15px;
 }
 
 .page-section--dark-indigo .contact-form-label {
   color: rgba(255, 255, 255, 0.72);
-}
-
-@media screen and (max-width: 768px) {
-  .page-section--dark-indigo {
-    background: #141a2e;
-  }
 }
 
 @media screen and (max-width: 768px) {
