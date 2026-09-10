@@ -317,6 +317,10 @@
   text-transform: uppercase;
 }
 
+.page-title--heavy {
+  font-weight: 900;
+}
+
 .page-title-mark {
   color: var(--card-text);
   position: relative;
