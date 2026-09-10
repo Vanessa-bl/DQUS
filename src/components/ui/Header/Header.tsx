@@ -114,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
         <nav className="header__nav" aria-label="Redes sociales">
           <ul>
             <li>
-              <a className="header__cta" href="/contact">
+              <a className="cta-btn" href="/contact">
                 {t("header.letsTalk", "Let's Talk")}
               </a>
             </li>

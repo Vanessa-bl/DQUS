@@ -72,7 +72,7 @@
   padding: 2px;
 }
 
-.header__cta {
+.cta-btn {
   display: inline-flex;
   align-items: center;
   font-family: "Nunito Sans", sans-serif;
@@ -93,7 +93,7 @@
   transition: color 0.3s ease;
 }
 
-.header__cta::before {
+.cta-btn::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -104,11 +104,11 @@
   z-index: -1;
 }
 
-.header__cta:hover {
+.cta-btn:hover {
   color: #131120;
 }
 
-.header__cta:hover::before {
+.cta-btn:hover::before {
   transform: scaleY(1);
 }
 
@@ -187,7 +187,7 @@
     flex-shrink: 0;
   }
 
-  .header__cta {
+  .cta-btn {
     font-size: 0.85rem;
     height: 40px;
     padding: 0 1rem;

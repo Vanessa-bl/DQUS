@@ -110,7 +110,7 @@ export const Contact: React.FC = () => {
             />
           </div>
 
-          <button type="submit" className="contact-form-submit">
+          <button type="submit" className="cta-btn">
             {t("contact.form.submit", "Send Message")}
           </button>
         </form>
