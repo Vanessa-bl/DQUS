@@ -10,7 +10,6 @@ const HIGHLIGHT_KEYS = [
   "home.marquee.3",
   "home.marquee.4",
   "home.marquee.5",
-  "home.marquee.6",
 ] as const;
 
 export const TechCarousel: React.FC = () => {
