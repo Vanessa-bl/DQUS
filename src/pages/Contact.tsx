@@ -42,10 +42,16 @@ export const Contact: React.FC = () => {
             </span>
           </h1>
 
+          <p className="page-lede page-lede--bold">
+            {t(
+              "contact.hero.question",
+              "Ready to build something you're actually proud of?"
+            )}
+          </p>
           <p className="page-lede">
             {t(
               "contact.hero.lede",
-              "Have questions? We would love to hear from you. Fill in the form and we will get back to you as soon as possible."
+              "Skip the templated pitch. Tell us the real version of what you want to make. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
             )}
           </p>
         </motion.div>

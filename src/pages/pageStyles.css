@@ -335,6 +335,12 @@
   margin: 0;
 }
 
+.page-lede--bold {
+  font-weight: 700;
+  color: var(--card-text);
+  font-size: 1.15rem;
+}
+
 .page-section--flush-top {
   margin-top: 0;
   padding-top: 0;
