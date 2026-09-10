@@ -360,8 +360,8 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
+  width: 35%;
   height: 4px;
   background: linear-gradient(to right, #86efac 0%, #16a34a 100%);
 }
