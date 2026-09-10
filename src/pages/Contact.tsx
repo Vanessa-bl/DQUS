@@ -35,11 +35,11 @@ export const Contact: React.FC = () => {
         >
           <span className="page-badge">{t("contact.hero.badge", "CONTACT US")}</span>
 
-          <h1 id="contact-hero-title" className="page-title">
-            {t("contact.hero.title.line1", "Get In")}
+          <h1 id="contact-hero-title" className="page-title page-title--xl">
+            {t("contact.hero.title.line1", "Contact")}
             <br />
             <span className="page-title-mark">
-              {t("contact.hero.title.line2", "Touch")}
+              {t("contact.hero.title.line2", "Us")}
             </span>
           </h1>
 
