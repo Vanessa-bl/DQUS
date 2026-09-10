@@ -313,6 +313,10 @@
   font-size: clamp(2.8rem, 5vw, 4.25rem);
 }
 
+.page-title--upper {
+  text-transform: uppercase;
+}
+
 .page-title-mark {
   color: var(--card-text);
   position: relative;
