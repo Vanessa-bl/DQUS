@@ -132,7 +132,7 @@ export const Home: React.FC = () => {
       </section>
 
       <div className="hs-tech">
-        <TechCarousel aria-label="Technologies we work with" />
+        <TechCarousel />
       </div>
     </Layout>
   );

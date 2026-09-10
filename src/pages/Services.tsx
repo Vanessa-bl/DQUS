@@ -26,26 +26,26 @@ export const Services: React.FC = () => {
 
   return (
     <Layout>
-      <section className="svc-section" aria-labelledby="services-hero-title">
+      <section className="page-section" aria-labelledby="services-hero-title">
         <motion.div
-          className="svc-block"
+          className="page-block"
           custom={0}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <span className="svc-badge">{t("services.hero.badge", "OUR SERVICES")}</span>
+          <span className="page-badge">{t("services.hero.badge", "OUR SERVICES")}</span>
 
-          <h1 id="services-hero-title" className="svc-title">
+          <h1 id="services-hero-title" className="page-title">
             {t("services.hero.title.line1", "What We")}
             <br />
-            <span className="svc-title-mark">
+            <span className="page-title-mark">
               {t("services.hero.title.line2", "Offer")}
             </span>
           </h1>
 
-          <p className="svc-lede">
+          <p className="page-lede">
             {t(
               "services.hero.lede",
               "Potenciamos tu negocio con soluciones digitales a medida. Explora nuestros servicios diseñados para llevar tu marca al siguiente nivel."
@@ -54,7 +54,7 @@ export const Services: React.FC = () => {
         </motion.div>
       </section>
 
-      <section className="svc-section" aria-labelledby="services-grid-title">
+      <section className="page-section" aria-labelledby="services-grid-title">
         <h2 id="services-grid-title" className="sr-only">
           {t("services.grid.title", "Available Services")}
         </h2>
@@ -104,19 +104,19 @@ export const Services: React.FC = () => {
         </div>
       </section>
 
-      <section className="svc-section" aria-labelledby="process-title">
-        <div className="svc-block">
-          <span className="svc-badge">{t("services.process.badge", "OUR PROCESS")}</span>
+      <section className="page-section" aria-labelledby="process-title">
+        <div className="page-block">
+          <span className="page-badge">{t("services.process.badge", "OUR PROCESS")}</span>
 
-          <h2 id="process-title" className="svc-title svc-title--sm">
+          <h2 id="process-title" className="page-title page-title--sm">
             {t("services.process.title.line1", "How We")}
             <br />
-            <span className="svc-title-mark">
+            <span className="page-title-mark">
               {t("services.process.title.line2", "Work")}
             </span>
           </h2>
 
-          <p className="svc-lede">
+          <p className="page-lede">
             {t(
               "services.process.lede",
               "Seguimos un enfoque ágil y colaborativo, desde el descubrimiento inicial hasta el soporte post-lanzamiento."

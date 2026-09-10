@@ -26,12 +26,6 @@ export const Card: React.FC<CardProps> = (props) => {
         initial="initial"
         whileHover="hover"
         animate="initial"
-        style={{
-          overflow: "hidden",
-          position: "relative",
-          display: "block",
-          textDecoration: "none",
-        }}
       >
         <motion.span
           className="wave"
@@ -52,7 +46,6 @@ export const Card: React.FC<CardProps> = (props) => {
               transition: { duration: 0.5, ease: "easeInOut" },
             },
           }}
-          style={{ position: "relative", zIndex: 2 }}
         >
           <div className="card-body">
             <div className="card-header">
@@ -74,11 +67,6 @@ export const Card: React.FC<CardProps> = (props) => {
                 rotate: 0,
                 transition: { duration: 0.5, ease: "easeInOut" },
               },
-            }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <ArrowUpRight
@@ -99,11 +87,6 @@ export const Card: React.FC<CardProps> = (props) => {
         initial="initial"
         whileHover="hover"
         animate="initial"
-        style={{
-          overflow: "hidden",
-          position: "relative",
-          display: "block",
-        }}
       >
         <motion.span
           className="wave"
@@ -124,7 +107,6 @@ export const Card: React.FC<CardProps> = (props) => {
               transition: { duration: 0.5, ease: "easeInOut" },
             },
           }}
-          style={{ position: "relative", zIndex: 2 }}
         >
           <div className="card-body">
             <div className="card-header">
@@ -146,11 +128,6 @@ export const Card: React.FC<CardProps> = (props) => {
                 rotate: 0,
                 transition: { duration: 0.5, ease: "easeInOut" },
               },
-            }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <ArrowUpRight

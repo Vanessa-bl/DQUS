@@ -181,84 +181,87 @@
 }
 
 /* ================================
-   About Page Styles (about.css)
+   About Page (specific)
    ================================ */
-.about-hero {
-  padding: 6rem 2rem;
-  text-align: center;
-}
-.about-hero__content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.our-story {
+.about-story-grid {
   display: grid;
-  max-width: 79rem;
-  margin: 4rem auto;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: flex-start;
 }
-.team-section {
-  padding: 4rem 2rem;
-  text-align: center;
+
+.about-story-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--card-text);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
 }
-.team-grid {
+
+.about-story-text {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--card-text-regular);
+  margin: 0;
+}
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.about-feature-pill {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--card-text-regular);
+  background: var(--feature-pill-bg);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--feature-pill-border);
+  white-space: nowrap;
+}
+
+.about-cards-stack {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  max-width: 79rem;
-  margin: 2rem auto 0;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-marquee-wrap {
+  margin: 80px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-story-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-story-title {
+    font-size: 1.5rem;
+  }
+  .about-team-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-marquee-wrap {
+    margin-top: 40px;
+  }
 }
 
 /* ================================
-   Contact Page Styles (contact.css)
+   Shared Page Primitives
+   Used by Services, Contact, About
    ================================ */
-.contact-hero {
-  padding: 6rem 2rem;
-  text-align: center;
-}
-.contact-hero__content {
-  max-width: 600px;
-  margin: 0 auto;
-}
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 100%;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.contact-form input,
-.contact-form textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  resize: vertical;
-}
-.btn-submit {
-  align-self: flex-start;
-  padding: 0.75rem 2rem;
-  background: #f97316;
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-submit:hover {
-  background: #c2410c;
-}
-
-/* ================================
-   Services Page
-   ================================ */
-.svc-section {
+.page-section {
   max-width: 1280px;
   margin: 80px auto 0;
   padding: 5rem 3rem 4rem;
@@ -269,14 +272,14 @@
   gap: 2.5rem;
 }
 
-.svc-block {
+.page-block {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 680px;
 }
 
-.svc-badge {
+.page-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -292,7 +295,7 @@
   width: fit-content;
 }
 
-.svc-title {
+.page-title {
   font-family: "DM Sans", sans-serif;
   font-weight: 800;
   font-size: clamp(2.2rem, 3.5vw, 3rem);
@@ -302,17 +305,17 @@
   letter-spacing: -0.02em;
 }
 
-.svc-title--sm {
+.page-title--sm {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
 }
 
-.svc-title-mark {
+.page-title-mark {
   color: var(--card-text);
   position: relative;
   display: inline-block;
 }
 
-.svc-lede {
+.page-lede {
   font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
   line-height: 1.75;
@@ -320,6 +323,22 @@
   margin: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .page-section {
+    padding: 3rem 1.25rem 2.5rem;
+    margin-top: 40px;
+  }
+  .page-title {
+    font-size: 2rem;
+  }
+  .page-title--sm {
+    font-size: 1.8rem;
+  }
+}
+
+/* ================================
+   Services Page (specific)
+   ================================ */
 .svc-process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -358,19 +377,79 @@
 }
 
 @media screen and (max-width: 768px) {
-  .svc-section {
-    padding: 3rem 1.25rem 2.5rem;
-    margin-top: 40px;
-  }
-  .svc-title {
-    font-size: 2rem;
-  }
-  .svc-title--sm {
-    font-size: 1.8rem;
-  }
   .svc-process-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ================================
+   Contact Page (specific)
+   ================================ */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-form-label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-text-regular);
+  letter-spacing: 0.01em;
+}
+
+.contact-form-input,
+.contact-form-textarea {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--feature-pill-border);
+  border-radius: 12px;
+  background: var(--feature-pill-bg);
+  color: var(--card-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form-input:focus-visible,
+.contact-form-textarea:focus-visible {
+  border-color: rgba(124, 127, 198, 0.5);
+  box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.1);
+}
+
+.contact-form-submit {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 2.25rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  width: fit-content;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-form-submit:hover {
+  transform: translateY(-2px);
 }
 
 /* ================================
