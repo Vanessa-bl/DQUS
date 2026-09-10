@@ -349,6 +349,17 @@
 .page-section--dark-indigo .contact-form {
   background: #141a2e;
   padding: 2.5rem;
+  position: relative;
+}
+
+.page-section--dark-indigo .contact-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #86efac 0%, #16a34a 100%);
 }
 
 .page-section--dark-indigo .contact-form-label {
