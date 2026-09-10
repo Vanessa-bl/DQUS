@@ -7,12 +7,17 @@ import { useT } from "../i18n/useT";
 export const Contact: React.FC = () => {
   const t = useT();
 
-  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
 
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -34,7 +39,10 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <h1 id="contact-hero-title" className="page-title page-title--xl page-title--upper page-title--heavy">
+            <h1
+              id="contact-hero-title"
+              className="page-title page-title--xl page-title--upper page-title--heavy"
+            >
               {t("contact.hero.title.line1", "Contact")}{" "}
               <span className="page-title-mark">
                 {t("contact.hero.title.line2", "Us")}
@@ -44,13 +52,13 @@ export const Contact: React.FC = () => {
             <p className="page-lede page-lede--bold">
               {t(
                 "contact.hero.question",
-                "Ready to build something you're actually proud of?"
+                "Ready to build something you're actually proud of?",
               )}
             </p>
             <p className="page-lede">
               {t(
                 "contact.hero.lede",
-                "Skip the templated pitch. Tell us the real version of what you want to make, even the parts still forming. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
+                "Skip the templated pitch. Tell us the real version of what you want to make, even the parts still forming. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts.",
               )}
             </p>
           </motion.div>
@@ -64,15 +72,20 @@ export const Contact: React.FC = () => {
               <p>360 NW 27th St</p>
               <p>Miami, FL 33127</p>
             </div>
-            <a className="contact-address__email" href="mailto:hello@devqueens.us">
+            <a
+              className="contact-address__email"
+              href="mailto:hello@devqueens.us"
+            >
               hello@devqueens.us
-              <span className="contact-address__email-chevron" aria-hidden="true">›</span>
             </a>
           </aside>
         </div>
       </section>
 
-      <section className="page-section page-section--flush-top page-section--dark-indigo" aria-labelledby="contact-form-title">
+      <section
+        className="page-section page-section--flush-top page-section--dark-indigo"
+        aria-labelledby="contact-form-title"
+      >
         <h2 id="contact-form-title" className="sr-only">
           {t("contact.form.title", "Contact Form")}
         </h2>
@@ -90,7 +103,10 @@ export const Contact: React.FC = () => {
                 value={form.firstName}
                 onChange={handleChange}
                 required
-                placeholder={t("contact.form.firstName.placeholder", "Your first name")}
+                placeholder={t(
+                  "contact.form.firstName.placeholder",
+                  "Your first name",
+                )}
               />
             </div>
             <div className="contact-form-group">
@@ -105,7 +121,10 @@ export const Contact: React.FC = () => {
                 value={form.lastName}
                 onChange={handleChange}
                 required
-                placeholder={t("contact.form.lastName.placeholder", "Your last name")}
+                placeholder={t(
+                  "contact.form.lastName.placeholder",
+                  "Your last name",
+                )}
               />
             </div>
           </div>
@@ -122,7 +141,10 @@ export const Contact: React.FC = () => {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder={t("contact.form.email.placeholder", "Your email address")}
+              placeholder={t(
+                "contact.form.email.placeholder",
+                "Your email address",
+              )}
             />
           </div>
 
@@ -138,7 +160,10 @@ export const Contact: React.FC = () => {
               value={form.message}
               onChange={handleChange}
               required
-              placeholder={t("contact.form.message.placeholder", "Write your message here")}
+              placeholder={t(
+                "contact.form.message.placeholder",
+                "Write your message here",
+              )}
             />
           </div>
 

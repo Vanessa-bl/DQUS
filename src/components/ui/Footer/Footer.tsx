@@ -46,7 +46,14 @@ const Footer: React.FC<FooterProps> = ({
       role="contentinfo"
     >
       <div className="footer-container">
-        <div className="footer-content" style={landingLinks ? { gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1.5fr" } : undefined}>
+        <div
+          className="footer-content"
+          style={
+            landingLinks
+              ? { gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1.5fr" }
+              : undefined
+          }
+        >
           <motion.div className="footer-brand" custom={0} variants={fadeUp}>
             <h3
               style={{
@@ -69,10 +76,13 @@ const Footer: React.FC<FooterProps> = ({
                 marginBottom: "24px",
               }}
             >
-              {t("footer.description", "Small, senior team fixing ecommerce and logistics stacks when they start bleeding revenue.")}
+              {t(
+                "footer.description",
+                "Small, senior team fixing ecommerce and logistics stacks when they start bleeding revenue.",
+              )}
             </p>
             <a
-              href="mailto:hello@devqueensus.com"
+              href="mailto:hello@devqueens.us"
               style={{
                 fontFamily: "'Nunito Sans', sans-serif",
                 fontSize: "0.9rem",
@@ -81,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({
                 textDecoration: "none",
               }}
             >
-              {t("footer.email", "hello@devqueensus.com")}
+              {t("footer.email", "hello@devqueens.us")}
             </a>
           </motion.div>
 
@@ -98,9 +108,22 @@ const Footer: React.FC<FooterProps> = ({
                   textTransform: "uppercase",
                 }}
               >
-                {landingLinks ? t("footer.sections", "Secciones") : t("footer.services", "Services")}
+                {landingLinks
+                  ? t("footer.sections", "Secciones")
+                  : t("footer.services", "Services")}
               </h4>
-              <nav className="footer-nav" style={landingLinks ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 24px" } : undefined}>
+              <nav
+                className="footer-nav"
+                style={
+                  landingLinks
+                    ? {
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "8px 24px",
+                      }
+                    : undefined
+                }
+              >
                 {landingLinks ? (
                   landingLinks.map((link) => (
                     <a
@@ -108,7 +131,9 @@ const Footer: React.FC<FooterProps> = ({
                       href={`#${link.id}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" });
+                        document
+                          .getElementById(link.id)
+                          ?.scrollIntoView({ behavior: "smooth" });
                       }}
                       style={{
                         fontFamily: "'Nunito Sans', sans-serif",
@@ -163,10 +188,13 @@ const Footer: React.FC<FooterProps> = ({
                 {t("footer.cta.title", "Something breaking?")}
               </h4>
               <p className="footer-cta__desc">
-                {t("footer.cta.desc", "Book a free 30-min audit. We'll show you where you're leaking revenue and what it takes to fix.")}
+                {t(
+                  "footer.cta.desc",
+                  "Book a free 30-min audit. We'll show you where you're leaking revenue and what it takes to fix.",
+                )}
               </p>
               <motion.a
-                href="mailto:hello@devqueensus.com"
+                href="mailto:hello@devqueens.us"
                 className="footer-cta__button"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -182,7 +210,8 @@ const Footer: React.FC<FooterProps> = ({
         <motion.div className="footer-bottom" custom={4} variants={fadeUp}>
           <div className="footer-bottom-left">
             <p className="copyright">
-              &copy; {currentYear} {t("footer.copyright", "DevQueens. All Rights Reserved.")}
+              &copy; {currentYear}{" "}
+              {t("footer.copyright", "DevQueens. All Rights Reserved.")}
             </p>
           </div>
 
