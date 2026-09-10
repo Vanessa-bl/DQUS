@@ -348,8 +348,12 @@
 
 .page-section--dark-indigo .contact-form {
   background: #141a2e;
-  padding: 2.5rem;
+  padding: 20px 50px 50px;
   position: relative;
+}
+
+#contact-hero-title {
+  padding-bottom: 2rem;
 }
 
 .page-section--dark-indigo .contact-form::before {
