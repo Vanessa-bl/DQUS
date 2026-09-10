@@ -346,6 +346,14 @@
   padding-top: 0;
 }
 
+.page-section--dark-indigo {
+  background: #141a2e;
+}
+
+.page-section--dark-indigo .contact-form-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 @media screen and (max-width: 768px) {
   .page-section {
     padding: 3rem 1.25rem 2.5rem;
@@ -421,6 +429,13 @@
   gap: 1.5rem;
   max-width: 600px;
   width: 100%;
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-form {
+    align-self: center;
+  }
 }
 
 .contact-form-group {
