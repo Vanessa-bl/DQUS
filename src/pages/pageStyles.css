@@ -481,6 +481,10 @@
   box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.1);
 }
 
+.contact-form .cta-btn {
+  align-self: flex-start;
+}
+
 /* ================================
    Accountants Landing - Responsive Layouts
    ================================ */
