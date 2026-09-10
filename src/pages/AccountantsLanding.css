@@ -1,0 +1,923 @@
+/* ================================
+   Accountants Landing
+   Page-specific styles. Reuses .page-* primitives
+   from pageStyles.css for section/badge/title/lede.
+   ================================ */
+
+.page-section--clip {
+  overflow: hidden;
+}
+
+.page-section--flush {
+  padding: 0;
+  background: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Section h2 (compact size, used across landing) */
+.al-section-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--card-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (max-width: 767px) {
+  .al-section-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* ================================
+   About block
+   ================================ */
+.al-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.al-story-p {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--card-text-regular);
+  margin: 0 0 1rem;
+}
+
+.al-story-p:last-of-type {
+  margin-bottom: 0;
+}
+
+.al-story-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.al-story-feature-pill {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--card-text-regular);
+  background: var(--feature-pill-bg);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--feature-pill-border);
+  white-space: nowrap;
+}
+
+.al-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.al-stat {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%);
+  border-radius: 20px;
+  padding: 1.75rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.al-stat-glow {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(251, 146, 60, 0.2);
+  border-radius: 50%;
+  top: -20px;
+  right: -20px;
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.al-stat-num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 0 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.al-stat-label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.82rem;
+  color: #fff;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .al-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ================================
+   Offer banner
+   ================================ */
+.al-offer {
+  background-image: url(/main1.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.al-offer__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #000000bd 0%, #000000ab 40%, #0000003d 100%);
+  border-radius: 20px;
+}
+
+.al-offer__glow--top {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(251, 146, 60, 0.2);
+  border-radius: 50%;
+  top: -80px;
+  right: -60px;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.al-offer__glow--bottom {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(251, 146, 60, 0.15);
+  border-radius: 50%;
+  bottom: -60px;
+  left: -40px;
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.al-offer__body {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 3rem;
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.al-offer__eyebrow {
+  display: inline-block;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.al-offer__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+
+.al-offer__price {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+}
+
+.al-offer__price-unit {
+  font-size: 0.4em;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.al-offer__desc {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 1rem 0 0;
+  max-width: 400px;
+}
+
+.al-offer__cta {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #c2410c;
+  background: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2.25rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.al-offer__cta:hover {
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 767px) {
+  .al-offer__body {
+    padding: 2.5rem 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .al-offer__title {
+    font-size: 2rem;
+  }
+  .al-offer__price {
+    font-size: 3rem;
+  }
+}
+
+/* ================================
+   Process
+   ================================ */
+.al-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.al-process-step {
+  background: var(--feature-pill-bg);
+  border: 1px solid var(--feature-pill-border);
+  border-radius: 20px;
+  padding: 1.75rem;
+}
+
+.al-process-step-num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--card-text);
+  opacity: 0.25;
+}
+
+.al-process-step-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--card-text);
+  margin: 0.5rem 0 0.35rem;
+}
+
+.al-process-step-text {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--card-text-regular);
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .al-process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   Compare
+   ================================ */
+.al-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.al-compare-card {
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid var(--feature-pill-border);
+  background: var(--feature-pill-bg);
+}
+
+.al-compare-card--positive {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.al-compare-card__glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: rgba(251, 146, 60, 0.25);
+  border-radius: 50%;
+  top: -40px;
+  right: -30px;
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+.al-compare-card__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--card-text);
+  margin: 0 0 1rem;
+}
+
+.al-compare-card--positive .al-compare-card__title {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.al-compare-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.al-compare-card--positive .al-compare-list {
+  position: relative;
+  z-index: 1;
+}
+
+.al-compare-list-item {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  color: var(--card-text-regular);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.al-compare-card--positive .al-compare-list-item {
+  color: #fff;
+}
+
+.al-compare-list-marker {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--card-text-regular);
+  opacity: 0.3;
+}
+
+.al-compare-list-marker--pos {
+  color: #fed7aa;
+  opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .al-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   Buy packages
+   ================================ */
+.al-buy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.al-pack {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.al-pack--basic {
+  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg);
+}
+
+.al-pack--pro {
+  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg);
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4), 0 8px 32px rgba(249, 115, 22, 0.15);
+}
+
+.al-pack__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+  border-radius: 24px;
+  z-index: 0;
+}
+
+.al-pack__glow-big {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(251, 146, 60, 0.2);
+  border-radius: 50%;
+  top: -60px;
+  right: -50px;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.al-pack--pro .al-pack__glow-big {
+  width: 220px;
+  height: 220px;
+  background: rgba(251, 146, 60, 0.25);
+}
+
+.al-pack__glow-small {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(251, 146, 60, 0.1);
+  border-radius: 16px;
+  transform: rotate(15deg);
+  bottom: 30px;
+  right: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1;
+}
+
+.al-pack--pro .al-pack__glow-small {
+  background: rgba(251, 146, 60, 0.12);
+}
+
+.al-pack__glass {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin: 1.5rem;
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.al-pack__badge {
+  display: inline-block;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(249, 115, 22, 0.35);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  width: fit-content;
+  margin-bottom: 1.25rem;
+}
+
+.al-pack__badge--pro {
+  color: #c2410c;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.al-pack__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  color: #fff;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+
+.al-pack__desc {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1.5rem;
+}
+
+.al-pack__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 1.5rem;
+}
+
+.al-pack__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.al-pack__feature {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.al-pack__feature-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(249, 115, 22, 0.5);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.al-pack__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  justify-content: center;
+}
+
+.al-pack__price {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 900;
+  font-size: 3.2rem;
+  color: #fff;
+  line-height: 1;
+}
+
+.al-pack__price-unit {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+}
+
+.al-pack__cta {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #c2410c;
+  background: #fff;
+  border: 1.5px solid #fff;
+  border-radius: 999px;
+  padding: 0.95rem 2rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.al-pack__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.al-pack__guarantee {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.al-perks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  grid-column: 1 / -1;
+}
+
+.al-perk {
+  background: var(--feature-pill-bg);
+  border: 1px solid var(--feature-pill-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.al-perk__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.al-perk__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--card-text);
+  margin: 0 0 0.3rem;
+}
+
+.al-perk__text {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--card-text-regular);
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .al-buy-grid {
+    grid-template-columns: 1fr;
+  }
+  .al-pack__title {
+    font-size: 1.6rem;
+  }
+  .al-perks {
+    grid-template-columns: 1fr;
+    grid-column: auto;
+  }
+}
+
+/* ================================
+   Contact section
+   ================================ */
+.al-contact-row {
+  display: flex;
+  gap: 3rem;
+}
+
+.al-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.al-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1 1 50%;
+}
+
+.al-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.al-form-label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-text-regular);
+  letter-spacing: 0.01em;
+}
+
+.al-form-input,
+.al-form-textarea {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--feature-pill-border);
+  border-radius: 12px;
+  background: var(--feature-pill-bg);
+  color: var(--card-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.al-form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.al-form-input:focus-visible,
+.al-form-textarea:focus-visible {
+  border-color: rgba(124, 127, 198, 0.5);
+  box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.1);
+}
+
+.al-form-error {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background: rgba(220, 38, 38, 0.08);
+  border-radius: 10px;
+}
+
+.al-form-submit {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2.5rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  width: fit-content;
+  transition: transform 0.2s ease;
+}
+
+.al-form-submit:hover {
+  transform: translateY(-2px);
+}
+
+.al-form-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.al-form-submit:disabled:hover {
+  transform: none;
+}
+
+.al-sent {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.al-sent__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #c2410c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-size: 1.8rem;
+}
+
+.al-sent__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--card-text);
+  margin: 0 0 0.5rem;
+}
+
+.al-sent__text {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  color: var(--card-text-regular);
+  max-width: 360px;
+  margin: 0;
+}
+
+.al-contact-side {
+  flex: 1 1 50%;
+  border-radius: 24px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/formulario_gfpual.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.al-contact-side__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.45) 100%);
+  border-radius: 24px;
+}
+
+.al-contact-side__glow-big {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(251, 146, 60, 0.2);
+  border-radius: 50%;
+  top: -60px;
+  right: -50px;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.al-contact-side__glow-small {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: rgba(251, 146, 60, 0.1);
+  border-radius: 16px;
+  transform: rotate(15deg);
+  bottom: 30px;
+  right: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.al-contact-side__glass {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+}
+
+.al-contact-side__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0 0 1.25rem;
+  line-height: 1.2;
+}
+
+.al-contact-side__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.al-contact-side__item {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.05rem;
+  color: #fff;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.al-contact-side__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c2410c 0%, #f97316 100%);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .al-contact-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .al-contact-side {
+    display: none;
+  }
+}

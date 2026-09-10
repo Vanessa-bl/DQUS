@@ -6,6 +6,7 @@ import NewHero from "../components/ui/NewHero/NewHero";
 import { Card } from "../components/ui/card/Card";
 import { ImageCard } from "../components/ui/ImageCard/ImageCard";
 import "./pageStyles.css";
+import "./AccountantsLanding.css";
 import { Layout } from "./layout";
 import { useT } from "../i18n/useT";
 import { useLocale } from "../i18n/provider";
@@ -17,43 +18,6 @@ const fadeUp = {
     y: 0,
     transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.12 * i },
   }),
-};
-
-const badgeStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "0.4rem",
-  background: "var(--pill-bg)",
-  color: "var(--pill-text)",
-  fontFamily: "'Nunito Sans', sans-serif",
-  fontSize: "0.78rem",
-  fontWeight: 700,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  padding: "0.4rem 1rem",
-  borderRadius: "999px",
-  width: "fit-content",
-};
-
-const inputStyle: React.CSSProperties = {
-  fontFamily: "'Nunito Sans', sans-serif",
-  fontSize: "0.95rem",
-  padding: "0.85rem 1rem",
-  border: "1px solid var(--feature-pill-border)",
-  borderRadius: "12px",
-  background: "var(--feature-pill-bg)",
-  color: "var(--card-text)",
-  outline: "none",
-  width: "100%",
-  boxSizing: "border-box",
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "'Nunito Sans', sans-serif",
-  fontSize: "0.85rem",
-  fontWeight: 600,
-  color: "var(--card-text-regular)",
-  letterSpacing: "0.01em",
 };
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
@@ -70,12 +34,21 @@ const anchorLinks = [
   { id: "contact", label: "Contacto", labelKey: "header.anchorNav.contact" },
 ];
 
+const stats = [
+  { num: "100+", key: "stat1", fallback: "Proyectos Entregados" },
+  { num: "5+", key: "stat2", fallback: "Años de Experiencia" },
+  { num: "100%", key: "stat3", fallback: "Clientes Satisfechos" },
+  { num: "24/7", key: "stat4", fallback: "Soporte Continuo" },
+];
+
+const processSteps = [
+  { step: "01", key: "step1", titleFallback: "Consultoría Gratuita", textFallback: "Conversamos sobre tu práctica contable, tus objetivos y cómo querés mostrarte al mundo." },
+  { step: "02", key: "step2", titleFallback: "Diseño a Tu Medida", textFallback: "Creamos propuestas de diseño alineadas a tu identidad. Vos elegís o traés tus propias ideas." },
+  { step: "03", key: "step3", titleFallback: "Desarrollo Ágil", textFallback: "Construimos tu web con las mejores prácticas. Rápida, segura y optimizada para todos los dispositivos." },
+  { step: "04", key: "step4", titleFallback: "Lanzamiento y Soporte", textFallback: "Publicamos tu sitio y te acompañamos con soporte continuo para que todo funcione perfecto." },
+];
+
 export const AccountantsLanding: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-  );
-  const sectionPad = isMobile ? "3rem 1.2rem 2.5rem" : "5rem 3rem 4rem";
-  const sectionMargin = isMobile ? "50px auto 0" : "80px auto 0";
   const t = useT();
   const { setLocale } = useLocale();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -95,13 +68,6 @@ export const AccountantsLanding: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     if (formError) setFormError("");
@@ -113,7 +79,7 @@ export const AccountantsLanding: React.FC = () => {
     const message = form.message.trim();
     if (name.length < 2 || name.length > 100) return "El nombre debe tener entre 2 y 100 caracteres.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Ingresá un email válido.";
-    if (form.phone.trim() && !/^[\d\s\-\+\(\)]{4,25}$/.test(form.phone.trim())) return "El teléfono no tiene un formato válido.";
+    if (form.phone.trim() && !/^[\d\s\-+()]{4,25}$/.test(form.phone.trim())) return "El teléfono no tiene un formato válido.";
     if (message.length < 5) return "El mensaje debe tener al menos 5 caracteres.";
     if (message.length > 2000) return "El mensaje no puede exceder los 2000 caracteres.";
     return null;
@@ -185,127 +151,56 @@ export const AccountantsLanding: React.FC = () => {
 
       <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" hideLine3 />
 
-      <section id="about"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.about.badge", "QUIÉNES SOMOS")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
+      <section id="about" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.about.badge", "QUIÉNES SOMOS")}</span>
+          <h2 className="al-section-title">
             {t("accountants.about.title.line1", "Expertos en Presencia Digital")}
             <br />
-            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
+            <span className="accent-underline">
               {t("accountants.about.title.line2", "para Profesionales Contables")}
             </span>
           </h2>
         </div>
-        <div className="about-grid" style={{ gap: "3rem", alignItems: "flex-start" }}>
+        <div className="al-about-grid">
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: "0 0 1rem" }}>
+            <p className="al-story-p">
               {t("accountants.about.p1", "En DevQueens nos especializamos en crear presencia digital para profesionales contables. Entendemos los desafíos únicos de tu industria: necesitás transmitir confianza, experiencia y profesionalismo en cada punto de contacto con tus clientes.")}
             </p>
-            <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: 0 }}>
-              {t("accountants.about.p2", "Combinamos diseño estratégico, desarrollo web moderno y optimización para marketing digital. No solo creamos sitios web — construimos herramientas que convierten visitantes en clientes y posicionan tu práctica contable por encima de la competencia.")}
+            <p className="al-story-p">
+              {t("accountants.about.p2", "Combinamos diseño estratégico, desarrollo web moderno y optimización para marketing digital. No solo creamos sitios web, construimos herramientas que convierten visitantes en clientes y posicionan tu práctica contable por encima de la competencia.")}
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginTop: "1.5rem" }}>
+            <div className="al-story-features">
               {[
                 t("accountants.about.feature1", "Diseño UX/UI profesional"),
                 t("accountants.about.feature2", "Desarrollo web y mobile"),
                 t("accountants.about.feature3", "SEO y marketing digital"),
                 t("accountants.about.feature4", "Asesoría continua personalizada"),
               ].map((feat) => (
-                <span key={feat} style={{
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.78rem", fontWeight: 600,
-                  color: "var(--card-text-regular)", background: "var(--feature-pill-bg)",
-                  padding: "0.4rem 0.9rem", borderRadius: "999px",
-                  border: "1px solid var(--feature-pill-border)", whiteSpace: "nowrap",
-                }}>
-                  {feat}
-                </span>
+                <span key={feat} className="al-story-feature-pill">{feat}</span>
               ))}
             </div>
           </motion.div>
-          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{
-              display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px",
-            }}
-          >
-            <div style={{
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "20px", padding: "1.75rem", textAlign: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>100+</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat1", "Proyectos Entregados")}</p>
-            </div>
-            <div style={{
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "20px", padding: "1.75rem", textAlign: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>5+</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat2", "Años de Experiencia")}</p>
-            </div>
-            <div style={{
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "20px", padding: "1.75rem", textAlign: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>100%</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat3", "Clientes Satisfechos")}</p>
-            </div>
-            <div style={{
-              background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)",
-              borderRadius: "20px", padding: "1.75rem", textAlign: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ position: "absolute", width: "80px", height: "80px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(25px)", pointerEvents: "none" }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 4px", position: "relative", zIndex: 1 }}>24/7</p>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{t("accountants.about.stat4", "Soporte Continuo")}</p>
-            </div>
+          <motion.div className="al-stats" custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {stats.map((s) => (
+              <div key={s.key} className="al-stat">
+                <div className="al-stat-glow" aria-hidden="true" />
+                <p className="al-stat-num">{s.num}</p>
+                <p className="al-stat-label">{t(`accountants.about.${s.key}`, s.fallback)}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      <section id="why"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.why.badge", "¿POR QUÉ ESTAR ONLINE?")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
+      <section id="why" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.why.badge", "¿POR QUÉ ESTAR ONLINE?")}</span>
+          <h2 className="al-section-title">
             {t("accountants.why.title", "Tus Clientes Te Buscan en Internet. ¿Te Encuentran?")}
           </h2>
         </div>
-        <div className="why-grid" style={{ gap: "20px" }}>
-          {/* ── OLD: orange gradient cards ── */}
-          {/*
-          {[
-            { num: "93%", title: t("accountants.why.stat1.title", "Investigan Online"), text: t("accountants.why.stat1.text", "De los clientes potenciales investigan en internet antes de contratar un servicio profesional.") },
-            { num: "75%", title: t("accountants.why.stat2.title", "Confían Más"), text: t("accountants.why.stat2.text", "Un sitio web profesional aumenta la confianza y credibilidad de tu servicio contable.") },
-            { num: "3x", title: t("accountants.why.stat3.title", "Más Oportunidades"), text: t("accountants.why.stat3.text", "Los contadores con presencia online reciben hasta 3 veces más consultas de nuevos clientes.") },
-          ].map((item, i) => (
-            <motion.div key={i} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              style={{ background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", borderRadius: "20px", padding: "2rem", position: "relative", overflow: "hidden" }}
-            >
-              <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-20px", right: "-20px", filter: "blur(30px)", pointerEvents: "none" }} />
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#fff", margin: "0 0 8px", position: "relative", zIndex: 1 }}>{item.num}</p>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#fff", margin: "0 0 6px", position: "relative", zIndex: 1 }}>{item.title}</h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: "#fff", margin: 0, position: "relative", zIndex: 1 }}>{item.text}</p>
-            </motion.div>
-          ))}
-          */}
-
-          {/* ── NEW: modern image cards ── */}
+        <div className="why-grid">
           <ImageCard
             index={0}
             image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg"
@@ -330,18 +225,13 @@ export const AccountantsLanding: React.FC = () => {
         </div>
       </section>
 
-      <section id="services"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.services.badge", "LO QUE OFRECEMOS")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
-            {t("accountants.services.title.line1", "Tu Web Profesional")}<br />
-            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
+      <section id="services" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.services.badge", "LO QUE OFRECEMOS")}</span>
+          <h2 className="al-section-title">
+            {t("accountants.services.title.line1", "Tu Web Profesional")}
+            <br />
+            <span className="accent-underline">
               {t("accountants.services.title.line2", "Lista para Crecer")}
             </span>
           </h2>
@@ -354,120 +244,121 @@ export const AccountantsLanding: React.FC = () => {
         </div>
       </section>
 
-      <section id="offer"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: "0",
-          backgroundImage: "url(/main1.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          borderRadius: "20px", overflow: "hidden", position: "relative",
-        }}
-      >
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, #000000bd 0%, #000000ab 40%, #0000003d 100%)", borderRadius: "20px" }} />
-        <div style={{ position: "absolute", width: "300px", height: "300px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-80px", right: "-60px", filter: "blur(60px)", pointerEvents: "none", zIndex: 1 }} />
-        <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.15)", borderRadius: "50%", bottom: "-60px", left: "-40px", filter: "blur(50px)", pointerEvents: "none", zIndex: 1 }} />
-        <div className="offer-row" style={{ position: "relative", zIndex: 2, padding: isMobile ? "2.5rem 1.2rem" : "4rem 3rem", gap: "2rem" }}>
+      <section id="offer" className="page-section--flush al-offer">
+        <div className="al-offer__overlay" aria-hidden="true" />
+        <div className="al-offer__glow--top" aria-hidden="true" />
+        <div className="al-offer__glow--bottom" aria-hidden="true" />
+        <div className="al-offer__body">
           <div>
-            <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", marginBottom: "0.75rem" }}>
+            <span className="al-offer__eyebrow">
               {t("accountants.offer.badge", "OFERTA LANZAMIENTO")}
             </span>
-            <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "2rem" : "clamp(2.2rem, 4vw, 3.5rem)", lineHeight: 1.1, color: "#fff", margin: "0 0 0.75rem" }}>
+            <h2 className="al-offer__title">
               {t("accountants.offer.title", "Tu Web Profesional desde")}
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: isMobile ? "3rem" : "clamp(3rem, 6vw, 5rem)", color: "#fff", margin: 0, lineHeight: 1 }}>
-              $100 <span style={{ fontSize: "0.4em", fontWeight: 700, opacity: 0.7 }}>USD</span>
+            <p className="al-offer__price">
+              $100 <span className="al-offer__price-unit">USD</span>
             </p>
-            <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "#fff", margin: "1rem 0 0", maxWidth: "400px" }}>
+            <p className="al-offer__desc">
               {t("accountants.offer.desc", "Incluye diseño personalizado, desarrollo web y mobile, optimización SEO básica y asesoría inicial. Todo lo que necesitás para empezar.")}
             </p>
           </div>
-          <a href="#buy" data-umami-event="cta-aprovechar-oferta" onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
-            style={{
-              fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
-              color: "#c2410c", background: "#fff", border: "none", borderRadius: "999px",
-              padding: "0.9rem 2.25rem", cursor: "pointer", letterSpacing: "0.01em",
-              textDecoration: "none", whiteSpace: "nowrap", display: "inline-block",
-              transition: "transform 0.2s ease",
-            }}
+          <a
+            className="al-offer__cta"
+            href="#buy"
+            data-umami-event="cta-aprovechar-oferta"
+            onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
           >
             {t("accountants.offer.cta", "Aprovechar Oferta")}
           </a>
         </div>
       </section>
 
-      <section id="process"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.process.badge", "CÓMO FUNCIONA")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
+      <section id="process" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.process.badge", "CÓMO FUNCIONA")}</span>
+          <h2 className="al-section-title">
             {t("accountants.process.title", "Del Primer Contacto a Tu Web Publicada")}
           </h2>
         </div>
-        <div className="process-grid" style={{ gap: "20px" }}>
-          {[
-            { step: "01", title: t("accountants.process.step1.title", "Consultoría Gratuita"), text: t("accountants.process.step1.text", "Conversamos sobre tu práctica contable, tus objetivos y cómo querés mostrarte al mundo.") },
-            { step: "02", title: t("accountants.process.step2.title", "Diseño a Tu Medida"), text: t("accountants.process.step2.text", "Creamos propuestas de diseño alineadas a tu identidad. Vos elegís o traés tus propias ideas.") },
-            { step: "03", title: t("accountants.process.step3.title", "Desarrollo Ágil"), text: t("accountants.process.step3.text", "Construimos tu web con las mejores prácticas. Rápida, segura y optimizada para todos los dispositivos.") },
-            { step: "04", title: t("accountants.process.step4.title", "Lanzamiento y Soporte"), text: t("accountants.process.step4.text", "Publicamos tu sitio y te acompañamos con soporte continuo para que todo funcione perfecto.") },
-          ].map((item, i) => (
-            <motion.div key={i} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              style={{ background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)", borderRadius: "20px", padding: "1.75rem" }}
+        <div className="al-process-grid">
+          {processSteps.map((item, i) => (
+            <motion.div
+              key={item.step}
+              className="al-process-step"
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
             >
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.5rem", color: "var(--card-text)", opacity: 0.25 }}>{item.step}</span>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--card-text)", margin: "0.5rem 0 0.35rem" }}>{item.title}</h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: "var(--card-text-regular)", margin: 0 }}>{item.text}</p>
+              <span className="al-process-step-num">{item.step}</span>
+              <h3 className="al-process-step-title">{t(`accountants.process.${item.key}.title`, item.titleFallback)}</h3>
+              <p className="al-process-step-text">{t(`accountants.process.${item.key}.text`, item.textFallback)}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section id="compare"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.compare.badge", "COMPARACIÓN")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
-            {t("accountants.compare.title.line1", "La Diferencia de")}<br />
-            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
+      <section id="compare" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.compare.badge", "COMPARACIÓN")}</span>
+          <h2 className="al-section-title">
+            {t("accountants.compare.title.line1", "La Diferencia de")}
+            <br />
+            <span className="accent-underline">
               {t("accountants.compare.title.line2", "Tener Presencia Online")}
             </span>
           </h2>
         </div>
-        <div className="compare-grid" style={{ gap: "24px" }}>
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{ border: "1px solid var(--feature-pill-border)", borderRadius: "20px", padding: "2rem", background: "var(--feature-pill-bg)" }}
+        <div className="al-compare-grid">
+          <motion.div
+            className="al-compare-card"
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "var(--card-text)", margin: "0 0 1rem" }}>
+            <h3 className="al-compare-card__title">
               {t("accountants.compare.left.title", "Sin Presencia Online")}
             </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-              {[t("accountants.compare.left.1", "Clientes no te encuentran en internet"), t("accountants.compare.left.2", "Sin material para hacer publicidad"), t("accountants.compare.left.3", "Imagen poco profesional"), t("accountants.compare.left.4", "Dependés solo del boca a boca")].map((item, i) => (
-                <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "var(--card-text-regular)", display: "flex", gap: "8px", alignItems: "flex-start" }}>
-                  <span style={{ color: "var(--card-text-regular)", opacity: 0.3, fontSize: "1.1rem", lineHeight: 1 }}>—</span>{item}
+            <ul className="al-compare-list">
+              {[
+                t("accountants.compare.left.1", "Clientes no te encuentran en internet"),
+                t("accountants.compare.left.2", "Sin material para hacer publicidad"),
+                t("accountants.compare.left.3", "Imagen poco profesional"),
+                t("accountants.compare.left.4", "Dependés solo del boca a boca"),
+              ].map((item) => (
+                <li key={item} className="al-compare-list-item">
+                  <span className="al-compare-list-marker" aria-hidden="true">—</span>
+                  {item}
                 </li>
               ))}
             </ul>
           </motion.div>
-          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{ background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", borderRadius: "20px", padding: "2rem", position: "relative", overflow: "hidden" }}
+          <motion.div
+            className="al-compare-card al-compare-card--positive"
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            <div style={{ position: "absolute", width: "140px", height: "140px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-40px", right: "-30px", filter: "blur(35px)", pointerEvents: "none" }} />
-            <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "#fff", margin: "0 0 1rem", position: "relative", zIndex: 1 }}>
+            <div className="al-compare-card__glow" aria-hidden="true" />
+            <h3 className="al-compare-card__title">
               {t("accountants.compare.right.title", "Con DevQueens")}
             </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem", position: "relative", zIndex: 1 }}>
-              {[t("accountants.compare.right.1", "Web profesional 100% personalizada"), t("accountants.compare.right.2", "Lista para campañas de Google y redes"), t("accountants.compare.right.3", "Refleja tu experiencia y seriedad"), t("accountants.compare.right.4", "Flujo constante de nuevos clientes")].map((item, i) => (
-                <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.9rem", color: "#fff", display: "flex", gap: "8px", alignItems: "flex-start" }}>
-                  <span style={{ color: "#fed7aa", fontSize: "1.1rem", lineHeight: 1 }}>✓</span>{item}
+            <ul className="al-compare-list">
+              {[
+                t("accountants.compare.right.1", "Web profesional 100% personalizada"),
+                t("accountants.compare.right.2", "Lista para campañas de Google y redes"),
+                t("accountants.compare.right.3", "Refleja tu experiencia y seriedad"),
+                t("accountants.compare.right.4", "Flujo constante de nuevos clientes"),
+              ].map((item) => (
+                <li key={item} className="al-compare-list-item">
+                  <span className="al-compare-list-marker al-compare-list-marker--pos" aria-hidden="true">✓</span>
+                  {item}
                 </li>
               ))}
             </ul>
@@ -475,357 +366,295 @@ export const AccountantsLanding: React.FC = () => {
         </div>
       </section>
 
-      <section id="buy"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.buy.badge", "COMENZAR AHORA")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
-            {t("accountants.buy.title.line1", "Obten Tu Sitio Web")}<br />
-            <span className="accent-underline" style={{ color: "var(--card-text)" }}>
+      <section id="buy" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.buy.badge", "COMENZAR AHORA")}</span>
+          <h2 className="al-section-title">
+            {t("accountants.buy.title.line1", "Obten Tu Sitio Web")}
+            <br />
+            <span className="accent-underline">
               {t("accountants.buy.title.line2", "Listo para Atraer Clientes")}
             </span>
           </h2>
-          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: 0 }}>
+          <p className="page-lede">
             {t("accountants.buy.desc", "En menos de una semana tendrás tu sitio web profesional publicado, optimizado para atraer clientes y preparado para campañas de marketing digital. Sin complicaciones, sin letras chicas.")}
           </p>
         </div>
 
-        <div className="buy-grid" style={{ gap: "24px" }}>
-          {/* ── Package 1: $100 ── */}
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{
-              borderRadius: "24px", overflow: "hidden", position: "relative",
-              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg)",
-              backgroundSize: "cover", backgroundPosition: "center",
-              display: "flex", flexDirection: "column",
-            }}
+        <div className="al-buy-grid">
+          <motion.div
+            className="al-pack al-pack--basic"
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)", borderRadius: "24px", zIndex: 0 }} />
-            <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.1)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)", zIndex: 1 }} />
-            <div style={{
-              position: "relative", zIndex: 2,
-              background: "rgba(255,255,255,0.04)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "20px",
-              margin: "1.5rem",
-              padding: "2.25rem 1.75rem",
-              display: "flex", flexDirection: "column",
-              flex: 1,
-            }}>
-              <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "rgba(249,115,22,0.35)", padding: "0.3rem 0.9rem", borderRadius: "999px", width: "fit-content", marginBottom: "1.25rem" }}>
-                {t("accountants.pack1.badge", "BÁSICO")}
-              </span>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: isMobile ? "1.6rem" : "clamp(1.6rem, 2.5vw, 2rem)", color: "#fff", margin: "0 0 0.5rem", lineHeight: 1.15 }}>
+            <div className="al-pack__overlay" aria-hidden="true" />
+            <div className="al-pack__glow-big" aria-hidden="true" />
+            <div className="al-pack__glow-small" aria-hidden="true" />
+            <div className="al-pack__glass">
+              <span className="al-pack__badge">{t("accountants.pack1.badge", "BÁSICO")}</span>
+              <h3 className="al-pack__title">
                 {t("accountants.pack1.title", "Sitio Web Profesional")}
               </h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: "0 0 1.5rem" }}>
+              <p className="al-pack__desc">
                 {t("accountants.pack1.desc", "Todo lo esencial para tu presencia online.")}
               </p>
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.75rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1 }}>
+              <div className="al-pack__divider" />
+              <ul className="al-pack__features">
                 {[
                   t("accountants.buy.includes.1", "Diseño web profesional personalizado"),
                   t("accountants.buy.includes.2", "Optimizado para SEO desde el día uno"),
                   t("accountants.buy.includes.3", "Adaptado a mobile y todos los dispositivos"),
                   t("accountants.buy.includes.4", "Listo para Google Ads y redes sociales"),
                   t("accountants.buy.includes.5", "Soporte y acompañamiento continuo"),
-                ].map((item, i) => (
-                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "#fff", display: "flex", gap: "12px", alignItems: "flex-start" }}>
-                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "20px", height: "20px", borderRadius: "50%", background: "rgba(249,115,22,0.5)", color: "#fff", fontSize: "0.65rem", fontWeight: 700, flexShrink: 0, marginTop: "2px" }}>✓</span>
+                ].map((item) => (
+                  <li key={item} className="al-pack__feature">
+                    <span className="al-pack__feature-check" aria-hidden="true">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "1.25rem", justifyContent: "center" }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "3.2rem", color: "#fff", lineHeight: 1 }}>$100</span>
-                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.65)", fontWeight: 600 }}>USD</span>
+              <div className="al-pack__price-row">
+                <span className="al-pack__price">$100</span>
+                <span className="al-pack__price-unit">USD</span>
               </div>
-              <a href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203" data-umami-event="cta-comprar-stripe-basic"
-                style={{
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", fontWeight: 700,
-                  color: "#c2410c", background: "#fff", border: "1.5px solid #fff", borderRadius: "999px",
-                  padding: "0.95rem 2rem", cursor: "pointer", letterSpacing: "0.02em",
-                  textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)";
-                }}
+              <a
+                className="al-pack__cta"
+                href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203"
+                data-umami-event="cta-comprar-stripe-basic"
               >
                 {t("accountants.buy.cta", "Obtener Mi Sitio Web Ahora")}
               </a>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "1rem 0 0", textAlign: "center" }}>
+              <p className="al-pack__guarantee">
                 {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
               </p>
             </div>
           </motion.div>
 
-          {/* ── Package 2: $150 ── */}
-          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{
-              borderRadius: "24px", overflow: "hidden", position: "relative",
-              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg)",
-              backgroundSize: "cover", backgroundPosition: "center",
-              display: "flex", flexDirection: "column",
-              boxShadow: "0 0 0 2px rgba(249,115,22,0.4), 0 8px 32px rgba(249,115,22,0.15)",
-            }}
+          <motion.div
+            className="al-pack al-pack--pro"
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)", borderRadius: "24px", zIndex: 0 }} />
-            <div style={{ position: "absolute", width: "220px", height: "220px", background: "rgba(251,146,60,0.25)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", width: "100px", height: "100px", background: "rgba(251,146,60,0.12)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)", zIndex: 1 }} />
-            <div style={{
-              position: "relative", zIndex: 2,
-              background: "rgba(255,255,255,0.04)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "20px",
-              margin: "1.5rem",
-              padding: "2.25rem 1.75rem",
-              display: "flex", flexDirection: "column",
-              flex: 1,
-            }}>
-              <span style={{ display: "inline-block", fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c2410c", background: "#fff", padding: "0.3rem 0.9rem", borderRadius: "999px", width: "fit-content", marginBottom: "1.25rem", boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>
-                {t("accountants.pack2.badge", "AVANZADO · MÁS POPULAR")}
-              </span>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: isMobile ? "1.6rem" : "clamp(1.6rem, 2.5vw, 2rem)", color: "#fff", margin: "0 0 0.5rem", lineHeight: 1.15 }}>
+            <div className="al-pack__overlay" aria-hidden="true" />
+            <div className="al-pack__glow-big" aria-hidden="true" />
+            <div className="al-pack__glow-small" aria-hidden="true" />
+            <div className="al-pack__glass">
+              <span className="al-pack__badge al-pack__badge--pro">{t("accountants.pack2.badge", "AVANZADO · MÁS POPULAR")}</span>
+              <h3 className="al-pack__title">
                 {t("accountants.pack2.title", "Web + Fanpage + Campaña")}
               </h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: "0 0 1.5rem" }}>
+              <p className="al-pack__desc">
                 {t("accountants.pack2.desc", "Presencia digital completa con publicidad incluida.")}
               </p>
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1.75rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1 }}>
+              <div className="al-pack__divider" />
+              <ul className="al-pack__features">
                 {[
                   t("accountants.pack2.includes.1", "Diseño web profesional personalizado"),
                   t("accountants.pack2.includes.2", "Creación y optimización de Fanpage de Facebook"),
                   t("accountants.pack2.includes.3", "Configuración de 1 campaña publicitaria"),
                   t("accountants.pack2.includes.4", "Acompañamiento en cada etapa del proceso"),
                   t("accountants.pack2.includes.5", "Soporte continuo"),
-                ].map((item, i) => (
-                  <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "#fff", display: "flex", gap: "12px", alignItems: "flex-start" }}>
-                    <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "20px", height: "20px", borderRadius: "50%", background: "rgba(249,115,22,0.5)", color: "#fff", fontSize: "0.65rem", fontWeight: 700, flexShrink: 0, marginTop: "2px" }}>✓</span>
+                ].map((item) => (
+                  <li key={item} className="al-pack__feature">
+                    <span className="al-pack__feature-check" aria-hidden="true">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "1.25rem", justifyContent: "center" }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "3.2rem", color: "#fff", lineHeight: 1 }}>$150</span>
-                <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "rgba(255,255,255,0.65)", fontWeight: 600 }}>USD</span>
+              <div className="al-pack__price-row">
+                <span className="al-pack__price">$150</span>
+                <span className="al-pack__price-unit">USD</span>
               </div>
-              <a href="https://buy.stripe.com/14AfZh9YA3rraMraXaaR204" data-umami-event="cta-comprar-stripe-pro"
-                style={{
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", fontWeight: 700,
-                  color: "#c2410c", background: "#fff", border: "1.5px solid #fff", borderRadius: "999px",
-                  padding: "0.95rem 2rem", cursor: "pointer", letterSpacing: "0.02em",
-                  textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)";
-                }}
+              <a
+                className="al-pack__cta"
+                href="https://buy.stripe.com/14AfZh9YA3rraMraXaaR204"
+                data-umami-event="cta-comprar-stripe-pro"
               >
                 {t("accountants.pack2.cta", "Obtener Mi Plan Avanzado")}
               </a>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", margin: "1rem 0 0", textAlign: "center" }}>
+              <p className="al-pack__guarantee">
                 {t("accountants.pack2.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
               </p>
             </div>
           </motion.div>
 
-          {/* ── Perks (full-width row below packages) ── */}
-          <motion.div custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-              gap: "20px",
-              gridColumn: isMobile ? "auto" : "1 / -1",
-            }}
+          <motion.div
+            className="al-perks"
+            custom={2}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
           >
-            <div style={{
-              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
-              borderRadius: "16px", padding: "1.5rem",
-              display: "flex", gap: "1rem", alignItems: "flex-start",
-            }}>
-              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div className="al-perk">
+              <div className="al-perk__icon">
                 <MessageCircle size={20} color="#fff" />
               </div>
               <div>
-                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo")}</h3>
-                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.")}</p>
+                <h3 className="al-perk__title">{t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo")}</h3>
+                <p className="al-perk__text">{t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.")}</p>
               </div>
             </div>
-            <div style={{
-              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
-              borderRadius: "16px", padding: "1.5rem",
-              display: "flex", gap: "1rem", alignItems: "flex-start",
-            }}>
-              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div className="al-perk">
+              <div className="al-perk__icon">
                 <Palette size={20} color="#fff" />
               </div>
               <div>
-                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca")}</h3>
-                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.")}</p>
+                <h3 className="al-perk__title">{t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca")}</h3>
+                <p className="al-perk__text">{t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.")}</p>
               </div>
             </div>
-            <div style={{
-              background: "var(--feature-pill-bg)", border: "1px solid var(--feature-pill-border)",
-              borderRadius: "16px", padding: "1.5rem",
-              display: "flex", gap: "1rem", alignItems: "flex-start",
-            }}>
-              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "linear-gradient(135deg, #c2410c 0%, #ea580c 40%, #f97316 100%)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div className="al-perk">
+              <div className="al-perk__icon">
                 <TrendingUp size={20} color="#fff" />
               </div>
               <div>
-                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "var(--card-text)", margin: "0 0 0.3rem" }}>{t("accountants.buy.perk3.title", "Preparado para Crecer")}</h3>
-                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", lineHeight: 1.55, color: "var(--card-text-regular)", margin: 0 }}>{t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.")}</p>
+                <h3 className="al-perk__title">{t("accountants.buy.perk3.title", "Preparado para Crecer")}</h3>
+                <p className="al-perk__text">{t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.")}</p>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section id="contact"
-        style={{
-          maxWidth: "1280px", margin: sectionMargin, padding: sectionPad, overflow: "hidden",
-          background: "var(--card-bg)", borderRadius: "15px",
-          display: "flex", flexDirection: "column", gap: "2.5rem", position: "relative",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px" }}>
-          <span style={badgeStyle}>{t("accountants.contact.badge", "PRIMER ASESORAMIENTO GRATIS")}</span>
-          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: isMobile ? "1.6rem" : "clamp(1.8rem, 3vw, 2.5rem)", lineHeight: 1.15, color: "var(--card-text)", margin: 0, letterSpacing: "-0.02em" }}>
+      <section id="contact" className="page-section page-section--clip">
+        <div className="page-block">
+          <span className="page-badge">{t("accountants.contact.badge", "PRIMER ASESORAMIENTO GRATIS")}</span>
+          <h2 className="al-section-title">
             {t("accountants.contact.title", "Empecemos a Construir Tu Presencia Online")}
           </h2>
-          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", lineHeight: 1.75, color: "var(--card-text-regular)", margin: 0 }}>
+          <p className="page-lede">
             {t("accountants.contact.desc", "Dejanos tus datos y te contactamos para una asesoría sin costo. Traé tus ideas o nosotros te proponemos diseños y posibilidades. Sin compromiso, solo oportunidades.")}
           </p>
         </div>
 
-        <div className="contact-row" style={{ gap: isMobile ? "2rem" : "3rem" }}>
+        <div className="al-contact-row">
           {sent ? (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+              className="al-sent"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, ease: "easeOut" as const }}
-              style={{ flex: "1 1 50%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "2rem" }}
             >
-              <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "#c2410c", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
-                <span style={{ color: "#fff", fontSize: "1.8rem" }}>✓</span>
-              </div>
-              <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.4rem", color: "var(--card-text)", margin: "0 0 0.5rem" }}>
+              <div className="al-sent__icon" aria-hidden="true">✓</div>
+              <h3 className="al-sent__title">
                 {t("accountants.form.sent.title", "¡Gracias por tu interés!")}
               </h3>
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", color: "var(--card-text-regular)", maxWidth: "360px" }}>
+              <p className="al-sent__text">
                 {t("accountants.form.sent.text", "Hemos recibido tu solicitud. Te contactaremos en las próximas 24 horas para coordinar tu asesoría gratuita.")}
               </p>
             </motion.div>
           ) : (
-            <motion.form onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.form
+              className="al-form"
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, ease: "easeOut" as const }}
-              style={{ display: "flex", flexDirection: "column", gap: "1.5rem", flex: "1 1 50%" }}
             >
-              <input type="text" name="_honey" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }} autoComplete="off" />
+              <input className="al-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" />
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                <label htmlFor="al-name" style={labelStyle}>{t("accountants.form.name", "Nombre completo")}</label>
-                <input type="text" id="al-name" name="name" value={form.name} onChange={handleChange} required maxLength={100} placeholder={t("accountants.form.name.placeholder", "Tu nombre y apellido")} style={inputStyle} />
+              <div className="al-form-group">
+                <label htmlFor="al-name" className="al-form-label">{t("accountants.form.name", "Nombre completo")}</label>
+                <input
+                  className="al-form-input"
+                  type="text"
+                  id="al-name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  maxLength={100}
+                  placeholder={t("accountants.form.name.placeholder", "Tu nombre y apellido")}
+                />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                <label htmlFor="al-email" style={labelStyle}>{t("accountants.form.email", "Email")}</label>
-                <input type="email" id="al-email" name="email" value={form.email} onChange={handleChange} required maxLength={254} placeholder={t("accountants.form.email.placeholder", "Tu correo electrónico")} style={inputStyle} />
+              <div className="al-form-group">
+                <label htmlFor="al-email" className="al-form-label">{t("accountants.form.email", "Email")}</label>
+                <input
+                  className="al-form-input"
+                  type="email"
+                  id="al-email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  maxLength={254}
+                  placeholder={t("accountants.form.email.placeholder", "Tu correo electrónico")}
+                />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                <label htmlFor="al-phone" style={labelStyle}>{t("accountants.form.phone", "Teléfono (opcional)")}</label>
-                <input type="tel" id="al-phone" name="phone" value={form.phone} onChange={handleChange} maxLength={20} placeholder={t("accountants.form.phone.placeholder", "Tu número de contacto")} style={inputStyle} />
+              <div className="al-form-group">
+                <label htmlFor="al-phone" className="al-form-label">{t("accountants.form.phone", "Teléfono (opcional)")}</label>
+                <input
+                  className="al-form-input"
+                  type="tel"
+                  id="al-phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  maxLength={20}
+                  placeholder={t("accountants.form.phone.placeholder", "Tu número de contacto")}
+                />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                <label htmlFor="al-message" style={labelStyle}>{t("accountants.form.message", "Contanos sobre tu práctica")}</label>
-                <textarea id="al-message" name="message" rows={4} value={form.message} onChange={handleChange} required maxLength={2000} placeholder={t("accountants.form.message.placeholder", "¿Qué servicios ofrecés? ¿Tenés alguna idea para tu web?")} style={{ ...inputStyle, resize: "vertical", minHeight: "100px" }} />
+              <div className="al-form-group">
+                <label htmlFor="al-message" className="al-form-label">{t("accountants.form.message", "Contanos sobre tu práctica")}</label>
+                <textarea
+                  className="al-form-textarea"
+                  id="al-message"
+                  name="message"
+                  rows={4}
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  maxLength={2000}
+                  placeholder={t("accountants.form.message.placeholder", "¿Qué servicios ofrecés? ¿Tenés alguna idea para tu web?")}
+                />
               </div>
 
               {formError && (
-                <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", color: "#dc2626", margin: 0, padding: "0.6rem 1rem", background: "rgba(220,38,38,0.08)", borderRadius: "10px" }}>
-                  {formError}
-                </p>
+                <p className="al-form-error">{formError}</p>
               )}
 
-              <button type="submit" disabled={submitting} data-umami-event="cta-formulario-contacto"
-                style={{
-                  fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.95rem", fontWeight: 700,
-                  color: "var(--btn-text)", background: "var(--btn-bg)", border: "none",
-                  borderRadius: "999px", padding: "0.9rem 2.5rem", cursor: submitting ? "not-allowed" : "pointer",
-                  letterSpacing: "0.01em", width: "fit-content", transition: "transform 0.2s ease",
-                  opacity: submitting ? 0.6 : 1,
-                }}
+              <button
+                type="submit"
+                className="al-form-submit"
+                disabled={submitting}
+                data-umami-event="cta-formulario-contacto"
               >
                 {submitting ? "Enviando..." : t("accountants.form.submit", "Quiero Mi Asesoría Gratuita")}
               </button>
             </motion.form>
           )}
 
-          {!isMobile && (
-            <div style={{
-              flex: "1 1 50%",
-              borderRadius: "24px", padding: "2rem",
-              position: "relative", overflow: "hidden",
-              display: "flex", flexDirection: "column", justifyContent: "center",
-              minHeight: "400px",
-              backgroundImage: "url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/formulario_gfpual.jpg)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.45) 100%)", borderRadius: "24px" }} />
-              <div style={{ position: "absolute", width: "200px", height: "200px", background: "rgba(251,146,60,0.2)", borderRadius: "50%", top: "-60px", right: "-50px", filter: "blur(40px)", pointerEvents: "none" }} />
-              <div style={{ position: "absolute", width: "120px", height: "120px", background: "rgba(251,146,60,0.1)", borderRadius: "16px", transform: "rotate(15deg)", bottom: "30px", right: "20px", border: "1px solid rgba(255,255,255,0.08)" }} />
-              <div style={{
-                position: "relative", zIndex: 1,
-                background: "rgba(255,255,255,0.05)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "20px",
-                padding: "2rem 1.75rem",
-              }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "1.8rem", color: "#fff", margin: "0 0 1.25rem", lineHeight: 1.2 }}>
-                  {t("accountants.form.side.title", "¿Por qué elegirnos?")}
-                </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {[
-                    t("accountants.form.side.1", "Primer asesoramiento sin costo"),
-                    t("accountants.form.side.2", "Diseños personalizados o traé el tuyo"),
-                    t("accountants.form.side.3", "Te acompañamos en cada decisión"),
-                    t("accountants.form.side.4", "Web lista para marketing y publicidad"),
-                  ].map((item, i) => (
-                    <li key={i} style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1.05rem", color: "#fff", display: "flex", gap: "12px", alignItems: "center" }}>
-                      <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "22px", height: "22px", borderRadius: "50%", background: "linear-gradient(135deg, #c2410c 0%, #f97316 100%)", color: "#fff", fontSize: "0.7rem", fontWeight: 700, flexShrink: 0 }}>✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="al-contact-side">
+            <div className="al-contact-side__overlay" aria-hidden="true" />
+            <div className="al-contact-side__glow-big" aria-hidden="true" />
+            <div className="al-contact-side__glow-small" aria-hidden="true" />
+            <div className="al-contact-side__glass">
+              <p className="al-contact-side__title">
+                {t("accountants.form.side.title", "¿Por qué elegirnos?")}
+              </p>
+              <ul className="al-contact-side__list">
+                {[
+                  t("accountants.form.side.1", "Primer asesoramiento sin costo"),
+                  t("accountants.form.side.2", "Diseños personalizados o traé el tuyo"),
+                  t("accountants.form.side.3", "Te acompañamos en cada decisión"),
+                  t("accountants.form.side.4", "Web lista para marketing y publicidad"),
+                ].map((item) => (
+                  <li key={item} className="al-contact-side__item">
+                    <span className="al-contact-side__check" aria-hidden="true">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+          </div>
         </div>
       </section>
     </Layout>
