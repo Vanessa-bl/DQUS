@@ -26,35 +26,52 @@ export const Contact: React.FC = () => {
   return (
     <Layout darkHeader>
       <section className="page-section" aria-labelledby="contact-hero-title">
-        <motion.div
-          className="page-block"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          <span className="page-badge">{t("contact.hero.badge", "CONTACT US")}</span>
+        <div className="contact-hero-row">
+          <motion.div
+            className="page-block"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <span className="page-badge">{t("contact.hero.badge", "CONTACT US")}</span>
 
-          <h1 id="contact-hero-title" className="page-title page-title--xl page-title--upper page-title--heavy">
-            {t("contact.hero.title.line1", "Contact")}{" "}
-            <span className="page-title-mark">
-              {t("contact.hero.title.line2", "Us")}
-            </span>
-          </h1>
+            <h1 id="contact-hero-title" className="page-title page-title--xl page-title--upper page-title--heavy">
+              {t("contact.hero.title.line1", "Contact")}{" "}
+              <span className="page-title-mark">
+                {t("contact.hero.title.line2", "Us")}
+              </span>
+            </h1>
 
-          <p className="page-lede page-lede--bold">
-            {t(
-              "contact.hero.question",
-              "Ready to build something you're actually proud of?"
-            )}
-          </p>
-          <p className="page-lede">
-            {t(
-              "contact.hero.lede",
-              "Skip the templated pitch. Tell us the real version of what you want to make, even the parts still forming. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
-            )}
-          </p>
-        </motion.div>
+            <p className="page-lede page-lede--bold">
+              {t(
+                "contact.hero.question",
+                "Ready to build something you're actually proud of?"
+              )}
+            </p>
+            <p className="page-lede">
+              {t(
+                "contact.hero.lede",
+                "Skip the templated pitch. Tell us the real version of what you want to make, even the parts still forming. We'll listen, ask the right questions, and be honest about how to get there. That's where the good work starts."
+              )}
+            </p>
+          </motion.div>
+
+          <aside className="contact-address">
+            <h2 className="contact-address__title">
+              {t("contact.address.title", "Address")}
+            </h2>
+            <div className="contact-address__lines">
+              <p>DevQueens</p>
+              <p>360 NW 27th St</p>
+              <p>Miami, FL 33127</p>
+            </div>
+            <a className="contact-address__email" href="mailto:hello@devqueens.us">
+              hello@devqueens.us
+              <span className="contact-address__email-chevron" aria-hidden="true">›</span>
+            </a>
+          </aside>
+        </div>
       </section>
 
       <section className="page-section page-section--flush-top page-section--dark-indigo" aria-labelledby="contact-form-title">
