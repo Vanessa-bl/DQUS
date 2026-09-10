@@ -356,14 +356,22 @@
   padding-bottom: 2rem;
 }
 
-.page-section--dark-indigo .contact-form::before {
+.page-section--dark-indigo .contact-form::before,
+.page-section--dark-indigo .contact-form::after {
   content: "";
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
   height: 4px;
   background: linear-gradient(to right, #86efac 0%, #16a34a 100%);
+}
+
+.page-section--dark-indigo .contact-form::before {
+  top: 0;
+}
+
+.page-section--dark-indigo .contact-form::after {
+  bottom: 0;
 }
 
 .page-section--dark-indigo .contact-form-label {
