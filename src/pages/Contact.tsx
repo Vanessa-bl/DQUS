@@ -61,14 +61,7 @@ export const Contact: React.FC = () => {
         <h2 id="contact-form-title" className="sr-only">
           {t("contact.form.title", "Contact Form")}
         </h2>
-        <motion.form
-          className="contact-form"
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
+        <form className="contact-form" onSubmit={handleSubmit}>
           <div className="contact-form-group">
             <label htmlFor="name" className="contact-form-label">
               {t("contact.form.name.label", "Name")}
@@ -120,7 +113,7 @@ export const Contact: React.FC = () => {
           <button type="submit" className="contact-form-submit">
             {t("contact.form.submit", "Send Message")}
           </button>
-        </motion.form>
+        </form>
       </section>
     </Layout>
   );
