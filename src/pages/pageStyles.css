@@ -445,6 +445,18 @@
   gap: 0.4rem;
 }
 
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .contact-form-label {
   font-family: "Nunito Sans", sans-serif;
   font-size: 0.85rem;
@@ -458,14 +470,12 @@
   font-family: "Nunito Sans", sans-serif;
   font-size: 0.95rem;
   padding: 0.85rem 1rem;
-  border: 1px solid var(--feature-pill-border);
+  border: none;
   border-radius: 12px;
   background: var(--feature-pill-bg);
   color: var(--card-text);
   outline: none;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
@@ -477,8 +487,7 @@
 
 .contact-form-input:focus-visible,
 .contact-form-textarea:focus-visible {
-  border-color: rgba(124, 127, 198, 0.5);
-  box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.1);
+  box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.35);
 }
 
 .contact-form .cta-btn {

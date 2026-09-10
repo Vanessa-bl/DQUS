@@ -7,7 +7,7 @@ import { useT } from "../i18n/useT";
 export const Contact: React.FC = () => {
   const t = useT();
 
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", message: "" });
 
   const handleChange = (
     e:
@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert(t("contact.form.sent", "Message sent! Thanks for reaching out."));
-    setForm({ name: "", email: "", message: "" });
+    setForm({ firstName: "", lastName: "", email: "", message: "" });
   };
 
   return (
@@ -62,20 +62,37 @@ export const Contact: React.FC = () => {
           {t("contact.form.title", "Contact Form")}
         </h2>
         <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="contact-form-group">
-            <label htmlFor="name" className="contact-form-label">
-              {t("contact.form.name.label", "Name")}
-            </label>
-            <input
-              className="contact-form-input"
-              type="text"
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              placeholder={t("contact.form.name.placeholder", "Your name")}
-            />
+          <div className="contact-form-row">
+            <div className="contact-form-group">
+              <label htmlFor="firstName" className="contact-form-label">
+                {t("contact.form.firstName.label", "First Name")}
+              </label>
+              <input
+                className="contact-form-input"
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={form.firstName}
+                onChange={handleChange}
+                required
+                placeholder={t("contact.form.firstName.placeholder", "Your first name")}
+              />
+            </div>
+            <div className="contact-form-group">
+              <label htmlFor="lastName" className="contact-form-label">
+                {t("contact.form.lastName.label", "Last Name")}
+              </label>
+              <input
+                className="contact-form-input"
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={form.lastName}
+                onChange={handleChange}
+                required
+                placeholder={t("contact.form.lastName.placeholder", "Your last name")}
+              />
+            </div>
           </div>
 
           <div className="contact-form-group">
