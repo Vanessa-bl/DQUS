@@ -363,6 +363,10 @@
   align-items: start;
 }
 
+.contact-hero-row .page-block {
+  max-width: 612px;
+}
+
 .contact-address {
   min-width: 220px;
   font-family: "Nunito Sans", sans-serif;
