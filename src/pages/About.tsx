@@ -54,7 +54,7 @@ export const About: React.FC = () => {
         </motion.div>
       </section>
 
-      <section className="page-section" aria-labelledby="story-title">
+      <section className="page-section page-section--flush-top" aria-labelledby="story-title">
         <div className="page-block">
           <span className="page-badge">{t("about.story.badge", "OUR STORY")}</span>
         </div>

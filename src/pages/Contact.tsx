@@ -52,7 +52,7 @@ export const Contact: React.FC = () => {
         </motion.div>
       </section>
 
-      <section className="page-section" aria-labelledby="contact-form-title">
+      <section className="page-section page-section--flush-top" aria-labelledby="contact-form-title">
         <h2 id="contact-form-title" className="sr-only">
           {t("contact.form.title", "Contact Form")}
         </h2>
