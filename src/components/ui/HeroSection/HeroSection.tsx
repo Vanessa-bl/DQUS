@@ -65,7 +65,7 @@ export default function Hero() {
             >
               Get Started
             </button>
-            <a href="mailto:hello@devqueensus.com" className="btn-secondary">
+            <a href="mailto:" className="btn-secondary">
               Start a Project
             </a>
           </motion.div>

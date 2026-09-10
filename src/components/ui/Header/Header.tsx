@@ -14,6 +14,7 @@ interface HeaderProps {
   minimal?: boolean;
   showThemeSwitch?: boolean;
   transparent?: boolean;
+  dark?: boolean;
   anchorNav?: { id: string; label: string; labelKey?: string }[];
 }
 
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   minimal = false,
   showThemeSwitch = false,
   transparent = false,
+  dark = false,
   anchorNav,
 }) => {
   const { theme, toggleTheme } = useTheme();
@@ -30,35 +32,37 @@ export const Header: React.FC<HeaderProps> = ({
 
   const handleMenuClick = onMenuClick ?? (() => {});
 
-  const navLinkStyle: React.CSSProperties = {
-    fontFamily: "'Nunito Sans', sans-serif",
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    color: "var(--card-text)",
-    letterSpacing: "0.01em",
-  };
+  const className = [
+    "header",
+    minimal && "header--minimal",
+    transparent && "header--transparent",
+    dark && "header--dark",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <motion.header
       role="banner"
-      className={`header${minimal ? " header--minimal" : ""}${transparent ? " header--transparent" : ""}`}
+      className={className}
       {...(transparent ? { "data-theme": "dark" } : {})}
     >
-      {!minimal && (
-        <button
-          className="button-header mobile-only"
-          aria-label={t("header.menu.open", "Open menu")}
-          onClick={handleMenuClick}
-        >
-          <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
-            <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-            <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-            <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-          </svg>
-        </button>
-      )}
+      <div className="header__inner">
+        {!minimal && (
+          <button
+            className="button-header mobile-only"
+            aria-label={t("header.menu.open", "Open menu")}
+            onClick={handleMenuClick}
+          >
+            <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
+              <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+          </button>
+        )}
 
-      <Logo />
+        <Logo />
 
       {!minimal && (
         <nav className="header__desktop-nav" aria-label="Main navigation">
@@ -67,15 +71,8 @@ export const Header: React.FC<HeaderProps> = ({
               anchorNav.map((item) => (
                 <li key={item.id}>
                   <a
+                    className="header__nav-link"
                     href={`#${item.id}`}
-                    style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--card-text)",
-                      letterSpacing: "0.01em",
-                      textDecoration: "none",
-                    }}
                     onClick={(e) => {
                       e.preventDefault();
                       const el = document.getElementById(item.id);
@@ -89,22 +86,22 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <>
                 <li>
-                  <AnimatedLink to="/" size="0.85rem" aria-label={t("header.nav.home", "Go to Home")} style={navLinkStyle}>
+                  <AnimatedLink to="/" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.home", "Go to Home")}>
                     {t("header.home", "Home")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/services" size="0.85rem" aria-label={t("header.nav.services", "Go to Services")} style={navLinkStyle}>
+                  <AnimatedLink to="/services" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.services", "Go to Services")}>
                     {t("header.services", "Services")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/about" size="0.85rem" aria-label={t("header.nav.about", "Go to About")} style={navLinkStyle}>
+                  <AnimatedLink to="/about" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.about", "Go to About")}>
                     {t("header.about", "About")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/contact" size="0.85rem" aria-label={t("header.nav.contact", "Go to Contact")} style={navLinkStyle}>
+                  <AnimatedLink to="/contact" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.contact", "Go to Contact")}>
                     {t("header.contact", "Contact")}
                   </AnimatedLink>
                 </li>
@@ -114,51 +111,52 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
       )}
 
-      <nav className="header__nav" aria-label="Redes sociales">
-        <ul>
-          <li>
-            <a className="header__cta" href="/contact">
-              {t("header.letsTalk", "Let's Talk")}
-            </a>
-          </li>
-          <li>
-            <div className="header__locale">
-              <button
-                className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
-                onClick={() => setLocale("en")}
-                aria-label="Switch to English"
-              >
-                EN
-              </button>
-              <button
-                className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
-                onClick={() => setLocale("es")}
-                aria-label="Cambiar a Español"
-              >
-                ES
-              </button>
-            </div>
-          </li>
-          <li>
-            {showThemeSwitch &&
-              (minimal ? (
-                <ThemeSwitch />
-              ) : (
+        <nav className="header__nav" aria-label="Redes sociales">
+          <ul>
+            <li>
+              <a className="cta-btn" href="/contact">
+                {t("header.letsTalk", "Let's Talk")}
+              </a>
+            </li>
+            <li>
+              <div className="header__locale">
                 <button
-                  className="button-header button-header--theme"
-                  onClick={toggleTheme}
-                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                  className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
+                  onClick={() => setLocale("en")}
+                  aria-label="Switch to English"
                 >
-                  {theme === "dark" ? (
-                    <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
-                  ) : (
-                    <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
-                  )}
+                  EN
                 </button>
-              ))}
-          </li>
-        </ul>
-      </nav>
+                <button
+                  className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
+                  onClick={() => setLocale("es")}
+                  aria-label="Cambiar a Español"
+                >
+                  ES
+                </button>
+              </div>
+            </li>
+            <li>
+              {showThemeSwitch &&
+                (minimal ? (
+                  <ThemeSwitch />
+                ) : (
+                  <button
+                    className="button-header button-header--theme"
+                    onClick={toggleTheme}
+                    aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                  >
+                    {theme === "dark" ? (
+                      <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
+                    ) : (
+                      <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
+                    )}
+                  </button>
+                ))}
+            </li>
+          </ul>
+        </nav>
+      </div>
     </motion.header>
   );
 };

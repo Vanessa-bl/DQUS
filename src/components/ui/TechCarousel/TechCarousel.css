@@ -7,14 +7,23 @@
 }
 
 .tech-carousel-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
   font-family: "DM Sans", sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
   white-space: nowrap;
   letter-spacing: -0.01em;
-  padding: 0 20px;
+  padding: 0 28px 0 0;
   transition: color 0.2s ease;
+}
+
+.tech-carousel-sep {
+  color: rgba(251, 146, 60, 0.75);
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .tech-carousel-item:hover {
@@ -24,14 +33,16 @@
 
 @media (max-width: 768px) {
   .tech-carousel-item {
-    font-size: 1.1rem;
-    padding: 0 14px;
+    font-size: 1rem;
+    gap: 20px;
+    padding: 0 20px 0 0;
   }
 }
 
 @media (max-width: 480px) {
   .tech-carousel-item {
-    font-size: 0.95rem;
-    padding: 0 10px;
+    font-size: 0.9rem;
+    gap: 16px;
+    padding: 0 16px 0 0;
   }
 }

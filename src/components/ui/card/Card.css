@@ -76,6 +76,14 @@
 
 .card-footer {
   width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.card {
+  text-decoration: none;
+  display: block;
 }
 
 .card--inverted {

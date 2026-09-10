@@ -38,8 +38,8 @@ export default function NewHero({
   hideLine3 = false,
 }: NewHeroProps) {
   const t = useT();
-  const startHref = btnStartTarget ? `#${btnStartTarget}` : "mailto:hello@devqueensus.com";
-  const projectHref = btnProjectTarget ? `#${btnProjectTarget}` : "mailto:hello@devqueensus.com";
+  const startHref = btnStartTarget ? `#${btnStartTarget}` : "mailto:";
+  const projectHref = btnProjectTarget ? `#${btnProjectTarget}` : "mailto:";
 
   return (
     <section className="nh" id={id}>
@@ -50,7 +50,8 @@ export default function NewHero({
             {t(`${tPrefix}.eyebrow`, "Digital Product Studio")}
           </span>
           <h2 className="nh__headline">
-            {t(`${tPrefix}.headline.line1`, "We Build Products")}<br />
+            {t(`${tPrefix}.headline.line1`, "We Build Products")}
+            <br />
             <span className="nh__headline-mark">
               {t(`${tPrefix}.headline.line2`, "Users Actually Love")}
             </span>
@@ -61,7 +62,7 @@ export default function NewHero({
           <p className="nh__desc">
             {t(
               `${tPrefix}.desc`,
-              "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out, and stand up to scrutiny."
+              "DevQueens is a full-service digital studio. We combine strategic design, modern engineering, and relentless attention to detail to ship products that stand out, and stand up to scrutiny.",
             )}
           </p>
           <a href={startHref} className="nh__cta">
@@ -89,9 +90,16 @@ export default function NewHero({
       <div className="nh__features">
         {FEATURES.map((f) => (
           <div key={f.key} className="nh__feat">
-            <span className={`nh__feat-dot nh__feat-dot--${f.dot}`} aria-hidden="true" />
-            <h3 className="nh__feat-title">{t(`${tPrefix}.${f.key}.title`, f.title)}</h3>
-            <p className="nh__feat-desc">{t(`${tPrefix}.${f.key}.desc`, f.desc)}</p>
+            <span
+              className={`nh__feat-dot nh__feat-dot--${f.dot}`}
+              aria-hidden="true"
+            />
+            <h3 className="nh__feat-title">
+              {t(`${tPrefix}.${f.key}.title`, f.title)}
+            </h3>
+            <p className="nh__feat-desc">
+              {t(`${tPrefix}.${f.key}.desc`, f.desc)}
+            </p>
           </div>
         ))}
       </div>
