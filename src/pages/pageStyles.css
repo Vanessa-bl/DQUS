@@ -352,7 +352,7 @@
   position: relative;
 }
 
-#contact-hero-title {
+.page-section[aria-labelledby="contact-hero-title"] {
   padding-bottom: 2rem;
 }
 
