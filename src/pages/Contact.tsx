@@ -34,8 +34,6 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <span className="page-badge">{t("contact.hero.badge", "CONTACT US")}</span>
-
             <h1 id="contact-hero-title" className="page-title page-title--xl page-title--upper page-title--heavy">
               {t("contact.hero.title.line1", "Contact")}{" "}
               <span className="page-title-mark">
