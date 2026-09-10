@@ -47,21 +47,22 @@ export const Header: React.FC<HeaderProps> = ({
       className={className}
       {...(transparent ? { "data-theme": "dark" } : {})}
     >
-      {!minimal && (
-        <button
-          className="button-header mobile-only"
-          aria-label={t("header.menu.open", "Open menu")}
-          onClick={handleMenuClick}
-        >
-          <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
-            <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-            <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-            <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
-          </svg>
-        </button>
-      )}
+      <div className="header__inner">
+        {!minimal && (
+          <button
+            className="button-header mobile-only"
+            aria-label={t("header.menu.open", "Open menu")}
+            onClick={handleMenuClick}
+          >
+            <svg width="25" height="16" viewBox="0 0 20 13" fill="none" aria-hidden="true">
+              <line x1="0" y1="1"  x2="20" y2="1"  stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="3" y1="6.5" x2="20" y2="6.5" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="6" y1="12" x2="20" y2="12" stroke="#d4d4d4" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+          </button>
+        )}
 
-      <Logo />
+        <Logo />
 
       {!minimal && (
         <nav className="header__desktop-nav" aria-label="Main navigation">
@@ -110,51 +111,52 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
       )}
 
-      <nav className="header__nav" aria-label="Redes sociales">
-        <ul>
-          <li>
-            <a className="header__cta" href="/contact">
-              {t("header.letsTalk", "Let's Talk")}
-            </a>
-          </li>
-          <li>
-            <div className="header__locale">
-              <button
-                className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
-                onClick={() => setLocale("en")}
-                aria-label="Switch to English"
-              >
-                EN
-              </button>
-              <button
-                className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
-                onClick={() => setLocale("es")}
-                aria-label="Cambiar a Español"
-              >
-                ES
-              </button>
-            </div>
-          </li>
-          <li>
-            {showThemeSwitch &&
-              (minimal ? (
-                <ThemeSwitch />
-              ) : (
+        <nav className="header__nav" aria-label="Redes sociales">
+          <ul>
+            <li>
+              <a className="header__cta" href="/contact">
+                {t("header.letsTalk", "Let's Talk")}
+              </a>
+            </li>
+            <li>
+              <div className="header__locale">
                 <button
-                  className="button-header button-header--theme"
-                  onClick={toggleTheme}
-                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                  className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
+                  onClick={() => setLocale("en")}
+                  aria-label="Switch to English"
                 >
-                  {theme === "dark" ? (
-                    <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
-                  ) : (
-                    <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
-                  )}
+                  EN
                 </button>
-              ))}
-          </li>
-        </ul>
-      </nav>
+                <button
+                  className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
+                  onClick={() => setLocale("es")}
+                  aria-label="Cambiar a Español"
+                >
+                  ES
+                </button>
+              </div>
+            </li>
+            <li>
+              {showThemeSwitch &&
+                (minimal ? (
+                  <ThemeSwitch />
+                ) : (
+                  <button
+                    className="button-header button-header--theme"
+                    onClick={toggleTheme}
+                    aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                  >
+                    {theme === "dark" ? (
+                      <Sun size={18} strokeWidth={1.5} color="var(--card-text)" />
+                    ) : (
+                      <Moon size={18} strokeWidth={1.5} color="var(--card-text)" />
+                    )}
+                  </button>
+                ))}
+            </li>
+          </ul>
+        </nav>
+      </div>
     </motion.header>
   );
 };
