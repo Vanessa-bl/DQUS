@@ -357,10 +357,10 @@
 }
 
 .contact-hero-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 4rem;
-  align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
 .contact-address {
@@ -419,7 +419,6 @@
 
 @media screen and (max-width: 768px) {
   .contact-hero-row {
-    grid-template-columns: 1fr;
     gap: 2rem;
   }
 }
