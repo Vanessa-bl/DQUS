@@ -323,10 +323,19 @@
   margin: 0;
 }
 
+.page-section--flush-top {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 @media screen and (max-width: 768px) {
   .page-section {
     padding: 3rem 1.25rem 2.5rem;
     margin-top: 40px;
+  }
+  .page-section--flush-top {
+    margin-top: 0;
+    padding-top: 0;
   }
   .page-title {
     font-size: 2rem;

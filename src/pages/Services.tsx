@@ -54,7 +54,7 @@ export const Services: React.FC = () => {
         </motion.div>
       </section>
 
-      <section className="page-section" aria-labelledby="services-grid-title">
+      <section className="page-section page-section--flush-top" aria-labelledby="services-grid-title">
         <h2 id="services-grid-title" className="sr-only">
           {t("services.grid.title", "Available Services")}
         </h2>
