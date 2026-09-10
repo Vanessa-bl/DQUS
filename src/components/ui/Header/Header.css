@@ -213,3 +213,53 @@
   margin: 12px auto 0;
   background: transparent;
 }
+
+/* ================================
+   Nav link primitive (main + anchor nav)
+   ================================ */
+.header__nav-link {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-text);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+/* ================================
+   Dark solid variant (non-home pages)
+   ================================ */
+.header.header--dark {
+  background: #0a0a0a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  --link-var: #fafafa;
+}
+
+.header.header--dark .header__nav-link {
+  color: #fafafa;
+}
+
+.header.header--dark .header__locale-btn {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.header.header--dark .header__locale-btn:hover:not(.is-active) {
+  color: #fafafa;
+}
+
+.header.header--dark .header__locale-btn.is-active {
+  background: #fafafa;
+  color: #0a0a0a;
+}
+
+.header.header--dark .header__locale {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.header.header--dark .button-header--theme:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header.header--dark .mobile-only line {
+  stroke: #fafafa;
+}

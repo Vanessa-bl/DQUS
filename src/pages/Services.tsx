@@ -25,7 +25,7 @@ export const Services: React.FC = () => {
   ];
 
   return (
-    <Layout>
+    <Layout darkHeader>
       <section className="page-section" aria-labelledby="services-hero-title">
         <motion.div
           className="page-block"

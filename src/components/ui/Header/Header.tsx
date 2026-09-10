@@ -14,6 +14,7 @@ interface HeaderProps {
   minimal?: boolean;
   showThemeSwitch?: boolean;
   transparent?: boolean;
+  dark?: boolean;
   anchorNav?: { id: string; label: string; labelKey?: string }[];
 }
 
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   minimal = false,
   showThemeSwitch = false,
   transparent = false,
+  dark = false,
   anchorNav,
 }) => {
   const { theme, toggleTheme } = useTheme();
@@ -30,18 +32,19 @@ export const Header: React.FC<HeaderProps> = ({
 
   const handleMenuClick = onMenuClick ?? (() => {});
 
-  const navLinkStyle: React.CSSProperties = {
-    fontFamily: "'Nunito Sans', sans-serif",
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    color: "var(--card-text)",
-    letterSpacing: "0.01em",
-  };
+  const className = [
+    "header",
+    minimal && "header--minimal",
+    transparent && "header--transparent",
+    dark && "header--dark",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <motion.header
       role="banner"
-      className={`header${minimal ? " header--minimal" : ""}${transparent ? " header--transparent" : ""}`}
+      className={className}
       {...(transparent ? { "data-theme": "dark" } : {})}
     >
       {!minimal && (
@@ -67,15 +70,8 @@ export const Header: React.FC<HeaderProps> = ({
               anchorNav.map((item) => (
                 <li key={item.id}>
                   <a
+                    className="header__nav-link"
                     href={`#${item.id}`}
-                    style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--card-text)",
-                      letterSpacing: "0.01em",
-                      textDecoration: "none",
-                    }}
                     onClick={(e) => {
                       e.preventDefault();
                       const el = document.getElementById(item.id);
@@ -89,22 +85,22 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <>
                 <li>
-                  <AnimatedLink to="/" size="0.85rem" aria-label={t("header.nav.home", "Go to Home")} style={navLinkStyle}>
+                  <AnimatedLink to="/" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.home", "Go to Home")}>
                     {t("header.home", "Home")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/services" size="0.85rem" aria-label={t("header.nav.services", "Go to Services")} style={navLinkStyle}>
+                  <AnimatedLink to="/services" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.services", "Go to Services")}>
                     {t("header.services", "Services")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/about" size="0.85rem" aria-label={t("header.nav.about", "Go to About")} style={navLinkStyle}>
+                  <AnimatedLink to="/about" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.about", "Go to About")}>
                     {t("header.about", "About")}
                   </AnimatedLink>
                 </li>
                 <li>
-                  <AnimatedLink to="/contact" size="0.85rem" aria-label={t("header.nav.contact", "Go to Contact")} style={navLinkStyle}>
+                  <AnimatedLink to="/contact" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.contact", "Go to Contact")}>
                     {t("header.contact", "Contact")}
                   </AnimatedLink>
                 </li>

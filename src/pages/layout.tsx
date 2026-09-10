@@ -11,6 +11,7 @@ interface LayoutProps {
   anchorNav?: { id: string; label: string }[];
   landingFooterLinks?: { id: string; label: string }[];
   transparentHeader?: boolean;
+  darkHeader?: boolean;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -18,6 +19,7 @@ export const Layout: React.FC<LayoutProps> = ({
   anchorNav,
   landingFooterLinks,
   transparentHeader = false,
+  darkHeader = false,
 }) => {
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
   const t = useT();
@@ -25,7 +27,7 @@ export const Layout: React.FC<LayoutProps> = ({
   return (
     <>
       <header>
-        <Header onMenuClick={openDrawer} anchorNav={anchorNav} transparent={transparentHeader} />
+        <Header onMenuClick={openDrawer} anchorNav={anchorNav} transparent={transparentHeader} dark={darkHeader} />
         <AnimatedDrawer
           isOpen={isOpen}
           onClose={closeDrawer}

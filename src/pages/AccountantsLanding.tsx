@@ -146,7 +146,7 @@ export const AccountantsLanding: React.FC = () => {
   };
 
   return (
-    <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks}>
+    <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks} darkHeader>
       <VideoMaskHero />
 
       <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" hideLine3 />

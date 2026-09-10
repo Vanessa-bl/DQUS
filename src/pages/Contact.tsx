@@ -24,7 +24,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout darkHeader>
       <section className="page-section" aria-labelledby="contact-hero-title">
         <motion.div
           className="page-block"

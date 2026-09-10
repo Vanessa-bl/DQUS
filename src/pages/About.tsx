@@ -25,7 +25,7 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <Layout>
+    <Layout darkHeader>
       <section className="page-section" aria-labelledby="hero-title">
         <motion.div
           className="page-block"
