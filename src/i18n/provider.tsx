@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { IntlProvider } from "react-intl";
 
@@ -30,14 +32,17 @@ export function useLocale() {
 }
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
+  const [locale, setLocaleState] = useState<Locale>("en");
+  const [messages, setMessages] = useState<Record<string, string>>({});
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem("locale");
-      if (saved === "en" || saved === "es") return saved;
-    } catch {}
-    return "en";
-  });
-  const [messages, setMessages] = useState<Record<string, string>>({});
+      if (saved === "en" || saved === "es") {
+        setLocaleState(saved);
+      }
+    } catch { /* noop */ }
+  }, []);
 
   useEffect(() => {
     loadMessages(locale).then(setMessages);
@@ -45,7 +50,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);
-    try { localStorage.setItem("locale", next); } catch {}
+    try { localStorage.setItem("locale", next); } catch { /* noop */ }
   }, []);
 
   return (

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { type ReactNode } from "react";
 import { Header } from "../components/ui/Header/Header";
 import { useDrawer } from "../hooks/useDrawer";

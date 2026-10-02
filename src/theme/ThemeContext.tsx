@@ -1,4 +1,5 @@
-// src/theme/ThemeContext.tsx
+"use client";
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -16,6 +17,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [nextTheme, setNextTheme] = useState<Theme>("light");
   const [animating, setAnimating] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme;
@@ -24,6 +26,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.setAttribute("data-theme", saved);
     }
     document.documentElement.classList.remove("no-transitions");
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
@@ -53,7 +56,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, animating }}>
       {children}
-      {animating &&
+      {mounted && animating &&
         createPortal(
           <div
             data-theme={nextTheme}

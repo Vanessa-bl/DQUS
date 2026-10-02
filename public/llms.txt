@@ -1,0 +1,42 @@
+# DevQueens
+
+> DevQueens is an agent studio for vertical SaaS. We build the connectors that let AI agents — ChatGPT, WhatsApp Business agents, OpenAI Operator, Claude computer use, and Google Gemini — book, quote, cancel, or pay through the customer's existing API. Second product line: SMB agent discoverability.
+
+## Two product lines
+
+### Line 1 — Vertical SaaS Agent Connectors
+
+Three-stage engagement with public pricing:
+
+1. **Agent Paid Proof-of-Concept** — $3,000 to $7,000, 5–10 days. One action against the customer's test data through their real API. Team watches the agent transact through the platform before committing to production. Never free — the price is the filter.
+2. **Production Agent Connector** — $10,000 to $25,000, 3–5 weeks. Full agent surface against the customer's API: availability, booking, cancellation, payment, refund. Includes Meta WhatsApp Business platform review, Braintrust or Langfuse evals, cost caps, and a runbook.
+3. **Agent Ops Retainer** — $1,500 to $3,000 per month. Covers OAuth token rotation, schema drift, model release regressions, Meta platform policy changes, eval maintenance, and security reviews. No emergency SOWs.
+
+### Line 2 — SMB Agent Discoverability
+
+- **Audit + initial setup** from $1,500. Restructure hours, prices, policies, catalog, availability, and profiles so ChatGPT, Gemini, Perplexity, and WhatsApp agents represent the business correctly.
+- **Monthly monitoring** from $300 per month. Ongoing checks of how the SMB appears in consumer-facing AI agents, with alerts when representation drifts.
+
+## Who we work with
+
+- **Vertical SaaS platforms**: booking, scheduling, invoicing, marketplaces, vertical-native apps and their engineering teams.
+- **SMBs and local operators**: businesses that want to be discoverable and correctly represented by consumer-facing AI agents.
+
+## Pricing philosophy
+
+Public prices, fixed scope, fixed timelines. The anchor is revenue captured by the agent surface, not hours logged. Example: a barbershop where the connector delivers 50 bookings a month captures $2,000 in new revenue, making a $500 retainer a rounding error.
+
+## Key facts
+
+- Studio type: agent studio for vertical SaaS + SMB agent discoverability
+- Founded: 2020
+- Coverage: worldwide, remote, US-timezone comms
+- Legal: US LLC
+- Team: senior LATAM engineers
+
+## Primary pages
+
+- [Home](https://www.devqueens.us/): positioning, services, pricing, work
+- [Services](https://www.devqueens.us/services): full service catalog
+- [About](https://www.devqueens.us/about): team, story, mission
+- [Contact](https://www.devqueens.us/contact): book a discovery call

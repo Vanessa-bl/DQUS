@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Next.js
+.next/
+next-env.d.ts
+
 google-apps-script.js
 
 # gentle-ai skill-registry (auto-generated, local only)

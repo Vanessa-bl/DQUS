@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Layout } from "./layout";
 import { useT } from "../i18n/useT";
 import { useLocale } from "../i18n/provider";
@@ -38,9 +40,16 @@ interface PaymentSuccessProps {
 }
 
 export const PaymentSuccess: React.FC<PaymentSuccessProps> = ({ locale = "es" }) => {
-  const isMobile = window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
   const t = useT();
   const { setLocale } = useLocale();
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     setLocale(locale);
@@ -330,7 +339,7 @@ export const PaymentSuccess: React.FC<PaymentSuccessProps> = ({ locale = "es" })
       >
         <motion.div custom={7} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <Link
-            to="/contadores"
+            href="/contadores"
             style={{
               fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "0.95rem",
