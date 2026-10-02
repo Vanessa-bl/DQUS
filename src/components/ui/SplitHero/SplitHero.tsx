@@ -22,7 +22,20 @@ const wordUp: Variants = {
 
 export default function SplitHero() {
   const t = useT();
-  const titleWords = t("hero.split.title", "Beautifully Effective.").split(" ");
+  const title = t("hero.split.title", "Your Product. Bookable by Agents.");
+  const rawWords = title.split(" ");
+  let titleWords: string[];
+  if (rawWords.length <= 2) {
+    titleWords = [rawWords.join(" ")];
+  } else if (rawWords.length === 3) {
+    titleWords = [rawWords[0], rawWords.slice(1).join(" ")];
+  } else {
+    titleWords = [
+      rawWords.slice(0, 2).join(" "),
+      ...rawWords.slice(2, -2),
+      rawWords.slice(-2).join(" "),
+    ];
+  }
 
   return (
     <section className="split-hero" aria-labelledby="split-hero-title">
@@ -35,16 +48,16 @@ export default function SplitHero() {
           animate="visible"
           variants={fadeUp}
         >
-          {t("hero.split.preTitle", "Digital Marketing Agency")}
+          {t("hero.split.preTitle", "Agent Studio for Vertical SaaS")}
         </motion.p>
 
         <h1
           id="split-hero-title"
           className="split-hero__title"
-          aria-label={t("hero.split.title", "Beautifully Effective.")}
+          aria-label={title}
         >
           {titleWords.map((word, i) => (
-            <span className="word-parent" key={word}>
+            <span className="word-parent" key={`${i}-${word}`}>
               <motion.span
                 className="word-child"
                 custom={i}
@@ -54,7 +67,6 @@ export default function SplitHero() {
               >
                 {word}
               </motion.span>
-              {i < titleWords.length - 1 ? " " : null}
             </span>
           ))}
         </h1>
@@ -68,7 +80,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.intro",
-            "The craft to look good, the strategy to sell well"
+            "Paid PoC in 10 days. Production connector in 5 weeks. A retainer for what breaks after."
           )}
         </motion.p>
 
@@ -81,7 +93,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.body",
-            "Standing out in a crowded market is only the start — every visit should turn into measurable results. We help ambitious brands transform great work into lasting growth by uniting strategy, design, development, and data into one integrated playbook built around how your clients actually buy."
+            "Vertical SaaS platforms own the workflow — the calendar, the inventory, the checkout — that consumer-facing agents need to execute. We build the connectors that plug your product into OpenAI Operator, Claude computer use, Google Gemini, and the ChatGPT and WhatsApp Business agents already reaching your customers. Meta WhatsApp Business review, Braintrust evals, cost caps, and observability included."
           )}
         </motion.p>
 
@@ -93,10 +105,10 @@ export default function SplitHero() {
           variants={fadeUp}
         >
           <a className="split-hero__btn" href="/services">
-            {t("hero.split.ctaPrimary", "Explore our capabilities")}
+            {t("hero.split.ctaPrimary", "See pricing")}
           </a>
-          <a className="split-hero__cta-link" href="/about">
-            {t("hero.split.ctaSecondary", "Check out our tech")}
+          <a className="split-hero__cta-link" href="/contact">
+            {t("hero.split.ctaSecondary", "Book a discovery call")}
           </a>
         </motion.div>
       </div>

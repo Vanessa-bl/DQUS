@@ -1,14 +1,16 @@
+"use client";
+
 import React from "react";
 import { motion, type Variants } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-// Componente animado a partir de Link sin genéricos explícitos
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 export type AnimatedLinkProps = Omit<
   React.ComponentProps<typeof MotionLink>,
   "children"
 > & {
+  to: string;
   size?: string;
   isActive?: boolean;
   children?: React.ReactNode;
@@ -32,7 +34,7 @@ export const AnimatedLink: React.FC<AnimatedLinkProps> = ({
 
   return (
     <MotionLink
-      to={to}
+      href={to}
       initial={state}
       animate={state}
       whileHover="hover"

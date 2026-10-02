@@ -49,6 +49,12 @@
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
+  margin-right: 0.28em;
+  white-space: nowrap;
+}
+
+.split-hero__title .word-parent:last-child {
+  margin-right: 0;
 }
 
 .split-hero__title .word-child {
@@ -123,7 +129,7 @@
 }
 
 .split-hero__media {
-  min-height: 420px;
+  min-height: 720px;
   align-self: stretch;
   position: relative;
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "./conversionAudit.css";
 import { ConversionAuditHero } from "../components/conversion-audit/ConversionAuditHero";
