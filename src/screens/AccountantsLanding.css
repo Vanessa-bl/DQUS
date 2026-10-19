@@ -4,6 +4,198 @@
    from pageStyles.css for section/badge/title/lede.
    ================================ */
 
+/* ================================
+   Hero section (replaces VideoMaskHero).
+   60/40 grid: text left, HeroPulse animation right.
+   Mirrors the Home SplitHero rhythm with brand pink accents.
+   ================================ */
+
+.al-hero {
+  width: 100%;
+  background: #131120;
+  padding: 7.5rem 3rem 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.al-hero__inner {
+  max-width: 1209px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  min-height: calc(100vh - 11.5rem);
+}
+
+.al-hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.al-hero__eyebrow {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 1.25rem;
+}
+
+.al-hero__title {
+  font-family: "Figtree", sans-serif;
+  font-weight: 900;
+  font-size: 4.5rem;
+  line-height: 1.02;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin: 0 0 1.75rem;
+  text-transform: uppercase;
+}
+
+.al-hero__title-mark {
+  position: relative;
+  display: inline-block;
+}
+
+.al-hero__title-mark::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #e9336f;
+  border-radius: 2px;
+}
+
+.al-hero__body {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 2rem;
+  max-width: 540px;
+}
+
+.al-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.al-hero__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ba155e 0%, #e93370 55%, #ff507a 100%);
+  border: none;
+  height: 46px;
+  padding: 0 1.9rem;
+  box-sizing: border-box;
+  border-radius: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.al-hero__cta-primary:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 51, 112, 0.3);
+}
+
+.al-hero__cta-secondary {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  transition: opacity 0.2s ease;
+}
+
+.al-hero__cta-secondary:hover {
+  opacity: 0.7;
+}
+
+.al-hero__proof {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 540px;
+}
+
+.al-hero__proof-stat {
+  font-family: "Figtree", sans-serif;
+  font-weight: 900;
+  font-size: 1.75rem;
+  color: #e93370;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.al-hero__proof-label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.66);
+  margin: 0;
+  flex: 1;
+}
+
+.al-hero__media {
+  min-height: 520px;
+  align-self: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .al-hero {
+    padding: 6.5rem 1.5rem 2.5rem;
+  }
+
+  .al-hero__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 3rem;
+  }
+
+  .al-hero__media {
+    order: -1;
+    min-height: 280px;
+  }
+
+  .al-hero__text {
+    order: 1;
+  }
+
+  .al-hero__title {
+    font-size: 3rem;
+  }
+
+  .al-hero__proof {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+}
+
 .page-section--clip {
   overflow: hidden;
 }

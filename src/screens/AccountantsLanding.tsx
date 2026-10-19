@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Palette, TrendingUp } from "lucide-react";
-import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
+import HeroPulse from "../components/ui/SplitHero/HeroPulse";
 import { Card } from "../components/ui/card/Card";
 import { ImageCard } from "../components/ui/ImageCard/ImageCard";
 import "./pageStyles.css";
@@ -24,6 +24,7 @@ const fadeUp = {
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
 
 const anchorLinks = [
+  { id: "hero", label: "Inicio", labelKey: "header.anchorNav.hero" },
   { id: "about", label: "Nosotros", labelKey: "header.anchorNav.about" },
   { id: "why", label: "Por Qué", labelKey: "header.anchorNav.why" },
   { id: "services", label: "Servicios", labelKey: "header.anchorNav.services" },
@@ -147,7 +148,100 @@ export const AccountantsLanding: React.FC = () => {
 
   return (
     <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks} darkHeader>
-      <VideoMaskHero />
+      <section id="hero" className="al-hero" aria-labelledby="al-hero-title">
+        <div className="al-hero__inner">
+          <div className="al-hero__text">
+            <motion.span
+              className="al-hero__eyebrow"
+              custom={0}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+            >
+              {t("accountants.heroNew.eyebrow", "AUTOMATIZACIÓN · CONTADORES")}
+            </motion.span>
+
+            <motion.h1
+              id="al-hero-title"
+              className="al-hero__title"
+              custom={1}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+            >
+              {t("accountants.heroNew.title.line1", "Menos horas manuales.")}
+              <br />
+              <span className="al-hero__title-mark">
+                {t("accountants.heroNew.title.line2", "Más clientes atendidos.")}
+              </span>
+            </motion.h1>
+
+            <motion.p
+              className="al-hero__body"
+              custom={2}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+            >
+              {t(
+                "accountants.heroNew.body",
+                "Automatizamos las tareas repetitivas que te comen el día: carga de facturas, conciliación bancaria y categorización. Vos te quedás con lo estratégico, lo que tus clientes pagan más caro."
+              )}
+            </motion.p>
+
+            <motion.div
+              className="al-hero__actions"
+              custom={3}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+            >
+              <a
+                className="al-hero__cta-primary"
+                href="#offer"
+                data-umami-event="hero-ver-como-funciona"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("offer")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {t("accountants.heroNew.ctaPrimary", "Ver cómo funciona")}
+              </a>
+              <a
+                className="al-hero__cta-secondary"
+                href="#contact"
+                data-umami-event="hero-escribinos"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {t("accountants.heroNew.ctaSecondary", "Escribinos")}
+              </a>
+            </motion.div>
+
+            <motion.div
+              className="al-hero__proof"
+              custom={4}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+            >
+              <p className="al-hero__proof-stat">20+ horas</p>
+              <p className="al-hero__proof-label">
+                {t(
+                  "accountants.heroNew.proof",
+                  "ahorradas por contador cada semana al automatizar las tareas repetitivas."
+                )}
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="al-hero__media" aria-hidden="true">
+            <HeroPulse />
+          </div>
+        </div>
+      </section>
 
       <section id="about" className="page-section page-section--clip">
         <div className="page-block">
