@@ -1,0 +1,166 @@
+# DevQueens: Full Context
+
+> One studio. Three lines of work: process automation, AI agents on your product, AI marketing. Paid proof of concept in 10 days. Production build in 5 weeks. A retainer for what breaks after. Shipped to production and measured in revenue.
+
+## The one line position
+
+Automate the work. Capture the market. Every operation leaks in three places: hours burned on repeatable work, revenue stuck behind manual queues, and buyers who never find you because the AI layer between them and your business reads it wrong. We ship the automations, the AI agents, and the marketing that fix all three.
+
+## Why three lines together
+
+Most studios do one of these three. The problem is that they do not talk to each other. The automation team ships without knowing what the AI agent exposes. The AI agent team ships without knowing where buyers actually search. The marketing team ships without a product to point at.
+
+One studio delivers all three so the data model, the schemas, the catalog, the pricing, and the voice stay consistent across the automation that clears the queue, the agent that transacts on the product, and the marketing that puts the business in front of the buyer. Every build is tailored to the specific company. There is no shelf product.
+
+## Service 1: Process Automation
+
+**Price band:** $5,000 to $20,000 for the production build. Entry via $3,000 to $7,000 paid proof of concept.
+
+**Timeline:** Four to six weeks for production. Five to ten days for the proof of concept.
+
+**What we build:**
+
+- Three way invoice matching that compares invoices against purchase orders and delivery receipts, flags price and quantity discrepancies, routes exceptions to approvers with the supporting evidence attached.
+- Exception routing with evidence packets so approvers see the diff and the decision inline.
+- Reconciliation queues that handle 800+ invoices a month or 90,000+ cases a month depending on the shape of the workload.
+- Approval chains with audit trails.
+- Document extraction and classification tied to downstream systems of record.
+
+**What makes it work:**
+
+- Your team watches the queue drain in real time on your data before you sign off on production.
+- Every automation ships with evals that catch regressions, not just happy path tests.
+- Cost caps on any LLM call so a model price change does not blow up your run rate.
+- Runbook that your ops team can operate without us.
+
+## Service 2: AI Agent Surface
+
+**Price band:** $10,000 to $25,000 for the production connector. Entry via $3,000 to $7,000 paid proof of concept.
+
+**Timeline:** Three to five weeks for production. Five to ten days for the proof of concept.
+
+**What we build:**
+
+- Full agent surface against your API: availability, booking, cancellation, payment, refund, whatever your product actually supports.
+- Delivered into OpenAI Operator, Claude computer use, ChatGPT, and WhatsApp Business so your customers can reach you from the tools they already use.
+- Meta WhatsApp Business platform review handled end to end.
+- Braintrust or Langfuse evals wired to your production traffic.
+- Cost caps per conversation, per account, per surface.
+- Runbook your engineering team can operate without us.
+
+**Receipts:**
+
+- Production connector between a scheduling SaaS and OpenAI Operator plus a WhatsApp Business agent. 40,000 bookings a month flow through the agent surface. Zero manual overrides. Their sales team leads with it against their two closest competitors.
+
+## Service 3: AI Marketing
+
+**Price band:** From $1,500 setup plus $300 per month monitoring.
+
+**Timeline:** Two to three weeks for the initial audit and restructure. Monthly cadence after.
+
+**What we build:**
+
+- Audit and restructure your hours, prices, catalog, availability, policies, and profiles so ChatGPT, Gemini, Perplexity, Claude, and the WhatsApp agents your customers already use read your business correctly.
+- Structured data that AI retrievers can actually extract: JSON LD per entity, consistent naming, canonical URLs per language.
+- Content refactor so the pages that LLMs cite most heavily are the ones that convert, not generic brochure copy.
+- Optional monthly monitoring that flags the day the AI tools stop reading you correctly, with the specific prompt and the incorrect output.
+
+## Ops Retainer
+
+**Price band:** $1,500 to $3,000 per month.
+
+**Covers:**
+
+- OAuth token rotation.
+- API schema drift that breaks the agent surface or the automation.
+- Model release regressions that break tuned prompts overnight.
+- Meta platform policy rewrites on random Fridays.
+- Eval maintenance, including the security evals.
+- Monthly security review of credentials and secrets.
+
+**Does not cover:**
+
+- New features (those are new scope with new price).
+- Emergency SOWs (there are no emergency SOWs because we watch the thing continuously).
+
+## Receipts in full
+
+### Three way matching, automated
+
+Finance operations. Built a three way matching automation that compared invoices against purchase orders and delivery receipts, flagged price and quantity discrepancies, and routed exceptions to approvers with the supporting evidence attached. 800 invoices a month, days of manual review returned to the team every week.
+
+### Booking connector shipped in 5 weeks
+
+Vertical SaaS. Production connector between a scheduling SaaS and OpenAI Operator, plus a WhatsApp Business agent on the consumer side. 40,000 bookings a month now run through the agent surface. Zero manual overrides. Their sales team leads with it against their two closest competitors.
+
+### Investor demo rescue
+
+Startup. Called in on a Tuesday. By Friday we had rewritten a broken agent loop, patched a retrieval bug, added evals and cost caps, and held the live demo through 30 minutes of investor questions with zero hallucinations.
+
+## Pricing philosophy
+
+Public prices. Fixed scope. Fixed timeline. Fixed price.
+
+Every engagement starts paid because the price is the filter. A proof of concept that is free attracts window shoppers. A proof of concept at $3K to $7K filters serious buyers before the first meeting.
+
+We anchor the price to what you capture, not what we clock.
+
+- An automation that clears 800 invoices a month returns 40 approver hours a week. That is real money against our price.
+- An AI agent that captures 50 bookings a week unlocks real revenue. That is real money against our price.
+- A profile audit that makes your business legible to ChatGPT turns searches into clients. That is real money against our price.
+
+Hourly billing after signing is not how we work. The retainer covers the maintenance you cannot schedule. Everything else is scope.
+
+## Who we work with
+
+- Product and operations teams that have a specific painful queue to drain.
+- Vertical SaaS platforms whose customers want to transact through consumer AI agents.
+- Small and local businesses that want to be found and correctly represented inside AI retrieval tools.
+- Startups that need an agent surface shipped by a specific date and cannot afford to miss it.
+
+## FAQ
+
+### How much does an automation build cost?
+
+Public pricing. Paid proof of concept: $3,000 to $7,000, 5 to 10 days. Production automation build: $5,000 to $20,000, 4 to 6 weeks. Ops retainer: $1,500 to $3,000 per month after production goes live.
+
+### How much does an AI agent surface cost?
+
+Public pricing. Paid proof of concept: $3,000 to $7,000, 5 to 10 days. Production AI agent connector: $10,000 to $25,000, 3 to 5 weeks. Ops retainer: $1,500 to $3,000 per month after production goes live.
+
+### How much does AI marketing cost?
+
+From $1,500 for the initial audit and restructure. From $300 per month for ongoing monitoring of how your business appears inside ChatGPT, Gemini, Perplexity, Claude, and WhatsApp agents.
+
+### How fast can you ship an automation?
+
+A paid proof of concept ships in 5 to 10 days. A production automation ships in 4 to 6 weeks.
+
+### How fast can you ship an AI agent surface?
+
+A paid proof of concept ships in 5 to 10 days. A production AI agent connector ships in 3 to 5 weeks, including Meta WhatsApp Business platform review.
+
+### Why does every engagement start paid?
+
+The price is the filter. A free proof of concept attracts window shoppers who cost time. A paid proof of concept in a $3K to $7K band filters for buyers who have a real workflow to drain or a real agent surface to build. It also lets our team watch the thing actually work against the customer's data before anyone commits to the production build.
+
+### What is included in the ops retainer?
+
+OAuth token rotation. API schema drift. Model release regressions. Meta platform policy changes. Eval maintenance including the security ones. Monthly security review. Everything you cannot schedule because it breaks on a Friday afternoon.
+
+### Do you work with small businesses?
+
+Yes, through the AI marketing line. We audit and restructure how a small or local business appears inside ChatGPT, Gemini, Perplexity, Claude, and the WhatsApp agents the business's customers already use. Entry at $1,500 setup plus $300 per month optional monitoring.
+
+### Do you offer custom solutions?
+
+Every build is tailored to the specific company. The three lines are not shelf products: they are the three deliverables we build around what your company already does and already has.
+
+## Primary URLs
+
+- Home: https://www.devqueens.us/
+- Services: https://www.devqueens.us/services
+- About: https://www.devqueens.us/about
+- Contact: https://www.devqueens.us/contact
+- Sitemap: https://www.devqueens.us/sitemap.xml
+- Robots policy: https://www.devqueens.us/robots.txt

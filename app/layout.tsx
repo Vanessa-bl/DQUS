@@ -6,26 +6,30 @@ import "@/src/index.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.devqueens.us"),
   title: {
-    default: "DevQueens — Agent Studio for Vertical SaaS | Paid PoC, Connector, Retainer",
+    default: "DevQueens | Automation, AI, and Marketing. One Studio.",
     template: "%s | DevQueens",
   },
   description:
-    "Agent studio for vertical SaaS. Paid PoC in 10 days ($3K–$7K), production connector in 5 weeks ($10K–$25K), retainer ($1.5K–$3K/mo). Also SMB agent discoverability.",
+    "Automations that drain the manual queue. AI agents that transact on your product. AI marketing that puts your business inside ChatGPT, Claude, and Perplexity where buyers now search. Paid proof of concept in 10 days. Production build in 5 weeks. Fixed scope, fixed timeline, fixed price.",
   keywords: [
-    "agent studio",
-    "vertical SaaS agents",
-    "AI agent connector",
-    "ChatGPT connector",
-    "WhatsApp Business agent",
-    "OpenAI Operator integration",
-    "Claude computer use",
-    "Gemini agent",
-    "SMB agent discoverability",
-    "generative engine optimization",
+    "process automation",
     "AI agent development",
-    "multi-agent workflows",
+    "AI marketing",
+    "three way invoice matching",
+    "invoice automation",
+    "exception routing automation",
+    "approval queue automation",
+    "AI agent connector",
+    "ChatGPT agent integration",
+    "Claude computer use integration",
+    "OpenAI Operator integration",
+    "WhatsApp Business agent",
+    "generative engine optimization",
+    "AI answer engine optimization",
+    "AI SEO",
+    "AI search visibility",
+    "paid AI proof of concept",
     "LLM API integration",
-    "paid AI PoC",
   ],
   authors: [{ name: "DevQueens" }],
   publisher: "DevQueens",
@@ -42,39 +46,33 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
-    languages: {
-      en: "/",
-      es: "/",
-      "x-default": "/",
-    },
   },
   openGraph: {
     type: "website",
     siteName: "DevQueens",
     locale: "en_US",
-    alternateLocale: "es_ES",
     url: "/",
-    title: "DevQueens — Agent Studio for Vertical SaaS",
+    title: "DevQueens | Automation, AI, and Marketing. One Studio.",
     description:
-      "Paid PoC in 10 days ($3K–$7K), production connector in 5 weeks ($10K–$25K), retainer ($1.5K–$3K/mo). Priced against your value, not our hours.",
+      "Automate the work. Capture the market. Process automations, AI agents on your product, and AI marketing that puts you inside ChatGPT, Claude, and Perplexity. Paid proof of concept in 10 days.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "DevQueens — Agent Studio for Vertical SaaS",
+        alt: "DevQueens | Automation, AI, and Marketing. One Studio.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevQueens — Agent Studio for Vertical SaaS",
+    title: "DevQueens | Automation, AI, and Marketing. One Studio.",
     description:
-      "Paid PoC → production connector → retainer. Public prices, fixed scope. Priced against your revenue, not our hours.",
+      "Automations that drain the queue. AI agents that transact on your product. AI marketing inside ChatGPT, Claude, Perplexity. Paid PoC in 10 days, production in 5 weeks.",
     images: [
       {
         url: "/og-image.jpg",
-        alt: "DevQueens — Agent Studio for Vertical SaaS",
+        alt: "DevQueens | Automation, AI, and Marketing.",
       },
     ],
   },
@@ -96,7 +94,7 @@ const jsonLd = {
       "@type": "Organization",
       "@id": "https://www.devqueens.us/#organization",
       name: "DevQueens",
-      alternateName: "DevQueens Agent Studio",
+      alternateName: "DevQueens Studio",
       url: "https://www.devqueens.us/",
       logo: {
         "@type": "ImageObject",
@@ -106,23 +104,28 @@ const jsonLd = {
       },
       image: "https://www.devqueens.us/og-image.jpg",
       description:
-        "Agent studio for vertical SaaS. Vertical SaaS platforms own the workflow — calendar, inventory, checkout — that consumer-facing agents need to execute. We build the connectors that plug your product into ChatGPT, WhatsApp Business, OpenAI Operator, Claude computer use, and Google Gemini agents.",
+        "DevQueens is one studio shipping three deliverables for the same company: process automation that drains the manual queue, AI agents that transact against the product's API, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Fixed scope, fixed timeline, fixed price. Measured in revenue.",
       foundingDate: "2020",
       areaServed: "Worldwide",
       knowsAbout: [
+        "Process automation",
+        "Three way invoice matching",
+        "Exception routing automation",
+        "Reconciliation and approval queues",
         "AI agent connectors",
-        "Vertical SaaS agent integration",
         "OpenAI Operator integration",
         "Claude computer use integration",
         "Google Gemini agent integration",
         "WhatsApp Business API agent",
         "Meta WhatsApp Business review",
         "LLM evaluation with Braintrust and Langfuse",
-        "Multi-agent workflows",
-        "Retrieval-Augmented Generation",
         "AI agent observability and cost caps",
-        "Generative engine optimization for SMBs",
+        "AI marketing",
+        "Generative engine optimization",
         "AI answer engine optimization",
+        "ChatGPT visibility for businesses",
+        "Perplexity citation optimization",
+        "Claude retrieval optimization",
       ],
     },
     {
@@ -136,19 +139,19 @@ const jsonLd = {
     {
       "@type": "ProfessionalService",
       "@id": "https://www.devqueens.us/#service",
-      name: "DevQueens Agent Studio for Vertical SaaS",
+      name: "DevQueens | Automation, AI, and Marketing",
       url: "https://www.devqueens.us/",
       image: "https://www.devqueens.us/og-image.jpg",
       provider: { "@id": "https://www.devqueens.us/#organization" },
       areaServed: "Worldwide",
       serviceType:
-        "Agent connector development for vertical SaaS platforms and SMB agent discoverability",
+        "Process automation, AI agent development, and AI marketing for companies that want fewer manual hours and more revenue.",
       description:
-        "Paid PoC → production connector → retainer for vertical SaaS. Audit + monthly monitoring for SMBs. Public prices, fixed scope, fixed timelines.",
+        "One studio shipping three lines of work. Process automation ($5K to $20K). AI agent surface ($10K to $25K). AI marketing (from $1.5K setup + $300 per month). Entry via a $3K to $7K paid proof of concept in 5 to 10 days. Public prices, fixed scope, fixed timeline.",
       priceRange: "$1500 - $25000",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Agent Studio Services",
+        name: "DevQueens Services",
         itemListElement: [
           {
             "@type": "Offer",
@@ -161,9 +164,25 @@ const jsonLd = {
             },
             itemOffered: {
               "@type": "Service",
-              name: "Agent Paid Proof-of-Concept",
+              name: "Paid Proof of Concept",
               description:
-                "5–10 days. One action against your test data through the customer's real API. Team watches the agent transact before committing to production. Deliberately priced to filter tire-kickers.",
+                "5 to 10 days. One real action against the customer's real data: an invoice reconciled against a purchase order, a booking placed through the API, or a lead captured from an agent conversation. Priced to filter serious buyers, never free.",
+            },
+          },
+          {
+            "@type": "Offer",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              priceCurrency: "USD",
+              minPrice: 5000,
+              maxPrice: 20000,
+            },
+            itemOffered: {
+              "@type": "Service",
+              name: "Process Automation Build",
+              description:
+                "4 to 6 weeks. Production automation that drains the manual queue. Three way invoice matching with supporting evidence attached. Exception routing. Reconciliation and approval queues. Handles 800 invoices a month, 90,000 cases a month, or whatever the customer's real volume is.",
             },
           },
           {
@@ -177,9 +196,9 @@ const jsonLd = {
             },
             itemOffered: {
               "@type": "Service",
-              name: "Production Agent Connector",
+              name: "AI Agent Surface",
               description:
-                "3–5 weeks. Full agent surface against the customer's API — availability, booking, cancellation, payment. Meta WhatsApp Business review, Braintrust or Langfuse evals, cost caps, and a runbook.",
+                "3 to 5 weeks. Full agent surface against the customer's API: availability, booking, cancellation, payment, refund. Delivered into OpenAI Operator, Claude computer use, ChatGPT, and WhatsApp Business. Meta WhatsApp Business platform review, Braintrust or Langfuse evals, cost caps, and a runbook.",
             },
           },
           {
@@ -194,9 +213,9 @@ const jsonLd = {
             },
             itemOffered: {
               "@type": "Service",
-              name: "Agent Ops Retainer",
+              name: "Ops Retainer",
               description:
-                "Monthly retainer covering OAuth rotation, schema drift, model release regressions, Meta platform policy changes, eval maintenance, and security reviews.",
+                "Monthly retainer covering OAuth token rotation, API schema drift, model release regressions that break tuned prompts, platform policy changes, eval maintenance including security evals, and monthly security reviews. No emergency statements of work and no scope creep bills.",
             },
           },
           {
@@ -210,9 +229,9 @@ const jsonLd = {
             },
             itemOffered: {
               "@type": "Service",
-              name: "SMB Agent Discoverability Audit",
+              name: "AI Marketing Audit and Restructure",
               description:
-                "Audit and restructure business data — hours, prices, policies, catalog, availability, profiles — so ChatGPT, Gemini, Perplexity, and WhatsApp agents represent the business correctly.",
+                "Audit and restructure the business's hours, prices, catalog, availability, policies, and profiles so ChatGPT, Gemini, Perplexity, Claude, and the WhatsApp agents the customer's buyers already use represent the business correctly.",
             },
           },
           {
@@ -227,9 +246,9 @@ const jsonLd = {
             },
             itemOffered: {
               "@type": "Service",
-              name: "SMB Agent Discoverability Monitoring",
+              name: "AI Marketing Monthly Monitoring",
               description:
-                "Ongoing monthly monitoring of how the business appears in ChatGPT, Gemini, Perplexity, and WhatsApp agents, with alerts when representation drifts.",
+                "Ongoing monthly monitoring of how the business appears inside ChatGPT, Gemini, Perplexity, Claude, and WhatsApp agents, with alerts when representation drifts.",
             },
           },
         ],
@@ -244,23 +263,31 @@ const jsonLd = {
           name: "What does DevQueens do?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "DevQueens is an agent studio for vertical SaaS. We build the connectors that let AI agents — ChatGPT, WhatsApp Business agents, OpenAI Operator, Claude computer use, and Google Gemini — book, quote, cancel, or pay through the customer's existing API. Second product line: SMB agent discoverability.",
+            text: "DevQueens is one studio that ships three deliverables for the same company: process automation that drains the manual queue, AI agents that transact against the customer's product, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Every build is tailored to the specific company.",
           },
         },
         {
           "@type": "Question",
-          name: "How much does an AI agent connector cost with DevQueens?",
+          name: "How much does DevQueens cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Public pricing: paid proof-of-concept $3,000–$7,000 in 5–10 days. Production agent connector $10,000–$25,000 in 3–5 weeks. Agent ops retainer $1,500–$3,000 per month. SMB agent discoverability audit starts at $1,500 with optional monthly monitoring from $300.",
+            text: "Public pricing. Paid proof of concept: $3,000 to $7,000 in 5 to 10 days. Production automation build: $5,000 to $20,000 in 4 to 6 weeks. Production AI agent connector: $10,000 to $25,000 in 3 to 5 weeks. AI marketing audit from $1,500 with optional $300 per month monitoring. Ops retainer $1,500 to $3,000 per month after production goes live.",
           },
         },
         {
           "@type": "Question",
-          name: "How fast can DevQueens ship an agent connector?",
+          name: "How fast can DevQueens ship an automation or AI agent?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "A paid proof-of-concept ships in 5–10 days. A production connector against the customer's API ships in 3–5 weeks, including Meta WhatsApp Business platform review and Braintrust or Langfuse evals.",
+            text: "A paid proof of concept ships in 5 to 10 days. A production automation ships in 4 to 6 weeks. A production AI agent connector ships in 3 to 5 weeks, including Meta WhatsApp Business platform review and Braintrust or Langfuse evals.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why does every DevQueens engagement start paid?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The price is the filter. A free proof of concept attracts window shoppers who cost time. A paid proof of concept in the $3,000 to $7,000 band filters for buyers who have a real queue to drain or a real agent surface to build, and it lets the team watch the thing actually work against the customer's data before anyone commits to production.",
           },
         },
         {
@@ -268,31 +295,31 @@ const jsonLd = {
           name: "How does DevQueens price its work?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Public prices, fixed scope, fixed timeline. The anchor is revenue captured by the agent surface, not hours logged. Every engagement starts with a paid proof-of-concept — never free — to filter serious buyers from window shoppers.",
+            text: "Public prices, fixed scope, fixed timeline. The anchor is what you capture, not what we clock. An automation that clears 800 invoices a month returns 40 approver hours a week. An AI agent that captures 50 bookings a week unlocks real revenue. A profile audit that makes your business legible to ChatGPT turns searches into clients.",
           },
         },
         {
           "@type": "Question",
-          name: "Does DevQueens work with SMBs and local businesses?",
+          name: "What is included in the DevQueens ops retainer?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes, through a separate product line. DevQueens audits and restructures SMB business data — hours, prices, policies, catalog, availability, and profiles — so ChatGPT, Gemini, Perplexity, and WhatsApp agents represent the business correctly. Starts at $1,500 with optional monthly monitoring from $300.",
+            text: "The monthly retainer covers OAuth token rotation, API schema drift, model release regressions that break tuned prompts, platform policy changes, eval maintenance including the security evals, and monthly security reviews. No emergency statements of work and no scope creep bills.",
           },
         },
         {
           "@type": "Question",
-          name: "What is included in the agent ops retainer?",
+          name: "Does DevQueens offer custom solutions per company?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The monthly retainer covers OAuth token rotation, API schema drift, model release regressions that break fine-tuned prompts, Meta WhatsApp Business platform policy changes, evaluation maintenance, and security reviews. No emergency SOWs and no scope-creep bills.",
+            text: "Every build is tailored to the specific company. The three lines, process automation, AI agent surface, and AI marketing, are not shelf products: they are the three deliverables DevQueens builds around what the company already does and already has.",
           },
         },
         {
           "@type": "Question",
-          name: "Who does DevQueens work with?",
+          name: "What makes DevQueens different from other AI agencies?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Vertical SaaS platforms — booking, scheduling, invoicing, marketplaces, vertical-native apps — and their engineering teams. Second track: SMBs that want to be discoverable by consumer-facing AI agents. Senior LATAM team, US LLC, US-timezone communications.",
+            text: "Most studios do one of the three lines, automation, AI agents, or AI marketing, and the three never talk to each other. DevQueens delivers all three under one roof so the data model, schemas, catalog, pricing, and voice stay consistent across the automation that clears the queue, the agent that transacts on the product, and the marketing that puts the business in front of the buyer.",
           },
         },
       ],

@@ -1,4 +1,4 @@
-# DevQueens — robots policy
+# DevQueens robots policy
 # We are explicit about AI/LLM crawlers so we can be discovered
 # by both traditional search engines and generative engines.
 

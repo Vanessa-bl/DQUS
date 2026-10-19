@@ -22,20 +22,11 @@ const wordUp: Variants = {
 
 export default function SplitHero() {
   const t = useT();
-  const title = t("hero.split.title", "Your Product. Bookable by Agents.");
-  const rawWords = title.split(" ");
-  let titleWords: string[];
-  if (rawWords.length <= 2) {
-    titleWords = [rawWords.join(" ")];
-  } else if (rawWords.length === 3) {
-    titleWords = [rawWords[0], rawWords.slice(1).join(" ")];
-  } else {
-    titleWords = [
-      rawWords.slice(0, 2).join(" "),
-      ...rawWords.slice(2, -2),
-      rawWords.slice(-2).join(" "),
-    ];
-  }
+  const title = t("hero.split.title", "Fewer Hours. More Revenue.");
+  const titleWords = title
+    .split(/\.\s+/)
+    .filter(Boolean)
+    .map((s) => (s.endsWith(".") ? s : `${s}.`));
 
   return (
     <section className="split-hero" aria-labelledby="split-hero-title">
@@ -48,7 +39,7 @@ export default function SplitHero() {
           animate="visible"
           variants={fadeUp}
         >
-          {t("hero.split.preTitle", "Agent Studio for Vertical SaaS")}
+          {t("hero.split.preTitle", "Automation. AI. Marketing. One studio.")}
         </motion.p>
 
         <h1
@@ -80,7 +71,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.intro",
-            "Paid PoC in 10 days. Production connector in 5 weeks. A retainer for what breaks after."
+            "Automate the work. Capture the market."
           )}
         </motion.p>
 
@@ -93,7 +84,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.body",
-            "Vertical SaaS platforms own the workflow — the calendar, the inventory, the checkout — that consumer-facing agents need to execute. We build the connectors that plug your product into OpenAI Operator, Claude computer use, Google Gemini, and the ChatGPT and WhatsApp Business agents already reaching your customers. Meta WhatsApp Business review, Braintrust evals, cost caps, and observability included."
+            "Paid proof of concept in 10 days. Production build in 5 weeks. A retainer for what breaks after. Automations, AI agents, and marketing shipped under one roof. Fixed scope, fixed timeline, fixed price."
           )}
         </motion.p>
 
@@ -105,7 +96,7 @@ export default function SplitHero() {
           variants={fadeUp}
         >
           <a className="split-hero__btn" href="/services">
-            {t("hero.split.ctaPrimary", "See pricing")}
+            {t("hero.split.ctaPrimary", "Write us")}
           </a>
           <a className="split-hero__cta-link" href="/contact">
             {t("hero.split.ctaSecondary", "Book a discovery call")}
