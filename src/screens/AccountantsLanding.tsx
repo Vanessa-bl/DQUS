@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Palette, TrendingUp } from "lucide-react";
 import VideoMaskHero from "../components/ui/VideoMaskHero/VideoMaskHero";
-import NewHero from "../components/ui/NewHero/NewHero";
 import { Card } from "../components/ui/card/Card";
 import { ImageCard } from "../components/ui/ImageCard/ImageCard";
 import "./pageStyles.css";
@@ -25,7 +24,6 @@ const fadeUp = {
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
 
 const anchorLinks = [
-  { id: "hero", label: "Inicio", labelKey: "header.anchorNav.hero" },
   { id: "about", label: "Nosotros", labelKey: "header.anchorNav.about" },
   { id: "why", label: "Por Qué", labelKey: "header.anchorNav.why" },
   { id: "services", label: "Servicios", labelKey: "header.anchorNav.services" },
@@ -150,8 +148,6 @@ export const AccountantsLanding: React.FC = () => {
   return (
     <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks} darkHeader>
       <VideoMaskHero />
-
-      <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" />
 
       <section id="about" className="page-section page-section--clip">
         <div className="page-block">
