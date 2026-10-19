@@ -46,12 +46,24 @@ export default function HeroPulse() {
     let width = 0;
     let height = 0;
 
+    // Chrome's hard cap for canvas side length is ~16384 on most GPUs.
+    // We clamp well below that so a resize-observer feedback loop (which
+    // can happen when the canvas sits inside a grid cell that only
+    // settles on second paint) cannot allocate a multi-million-pixel
+    // buffer and crash the canvas with the broken-image placeholder.
+    const MAX_SIDE = 2048;
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      const nextW = Math.max(1, Math.min(rect.width, MAX_SIDE));
+      const nextH = Math.max(1, Math.min(rect.height, MAX_SIDE));
+      // Short-circuit if nothing meaningful changed to kill the
+      // observer loop entirely.
+      if (nextW === width && nextH === height) return;
+      width = nextW;
+      height = nextH;
+      canvas.width = Math.min(width * dpr, MAX_SIDE);
+      canvas.height = Math.min(height * dpr, MAX_SIDE);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       if (reduced) draw(0);
     };
