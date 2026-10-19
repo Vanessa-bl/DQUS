@@ -52,4 +52,4 @@ Every build is tailored to the company. One studio delivers all three lines, so 
 ## Localized versions
 
 - English: https://www.devqueens.us/
-- Spanish: https://www.devqueens.us/es/ (partial; migration to full locale routing in progress)
+- Spanish: https://www.devqueens.us/es

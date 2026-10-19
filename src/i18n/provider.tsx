@@ -1,21 +1,16 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { IntlProvider } from "react-intl";
+import enMessages from "./messages/en.json";
+import esMessages from "./messages/es.json";
 
 type Locale = "en" | "es";
 
-const messagesMap: Record<Locale, Record<string, string>> = {
-  en: {},
-  es: {},
+const MESSAGES: Record<Locale, Record<string, string>> = {
+  en: enMessages as Record<string, string>,
+  es: esMessages as Record<string, string>,
 };
-
-async function loadMessages(locale: Locale): Promise<Record<string, string>> {
-  if (Object.keys(messagesMap[locale]).length > 0) return messagesMap[locale];
-  const mod = await import(`./messages/${locale}.json`);
-  messagesMap[locale] = mod.default ?? mod;
-  return messagesMap[locale];
-}
 
 interface LocaleContextValue {
   locale: Locale;
@@ -31,31 +26,26 @@ export function useLocale() {
   return useContext(LocaleContext);
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
-  const [messages, setMessages] = useState<Record<string, string>>({});
+type LocaleProviderProps = {
+  children: ReactNode;
+  initialLocale?: Locale;
+};
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("locale");
-      if (saved === "en" || saved === "es") {
-        setLocaleState(saved);
-      }
-    } catch { /* noop */ }
-  }, []);
-
-  useEffect(() => {
-    loadMessages(locale).then(setMessages);
-  }, [locale]);
-
-  const setLocale = useCallback((next: Locale) => {
-    setLocaleState(next);
-    try { localStorage.setItem("locale", next); } catch { /* noop */ }
-  }, []);
+export function LocaleProvider({
+  children,
+  initialLocale = "en",
+}: LocaleProviderProps) {
+  const locale: Locale = initialLocale;
+  const messages = MESSAGES[locale] ?? MESSAGES.en;
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale }}>
-      <IntlProvider locale={locale} messages={messages} defaultLocale="en" onError={() => {}}>
+    <LocaleContext.Provider value={{ locale, setLocale: () => {} }}>
+      <IntlProvider
+        locale={locale}
+        messages={messages}
+        defaultLocale="en"
+        onError={() => {}}
+      >
         {children}
       </IntlProvider>
     </LocaleContext.Provider>
