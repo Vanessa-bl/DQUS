@@ -13,7 +13,7 @@
 
 .img-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 48px rgba(194, 65, 12, 0.3);
+  box-shadow: 0 24px 48px rgba(186, 21, 94, 0.3);
 }
 
 .img-card__bg {
@@ -34,9 +34,9 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(20, 10, 2, 0.88) 0%,
-    rgba(80, 20, 10, 0.45) 45%,
-    rgba(150, 60, 20, 0.15) 100%
+    rgba(19, 17, 32, 0.88) 0%,
+    rgba(80, 25, 60, 0.45) 45%,
+    rgba(186, 21, 94, 0.15) 100%
   );
   z-index: 1;
 }
@@ -57,7 +57,7 @@
 }
 
 .img-card:hover .img-card__glass {
-  border-color: rgba(251, 146, 60, 0.3);
+  border-color: rgba(233, 51, 112, 0.3);
   background: rgba(255, 255, 255, 0.06);
 }
 
