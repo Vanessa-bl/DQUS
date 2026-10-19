@@ -5,6 +5,7 @@ import "./Header.css";
 import { useTheme } from "../../../theme/ThemeContext";
 import { useT } from "../../../i18n/useT";
 import { useLocale } from "../../../i18n/provider";
+import { useRouter, usePathname } from "../../../i18n/navigation";
 import Logo from "../Logo/Logo";
 import { AnimatedLink } from "../Link/AnimatedLink/AnimatedLink";
 import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
@@ -27,8 +28,15 @@ export const Header: React.FC<HeaderProps> = ({
   anchorNav,
 }) => {
   const { theme, toggleTheme } = useTheme();
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const t = useT();
+
+  const switchLocale = (next: "en" | "es") => {
+    if (next === locale) return;
+    router.replace(pathname, { locale: next });
+  };
 
   const handleMenuClick = onMenuClick ?? (() => {});
 
@@ -122,14 +130,14 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="header__locale">
                 <button
                   className={`header__locale-btn${locale === "en" ? " is-active" : ""}`}
-                  onClick={() => setLocale("en")}
+                  onClick={() => switchLocale("en")}
                   aria-label="Switch to English"
                 >
                   EN
                 </button>
                 <button
                   className={`header__locale-btn${locale === "es" ? " is-active" : ""}`}
-                  onClick={() => setLocale("es")}
+                  onClick={() => switchLocale("es")}
                   aria-label="Cambiar a Español"
                 >
                   ES

@@ -27,7 +27,6 @@ type NewHeroProps = {
   id?: string;
   btnStartTarget?: string;
   btnProjectTarget?: string;
-  hideLine3?: boolean;
 };
 
 export default function NewHero({
@@ -35,7 +34,6 @@ export default function NewHero({
   id,
   btnStartTarget,
   btnProjectTarget,
-  hideLine3 = false,
 }: NewHeroProps) {
   const t = useT();
   const startHref = btnStartTarget ? `#${btnStartTarget}` : "mailto:";
@@ -107,15 +105,9 @@ export default function NewHero({
       {/* DARK BANNER */}
       <div className="nh__banner">
         <p className="nh__quote">
-          {t(`${tPrefix}.quote.line1`, "Paid to prove.")}
+          {t(`${tPrefix}.quote.line1`, "We automate repetitive processes")}
           <br />
-          {t(`${tPrefix}.quote.line2`, "Priced to a number.")}
-          {!hideLine3 && (
-            <>
-              <br />
-              {t(`${tPrefix}.quote.line3`, "Retained to stay live.")}
-            </>
-          )}
+          {t(`${tPrefix}.quote.line2`, "and bring new buyers.")}
         </p>
 
         <div className="nh__banner-aside">
