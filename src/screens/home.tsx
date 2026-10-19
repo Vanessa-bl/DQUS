@@ -7,7 +7,6 @@ import "./pageStyles.css";
 import "./HomeSections.css";
 import { Card } from "../components/ui/card/Card";
 import { TechCarousel } from "../components/ui/TechCarousel/TechCarousel";
-import { FAQSection } from "../components/ui/FAQSection/FAQSection";
 import { Layout } from "./layout";
 import { useT } from "../i18n/useT";
 
@@ -133,8 +132,6 @@ export const Home: React.FC = () => {
           />
         </div>
       </section>
-
-      <FAQSection />
 
       <div className="hs-tech">
         <TechCarousel />

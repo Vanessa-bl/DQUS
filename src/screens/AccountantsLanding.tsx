@@ -151,7 +151,7 @@ export const AccountantsLanding: React.FC = () => {
     <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks} darkHeader>
       <VideoMaskHero />
 
-      <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" hideLine3 />
+      <NewHero tPrefix="accountants.hero" id="hero" btnStartTarget="offer" btnProjectTarget="contact" />
 
       <section id="about" className="page-section page-section--clip">
         <div className="page-block">
