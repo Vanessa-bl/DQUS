@@ -50,10 +50,10 @@ export default function NewHero({
             {t(`${tPrefix}.eyebrow`, "Two Product Lines. Public Prices.")}
           </span>
           <h2 className="nh__headline">
-            {t(`${tPrefix}.headline.line1`, "Vertical SaaS: agent-native.")}
+            {t(`${tPrefix}.headline.line1`, "Automate ops.")}
             <br />
             <span className="nh__headline-mark">
-              {t(`${tPrefix}.headline.line2`, "SMBs: agent-discoverable.")}
+              {t(`${tPrefix}.headline.line2`, "Grow revenue.")}
             </span>
           </h2>
         </div>
@@ -62,11 +62,11 @@ export default function NewHero({
           <p className="nh__desc">
             {t(
               `${tPrefix}.desc`,
-              "For vertical SaaS platforms: a paid PoC, then a production connector, then a retainer. For SMBs: an audit + monthly monitoring so agents get your business right. Fixed scope, fixed timeline, fixed money. Senior LATAM team, US LLC, US-timezone comms.",
+              "Automations that drain the manual queue so your team stops repeating itself. AI agents that close customers inside your product. AI marketing that puts your business inside ChatGPT, Claude, and Perplexity, right where buyers now search. One studio builds the three, tailored to your company. Fixed scope, fixed timeline, fixed price. Shipped to production and measured in revenue.",
             )}
           </p>
           <a href={startHref} className="nh__cta">
-            {t(`${tPrefix}.cta`, "See pricing")}
+            {t(`${tPrefix}.cta`, "Write us")}
             <svg
               width="15"
               height="15"
@@ -135,7 +135,7 @@ export default function NewHero({
             <div className="nh__stat">
               <span className="nh__stat-num">24/7</span>
               <span className="nh__stat-label">
-                {t(`${tPrefix}.stat.support`, "US-timezone team")}
+                {t(`${tPrefix}.stat.support`, "Dedicated support")}
               </span>
             </div>
           </div>

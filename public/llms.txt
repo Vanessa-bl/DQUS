@@ -1,42 +1,55 @@
 # DevQueens
 
-> DevQueens is an agent studio for vertical SaaS. We build the connectors that let AI agents — ChatGPT, WhatsApp Business agents, OpenAI Operator, Claude computer use, and Google Gemini — book, quote, cancel, or pay through the customer's existing API. Second product line: SMB agent discoverability.
+> DevQueens is one studio that ships three things: process automation, AI agents on your product, and AI marketing. Automations that drain the manual queue. AI agents that close customers inside your product. AI marketing that puts your business inside ChatGPT, Claude, and Perplexity, right where buyers now search. Fixed scope, fixed timeline, fixed price. Measured in revenue.
 
-## Two product lines
+## Three lines of work
 
-### Line 1 — Vertical SaaS Agent Connectors
+### Line 1: Process Automation ($5K to $20K)
 
-Three-stage engagement with public pricing:
+Four to six weeks. We take one painful workflow and ship it live. Three way invoice matching with supporting evidence attached. Exception routing. Reconciliation and approval queues. Example volume handled: 800 invoices a month, 90,000 cases a month. Your team watches the queue drain before signing off on production.
 
-1. **Agent Paid Proof-of-Concept** — $3,000 to $7,000, 5–10 days. One action against the customer's test data through their real API. Team watches the agent transact through the platform before committing to production. Never free — the price is the filter.
-2. **Production Agent Connector** — $10,000 to $25,000, 3–5 weeks. Full agent surface against the customer's API: availability, booking, cancellation, payment, refund. Includes Meta WhatsApp Business platform review, Braintrust or Langfuse evals, cost caps, and a runbook.
-3. **Agent Ops Retainer** — $1,500 to $3,000 per month. Covers OAuth token rotation, schema drift, model release regressions, Meta platform policy changes, eval maintenance, and security reviews. No emergency SOWs.
+### Line 2: AI Agent Surface ($10K to $25K)
 
-### Line 2 — SMB Agent Discoverability
+Three to five weeks. The full agent surface against your API: availability, booking, cancellation, payment, refund. Delivered into OpenAI Operator, Claude computer use, ChatGPT, and WhatsApp Business. Meta WhatsApp Business platform review included. Braintrust or Langfuse evals, cost caps, and a runbook your team can operate.
 
-- **Audit + initial setup** from $1,500. Restructure hours, prices, policies, catalog, availability, and profiles so ChatGPT, Gemini, Perplexity, and WhatsApp agents represent the business correctly.
-- **Monthly monitoring** from $300 per month. Ongoing checks of how the SMB appears in consumer-facing AI agents, with alerts when representation drifts.
+### Line 3: AI Marketing ($1,500 setup + $300 monthly)
 
-## Who we work with
+Marketing for the layer that comes after Google. We audit and restructure your hours, prices, catalog, availability, and profiles so ChatGPT, Gemini, Perplexity, Claude, and the WhatsApp agents your customers already use read your business correctly. Optional monthly monitoring flags the day they stop.
 
-- **Vertical SaaS platforms**: booking, scheduling, invoicing, marketplaces, vertical-native apps and their engineering teams.
-- **SMBs and local operators**: businesses that want to be discoverable and correctly represented by consumer-facing AI agents.
+### Ops Retainer ($1,500 to $3,000 per month)
+
+Covers OAuth token rotation, API schema drift, model release regressions that break tuned prompts, platform policy changes, eval maintenance, and security reviews. No emergency statements of work, no scope creep bills.
+
+## Entry point for every engagement
+
+Every engagement starts with a $3,000 to $7,000 paid proof of concept in 5 to 10 days. One real action against your real data. An invoice reconciled against a purchase order. A booking placed through your API. A lead captured from an agent conversation. Priced to filter, not to delight procurement. Never free.
+
+## Receipts
+
+- **Three way matching, automated**: compared invoices against purchase orders and delivery receipts, flagged price and quantity discrepancies, routed exceptions to approvers with supporting evidence attached. 800 invoices a month.
+- **Booking connector in 5 weeks**: production connector between a scheduling SaaS and OpenAI Operator, plus a WhatsApp Business agent. 40,000 bookings a month flow through the agent surface. Zero manual overrides.
+- **Investor demo rescue**: called in Tuesday, by Friday had rewritten a broken agent loop, patched a retrieval bug, added evals and cost caps. Held the live demo through 30 minutes of investor questions with zero hallucinations.
 
 ## Pricing philosophy
 
-Public prices, fixed scope, fixed timelines. The anchor is revenue captured by the agent surface, not hours logged. Example: a barbershop where the connector delivers 50 bookings a month captures $2,000 in new revenue, making a $500 retainer a rounding error.
+Public prices, fixed scope, fixed timeline. We anchor to what you capture, not what we clock. An automation that clears 800 invoices a month returns 40 approver hours a week. An AI agent that captures 50 bookings a week unlocks real revenue. A profile audit that makes your business legible to ChatGPT turns searches into clients.
 
-## Key facts
+## Who we work with
 
-- Studio type: agent studio for vertical SaaS + SMB agent discoverability
-- Founded: 2020
-- Coverage: worldwide, remote, US-timezone comms
-- Legal: US LLC
-- Team: senior LATAM engineers
+- Product and operations teams at companies with manual queues that bleed hours.
+- Vertical SaaS platforms whose customers want to transact through consumer AI agents.
+- Small and local businesses that want to be found and correctly represented inside the AI tools where buyers now search.
+
+Every build is tailored to the company. One studio delivers all three lines, so the automation, the agent, and the marketing speak the same language and share the same data model.
 
 ## Primary pages
 
-- [Home](https://www.devqueens.us/): positioning, services, pricing, work
-- [Services](https://www.devqueens.us/services): full service catalog
-- [About](https://www.devqueens.us/about): team, story, mission
-- [Contact](https://www.devqueens.us/contact): book a discovery call
+- [Home](https://www.devqueens.us/): three lines, pricing, work.
+- [Services](https://www.devqueens.us/services): full service catalog with pricing bands.
+- [About](https://www.devqueens.us/about): team, story.
+- [Contact](https://www.devqueens.us/contact): book a discovery call.
+
+## Localized versions
+
+- English: https://www.devqueens.us/
+- Spanish: https://www.devqueens.us/es/ (partial; migration to full locale routing in progress)
