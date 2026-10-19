@@ -151,51 +151,26 @@ export const AccountantsLanding: React.FC = () => {
       <section id="hero" className="al-hero" aria-labelledby="al-hero-title">
         <div className="al-hero__inner">
           <div className="al-hero__text">
-            <motion.span
-              className="al-hero__eyebrow"
-              custom={0}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <span className="al-hero__eyebrow">
               {t("accountants.heroNew.eyebrow", "AUTOMATIZACIÓN · CONTADORES")}
-            </motion.span>
+            </span>
 
-            <motion.h1
-              id="al-hero-title"
-              className="al-hero__title"
-              custom={1}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <h1 id="al-hero-title" className="al-hero__title">
               {t("accountants.heroNew.title.line1", "Menos horas manuales.")}
               <br />
               <span className="al-hero__title-mark">
                 {t("accountants.heroNew.title.line2", "Más clientes atendidos.")}
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              className="al-hero__body"
-              custom={2}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <p className="al-hero__body">
               {t(
                 "accountants.heroNew.body",
                 "Automatizamos las tareas repetitivas que te comen el día: carga de facturas, conciliación bancaria y categorización. Vos te quedás con lo estratégico, lo que tus clientes pagan más caro."
               )}
-            </motion.p>
+            </p>
 
-            <motion.div
-              className="al-hero__actions"
-              custom={3}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <div className="al-hero__actions">
               <a
                 className="al-hero__cta-primary"
                 href="#offer"
@@ -218,15 +193,9 @@ export const AccountantsLanding: React.FC = () => {
               >
                 {t("accountants.heroNew.ctaSecondary", "Escribinos")}
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="al-hero__proof"
-              custom={4}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
+            <div className="al-hero__proof">
               <p className="al-hero__proof-stat">20+ horas</p>
               <p className="al-hero__proof-label">
                 {t(
@@ -234,7 +203,7 @@ export const AccountantsLanding: React.FC = () => {
                   "ahorradas por contador cada semana al automatizar las tareas repetitivas."
                 )}
               </p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="al-hero__media" aria-hidden="true">
