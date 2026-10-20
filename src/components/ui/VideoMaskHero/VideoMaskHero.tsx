@@ -13,7 +13,11 @@ function calcParallaxRange(textEl: HTMLElement | null): number {
 const VIDEO_SRC =
   "https://res.cloudinary.com/djqiqpilh/video/upload/v1778251145/7308093-hd_1280_720_24fps_j1oug7.mp4";
 
-export default function VideoMaskHero() {
+type VideoMaskHeroProps = {
+  text?: string;
+};
+
+export default function VideoMaskHero({ text = "CONTADORES" }: VideoMaskHeroProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const rangeRef = useRef(0);
@@ -69,7 +73,11 @@ export default function VideoMaskHero() {
           />
         </div>
 
-        <div className="video-mask-hero__screen"></div>
+        <div className="video-mask-hero__screen">
+          <h1 ref={textRef} className="video-mask-hero__text">
+            {text}
+          </h1>
+        </div>
       </div>
     </div>
   );

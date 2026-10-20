@@ -1,923 +1,1222 @@
-/* ================================
-   Accountants Landing
-   Page-specific styles. Reuses .page-* primitives
-   from pageStyles.css for section/badge/title/lede.
-   ================================ */
+/* =================================================================
+   Landing: Agente IA inmobiliario
+   Dos registros:
+     - DARK (atención): hero, problem, how-it-works, demo, final-cta
+     - LIGHT (evaluación): calc, results, integrations, pricing,
+                           guarantee, compliance, faq
+   Un solo acento magenta: botones primarios + número big de calc.
+   Titulares en un color sólido (no splits mitad blanco mitad magenta).
+   ================================================================= */
 
-.page-section--clip {
-  overflow: hidden;
+:root {
+  --rea-dark: #0f0d1c;
+  --rea-dark-soft: #15132a;
+  --rea-light: #FAFAF8;
+  --rea-light-soft: #ffffff;
+  --rea-ink-on-dark: #ffffff;
+  --rea-ink-on-dark-dim: rgba(255, 255, 255, 0.68);
+  --rea-ink-on-dark-faint: rgba(255, 255, 255, 0.4);
+  --rea-ink-on-light: #0f0d1c;
+  --rea-ink-on-light-dim: rgba(15, 13, 28, 0.68);
+  --rea-ink-on-light-faint: rgba(15, 13, 28, 0.42);
+  --rea-accent: #e9336f;
+  --rea-accent-soft: rgba(233, 51, 112, 0.1);
+  --rea-border-dark: rgba(255, 255, 255, 0.08);
+  --rea-border-light: rgba(15, 13, 28, 0.08);
 }
 
-.page-section--flush {
-  padding: 0;
-  background: transparent;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
+/* ---------- Reset for the landing root ---------- */
+
+main {
+  display: block;
 }
 
-/* Section h2 (compact size, used across landing) */
-.al-section-title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  line-height: 1.15;
-  color: var(--card-text);
-  margin: 0;
-  letter-spacing: -0.02em;
+/* =================================================================
+   STICKY NAV
+================================================================= */
+
+.rea-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15, 13, 28, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rea-border-dark);
 }
 
-@media screen and (max-width: 767px) {
-  .al-section-title {
-    font-size: 1.6rem;
-  }
-}
-
-/* ================================
-   About block
-   ================================ */
-.al-about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: flex-start;
-}
-
-.al-story-p {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--card-text-regular);
-  margin: 0 0 1rem;
-}
-
-.al-story-p:last-of-type {
-  margin-bottom: 0;
-}
-
-.al-story-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-}
-
-.al-story-feature-pill {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--card-text-regular);
-  background: var(--feature-pill-bg);
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--feature-pill-border);
-  white-space: nowrap;
-}
-
-.al-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.al-stat {
-  background: linear-gradient(135deg, #ba155e 0%, #e93370 40%, #ff507a 100%);
-  border-radius: 20px;
-  padding: 1.75rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.al-stat-glow {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(233, 51, 112, 0.2);
-  border-radius: 50%;
-  top: -20px;
-  right: -20px;
-  filter: blur(25px);
-  pointer-events: none;
-}
-
-.al-stat-num {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #fff;
-  margin: 0 0 4px;
-  position: relative;
-  z-index: 1;
-}
-
-.al-stat-label {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.82rem;
-  color: #fff;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-@media screen and (max-width: 767px) {
-  .al-about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-/* ================================
-   Offer banner
-   ================================ */
-.al-offer {
-  background-image: url(/main1.png);
-  background-size: cover;
-  background-position: center;
-}
-
-.al-offer__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, #000000bd 0%, #000000ab 40%, #0000003d 100%);
-  border-radius: 20px;
-}
-
-.al-offer__glow--top {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: rgba(233, 51, 112, 0.2);
-  border-radius: 50%;
-  top: -80px;
-  right: -60px;
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.al-offer__glow--bottom {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: rgba(233, 51, 112, 0.15);
-  border-radius: 50%;
-  bottom: -60px;
-  left: -40px;
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.al-offer__body {
-  position: relative;
-  z-index: 2;
-  padding: 4rem 3rem;
-  gap: 2rem;
+.rea-nav__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
-.al-offer__eyebrow {
-  display: inline-block;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.rea-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.rea-nav__logo {
+  height: 32px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.rea-nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--rea-accent);
   color: #fff;
-  margin-bottom: 0.75rem;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
-.al-offer__title {
+.rea-nav__cta:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+/* =================================================================
+   SHARED SECTION PRIMITIVES
+================================================================= */
+
+.rea-section {
+  width: 100%;
+  padding: 9rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rea-section--dark {
+  background: var(--rea-dark);
+  color: var(--rea-ink-on-dark);
+}
+
+.rea-section--light {
+  background: var(--rea-light);
+  color: var(--rea-ink-on-light);
+}
+
+.rea-wide {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.rea-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ---------- Shared typography primitives ---------- */
+
+.rea-eyebrow {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rea-ink-on-dark-faint);
+  margin: 0 0 1.75rem;
+}
+
+.rea-eyebrow--light {
+  color: var(--rea-ink-on-light-faint);
+}
+
+.rea-h2 {
   font-family: "DM Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  line-height: 1.1;
-  color: #fff;
-  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--rea-ink-on-dark);
+  margin: 0 0 3rem;
+  max-width: 920px;
 }
 
-.al-offer__price {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 900;
-  font-size: clamp(3rem, 6vw, 5rem);
-  color: #fff;
-  margin: 0;
-  line-height: 1;
+.rea-h2--light {
+  color: var(--rea-ink-on-light);
 }
 
-.al-offer__price-unit {
-  font-size: 0.4em;
+/* ---------- CTAs ---------- */
+
+.rea-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 700;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.rea-cta--primary {
+  background: var(--rea-accent);
+  color: #fff;
+  box-shadow: 0 14px 36px -10px rgba(233, 51, 112, 0.55);
+}
+
+.rea-cta--primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.rea-cta--xl {
+  padding: 1.2rem 2rem;
+  font-size: 1.08rem;
+}
+
+/* Secondary becomes an underlined text link */
+.rea-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.rea-link:hover {
   opacity: 0.7;
 }
 
-.al-offer__desc {
+.rea-section--light .rea-link {
+  color: var(--rea-ink-on-light);
+}
+
+/* =================================================================
+   1. HERO
+================================================================= */
+
+.rea-hero {
+  padding-top: 4.5rem;
+  padding-bottom: 4rem;
+}
+
+.rea-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+@media (min-width: 960px) {
+  .rea-hero__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: stretch;
+  }
+}
+
+.rea-hero__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rea-hero__eyebrow {
+  display: inline-block;
   font-family: "Nunito Sans", sans-serif;
-  font-size: 0.95rem;
-  color: #fff;
-  margin: 1rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rea-ink-on-dark-faint);
+  margin-bottom: 1.5rem;
+}
+
+.rea-hero__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.024em;
+  color: var(--rea-ink-on-dark);
+  margin: 0 0 1.25rem;
+}
+
+.rea-hero__sub {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--rea-ink-on-dark-dim);
+  margin: 0 0 2rem;
+  max-width: 540px;
+}
+
+.rea-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.rea-hero__micro {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  color: var(--rea-ink-on-dark-faint);
+  margin: 0;
+}
+
+.rea-hero__media {
+  display: flex;
+  justify-content: center;
+}
+
+/* 10-word context line replacing the empty logo strip */
+.rea-hero__context {
+  margin: 5rem auto 0;
+  max-width: 760px;
+  text-align: center;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  letter-spacing: -0.01em;
+  color: var(--rea-ink-on-dark-dim);
+  line-height: 1.4;
+}
+
+/* ---------- Chat (JS driven) ---------- */
+
+.rea-hero__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.rea-chat-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
   max-width: 400px;
 }
 
-.al-offer__cta {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ba155e;
-  background: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 0.9rem 2.25rem;
-  cursor: pointer;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  white-space: nowrap;
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.al-offer__cta:hover {
-  transform: translateY(-2px);
-}
-
-@media screen and (max-width: 767px) {
-  .al-offer__body {
-    padding: 2.5rem 1.2rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .al-offer__title {
-    font-size: 2rem;
-  }
-  .al-offer__price {
-    font-size: 3rem;
-  }
-}
-
-/* ================================
-   Process
-   ================================ */
-.al-process-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.al-process-step {
-  background: var(--feature-pill-bg);
-  border: 1px solid var(--feature-pill-border);
+.rea-chat {
+  width: 100%;
+  background: #0b0a16;
+  border: 1px solid var(--rea-border-dark);
   border-radius: 20px;
-  padding: 1.75rem;
-}
-
-.al-process-step-num {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--card-text);
-  opacity: 0.25;
-}
-
-.al-process-step-title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--card-text);
-  margin: 0.5rem 0 0.35rem;
-}
-
-.al-process-step-text {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--card-text-regular);
-  margin: 0;
-}
-
-@media screen and (max-width: 767px) {
-  .al-process-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ================================
-   Compare
-   ================================ */
-.al-compare-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.al-compare-card {
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid var(--feature-pill-border);
-  background: var(--feature-pill-bg);
-}
-
-.al-compare-card--positive {
-  background: linear-gradient(135deg, #ba155e 0%, #e93370 40%, #ff507a 100%);
-  border: none;
-  position: relative;
   overflow: hidden;
-}
-
-.al-compare-card__glow {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  background: rgba(233, 51, 112, 0.25);
-  border-radius: 50%;
-  top: -40px;
-  right: -30px;
-  filter: blur(35px);
-  pointer-events: none;
-}
-
-.al-compare-card__title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--card-text);
-  margin: 0 0 1rem;
-}
-
-.al-compare-card--positive .al-compare-card__title {
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-
-.al-compare-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
+  /* Fixed height so el marco no crece. Body hace scroll interno. */
+  height: 480px;
+  max-height: 70vh;
+}
+
+.rea-chat__head {
+  display: flex;
+  align-items: center;
   gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--rea-border-dark);
+  flex-shrink: 0;
 }
 
-.al-compare-card--positive .al-compare-list {
-  position: relative;
-  z-index: 1;
-}
-
-.al-compare-list-item {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.9rem;
-  color: var(--card-text-regular);
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-}
-
-.al-compare-card--positive .al-compare-list-item {
-  color: #fff;
-}
-
-.al-compare-list-marker {
-  font-size: 1.1rem;
-  line-height: 1;
-  color: var(--card-text-regular);
-  opacity: 0.3;
-}
-
-.al-compare-list-marker--pos {
-  color: #ffd7e0;
-  opacity: 1;
-}
-
-@media screen and (max-width: 767px) {
-  .al-compare-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ================================
-   Buy packages
-   ================================ */
-.al-buy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.al-pack {
-  border-radius: 24px;
-  overflow: hidden;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.al-pack--basic {
-  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg);
-}
-
-.al-pack--pro {
-  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg);
-  box-shadow: 0 0 0 2px rgba(233, 51, 112, 0.4), 0 8px 32px rgba(233, 51, 112, 0.15);
-}
-
-.al-pack__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
-  border-radius: 24px;
-  z-index: 0;
-}
-
-.al-pack__glow-big {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: rgba(233, 51, 112, 0.2);
-  border-radius: 50%;
-  top: -60px;
-  right: -50px;
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.al-pack--pro .al-pack__glow-big {
-  width: 220px;
-  height: 220px;
-  background: rgba(233, 51, 112, 0.25);
-}
-
-.al-pack__glow-small {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(233, 51, 112, 0.1);
-  border-radius: 16px;
-  transform: rotate(15deg);
-  bottom: 30px;
-  right: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 1;
-}
-
-.al-pack--pro .al-pack__glow-small {
-  background: rgba(233, 51, 112, 0.12);
-}
-
-.al-pack__glass {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  margin: 1.5rem;
-  padding: 2.25rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.al-pack__badge {
-  display: inline-block;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(233, 51, 112, 0.35);
-  padding: 0.3rem 0.9rem;
-  border-radius: 999px;
-  width: fit-content;
-  margin-bottom: 1.25rem;
-}
-
-.al-pack__badge--pro {
-  color: #ba155e;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.al-pack__title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
-  color: #fff;
-  margin: 0 0 0.5rem;
-  line-height: 1.15;
-}
-
-.al-pack__desc {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 1.5rem;
-}
-
-.al-pack__divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.12);
-  margin-bottom: 1.5rem;
-}
-
-.al-pack__features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  flex: 1;
-}
-
-.al-pack__feature {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
-  color: #fff;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.al-pack__feature-check {
+.rea-chat__avatar {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(233, 51, 112, 0.5);
+  background: var(--rea-accent);
   color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
+  border-radius: 50%;
+  font-weight: 800;
+  font-family: "DM Sans", sans-serif;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
-.al-pack__price-row {
+.rea-chat__name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--rea-ink-on-dark);
+}
+
+.rea-chat__state {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--rea-ink-on-dark-faint);
+}
+
+.rea-chat__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  scroll-behavior: smooth;
+  /* Thin scrollbar for a cleaner look */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.rea-chat__body::-webkit-scrollbar { width: 6px; }
+.rea-chat__body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 3px; }
+
+.rea-chat__msg {
+  max-width: 85%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 14px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--rea-ink-on-dark);
+  animation: reaMsgIn 0.4s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.rea-chat__msg--in {
+  background: rgba(255, 255, 255, 0.06);
+  align-self: flex-start;
+  border-top-left-radius: 4px;
+}
+
+.rea-chat__msg--out {
+  background: var(--rea-accent);
+  align-self: flex-end;
+  border-top-right-radius: 4px;
+}
+
+@keyframes reaMsgIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typing indicator (3 dots) */
+.rea-chat__typing {
+  align-self: flex-end;
+  background: var(--rea-accent);
+  padding: 0.75rem 0.9rem;
+  border-radius: 14px;
+  border-top-right-radius: 4px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  animation: reaMsgIn 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.rea-chat__typing span {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  animation: reaTypingDot 1.3s ease-in-out infinite;
+}
+
+.rea-chat__typing span:nth-child(2) { animation-delay: 0.18s; }
+.rea-chat__typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes reaTypingDot {
+  0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
+  30%          { opacity: 1;    transform: translateY(-3px); }
+}
+
+.rea-chat__pass {
+  padding: 0.85rem 1rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  text-align: center;
+  background: var(--rea-accent-soft);
+  color: var(--rea-accent);
+  border-top: 1px solid var(--rea-border-dark);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  animation: reaMsgIn 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.rea-chat__legend {
+  display: none;
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.82rem;
+  color: var(--rea-ink-on-dark-faint);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 960px) {
+  .rea-chat__legend {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rea-chat__msg,
+  .rea-chat__typing,
+  .rea-chat__pass {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .rea-chat__typing span { animation: none; opacity: 0.6; }
+  .rea-chat__body { scroll-behavior: auto; }
+}
+
+/* =================================================================
+   2. PROBLEMA
+================================================================= */
+
+.rea-problem__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.rea-problem__list li {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--rea-ink-on-dark-dim);
+  padding-left: 1.75rem;
+  position: relative;
+}
+
+.rea-problem__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 12px;
+  height: 2px;
+  background: var(--rea-ink-on-dark-faint);
+}
+
+/* =================================================================
+   3. CÓMO FUNCIONA
+================================================================= */
+
+.rea-steps__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 820px) {
+  .rea-steps__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.rea-step {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--rea-border-dark);
+  border-radius: 20px;
+  background: var(--rea-dark-soft);
+}
+
+.rea-step__num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: var(--rea-ink-on-dark);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.rea-step__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--rea-ink-on-dark);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.rea-step__text {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-dark-dim);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* =================================================================
+   4. DEMO
+================================================================= */
+
+.rea-demo__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rea-demo__inner .rea-h2 {
+  margin-bottom: 1.5rem;
+}
+
+.rea-demo__lede {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.15rem;
+  color: var(--rea-ink-on-dark-dim);
+  line-height: 1.6;
+  margin: 0 auto 2.5rem;
+  max-width: 620px;
+}
+
+.rea-demo__hint {
+  margin: 1.5rem 0 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  color: var(--rea-ink-on-dark-faint);
+  font-style: italic;
+}
+
+/* =================================================================
+   5. CALCULADORA · hero moment
+================================================================= */
+
+.rea-calc__grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 1rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .rea-calc__grid {
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 4rem;
+  }
+}
+
+.rea-calc__inputs {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.rea-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rea-field span {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--rea-ink-on-light);
+}
+
+.rea-field input {
+  background: var(--rea-light-soft);
+  border: 1px solid var(--rea-border-light);
+  border-radius: 10px;
+  padding: 0.95rem 1rem;
+  color: var(--rea-ink-on-light);
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  outline: none;
+  min-height: 48px;
+  -moz-appearance: textfield;
+}
+
+.rea-field input::-webkit-outer-spin-button,
+.rea-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rea-field input:focus {
+  border-color: var(--rea-accent);
+  box-shadow: 0 0 0 3px rgba(233, 51, 112, 0.15);
+}
+
+/* ---------- The big result ---------- */
+
+.rea-calc__big {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rea-calc__big-num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(4rem, 11vw, 9rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--rea-accent);
+  margin: 0;
+  word-break: break-word;
+}
+
+.rea-calc__big-sub {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  line-height: 1.3;
+  color: var(--rea-ink-on-light);
+  margin: 0;
+  max-width: 480px;
+  letter-spacing: -0.015em;
+}
+
+.rea-calc__detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rea-border-light);
+  max-width: 440px;
+}
+
+.rea-calc__detail div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rea-calc__detail strong {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--rea-ink-on-light);
+  line-height: 1;
+}
+
+.rea-calc__detail span {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: var(--rea-ink-on-light-dim);
+  line-height: 1.3;
+}
+
+.rea-calc__disclaimer {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: var(--rea-ink-on-light-faint);
+  margin: 3rem 0 0;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+/* =================================================================
+   6. RESULTADOS · light
+================================================================= */
+
+.rea-results__grid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 820px) {
+  .rea-results__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+.rea-result {
+  padding: 0;
+}
+
+.rea-result svg {
+  color: var(--rea-accent);
+  margin-bottom: 1rem;
+}
+
+.rea-result h3 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--rea-ink-on-light);
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.rea-result p {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-light-dim);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* =================================================================
+   7. INTEGRACIONES · light
+================================================================= */
+
+.rea-integrations__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.rea-integrations__list li {
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--rea-border-light);
+  border-radius: 999px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--rea-ink-on-light);
+  background: var(--rea-light-soft);
+}
+
+/* =================================================================
+   8. PRECIOS · light
+================================================================= */
+
+.rea-pricing__toggle {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  background: var(--rea-light-soft);
+  border: 1px solid var(--rea-border-light);
+  border-radius: 999px;
+  margin-bottom: 3.5rem;
+  width: fit-content;
+}
+
+.rea-pricing__opt {
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  color: var(--rea-ink-on-light-dim);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.rea-pricing__opt.is-active {
+  background: var(--rea-ink-on-light);
+  color: var(--rea-light);
+}
+
+.rea-pricing__save {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.rea-pricing__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 820px) {
+  .rea-pricing__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.rea-plan {
+  padding: 2.25rem 1.75rem;
+  border: 1px solid var(--rea-border-light);
+  border-radius: 20px;
+  background: var(--rea-light-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+.rea-plan--featured {
+  border-color: var(--rea-ink-on-light);
+  border-width: 2px;
+  transform: translateY(-6px);
+}
+
+.rea-plan__flag {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--rea-ink-on-light);
+  color: var(--rea-light);
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+
+.rea-plan__name {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--rea-ink-on-light);
+}
+
+.rea-plan__tagline {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-light-dim);
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.rea-plan__price {
+  margin: 0.5rem 0;
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
-  margin-bottom: 1.25rem;
-  justify-content: center;
-}
-
-.al-pack__price {
   font-family: "DM Sans", sans-serif;
-  font-weight: 900;
-  font-size: 3.2rem;
-  color: #fff;
+  font-weight: 800;
+  font-size: 2.75rem;
+  color: var(--rea-ink-on-light);
   line-height: 1;
 }
 
-.al-pack__price-unit {
-  font-family: "Nunito Sans", sans-serif;
+.rea-plan__unit {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--rea-ink-on-light-dim);
   font-weight: 600;
 }
 
-.al-pack__cta {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #ba155e;
-  background: #fff;
-  border: 1.5px solid #fff;
-  border-radius: 999px;
-  padding: 0.95rem 2rem;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.al-pack__cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.al-pack__guarantee {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 1rem 0 0;
-  text-align: center;
-}
-
-.al-perks {
+.rea-plan__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  grid-column: 1 / -1;
+  gap: 0.6rem;
 }
 
-.al-perk {
-  background: var(--feature-pill-bg);
-  border: 1px solid var(--feature-pill-border);
-  border-radius: 16px;
-  padding: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.al-perk__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #ba155e 0%, #e93370 40%, #ff507a 100%);
+.rea-plan__list li {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.6rem;
+  color: var(--rea-ink-on-light);
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+}
+
+.rea-plan__list svg {
+  color: var(--rea-accent);
   flex-shrink: 0;
 }
 
-.al-perk__title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--card-text);
-  margin: 0 0 0.3rem;
+.rea-plan__cta {
+  justify-content: center;
+  margin-top: auto;
 }
 
-.al-perk__text {
+.rea-pricing__note {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  color: var(--rea-ink-on-light-faint);
+  margin: 3.5rem auto 0;
+  max-width: 620px;
   line-height: 1.55;
-  color: var(--card-text-regular);
-  margin: 0;
-}
-
-@media screen and (max-width: 767px) {
-  .al-buy-grid {
-    grid-template-columns: 1fr;
-  }
-  .al-pack__title {
-    font-size: 1.6rem;
-  }
-  .al-perks {
-    grid-template-columns: 1fr;
-    grid-column: auto;
-  }
-}
-
-/* ================================
-   Contact section
-   ================================ */
-.al-contact-row {
-  display: flex;
-  gap: 3rem;
-}
-
-.al-honeypot {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
-
-.al-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  flex: 1 1 50%;
-}
-
-.al-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.al-form-label {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--card-text-regular);
-  letter-spacing: 0.01em;
-}
-
-.al-form-input,
-.al-form-textarea {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.95rem;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--feature-pill-border);
-  border-radius: 12px;
-  background: var(--feature-pill-bg);
-  color: var(--card-text);
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.al-form-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.al-form-input:focus-visible,
-.al-form-textarea:focus-visible {
-  border-color: rgba(124, 127, 198, 0.5);
-  box-shadow: 0 0 0 3px rgba(124, 127, 198, 0.1);
-}
-
-.al-form-error {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.85rem;
-  color: #dc2626;
-  margin: 0;
-  padding: 0.6rem 1rem;
-  background: rgba(220, 38, 38, 0.08);
-  border-radius: 10px;
-}
-
-.al-form-submit {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--btn-text);
-  background: var(--btn-bg);
-  border: none;
-  border-radius: 999px;
-  padding: 0.9rem 2.5rem;
-  cursor: pointer;
-  letter-spacing: 0.01em;
-  width: fit-content;
-  transition: transform 0.2s ease;
-}
-
-.al-form-submit:hover {
-  transform: translateY(-2px);
-}
-
-.al-form-submit:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.al-form-submit:disabled:hover {
-  transform: none;
-}
-
-.al-sent {
-  flex: 1 1 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  padding: 2rem;
 }
 
-.al-sent__icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #ba155e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* =================================================================
+   9. GARANTÍA · light
+================================================================= */
+
+.rea-guarantee svg {
+  color: var(--rea-ink-on-light);
   margin-bottom: 1.5rem;
-  color: #fff;
-  font-size: 1.8rem;
 }
 
-.al-sent__title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--card-text);
-  margin: 0 0 0.5rem;
-}
-
-.al-sent__text {
+.rea-guarantee__text {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 0.95rem;
-  color: var(--card-text-regular);
-  max-width: 360px;
-  margin: 0;
+  color: var(--rea-ink-on-light-dim);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 540px;
 }
 
-.al-contact-side {
-  flex: 1 1 50%;
-  border-radius: 24px;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 400px;
-  background-image: url(https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/formulario_gfpual.jpg);
-  background-size: cover;
-  background-position: center;
-}
+/* =================================================================
+   10. CUMPLIMIENTO · light
+================================================================= */
 
-.al-contact-side__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.45) 100%);
-  border-radius: 24px;
-}
-
-.al-contact-side__glow-big {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: rgba(233, 51, 112, 0.2);
-  border-radius: 50%;
-  top: -60px;
-  right: -50px;
-  filter: blur(40px);
-  pointer-events: none;
-}
-
-.al-contact-side__glow-small {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: rgba(233, 51, 112, 0.1);
-  border-radius: 16px;
-  transform: rotate(15deg);
-  bottom: 30px;
-  right: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.al-contact-side__glass {
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2rem 1.75rem;
-}
-
-.al-contact-side__title {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: #fff;
-  margin: 0 0 1.25rem;
-  line-height: 1.2;
-}
-
-.al-contact-side__list {
+.rea-compliance__list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
+  max-width: 760px;
 }
 
-.al-contact-side__item {
+.rea-compliance__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid var(--rea-border-light);
+  border-radius: 12px;
+  background: var(--rea-light-soft);
   font-family: "Nunito Sans", sans-serif;
-  font-size: 1.05rem;
-  color: #fff;
-  display: flex;
-  gap: 12px;
-  align-items: center;
+  color: var(--rea-ink-on-light);
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
-.al-contact-side__check {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ba155e 0%, #ff507a 100%);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
+.rea-compliance__list svg {
+  color: var(--rea-ink-on-light);
   flex-shrink: 0;
 }
 
-@media screen and (max-width: 767px) {
-  .al-contact-row {
-    flex-direction: column;
-    gap: 2rem;
+/* =================================================================
+   11. FAQ · light
+================================================================= */
+
+.rea-faq__list {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 820px;
+}
+
+.rea-faq__item {
+  border: 1px solid var(--rea-border-light);
+  border-radius: 12px;
+  background: var(--rea-light-soft);
+  overflow: hidden;
+}
+
+.rea-faq__item summary {
+  cursor: pointer;
+  padding: 1.2rem 1.4rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  color: var(--rea-ink-on-light);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.05rem;
+}
+
+.rea-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.rea-faq__item summary::after {
+  content: "+";
+  color: var(--rea-ink-on-light);
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.rea-faq__item[open] summary::after {
+  content: "–";
+}
+
+.rea-faq__item p {
+  padding: 0 1.4rem 1.4rem;
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-light-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =================================================================
+   12. FINAL CTA · dark
+================================================================= */
+
+.rea-final .rea-h2 {
+  margin-bottom: 1.5rem;
+}
+
+.rea-final__sub {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-dark-dim);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 auto 2.5rem;
+  max-width: 540px;
+}
+
+.rea-final__ctas {
+  justify-content: center;
+}
+
+/* =================================================================
+   Footer (product only, replaces DQUEENS)
+================================================================= */
+
+.rea-foot {
+  background: var(--rea-dark);
+  color: var(--rea-ink-on-dark);
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--rea-border-dark);
+}
+
+.rea-foot__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+@media (min-width: 760px) {
+  .rea-foot__inner {
+    flex-direction: row;
+    align-items: center;
   }
-  .al-contact-side {
+}
+
+.rea-foot__brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.rea-foot__logo {
+  height: 28px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.rea-foot__tag {
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  color: var(--rea-ink-on-dark-faint);
+}
+
+.rea-foot__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.rea-foot__links a {
+  color: var(--rea-ink-on-dark-dim);
+  text-decoration: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.rea-foot__links a:hover {
+  color: var(--rea-ink-on-dark);
+}
+
+/* =================================================================
+   Mobile bottom sticky CTA
+================================================================= */
+
+.rea-mobile-cta {
+  display: none;
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  background: var(--rea-accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+  border-radius: 999px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  z-index: 90;
+  box-shadow: 0 14px 36px -10px rgba(233, 51, 112, 0.65);
+}
+
+@media (max-width: 760px) {
+  .rea-mobile-cta {
+    display: flex;
+  }
+  .rea-nav__cta {
     display: none;
+  }
+  .rea-final {
+    padding-bottom: 7rem;
+  }
+  .rea-section {
+    padding: 6rem 1.25rem;
+  }
+  .rea-hero {
+    padding-top: 5.5rem;
+    padding-bottom: 4rem;
+  }
+  .rea-hero__context {
+    margin-top: 3.5rem;
+  }
+}
+
+/* =================================================================
+   Reduced motion
+================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .rea-chat__msg,
+  .rea-chat__pass {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
