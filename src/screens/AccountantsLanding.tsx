@@ -1,723 +1,1024 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
-import { MessageCircle, Palette, TrendingUp } from "lucide-react";
-import HeroPulse from "../components/ui/SplitHero/HeroPulse";
-import { Card } from "../components/ui/card/Card";
-import { ImageCard } from "../components/ui/ImageCard/ImageCard";
-import "./pageStyles.css";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  MessageCircle,
+  Calendar,
+  CheckCircle2,
+  Shield,
+  Zap,
+  Users,
+  ArrowRight,
+} from "lucide-react";
 import "./AccountantsLanding.css";
-import { Layout } from "./layout";
-import { useT } from "../i18n/useT";
-import { useLocale } from "../i18n/provider";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.12 * i },
-  }),
+// ===============================
+// EDITABLE CONSTANTS
+// Change everything here. The UI reads from this block.
+// ===============================
+
+const PRODUCT_NAME = "[PON_AQUÍ_EL_NOMBRE]";
+const PRODUCT_LOGO = "/logodq.png"; // reemplazar por el logo del producto cuando esté
+
+// Nombre de la inmobiliaria que aparece EN EL CHAT (lo que ve el comprador).
+// Es un ejemplo editable: no debe ser el nombre del producto porque el agente
+// no quiere que el lead sienta que habla con una herramienta ajena a su marca.
+const AGENCY_NAME_EXAMPLE = "Inmobiliaria Chamberí";
+
+const WHATSAPP_PHONE = "34000000000";
+const DEMO_MESSAGE = "Hola, busco piso en Madrid hasta 400.000 €";
+const WHATSAPP_DEMO_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(DEMO_MESSAGE)}`;
+const TRIAL_URL = "#empezar";
+
+// Anual = mensual x 10 (dos meses gratis).
+const PLANS: Plan[] = [
+  {
+    id: "agente",
+    name: "Agente",
+    tagline: "Para un agente que trabaja solo.",
+    monthly: 49,
+    highlights: [
+      "Hasta 300 leads al mes",
+      "WhatsApp Business API",
+      "Panel con visitas del día",
+      "Soporte por correo",
+    ],
+  },
+  {
+    id: "agencia",
+    name: "Agencia",
+    tagline: "Para equipos que ya facturan.",
+    monthly: 99,
+    featured: true,
+    highlights: [
+      "Hasta 1.500 leads al mes",
+      "Integración con Meta Lead Ads",
+      "Google Calendar y tu CRM",
+      "Soporte prioritario",
+    ],
+  },
+  {
+    id: "multioficina",
+    name: "Multioficina",
+    tagline: "Para la red con varias oficinas.",
+    monthly: 199,
+    highlights: [
+      "Leads ilimitados",
+      "Multi oficina y multi agente",
+      "Reportes y exportaciones",
+      "Gestor de cuenta dedicado",
+    ],
+  },
+];
+
+type Plan = {
+  id: string;
+  name: string;
+  tagline: string;
+  monthly: number;
+  featured?: boolean;
+  highlights: string[];
 };
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu_6iYYMFNCQcaxxqFl_uQeamqAomcY2HWcclTlUM45_xaeRdfa2j50gUOfAf-9s_2uw/exec";
+// ===============================
+// Analytics helper (Umami)
+// ===============================
 
-const anchorLinks = [
-  { id: "hero", label: "Inicio", labelKey: "header.anchorNav.hero" },
-  { id: "about", label: "Nosotros", labelKey: "header.anchorNav.about" },
-  { id: "why", label: "Por Qué", labelKey: "header.anchorNav.why" },
-  { id: "services", label: "Servicios", labelKey: "header.anchorNav.services" },
-  { id: "offer", label: "Oferta", labelKey: "header.anchorNav.offer" },
-  { id: "process", label: "Proceso", labelKey: "header.anchorNav.process" },
-  { id: "compare", label: "Comparación", labelKey: "header.anchorNav.compare" },
-  { id: "buy", label: "Comprar", labelKey: "header.anchorNav.buy" },
-  { id: "contact", label: "Contacto", labelKey: "header.anchorNav.contact" },
+type UmamiWindow = Window & {
+  umami?: { track: (event: string, data?: Record<string, unknown>) => void };
+};
+
+const track = (event: string, data?: Record<string, unknown>) => {
+  if (typeof window === "undefined") return;
+  const w = window as UmamiWindow;
+  if (w.umami && typeof w.umami.track === "function") {
+    w.umami.track(event, data);
+  }
+};
+
+// ===============================
+// Chat mockup (CSS keyframes only)
+// ===============================
+
+// ---------- Chat script ----------
+
+type ChatSide = "in" | "out";
+type ChatMsg = { side: ChatSide; text: string };
+
+const CHAT_SCRIPT: ChatMsg[] = [
+  { side: "in", text: "Hola, vi un piso en Chamberí a las 23:47. ¿Sigue disponible?" },
+  { side: "out", text: "Hola. Sí, sigue disponible: C/ Fuencarral 150, 3 hab, 420.000 €. ¿Buscas en esa zona en concreto o también miras alrededor?" },
+  { side: "in", text: "Chamberí o Malasaña, sobre todo." },
+  { side: "out", text: "Perfecto. ¿Qué presupuesto máximo manejas y para cuándo te gustaría mudarte?" },
+  { side: "in", text: "Hasta 450.000. Cuanto antes, en 3 meses ideal." },
+  { side: "out", text: "Genial. Una última cosa para preparar la visita: ¿ya has hablado con el banco o lo vemos nosotros?" },
+  { side: "in", text: "Tengo pre aprobación de 400.000." },
+  { side: "out", text: "Tengo visita el jueves 18:30 o el sábado 11:00. ¿Cuál te viene mejor? Te paso también dos pisos de Malasaña en tu rango." },
 ];
 
-const stats = [
-  { num: "100+", key: "stat1", fallback: "Proyectos Entregados" },
-  { num: "5+", key: "stat2", fallback: "Años de Experiencia" },
-  { num: "100%", key: "stat3", fallback: "Clientes Satisfechos" },
-  { num: "24/7", key: "stat4", fallback: "Soporte Continuo" },
-];
+// Mobile: solo los primeros 4 para no alargar la página.
+const CHAT_SCRIPT_MOBILE = CHAT_SCRIPT.slice(0, 4);
 
-const processSteps = [
-  { step: "01", key: "step1", titleFallback: "Consultoría Gratuita", textFallback: "Conversamos sobre tu práctica contable, tus objetivos y cómo querés mostrarte al mundo." },
-  { step: "02", key: "step2", titleFallback: "Diseño a Tu Medida", textFallback: "Creamos propuestas de diseño alineadas a tu identidad. Vos elegís o traés tus propias ideas." },
-  { step: "03", key: "step3", titleFallback: "Desarrollo Ágil", textFallback: "Construimos tu web con las mejores prácticas. Rápida, segura y optimizada para todos los dispositivos." },
-  { step: "04", key: "step4", titleFallback: "Lanzamiento y Soporte", textFallback: "Publicamos tu sitio y te acompañamos con soporte continuo para que todo funcione perfecto." },
-];
+// Timings
+const T_INITIAL = 400;       // ms antes del primer mensaje
+const T_BETWEEN = 1200;      // ms entre mensajes
+const T_TYPING_SHOW = 800;   // ms visible el "escribiendo..."
+const T_RESTART = 3000;      // ms pausa antes del reinicio
 
-export const AccountantsLanding: React.FC = () => {
-  const t = useT();
-  const { setLocale } = useLocale();
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-  const [sent, setSent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState("");
-  const [lastSubmit, setLastSubmit] = useState(0);
-  const abortRef = useRef<AbortController | null>(null);
+const ChatAnimated: React.FC = () => {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const [passShown, setPassShown] = useState(false);
+  const [started, setStarted] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<number[]>([]);
+
+  // Pref detection
   useEffect(() => {
-    setLocale("es");
-  }, [setLocale]);
-
-  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mob = window.matchMedia("(max-width: 760px)");
+    setReducedMotion(rm.matches);
+    setIsMobile(mob.matches);
+    const onRM = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    const onM = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    rm.addEventListener("change", onRM);
+    mob.addEventListener("change", onM);
     return () => {
-      abortRef.current?.abort();
+      rm.removeEventListener("change", onRM);
+      mob.removeEventListener("change", onM);
     };
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    if (formError) setFormError("");
-  };
+  // Start on viewport enter
+  useEffect(() => {
+    if (started) return;
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setStarted(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [started]);
 
-  const validateForm = useCallback((): string | null => {
-    const name = form.name.trim();
-    const email = form.email.trim();
-    const message = form.message.trim();
-    if (name.length < 2 || name.length > 100) return "El nombre debe tener entre 2 y 100 caracteres.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Ingresá un email válido.";
-    if (form.phone.trim() && !/^[\d\s\-+()]{4,25}$/.test(form.phone.trim())) return "El teléfono no tiene un formato válido.";
-    if (message.length < 5) return "El mensaje debe tener al menos 5 caracteres.";
-    if (message.length > 2000) return "El mensaje no puede exceder los 2000 caracteres.";
-    return null;
-  }, [form]);
+  // State machine
+  useEffect(() => {
+    if (!started) return;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormError("");
+    const script = isMobile ? CHAT_SCRIPT_MOBILE : CHAT_SCRIPT;
 
-    if (Date.now() - lastSubmit < 5000) {
-      setFormError("Esperá unos segundos antes de enviar de nuevo.");
+    const clearAll = () => {
+      timers.current.forEach((id) => window.clearTimeout(id));
+      timers.current = [];
+    };
+
+    if (reducedMotion) {
+      // Mostrar todo de golpe, sin animación
+      clearAll();
+      setVisibleCount(script.length);
+      setTyping(false);
+      setPassShown(true);
       return;
     }
 
-    if (submitting) return;
+    const runLoop = () => {
+      clearAll();
+      setVisibleCount(0);
+      setTyping(false);
+      setPassShown(false);
 
-    const validationError = validateForm();
-    if (validationError) {
-      setFormError(validationError);
-      return;
-    }
+      let acc = T_INITIAL;
 
-    if ((e.target as HTMLFormElement).querySelector<HTMLInputElement>('input[name="_honey"]')?.value) {
-      setSent(true);
-      setForm({ name: "", email: "", phone: "", message: "" });
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      const controller = new AbortController();
-      abortRef.current = controller;
-      const timeout = setTimeout(() => controller.abort(), 10000);
-
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          phone: form.phone.trim() || "",
-          message: form.message.trim(),
-          _honey: "",
-        }),
-        signal: controller.signal,
+      script.forEach((msg, i) => {
+        if (msg.side === "out") {
+          const showTypingAt = acc;
+          timers.current.push(
+            window.setTimeout(() => setTyping(true), showTypingAt),
+          );
+          const showMsgAt = showTypingAt + T_TYPING_SHOW;
+          timers.current.push(
+            window.setTimeout(() => {
+              setTyping(false);
+              setVisibleCount(i + 1);
+            }, showMsgAt),
+          );
+          acc = showMsgAt + T_BETWEEN;
+        } else {
+          timers.current.push(
+            window.setTimeout(() => setVisibleCount(i + 1), acc),
+          );
+          acc += T_BETWEEN;
+        }
       });
 
-      clearTimeout(timeout);
-      setSent(true);
-      setForm({ name: "", email: "", phone: "", message: "" });
-      setLastSubmit(Date.now());
-    } catch (err: unknown) {
-      const error = err as Error;
-      if (error?.name === "AbortError") {
-        setFormError("La solicitud tardó demasiado. Intenta de nuevo.");
-      } else {
-        setFormError("Hubo un error al enviar. Intenta de nuevo.");
-      }
-    } finally {
-      setSubmitting(false);
-      abortRef.current = null;
+      // Pass footer
+      timers.current.push(window.setTimeout(() => setPassShown(true), acc));
+
+      // Reinicio
+      timers.current.push(window.setTimeout(runLoop, acc + T_RESTART));
+    };
+
+    runLoop();
+    return clearAll;
+  }, [started, reducedMotion, isMobile]);
+
+  // Smooth auto-scroll al llegar nuevos mensajes o typing
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    const scrollNow = () =>
+      el.scrollTo({
+        top: el.scrollHeight,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    const raf = requestAnimationFrame(scrollNow);
+    return () => cancelAnimationFrame(raf);
+  }, [visibleCount, typing, passShown, reducedMotion]);
+
+  const script = isMobile ? CHAT_SCRIPT_MOBILE : CHAT_SCRIPT;
+  const shown = script.slice(0, visibleCount);
+
+  return (
+    <div ref={rootRef} className="rea-chat-wrap">
+      <div
+        className="rea-chat"
+        role="img"
+        aria-label="Demostración de conversación entre un comprador y la IA, con el nombre de la inmobiliaria arriba."
+      >
+        <header className="rea-chat__head">
+          <span className="rea-chat__avatar">
+            {AGENCY_NAME_EXAMPLE.charAt(0)}
+          </span>
+          <div>
+            <p className="rea-chat__name">{AGENCY_NAME_EXAMPLE}</p>
+            <p className="rea-chat__state">en línea</p>
+          </div>
+        </header>
+        <div ref={bodyRef} className="rea-chat__body">
+          {shown.map((m, i) => (
+            <div
+              key={`${i}-${m.text.slice(0, 10)}`}
+              className={`rea-chat__msg rea-chat__msg--${m.side}`}
+            >
+              {m.text}
+            </div>
+          ))}
+          {typing && (
+            <div
+              className="rea-chat__typing"
+              aria-label="La IA está escribiendo"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
+        </div>
+        {passShown && (
+          <div className="rea-chat__pass">
+            Lead calificado · Visita propuesta · Pasado al agente
+          </div>
+        )}
+      </div>
+      <p className="rea-chat__legend">
+        Así lo ve el comprador: con la marca de tu agencia, no con la nuestra.
+      </p>
+    </div>
+  );
+};
+
+// ===============================
+// Scroll section tracker (Umami)
+// ===============================
+
+const useSectionTracker = () => {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const seen = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const id = e.target.id;
+          if (!id) continue;
+          if (e.isIntersecting && !seen.has(id)) {
+            seen.add(id);
+            track("section-view", { section: id });
+          }
+        }
+      },
+      { threshold: 0.35 },
+    );
+    document
+      .querySelectorAll<HTMLElement>("[data-track-section]")
+      .forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+};
+
+// ===============================
+// Component
+// ===============================
+
+export const AccountantsLanding: React.FC = () => {
+  useSectionTracker();
+
+  // Pricing toggle
+  const [annual, setAnnual] = useState(false);
+
+  // ROI calculator state
+  const [leads, setLeads] = useState<number>(100);
+  const [slowPct, setSlowPct] = useState<number>(60);
+  const [commission, setCommission] = useState<number>(5000);
+
+  // Computed outputs
+  const slowLeads = Math.max(0, Math.round(leads * (slowPct / 100)));
+  const extraVisits = Math.round(slowLeads * 0.35);
+  const extraSales = Math.round(extraVisits * 0.08);
+  const extraRevenue = extraSales * commission;
+
+  const formatMoney = new Intl.NumberFormat("es-ES", {
+    maximumFractionDigits: 0,
+  });
+
+  const trackedCalcChange = useRef<number>(0);
+  const handleCalcChange = (field: string, value: number) => {
+    const now = Date.now();
+    if (now - trackedCalcChange.current > 1000) {
+      track("calculator-interact", { field, value });
+      trackedCalcChange.current = now;
     }
   };
 
   return (
-    <Layout anchorNav={anchorLinks} landingFooterLinks={anchorLinks} darkHeader>
-      <section id="hero" className="al-hero" aria-labelledby="al-hero-title">
-        <div className="al-hero__inner">
-          <div className="al-hero__text">
-            <span className="al-hero__eyebrow">
-              {t("accountants.heroNew.eyebrow", "AUTOMATIZACIÓN · CONTADORES")}
-            </span>
-
-            <h1 id="al-hero-title" className="al-hero__title">
-              {t("accountants.heroNew.title.line1", "Menos horas manuales.")}
-              <br />
-              <span className="al-hero__title-mark">
-                {t("accountants.heroNew.title.line2", "Más clientes atendidos.")}
-              </span>
-            </h1>
-
-            <p className="al-hero__body">
-              {t(
-                "accountants.heroNew.body",
-                "Automatizamos las tareas repetitivas que te comen el día: carga de facturas, conciliación bancaria y categorización. Vos te quedás con lo estratégico, lo que tus clientes pagan más caro."
-              )}
-            </p>
-
-            <div className="al-hero__actions">
-              <a
-                className="al-hero__cta-primary"
-                href="#offer"
-                data-umami-event="hero-ver-como-funciona"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("offer")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                {t("accountants.heroNew.ctaPrimary", "Ver cómo funciona")}
-              </a>
-              <a
-                className="al-hero__cta-secondary"
-                href="#contact"
-                data-umami-event="hero-escribinos"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                {t("accountants.heroNew.ctaSecondary", "Escribinos")}
-              </a>
-            </div>
-
-            <div className="al-hero__proof">
-              <p className="al-hero__proof-stat">20+ horas</p>
-              <p className="al-hero__proof-label">
-                {t(
-                  "accountants.heroNew.proof",
-                  "ahorradas por contador cada semana al automatizar las tareas repetitivas."
-                )}
-              </p>
-            </div>
-          </div>
-
-          <div className="al-hero__media" aria-hidden="true">
-            <HeroPulse />
-          </div>
-        </div>
-      </section>
-
-      <section id="about" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.about.badge", "QUIÉNES SOMOS")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.about.title.line1", "Expertos en Presencia Digital")}
-            <br />
-            <span className="accent-underline">
-              {t("accountants.about.title.line2", "para Profesionales Contables")}
-            </span>
-          </h2>
-        </div>
-        <div className="al-about-grid">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <p className="al-story-p">
-              {t("accountants.about.p1", "En DevQueens nos especializamos en crear presencia digital para profesionales contables. Entendemos los desafíos únicos de tu industria: necesitás transmitir confianza, experiencia y profesionalismo en cada punto de contacto con tus clientes.")}
-            </p>
-            <p className="al-story-p">
-              {t("accountants.about.p2", "Combinamos diseño estratégico, desarrollo web moderno y optimización para marketing digital. No solo creamos sitios web, construimos herramientas que convierten visitantes en clientes y posicionan tu práctica contable por encima de la competencia.")}
-            </p>
-            <div className="al-story-features">
-              {[
-                t("accountants.about.feature1", "Diseño UX/UI profesional"),
-                t("accountants.about.feature2", "Desarrollo web y mobile"),
-                t("accountants.about.feature3", "SEO y marketing digital"),
-                t("accountants.about.feature4", "Asesoría continua personalizada"),
-              ].map((feat) => (
-                <span key={feat} className="al-story-feature-pill">{feat}</span>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div className="al-stats" custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            {stats.map((s) => (
-              <div key={s.key} className="al-stat">
-                <div className="al-stat-glow" aria-hidden="true" />
-                <p className="al-stat-num">{s.num}</p>
-                <p className="al-stat-label">{t(`accountants.about.${s.key}`, s.fallback)}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="why" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.why.badge", "¿POR QUÉ ESTAR ONLINE?")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.why.title", "Tus Clientes Te Buscan en Internet. ¿Te Encuentran?")}
-          </h2>
-        </div>
-        <div className="why-grid">
-          <ImageCard
-            index={0}
-            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-one_bweqvl.jpg"
-            stat="93%"
-            title={t("accountants.why.stat1.title", "Investigan Online")}
-            description={t("accountants.why.stat1.text", "De los clientes potenciales investigan en internet antes de contratar un servicio profesional.")}
-          />
-          <ImageCard
-            index={1}
-            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-two_dc7czx.jpg"
-            stat="75%"
-            title={t("accountants.why.stat2.title", "Confían Más")}
-            description={t("accountants.why.stat2.text", "Un sitio web profesional aumenta la confianza y credibilidad de tu servicio contable.")}
-          />
-          <ImageCard
-            index={2}
-            image="https://res.cloudinary.com/dljbxdjl7/image/upload/v1779879898/card-three_hktgir.jpg"
-            stat="3x"
-            title={t("accountants.why.stat3.title", "Más Oportunidades")}
-            description={t("accountants.why.stat3.text", "Los contadores con presencia online reciben hasta 3 veces más consultas de nuevos clientes.")}
-          />
-        </div>
-      </section>
-
-      <section id="services" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.services.badge", "LO QUE OFRECEMOS")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.services.title.line1", "Tu Web Profesional")}
-            <br />
-            <span className="accent-underline">
-              {t("accountants.services.title.line2", "Lista para Crecer")}
-            </span>
-          </h2>
-        </div>
-        <div className="cards-grid cards-grid--2col">
-          <Card inverted areaService={t("accountants.services.card1.area", "SITIO WEB")} title={t("accountants.services.card1.title", "Web Profesional Personalizada")} content={t("accountants.services.card1.content", "Diseñamos tu sitio web a medida con información clara sobre tus servicios, experiencia y valores. Adaptado a web y mobile para que te vean impecable en cualquier dispositivo.")} />
-          <Card inverted areaService={t("accountants.services.card2.area", "CATÁLOGO")} title={t("accountants.services.card2.title", "Catálogo de Servicios")} content={t("accountants.services.card2.content", "Presenta tus servicios contables de forma organizada y profesional. Tus clientes entenderán exactamente qué ofreces y por qué deberían elegirte.")} />
-          <Card inverted areaService={t("accountants.services.card3.area", "SEO & MARKETING")} title={t("accountants.services.card3.title", "Optimización para Marketing")} content={t("accountants.services.card3.content", "Tu web lista para campañas de publicidad y marketing digital. Optimizada para SEO, Google Ads y redes sociales desde el día uno.")} />
-          <Card inverted areaService={t("accountants.services.card4.area", "ASESORÍA")} title={t("accountants.services.card4.title", "Asesoría y Acompañamiento")} content={t("accountants.services.card4.content", "Te guiamos en cada decisión. Comparamos opciones del mercado, analizamos competidores y te ayudamos a destacar con fundamentos sólidos.")} />
-        </div>
-      </section>
-
-      <section id="offer" className="page-section--flush al-offer">
-        <div className="al-offer__overlay" aria-hidden="true" />
-        <div className="al-offer__glow--top" aria-hidden="true" />
-        <div className="al-offer__glow--bottom" aria-hidden="true" />
-        <div className="al-offer__body">
-          <div>
-            <span className="al-offer__eyebrow">
-              {t("accountants.offer.badge", "OFERTA LANZAMIENTO")}
-            </span>
-            <h2 className="al-offer__title">
-              {t("accountants.offer.title", "Tu Web Profesional desde")}
-            </h2>
-            <p className="al-offer__price">
-              $100 <span className="al-offer__price-unit">USD</span>
-            </p>
-            <p className="al-offer__desc">
-              {t("accountants.offer.desc", "Incluye diseño personalizado, desarrollo web y mobile, optimización SEO básica y asesoría inicial. Todo lo que necesitás para empezar.")}
-            </p>
-          </div>
+    <>
+      {/* ================================================
+          Sticky top nav (product only, no DevQueens brand)
+      ================================================ */}
+      <header className="rea-nav">
+        <div className="rea-nav__inner">
+          <a className="rea-nav__brand" href="#hero" aria-label={PRODUCT_NAME}>
+            <img
+              className="rea-nav__logo"
+              src={PRODUCT_LOGO}
+              alt={PRODUCT_NAME}
+              width={140}
+              height={36}
+            />
+          </a>
           <a
-            className="al-offer__cta"
-            href="#buy"
-            data-umami-event="cta-aprovechar-oferta"
-            onClick={(e) => { e.preventDefault(); document.getElementById("buy")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="rea-nav__cta"
+            href={WHATSAPP_DEMO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="nav-demo"
+            onClick={() => track("cta-click", { place: "nav", type: "demo" })}
           >
-            {t("accountants.offer.cta", "Aprovechar Oferta")}
+            <MessageCircle size={16} /> Probar la demo
           </a>
         </div>
-      </section>
+      </header>
 
-      <section id="process" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.process.badge", "CÓMO FUNCIONA")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.process.title", "Del Primer Contacto a Tu Web Publicada")}
-          </h2>
-        </div>
-        <div className="al-process-grid">
-          {processSteps.map((item, i) => (
-            <motion.div
-              key={item.step}
-              className="al-process-step"
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-            >
-              <span className="al-process-step-num">{item.step}</span>
-              <h3 className="al-process-step-title">{t(`accountants.process.${item.key}.title`, item.titleFallback)}</h3>
-              <p className="al-process-step-text">{t(`accountants.process.${item.key}.text`, item.textFallback)}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section id="compare" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.compare.badge", "COMPARACIÓN")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.compare.title.line1", "La Diferencia de")}
-            <br />
-            <span className="accent-underline">
-              {t("accountants.compare.title.line2", "Tener Presencia Online")}
-            </span>
-          </h2>
-        </div>
-        <div className="al-compare-grid">
-          <motion.div
-            className="al-compare-card"
-            custom={0}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h3 className="al-compare-card__title">
-              {t("accountants.compare.left.title", "Sin Presencia Online")}
-            </h3>
-            <ul className="al-compare-list">
-              {[
-                t("accountants.compare.left.1", "Clientes no te encuentran en internet"),
-                t("accountants.compare.left.2", "Sin material para hacer publicidad"),
-                t("accountants.compare.left.3", "Imagen poco profesional"),
-                t("accountants.compare.left.4", "Dependés solo del boca a boca"),
-              ].map((item) => (
-                <li key={item} className="al-compare-list-item">
-                  <span className="al-compare-list-marker" aria-hidden="true">—</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-          <motion.div
-            className="al-compare-card al-compare-card--positive"
-            custom={1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="al-compare-card__glow" aria-hidden="true" />
-            <h3 className="al-compare-card__title">
-              {t("accountants.compare.right.title", "Con DevQueens")}
-            </h3>
-            <ul className="al-compare-list">
-              {[
-                t("accountants.compare.right.1", "Web profesional 100% personalizada"),
-                t("accountants.compare.right.2", "Lista para campañas de Google y redes"),
-                t("accountants.compare.right.3", "Refleja tu experiencia y seriedad"),
-                t("accountants.compare.right.4", "Flujo constante de nuevos clientes"),
-              ].map((item) => (
-                <li key={item} className="al-compare-list-item">
-                  <span className="al-compare-list-marker al-compare-list-marker--pos" aria-hidden="true">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="buy" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.buy.badge", "COMENZAR AHORA")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.buy.title.line1", "Obten Tu Sitio Web")}
-            <br />
-            <span className="accent-underline">
-              {t("accountants.buy.title.line2", "Listo para Atraer Clientes")}
-            </span>
-          </h2>
-          <p className="page-lede">
-            {t("accountants.buy.desc", "En menos de una semana tendrás tu sitio web profesional publicado, optimizado para atraer clientes y preparado para campañas de marketing digital. Sin complicaciones, sin letras chicas.")}
-          </p>
-        </div>
-
-        <div className="al-buy-grid">
-          <motion.div
-            className="al-pack al-pack--basic"
-            custom={0}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="al-pack__overlay" aria-hidden="true" />
-            <div className="al-pack__glow-big" aria-hidden="true" />
-            <div className="al-pack__glow-small" aria-hidden="true" />
-            <div className="al-pack__glass">
-              <span className="al-pack__badge">{t("accountants.pack1.badge", "BÁSICO")}</span>
-              <h3 className="al-pack__title">
-                {t("accountants.pack1.title", "Sitio Web Profesional")}
-              </h3>
-              <p className="al-pack__desc">
-                {t("accountants.pack1.desc", "Todo lo esencial para tu presencia online.")}
+      <main>
+        {/* ================================================
+            1. HERO · dark · one CTA
+        ================================================ */}
+        <section
+          id="hero"
+          className="rea-section rea-section--dark rea-hero"
+          data-track-section=""
+        >
+          <div className="rea-hero__inner">
+            <div className="rea-hero__text">
+              <span className="rea-hero__eyebrow">
+                IA · Inmobiliarias de compraventa
+              </span>
+              <h1 className="rea-hero__title">
+                Responde a cada lead en
+                <br />
+                menos de 60 segundos.
+              </h1>
+              <p className="rea-hero__sub">
+                Incluso de madrugada. Califica al comprador y agenda la
+                visita en tu calendario.
               </p>
-              <div className="al-pack__divider" />
-              <ul className="al-pack__features">
-                {[
-                  t("accountants.buy.includes.1", "Diseño web profesional personalizado"),
-                  t("accountants.buy.includes.2", "Optimizado para SEO desde el día uno"),
-                  t("accountants.buy.includes.3", "Adaptado a mobile y todos los dispositivos"),
-                  t("accountants.buy.includes.4", "Listo para Google Ads y redes sociales"),
-                  t("accountants.buy.includes.5", "Soporte y acompañamiento continuo"),
-                ].map((item) => (
-                  <li key={item} className="al-pack__feature">
-                    <span className="al-pack__feature-check" aria-hidden="true">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="al-pack__price-row">
-                <span className="al-pack__price">$100</span>
-                <span className="al-pack__price-unit">USD</span>
+              <div className="rea-hero__ctas">
+                <a
+                  className="rea-cta rea-cta--primary rea-cta--xl"
+                  href={WHATSAPP_DEMO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-umami-event="hero-demo-whatsapp"
+                  onClick={() =>
+                    track("cta-click", { place: "hero", type: "demo" })
+                  }
+                >
+                  <MessageCircle size={20} /> Pruébalo ahora por WhatsApp
+                </a>
+                <a
+                  className="rea-link"
+                  href={TRIAL_URL}
+                  data-umami-event="hero-trial-start"
+                  onClick={() =>
+                    track("cta-click", { place: "hero", type: "trial" })
+                  }
+                >
+                  Empezar prueba gratis
+                </a>
               </div>
-              <a
-                className="al-pack__cta"
-                href="https://buy.stripe.com/fZu4gz3Ac6DD1bRd5iaR203"
-                data-umami-event="cta-comprar-stripe-basic"
-              >
-                {t("accountants.buy.cta", "Obtener Mi Sitio Web Ahora")}
-              </a>
-              <p className="al-pack__guarantee">
-                {t("accountants.buy.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
+              <p className="rea-hero__micro">
+                14 días gratis. Sin tarjeta. Cancela cuando quieras.
               </p>
             </div>
-          </motion.div>
-
-          <motion.div
-            className="al-pack al-pack--pro"
-            custom={1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="al-pack__overlay" aria-hidden="true" />
-            <div className="al-pack__glow-big" aria-hidden="true" />
-            <div className="al-pack__glow-small" aria-hidden="true" />
-            <div className="al-pack__glass">
-              <span className="al-pack__badge al-pack__badge--pro">{t("accountants.pack2.badge", "AVANZADO · MÁS POPULAR")}</span>
-              <h3 className="al-pack__title">
-                {t("accountants.pack2.title", "Web + Fanpage + Campaña")}
-              </h3>
-              <p className="al-pack__desc">
-                {t("accountants.pack2.desc", "Presencia digital completa con publicidad incluida.")}
-              </p>
-              <div className="al-pack__divider" />
-              <ul className="al-pack__features">
-                {[
-                  t("accountants.pack2.includes.1", "Diseño web profesional personalizado"),
-                  t("accountants.pack2.includes.2", "Creación y optimización de Fanpage de Facebook"),
-                  t("accountants.pack2.includes.3", "Configuración de 1 campaña publicitaria"),
-                  t("accountants.pack2.includes.4", "Acompañamiento en cada etapa del proceso"),
-                  t("accountants.pack2.includes.5", "Soporte continuo"),
-                ].map((item) => (
-                  <li key={item} className="al-pack__feature">
-                    <span className="al-pack__feature-check" aria-hidden="true">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="al-pack__price-row">
-                <span className="al-pack__price">$150</span>
-                <span className="al-pack__price-unit">USD</span>
-              </div>
-              <a
-                className="al-pack__cta"
-                href="https://buy.stripe.com/14AfZh9YA3rraMraXaaR204"
-                data-umami-event="cta-comprar-stripe-pro"
-              >
-                {t("accountants.pack2.cta", "Obtener Mi Plan Avanzado")}
-              </a>
-              <p className="al-pack__guarantee">
-                {t("accountants.pack2.guarantee", "Pago 100% seguro · Resultados en menos de 7 días")}
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="al-perks"
-            custom={2}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="al-perk">
-              <div className="al-perk__icon">
-                <MessageCircle size={20} color="#fff" />
-              </div>
-              <div>
-                <h3 className="al-perk__title">{t("accountants.buy.perk1.title", "Consultoría Inicial Sin Costo")}</h3>
-                <p className="al-perk__text">{t("accountants.buy.perk1.text", "Conversamos sobre tu práctica y definimos juntos la mejor estrategia para tu web.")}</p>
-              </div>
-            </div>
-            <div className="al-perk">
-              <div className="al-perk__icon">
-                <Palette size={20} color="#fff" />
-              </div>
-              <div>
-                <h3 className="al-perk__title">{t("accountants.buy.perk2.title", "Diseño que Refleja Tu Marca")}</h3>
-                <p className="al-perk__text">{t("accountants.buy.perk2.text", "Creamos una identidad visual profesional alineada a tu imagen como contador.")}</p>
-              </div>
-            </div>
-            <div className="al-perk">
-              <div className="al-perk__icon">
-                <TrendingUp size={20} color="#fff" />
-              </div>
-              <div>
-                <h3 className="al-perk__title">{t("accountants.buy.perk3.title", "Preparado para Crecer")}</h3>
-                <p className="al-perk__text">{t("accountants.buy.perk3.text", "Tu sitio listo para escalar con marketing digital cuando vos decidas.")}</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="contact" className="page-section page-section--clip">
-        <div className="page-block">
-          <span className="page-badge">{t("accountants.contact.badge", "PRIMER ASESORAMIENTO GRATIS")}</span>
-          <h2 className="al-section-title">
-            {t("accountants.contact.title", "Empecemos a Construir Tu Presencia Online")}
-          </h2>
-          <p className="page-lede">
-            {t("accountants.contact.desc", "Dejanos tus datos y te contactamos para una asesoría sin costo. Traé tus ideas o nosotros te proponemos diseños y posibilidades. Sin compromiso, solo oportunidades.")}
-          </p>
-        </div>
-
-        <div className="al-contact-row">
-          {sent ? (
-            <motion.div
-              className="al-sent"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut" as const }}
-            >
-              <div className="al-sent__icon" aria-hidden="true">✓</div>
-              <h3 className="al-sent__title">
-                {t("accountants.form.sent.title", "¡Gracias por tu interés!")}
-              </h3>
-              <p className="al-sent__text">
-                {t("accountants.form.sent.text", "Hemos recibido tu solicitud. Te contactaremos en las próximas 24 horas para coordinar tu asesoría gratuita.")}
-              </p>
-            </motion.div>
-          ) : (
-            <motion.form
-              className="al-form"
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: "easeOut" as const }}
-            >
-              <input className="al-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" />
-
-              <div className="al-form-group">
-                <label htmlFor="al-name" className="al-form-label">{t("accountants.form.name", "Nombre completo")}</label>
-                <input
-                  className="al-form-input"
-                  type="text"
-                  id="al-name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  maxLength={100}
-                  placeholder={t("accountants.form.name.placeholder", "Tu nombre y apellido")}
-                />
-              </div>
-              <div className="al-form-group">
-                <label htmlFor="al-email" className="al-form-label">{t("accountants.form.email", "Email")}</label>
-                <input
-                  className="al-form-input"
-                  type="email"
-                  id="al-email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  maxLength={254}
-                  placeholder={t("accountants.form.email.placeholder", "Tu correo electrónico")}
-                />
-              </div>
-              <div className="al-form-group">
-                <label htmlFor="al-phone" className="al-form-label">{t("accountants.form.phone", "Teléfono (opcional)")}</label>
-                <input
-                  className="al-form-input"
-                  type="tel"
-                  id="al-phone"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  maxLength={20}
-                  placeholder={t("accountants.form.phone.placeholder", "Tu número de contacto")}
-                />
-              </div>
-              <div className="al-form-group">
-                <label htmlFor="al-message" className="al-form-label">{t("accountants.form.message", "Contanos sobre tu práctica")}</label>
-                <textarea
-                  className="al-form-textarea"
-                  id="al-message"
-                  name="message"
-                  rows={4}
-                  value={form.message}
-                  onChange={handleChange}
-                  required
-                  maxLength={2000}
-                  placeholder={t("accountants.form.message.placeholder", "¿Qué servicios ofrecés? ¿Tenés alguna idea para tu web?")}
-                />
-              </div>
-
-              {formError && (
-                <p className="al-form-error">{formError}</p>
-              )}
-
-              <button
-                type="submit"
-                className="al-form-submit"
-                disabled={submitting}
-                data-umami-event="cta-formulario-contacto"
-              >
-                {submitting ? "Enviando..." : t("accountants.form.submit", "Quiero Mi Asesoría Gratuita")}
-              </button>
-            </motion.form>
-          )}
-
-          <div className="al-contact-side">
-            <div className="al-contact-side__overlay" aria-hidden="true" />
-            <div className="al-contact-side__glow-big" aria-hidden="true" />
-            <div className="al-contact-side__glow-small" aria-hidden="true" />
-            <div className="al-contact-side__glass">
-              <p className="al-contact-side__title">
-                {t("accountants.form.side.title", "¿Por qué elegirnos?")}
-              </p>
-              <ul className="al-contact-side__list">
-                {[
-                  t("accountants.form.side.1", "Primer asesoramiento sin costo"),
-                  t("accountants.form.side.2", "Diseños personalizados o traé el tuyo"),
-                  t("accountants.form.side.3", "Te acompañamos en cada decisión"),
-                  t("accountants.form.side.4", "Web lista para marketing y publicidad"),
-                ].map((item) => (
-                  <li key={item} className="al-contact-side__item">
-                    <span className="al-contact-side__check" aria-hidden="true">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="rea-hero__media">
+              <ChatAnimated />
             </div>
           </div>
+
+          {/* 11. Context line (10 words) replacing the empty logo strip */}
+          <p className="rea-hero__context">
+            IA que responde, califica compradores y agenda visitas por WhatsApp.
+          </p>
+        </section>
+
+        {/* ================================================
+            2. PROBLEMA · dark
+        ================================================ */}
+        <section
+          id="problem"
+          className="rea-section rea-section--dark rea-problem"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <h2 className="rea-h2">
+              El comprador no espera. Si no respondes rápido, compra con
+              otra agencia.
+            </h2>
+            <ul className="rea-problem__list">
+              <li>
+                Un lead que escribe a las once de la noche quiere respuesta
+                a las once de la noche.
+              </li>
+              <li>
+                Al día siguiente ya ha hablado con la competencia y la
+                visita se la lleva otro.
+              </li>
+              <li>
+                El tiempo del agente se va en filtrar curiosos, no en
+                cerrar ventas.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ================================================
+            3. CÓMO FUNCIONA · dark
+        ================================================ */}
+        <section
+          id="how-it-works"
+          className="rea-section rea-section--dark rea-steps"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow">Cómo funciona</p>
+            <h2 className="rea-h2">En tres pasos y una tarde de setup.</h2>
+            <ol className="rea-steps__list">
+              <li className="rea-step">
+                <span className="rea-step__num">01</span>
+                <h3 className="rea-step__title">
+                  Conectas tu WhatsApp y portales
+                </h3>
+                <p className="rea-step__text">
+                  WhatsApp Business, Idealista, Fotocasa, Habitaclia y Meta
+                  Lead Ads en un solo panel.
+                </p>
+              </li>
+              <li className="rea-step">
+                <span className="rea-step__num">02</span>
+                <h3 className="rea-step__title">La IA responde y califica</h3>
+                <p className="rea-step__text">
+                  Pregunta zona, presupuesto, financiación y plazo. Descarta
+                  curiosos sin fricción.
+                </p>
+              </li>
+              <li className="rea-step">
+                <span className="rea-step__num">03</span>
+                <h3 className="rea-step__title">
+                  Te llega la visita agendada
+                </h3>
+                <p className="rea-step__text">
+                  Entra directa en el calendario del agente. Funcionando en
+                  una tarde si ya tienes WhatsApp Business API, en 48 horas
+                  si hay que darla de alta.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        {/* ================================================
+            4. DEMO · dark
+        ================================================ */}
+        <section
+          id="demo"
+          className="rea-section rea-section--dark rea-demo"
+          data-track-section=""
+        >
+          <div className="rea-wide rea-demo__inner">
+            <p className="rea-eyebrow">Demo en vivo</p>
+            <h2 className="rea-h2">
+              Escríbele como si fueras un comprador.
+            </h2>
+            <p className="rea-demo__lede">
+              Abre WhatsApp con un mensaje de ejemplo ya escrito. Cambia la
+              zona o el precio y mira cómo responde.
+            </p>
+            <a
+              className="rea-cta rea-cta--primary rea-cta--xl"
+              href={WHATSAPP_DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="demo-whatsapp-open"
+              onClick={() =>
+                track("cta-click", { place: "demo-section", type: "demo" })
+              }
+            >
+              <MessageCircle size={22} /> Escribir ahora por WhatsApp
+            </a>
+            <p className="rea-demo__hint">
+              Mensaje prellenado: &ldquo;{DEMO_MESSAGE}&rdquo;
+            </p>
+          </div>
+        </section>
+
+        {/* ================================================
+            5. CALCULADORA · light · HERO MOMENT
+        ================================================ */}
+        <section
+          id="calculator"
+          className="rea-section rea-section--light rea-calc"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">
+              La cuenta que te vas a hacer igual
+            </p>
+            <h2 className="rea-h2 rea-h2--light">
+              ¿Cuánto estás dejando sobre la mesa?
+            </h2>
+
+            <div className="rea-calc__grid">
+              <div className="rea-calc__inputs">
+                <label className="rea-field">
+                  <span>Leads al mes</span>
+                  <input
+                    type="number"
+                    min={0}
+                    value={leads}
+                    onChange={(e) => {
+                      const v = Number(e.target.value) || 0;
+                      setLeads(v);
+                      handleCalcChange("leads", v);
+                    }}
+                    data-umami-event="calc-leads"
+                  />
+                </label>
+                <label className="rea-field">
+                  <span>% con respuesta tarde o nula</span>
+                  <input
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={slowPct}
+                    onChange={(e) => {
+                      const v = Math.min(
+                        100,
+                        Math.max(0, Number(e.target.value) || 0),
+                      );
+                      setSlowPct(v);
+                      handleCalcChange("slow-pct", v);
+                    }}
+                    data-umami-event="calc-slow-pct"
+                  />
+                </label>
+                <label className="rea-field">
+                  <span>Comisión media por venta (€)</span>
+                  <input
+                    type="number"
+                    min={0}
+                    value={commission}
+                    onChange={(e) => {
+                      const v = Number(e.target.value) || 0;
+                      setCommission(v);
+                      handleCalcChange("commission", v);
+                    }}
+                    data-umami-event="calc-commission"
+                  />
+                </label>
+              </div>
+
+              <div className="rea-calc__big">
+                <p className="rea-calc__big-num">
+                  {formatMoney.format(extraRevenue)} €
+                </p>
+                <p className="rea-calc__big-sub">
+                  Eso es lo que hoy se va con otra agencia.
+                </p>
+                <div className="rea-calc__detail">
+                  <div>
+                    <strong>{extraVisits}</strong>
+                    <span>visitas extra al mes</span>
+                  </div>
+                  <div>
+                    <strong>{extraSales}</strong>
+                    <span>ventas extra al mes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="rea-calc__disclaimer">
+              Estimación conservadora: 35% de los leads lentos se recuperan
+              y 8% de esas visitas acaba en venta. Tus números pueden variar.
+            </p>
+          </div>
+        </section>
+
+        {/* ================================================
+            6. RESULTADOS · light
+        ================================================ */}
+        <section
+          id="results"
+          className="rea-section rea-section--light rea-results"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">Lo que cambia</p>
+            <h2 className="rea-h2 rea-h2--light">
+              Más visitas agendadas. Cero leads sin respuesta.
+            </h2>
+            <div className="rea-results__grid">
+              <div className="rea-result">
+                <Zap size={22} />
+                <h3>Respuesta en segundos</h3>
+                <p>
+                  El lead recibe una contestación útil mientras aún está
+                  mirando pisos.
+                </p>
+              </div>
+              <div className="rea-result">
+                <Calendar size={22} />
+                <h3>Visitas pre agendadas</h3>
+                <p>
+                  Cuando el agente abre el calendario, ya hay citas con
+                  compradores reales.
+                </p>
+              </div>
+              <div className="rea-result">
+                <Users size={22} />
+                <h3>Solo compradores listos</h3>
+                <p>
+                  El agente deja de hablar con curiosos y se centra en
+                  cerrar operaciones.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================
+            7. INTEGRACIONES · light
+        ================================================ */}
+        <section
+          id="integrations"
+          className="rea-section rea-section--light rea-integrations"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">Integraciones</p>
+            <h2 className="rea-h2 rea-h2--light">
+              Conectado a donde ya trabajas.
+            </h2>
+            <ul className="rea-integrations__list">
+              <li>WhatsApp Business API</li>
+              <li>Portales inmobiliarios</li>
+              <li>Meta Lead Ads</li>
+              <li>Google Calendar</li>
+              <li>Tu CRM</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ================================================
+            8. PRECIOS · light
+        ================================================ */}
+        <section
+          id="pricing"
+          className="rea-section rea-section--light rea-pricing"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">Precios</p>
+            <h2 className="rea-h2 rea-h2--light">
+              Precio claro. Sin cuota de instalación.
+            </h2>
+
+            <div
+              className="rea-pricing__toggle"
+              role="group"
+              aria-label="Facturación"
+            >
+              <button
+                type="button"
+                className={`rea-pricing__opt${!annual ? " is-active" : ""}`}
+                onClick={() => {
+                  setAnnual(false);
+                  track("billing-toggle", { value: "monthly" });
+                }}
+                data-umami-event="billing-monthly"
+              >
+                Mensual
+              </button>
+              <button
+                type="button"
+                className={`rea-pricing__opt${annual ? " is-active" : ""}`}
+                onClick={() => {
+                  setAnnual(true);
+                  track("billing-toggle", { value: "annual" });
+                }}
+                data-umami-event="billing-annual"
+              >
+                Anual{" "}
+                <span className="rea-pricing__save">dos meses gratis</span>
+              </button>
+            </div>
+
+            <div className="rea-pricing__grid">
+              {PLANS.map((p) => {
+                const price = annual ? p.monthly * 10 : p.monthly;
+                const unit = annual ? "€/año" : "€/mes";
+                return (
+                  <article
+                    key={p.id}
+                    className={`rea-plan${p.featured ? " rea-plan--featured" : ""}`}
+                  >
+                    {p.featured && (
+                      <span className="rea-plan__flag">Más elegido</span>
+                    )}
+                    <h3 className="rea-plan__name">{p.name}</h3>
+                    <p className="rea-plan__tagline">{p.tagline}</p>
+                    <p className="rea-plan__price">
+                      <span>{price}</span>
+                      <span className="rea-plan__unit">{unit}</span>
+                    </p>
+                    <ul className="rea-plan__list">
+                      {p.highlights.map((h) => (
+                        <li key={h}>
+                          <CheckCircle2 size={16} />
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      className="rea-cta rea-cta--primary rea-plan__cta"
+                      href={TRIAL_URL}
+                      data-umami-event={`plan-${p.id}-start`}
+                      onClick={() =>
+                        track("cta-click", {
+                          place: `plan-${p.id}`,
+                          type: "trial",
+                        })
+                      }
+                    >
+                      Empezar prueba gratis
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+
+            <p className="rea-pricing__note">
+              Los mensajes de WhatsApp Business de Meta se facturan aparte,
+              directamente por Meta. Sin cuota de instalación por nuestra
+              parte.
+            </p>
+          </div>
+        </section>
+
+        {/* ================================================
+            9. GARANTÍA · light
+        ================================================ */}
+        <section
+          id="guarantee"
+          className="rea-section rea-section--light rea-guarantee"
+          data-track-section=""
+        >
+          <div className="rea-wide rea-center">
+            <Shield size={32} />
+            <h2 className="rea-h2 rea-h2--light">
+              14 días de prueba. Cancela cuando quieras.
+            </h2>
+            <p className="rea-guarantee__text">
+              Sin tarjeta de entrada, sin letra pequeña. Si en dos semanas
+              no te llega una sola visita útil, no sigues.
+            </p>
+          </div>
+        </section>
+
+        {/* ================================================
+            10. CUMPLIMIENTO · light
+        ================================================ */}
+        <section
+          id="compliance"
+          className="rea-section rea-section--light rea-compliance"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">
+              Confianza y cumplimiento
+            </p>
+            <h2 className="rea-h2 rea-h2--light">
+              Tus datos son tuyos. Y los de tus clientes también.
+            </h2>
+            <ul className="rea-compliance__list">
+              <li>
+                <Shield size={18} /> RGPD. Cumplimos la normativa europea
+                de protección de datos.
+              </li>
+              <li>
+                <CheckCircle2 size={18} /> Opt in. Solo escribimos a quien
+                dio su permiso explícito.
+              </li>
+              <li>
+                <Users size={18} /> Humano al mando. El agente puede tomar
+                el control en cualquier momento.
+              </li>
+              <li>
+                <CheckCircle2 size={18} /> Portabilidad. Exportas o borras
+                tus leads en un clic.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ================================================
+            11. FAQ · light
+        ================================================ */}
+        <section
+          id="faq"
+          className="rea-section rea-section--light rea-faq"
+          data-track-section=""
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">Dudas honestas</p>
+            <h2 className="rea-h2 rea-h2--light">
+              Lo que todos preguntan antes de probarlo.
+            </h2>
+            <div className="rea-faq__list">
+              <details className="rea-faq__item">
+                <summary>¿Suena a robot?</summary>
+                <p>
+                  No. La IA se presenta como asistente de tu inmobiliaria,
+                  habla en el tono que configuras y en cuanto el lead está
+                  listo, pasa la conversación a un humano con todo el
+                  contexto.
+                </p>
+              </details>
+              <details className="rea-faq__item">
+                <summary>¿Y si no sabe responder algo?</summary>
+                <p>
+                  Avisa al lead de que te consulta y transfiere la
+                  conversación a tu agente. Nunca inventa. Si la
+                  información no está, lo dice.
+                </p>
+              </details>
+              <details className="rea-faq__item">
+                <summary>¿Necesito cuenta oficial de WhatsApp Business?</summary>
+                <p>
+                  Sí, WhatsApp Business API. Si aún no la tienes, te
+                  ayudamos en el alta durante el setup. Es gratis darla de
+                  alta.
+                </p>
+              </details>
+              <details className="rea-faq__item">
+                <summary>¿Cuánto tarda en estar listo?</summary>
+                <p>
+                  Una tarde si ya tienes WhatsApp Business API. Dos días
+                  si hay que darla de alta por primera vez.
+                </p>
+              </details>
+              <details className="rea-faq__item">
+                <summary>¿Qué pasa con mis leads si cancelo?</summary>
+                <p>
+                  Son tuyos siempre. Los exportas en un clic antes de irte
+                  y los borramos de nuestros servidores a las 48 horas de
+                  cancelar.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================
+            12. CTA FINAL · dark
+        ================================================ */}
+        <section
+          id="final-cta"
+          className="rea-section rea-section--dark rea-final"
+          data-track-section=""
+        >
+          <div className="rea-wide rea-center">
+            <h2 className="rea-h2">
+              Responde a cada lead en menos de 60 segundos.
+            </h2>
+            <p className="rea-final__sub">
+              Prueba la demo en WhatsApp o abre tu cuenta de prueba. Lo que
+              prefieras.
+            </p>
+            <div className="rea-hero__ctas rea-final__ctas">
+              <a
+                className="rea-cta rea-cta--primary rea-cta--xl"
+                href={WHATSAPP_DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-umami-event="final-demo-whatsapp"
+                onClick={() =>
+                  track("cta-click", { place: "final", type: "demo" })
+                }
+              >
+                <MessageCircle size={20} /> Pruébalo ahora por WhatsApp
+              </a>
+              <a
+                className="rea-link"
+                href={TRIAL_URL}
+                data-umami-event="final-trial-start"
+                onClick={() =>
+                  track("cta-click", { place: "final", type: "trial" })
+                }
+              >
+                Empezar prueba gratis <ArrowRight size={14} />
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ================================================
+          Footer · product only
+      ================================================ */}
+      <footer className="rea-foot">
+        <div className="rea-foot__inner">
+          <div className="rea-foot__brand-block">
+            <img
+              className="rea-foot__logo"
+              src={PRODUCT_LOGO}
+              alt={PRODUCT_NAME}
+              width={120}
+              height={30}
+            />
+            <p className="rea-foot__tag">
+              Responde, califica y agenda visitas por WhatsApp.
+            </p>
+          </div>
+          <nav className="rea-foot__links" aria-label="Legales">
+            <a href="/aviso-legal">Aviso legal</a>
+            <a href="/privacidad">Privacidad</a>
+            <a href="/cookies">Cookies</a>
+            <a
+              href={WHATSAPP_DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contacto por WhatsApp
+            </a>
+          </nav>
         </div>
-      </section>
-    </Layout>
+      </footer>
+
+      {/* ================================================
+          Mobile bottom sticky CTA
+      ================================================ */}
+      <a
+        className="rea-mobile-cta"
+        href={WHATSAPP_DEMO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-umami-event="mobile-sticky-demo"
+        onClick={() =>
+          track("cta-click", { place: "mobile-sticky", type: "demo" })
+        }
+      >
+        <MessageCircle size={18} /> Pruébalo por WhatsApp
+      </a>
+    </>
   );
 };
