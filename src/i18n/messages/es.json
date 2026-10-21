@@ -75,7 +75,7 @@
   "home.work.eyebrow": "Trabajo reciente",
   "home.work.headline.line1": "Resultados.",
   "home.work.headline.line2": "No promesas.",
-  "home.work.desc": "Tres proyectos de los últimos doce meses. Volumen real, equipos reales, anonimizados donde el contrato lo pidió.",
+  "home.work.desc": "Cómo trabajamos, qué entregamos y qué te queda.",
   "home.work.card1.area": "SAAS VERTICAL / AGENTE DE IA",
   "home.work.card1.title": "Conector de reservas en 5 semanas.",
   "home.work.card1.content": "Conector en producción entre un SaaS de agendamiento, OpenAI Operator y un agente de WhatsApp Business. 40.000 reservas al mes a través de la superficie de agente. Cero overrides manuales.",
@@ -393,5 +393,14 @@
   "payment.error.subtitle": "Hubo un problema al procesar tu pago. Por favor, intenta de nuevo.",
   "payment.error.desc": "Esto puede deberse a un problema temporal con el procesador de pagos o a fondos insuficientes. Si el problema persiste, no dudes en contactarnos directamente.",
   "payment.error.back": "Volver",
-  "about.story.title": "Quiénes somos"
+  "about.story.title": "Quiénes somos",
+  "home.work.card4.area": "IMPACTO AGREGADO",
+  "home.work.card4.title": "40h/semana devueltas.",
+  "home.work.card4.content": "Horas de equipo recuperadas en promedio por cliente. Aprobaciones automatizadas, excepciones ruteadas con evidencia, revisión manual fuera del loop.",
+  "home.work.card5.area": "QUIÉN ESCRIBE EL CÓDIGO",
+  "home.work.card5.title": "Solo builders senior.",
+  "home.work.card5.content": "Cada línea la escribe alguien que ya mandó esto a producción. Sin aprender a tu costa. Sin cambios de equipo a mitad del proyecto.",
+  "home.work.card6.area": "QUÉ TE QUEDA",
+  "home.work.card6.title": "Código tuyo desde el día uno.",
+  "home.work.card6.content": "Tus repos, tu infra, tus runbooks. Documentación, evals y topes de costo quedan con el proyecto. Si querés llevarlo in-house, podés."
 }

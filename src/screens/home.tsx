@@ -94,40 +94,40 @@ export const Home: React.FC = () => {
           <p className="hs__desc">
             {t(
               "home.work.desc",
-              "Three engagements from the last twelve months. Real volume, real teams, anonymized where the contract asked."
+              "How we work, what we deliver, and what stays with you."
             )}
           </p>
         </div>
 
         <div className="hs-work__grid">
           <Card
-            href="#"
+            href="mailto:hello@devqueens.us"
             inverted
-            areaService={t("home.work.card1.area", "VERTICAL SAAS / AI AGENT")}
-            title={t("home.work.card1.title", "Booking connector in 5 weeks.")}
+            areaService={t("home.work.card4.area", "AGGREGATE IMPACT")}
+            title={t("home.work.card4.title", "40h/week returned.")}
             content={t(
-              "home.work.card1.content",
-              "Production connector between a scheduling SaaS, OpenAI Operator, and a WhatsApp Business agent. 40,000 bookings a month through the agent surface. Zero manual overrides."
+              "home.work.card4.content",
+              "Average team hours recovered per client. Approvals automated, exceptions routed with evidence, manual review removed from the loop."
             )}
           />
           <Card
-            href="#"
+            href="mailto:hello@devqueens.us"
             inverted
-            areaService={t("home.work.card2.area", "FINANCE OPS / AUTOMATION")}
-            title={t("home.work.card2.title", "Three-way matching, automated.")}
+            areaService={t("home.work.card5.area", "WHO WRITES THE CODE")}
+            title={t("home.work.card5.title", "Senior builders only.")}
             content={t(
-              "home.work.card2.content",
-              "Invoices matched against POs and delivery receipts, exceptions routed with evidence attached. 800 invoices a month, days of manual review returned every week."
+              "home.work.card5.content",
+              "Every line is written by someone who has shipped this before. No training on your tab. No handoffs mid-project."
             )}
           />
           <Card
-            href="#"
+            href="mailto:hello@devqueens.us"
             inverted
-            areaService={t("home.work.card3.area", "STARTUP / RESCUE")}
-            title={t("home.work.card3.title", "Rescued the investor demo.")}
+            areaService={t("home.work.card6.area", "WHAT YOU KEEP")}
+            title={t("home.work.card6.title", "Code you own, day one.")}
             content={t(
-              "home.work.card3.content",
-              "Called in Tuesday. By Friday: broken agent loop rewritten, retrieval bug patched, evals and cost caps added. Held the live demo through 30 minutes of investor questions. Zero hallucinations."
+              "home.work.card6.content",
+              "Your repos, your infra, your runbooks. Documentation, evals, and cost caps stay with the project. If you want to take it in-house, you can."
             )}
           />
         </div>

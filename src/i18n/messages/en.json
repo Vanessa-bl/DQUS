@@ -75,7 +75,7 @@
   "home.work.eyebrow": "Recent work",
   "home.work.headline.line1": "Receipts.",
   "home.work.headline.line2": "Not slides.",
-  "home.work.desc": "Three engagements from the last twelve months. Real volume, real teams, anonymized where the contract asked.",
+  "home.work.desc": "How we work, what we deliver, and what stays with you.",
   "home.work.card1.area": "VERTICAL SAAS / AI AGENT",
   "home.work.card1.title": "Booking connector in 5 weeks.",
   "home.work.card1.content": "Production connector between a scheduling SaaS, OpenAI Operator, and a WhatsApp Business agent. 40,000 bookings a month through the agent surface. Zero manual overrides.",
@@ -396,5 +396,14 @@
   "payment.error.subtitle": "There was an issue processing your payment. Please try again.",
   "payment.error.desc": "This may be due to a temporary issue with the payment processor or insufficient funds. If the problem persists, feel free to contact us directly.",
   "payment.error.back": "Back",
-  "about.story.title": "Who we are"
+  "about.story.title": "Who we are",
+  "home.work.card4.area": "AGGREGATE IMPACT",
+  "home.work.card4.title": "40h/week returned.",
+  "home.work.card4.content": "Average team hours recovered per client. Approvals automated, exceptions routed with evidence, manual review removed from the loop.",
+  "home.work.card5.area": "WHO WRITES THE CODE",
+  "home.work.card5.title": "Senior builders only.",
+  "home.work.card5.content": "Every line is written by someone who has shipped this before. No training on your tab. No handoffs mid-project.",
+  "home.work.card6.area": "WHAT YOU KEEP",
+  "home.work.card6.title": "Code you own, day one.",
+  "home.work.card6.content": "Your repos, your infra, your runbooks. Documentation, evals, and cost caps stay with the project. If you want to take it in-house, you can."
 }
