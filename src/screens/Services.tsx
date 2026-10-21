@@ -63,13 +63,15 @@ export const Services: React.FC = () => {
         <div className="cards-grid cards-grid--2col">
           <Card
             inverted
-            aria-label="Corporate Branding: Graphic Design"
-            areaService={t("services.card1.area", "GRAPHIC DESIGN")}
-            title={t("services.card1.title", "Corporate Branding")}
-            content={t("services.card1.content", "We create unique visual identities that reflect your brand essence and connect with your audience.")}
+            href="mailto:hello@devqueens.us"
+            aria-label={t("services.card1.title", "AI Automation")}
+            areaService={t("services.card1.area", "AI AUTOMATION")}
+            title={t("services.card1.title", "AI Automation")}
+            content={t("services.card1.content", "We automate the manual work in your flow so your team gets hours back every week.")}
           />
           <Card
             inverted
+            href="mailto:hello@devqueens.us"
             aria-label={t("services.card2.title", "Web Development")}
             areaService={t("services.card2.area", "WEB DEVELOPMENT")}
             title={t("services.card2.title", "Web Development")}
@@ -77,13 +79,15 @@ export const Services: React.FC = () => {
           />
           <Card
             inverted
-            aria-label={t("services.card3.title", "Mobile Apps")}
-            areaService={t("services.card3.area", "MOBILE SOLUTIONS")}
-            title={t("services.card3.title", "Mobile Apps")}
-            content={t("services.card3.content", "We design and develop native and hybrid mobile applications with intuitive UX.")}
+            href="mailto:hello@devqueens.us"
+            aria-label={t("services.card3.title", "E-commerce")}
+            areaService={t("services.card3.area", "ECOMMERCE")}
+            title={t("services.card3.title", "E-commerce")}
+            content={t("services.card3.content", "We build e-commerce stores optimized for conversion and ready to scale.")}
           />
           <Card
             inverted
+            href="mailto:hello@devqueens.us"
             aria-label={t("services.card4.title", "Digital Consulting")}
             areaService={t("services.card4.area", "DIGITAL CONSULTING")}
             title={t("services.card4.title", "Digital Consulting")}
@@ -91,13 +95,15 @@ export const Services: React.FC = () => {
           />
           <Card
             inverted
-            aria-label={t("services.card5.title", "SEO & Positioning")}
-            areaService={t("services.card5.area", "SEO")}
-            title={t("services.card5.title", "SEO & Positioning")}
-            content={t("services.card5.content", "We improve your search engine visibility with on-page and off-page SEO techniques.")}
+            href="mailto:hello@devqueens.us"
+            aria-label={t("services.card5.title", "GEO Marketing")}
+            areaService={t("services.card5.area", "GEO MARKETING")}
+            title={t("services.card5.title", "GEO Marketing")}
+            content={t("services.card5.content", "We position your business to get found by AIs like ChatGPT, Claude, and Gemini.")}
           />
           <Card
             inverted
+            href="mailto:hello@devqueens.us"
             aria-label={t("services.card6.title", "UI/UX Design")}
             areaService={t("services.card6.area", "UI/UX DESIGN")}
             title={t("services.card6.title", "UI/UX Design")}
