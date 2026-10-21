@@ -71,7 +71,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.intro",
-            "Automate the work. Capture the market."
+            "Automate the work. Capture the market. Improve your e-commerce."
           )}
         </motion.p>
 
