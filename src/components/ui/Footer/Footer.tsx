@@ -78,7 +78,7 @@ const Footer: React.FC<FooterProps> = ({
             >
               {t(
                 "footer.description",
-                "Agent studio for vertical SaaS: paid PoC → production connector → retainer. Also SMB agent discoverability.",
+                "Agent development for vertical SaaS: proof of concept → production connector → ongoing maintenance. Also SMB agent discoverability.",
               )}
             </p>
             <a
@@ -190,7 +190,7 @@ const Footer: React.FC<FooterProps> = ({
               <p className="footer-cta__desc">
                 {t(
                   "footer.cta.desc",
-                  "Book a 30-min discovery call. We'll tell you if a paid PoC makes sense — and quote it.",
+                  "Book a 30-min discovery call. We'll tell you if a proof of concept makes sense and give you a plan.",
                 )}
               </p>
               <motion.a
@@ -199,7 +199,7 @@ const Footer: React.FC<FooterProps> = ({
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                {t("footer.cta.button", "Book a Discovery Call")}
+                {t("footer.cta.button", "Book a call")}
               </motion.a>
             </motion.div>
           )}

@@ -6,11 +6,11 @@ import "@/src/index.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.devqueens.us"),
   title: {
-    default: "DevQueens | Automation, AI, and Marketing. One Studio.",
-    template: "%s | DevQueens",
+    default: "DQueens | Workforce IA",
+    template: "%s | DQueens",
   },
   description:
-    "Automations that drain the manual queue. AI agents that transact on your product. AI marketing that puts your business inside ChatGPT, Claude, and Perplexity where buyers now search. Paid proof of concept in 10 days. Production build in 5 weeks. Fixed scope, fixed timeline, fixed price.",
+    "Automations that drain manual hours. AI agents that transact on your product. AI marketing that puts your business inside ChatGPT, Claude, and Perplexity where buyers now search. Paid proof of concept in 10 days. Production build in 5 weeks. Fixed scope, fixed timeline, fixed price.",
   keywords: [
     "process automation",
     "AI agent development",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "three way invoice matching",
     "invoice automation",
     "exception routing automation",
-    "approval queue automation",
+    "approval flow automation",
     "AI agent connector",
     "ChatGPT agent integration",
     "Claude computer use integration",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "DevQueens",
     locale: "en_US",
     url: "/",
-    title: "DevQueens | Automation, AI, and Marketing. One Studio.",
+    title: "DevQueens | Automation, AI, and Marketing. One Roof.",
     description:
       "Automate the work. Capture the market. Process automations, AI agents on your product, and AI marketing that puts you inside ChatGPT, Claude, and Perplexity. Paid proof of concept in 10 days.",
     images: [
@@ -57,15 +57,15 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "DevQueens | Automation, AI, and Marketing. One Studio.",
+        alt: "DevQueens | Automation, AI, and Marketing. One Roof.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevQueens | Automation, AI, and Marketing. One Studio.",
+    title: "DevQueens | Automation, AI, and Marketing. One Roof.",
     description:
-      "Automations that drain the queue. AI agents that transact on your product. AI marketing inside ChatGPT, Claude, Perplexity. Paid PoC in 10 days, production in 5 weeks.",
+      "Automations that drain manual hours. AI agents that transact on your product. AI marketing inside ChatGPT, Claude, Perplexity. Paid PoC in 10 days, production in 5 weeks.",
     images: [
       {
         url: "/og-image.jpg",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.svg",
   },
 };
 
@@ -91,7 +91,7 @@ const jsonLd = {
       "@type": "Organization",
       "@id": "https://www.devqueens.us/#organization",
       name: "DevQueens",
-      alternateName: "DevQueens Studio",
+      alternateName: "DevQueens",
       url: "https://www.devqueens.us/",
       logo: {
         "@type": "ImageObject",
@@ -101,14 +101,14 @@ const jsonLd = {
       },
       image: "https://www.devqueens.us/og-image.jpg",
       description:
-        "DevQueens is one studio shipping three deliverables for the same company: process automation that drains the manual queue, AI agents that transact against the product's API, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Fixed scope, fixed timeline, fixed price. Measured in revenue.",
+        "DevQueens ships three deliverables for the same company: process automation that drains manual hours, AI agents that transact against the product's API, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Fixed scope, fixed timeline, fixed price. Measured in revenue.",
       foundingDate: "2020",
       areaServed: "Worldwide",
       knowsAbout: [
         "Process automation",
         "Three way invoice matching",
         "Exception routing automation",
-        "Reconciliation and approval queues",
+        "Reconciliation and approval flows",
         "AI agent connectors",
         "OpenAI Operator integration",
         "Claude computer use integration",
@@ -144,7 +144,7 @@ const jsonLd = {
       serviceType:
         "Process automation, AI agent development, and AI marketing for companies that want fewer manual hours and more revenue.",
       description:
-        "One studio shipping three lines of work. Process automation ($5K to $20K). AI agent surface ($10K to $25K). AI marketing (from $1.5K setup + $300 per month). Entry via a $3K to $7K paid proof of concept in 5 to 10 days. Public prices, fixed scope, fixed timeline.",
+        "Three lines of work. Process automation ($5K to $20K). AI agent surface ($10K to $25K). AI marketing (from $1.5K setup + $300 per month). Entry via a $3K to $7K paid proof of concept in 5 to 10 days. Public prices, fixed scope, fixed timeline.",
       priceRange: "$1500 - $25000",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -179,7 +179,7 @@ const jsonLd = {
               "@type": "Service",
               name: "Process Automation Build",
               description:
-                "4 to 6 weeks. Production automation that drains the manual queue. Three way invoice matching with supporting evidence attached. Exception routing. Reconciliation and approval queues. Handles 800 invoices a month, 90,000 cases a month, or whatever the customer's real volume is.",
+                "4 to 6 weeks. Production automation that drains manual hours. Three way invoice matching with supporting evidence attached. Exception routing. Reconciliation and approval flows. Handles 800 invoices a month, 90,000 cases a month, or whatever the customer's real volume is.",
             },
           },
           {
@@ -260,7 +260,7 @@ const jsonLd = {
           name: "What does DevQueens do?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "DevQueens is one studio that ships three deliverables for the same company: process automation that drains the manual queue, AI agents that transact against the customer's product, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Every build is tailored to the specific company.",
+            text: "DevQueens ships three deliverables for the same company: process automation that drains manual hours, AI agents that transact against the customer's product, and AI marketing that puts the business inside ChatGPT, Claude, and Perplexity where buyers now search. Every build is tailored to the specific company.",
           },
         },
         {
@@ -284,7 +284,7 @@ const jsonLd = {
           name: "Why does every DevQueens engagement start paid?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The price is the filter. A free proof of concept attracts window shoppers who cost time. A paid proof of concept in the $3,000 to $7,000 band filters for buyers who have a real queue to drain or a real agent surface to build, and it lets the team watch the thing actually work against the customer's data before anyone commits to production.",
+            text: "The price is the filter. A free proof of concept attracts window shoppers who cost time. A paid proof of concept in the $3,000 to $7,000 band filters for buyers who have real manual hours to automate or a real agent surface to build, and it lets the team watch the thing actually work against the customer's data before anyone commits to production.",
           },
         },
         {
@@ -316,7 +316,7 @@ const jsonLd = {
           name: "What makes DevQueens different from other AI agencies?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Most studios do one of the three lines, automation, AI agents, or AI marketing, and the three never talk to each other. DevQueens delivers all three under one roof so the data model, schemas, catalog, pricing, and voice stay consistent across the automation that clears the queue, the agent that transacts on the product, and the marketing that puts the business in front of the buyer.",
+            text: "Most agencies do one of the three lines, automation, AI agents, or AI marketing, and the three never talk to each other. DevQueens delivers all three under one roof so the data model, schemas, catalog, pricing, and voice stay consistent across the automation that drains manual hours, the agent that transacts on the product, and the marketing that puts the business in front of the buyer.",
           },
         },
       ],

@@ -22,7 +22,7 @@ const wordUp: Variants = {
 
 export default function SplitHero() {
   const t = useT();
-  const title = t("hero.split.title", "Fewer Hours. More Revenue.");
+  const title = t("hero.split.title", "LESS WORK. MORE GROWTH.");
   const titleWords = title
     .split(/\.\s+/)
     .filter(Boolean)
@@ -39,7 +39,7 @@ export default function SplitHero() {
           animate="visible"
           variants={fadeUp}
         >
-          {t("hero.split.preTitle", "Automation. AI. Marketing. One studio.")}
+          {t("hero.split.preTitle", "Automation. AI. Marketing. One roof.")}
         </motion.p>
 
         <h1
@@ -84,7 +84,7 @@ export default function SplitHero() {
         >
           {t(
             "hero.split.body",
-            "Paid proof of concept in 10 days. Production build in 5 weeks. A retainer for what breaks after. Automations, AI agents, and marketing shipped under one roof. Fixed scope, fixed timeline, fixed price."
+            "The right strategy. The right automation systems. The right people to move your business forward."
           )}
         </motion.p>
 
@@ -95,11 +95,11 @@ export default function SplitHero() {
           animate="visible"
           variants={fadeUp}
         >
-          <a className="split-hero__btn" href="/services">
-            {t("hero.split.ctaPrimary", "Write us")}
+          <a className="split-hero__btn" href="/contact">
+            {t("hero.split.ctaPrimary", "Book a Demo")}
           </a>
-          <a className="split-hero__cta-link" href="/contact">
-            {t("hero.split.ctaSecondary", "Book a discovery call")}
+          <a className="split-hero__cta-link" href="/services">
+            {t("hero.split.ctaSecondary", "See our work")}
           </a>
         </motion.div>
       </div>

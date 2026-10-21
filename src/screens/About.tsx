@@ -21,9 +21,9 @@ export const About: React.FC = () => {
   const t = useT();
 
   const features = [
-    t("about.story.features.0", "Founded in 2020"),
-    t("about.story.features.1", "100+ Projects Delivered"),
-    t("about.story.features.2", "Global Reach"),
+    t("about.story.features.0", "Senior team"),
+    t("about.story.features.1", "In production"),
+    t("about.story.features.2", "Code you own"),
   ];
 
   return (
@@ -70,12 +70,12 @@ export const About: React.FC = () => {
             variants={fadeUp}
           >
             <h2 id="story-title" className="about-story-title">
-              {t("about.story.title", "Our Story")}
+              {t("about.story.title", "Who we are")}
             </h2>
             <p className="about-story-text">
               {t(
                 "about.story.text",
-                "What began as a small team of developers and designers with a shared vision has grown into a full-service digital agency serving clients worldwide. We've delivered over 100 projects across industries including fintech, healthcare, e-commerce, and education. Our approach combines agile methodologies with deep technical expertise, ensuring every solution we build is scalable, maintainable, and aligned with our clients' strategic goals."
+                "DevQueens is an agency focused on building AI solutions. For every project, we assemble a team of senior specialists tailored to your case, from architecture and automation to design and marketing. We work with companies that need concrete results, not promises."
               )}
             </p>
 
@@ -115,41 +115,6 @@ export const About: React.FC = () => {
               )}
             />
           </motion.div>
-        </div>
-      </section>
-
-      <section className="page-section" aria-labelledby="team-title">
-        <div className="page-block">
-          <span className="page-badge">{t("about.team.badge", "MEET THE TEAM")}</span>
-
-          <h2 id="team-title" className="page-title page-title--sm">
-            {t("about.team.title.line1", "Passionate")}
-            <br />
-            <span className="page-title-mark">
-              {t("about.team.title.line2", "Experts")}
-            </span>
-          </h2>
-        </div>
-
-        <div className="about-team-grid">
-          <Card
-            inverted
-            areaService={t("about.team.member1.area", "CEO")}
-            title={t("about.team.member1.name", "Jane Doe")}
-            content={t("about.team.member1.role", "Chief Executive Officer")}
-          />
-          <Card
-            inverted
-            areaService={t("about.team.member2.area", "CTO")}
-            title={t("about.team.member2.name", "John Smith")}
-            content={t("about.team.member2.role", "Chief Technology Officer")}
-          />
-          <Card
-            inverted
-            areaService={t("about.team.member3.area", "DESIGN")}
-            title={t("about.team.member3.name", "Alice Johnson")}
-            content={t("about.team.member3.role", "Lead Designer")}
-          />
         </div>
       </section>
 
