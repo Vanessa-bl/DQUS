@@ -1,0 +1,55 @@
+---
+title: "Deployar un agente de IA en Shopify: un path de integración en 4 semanas"
+description: "Un path concreto para un storefront de Shopify: sincronización de catálogo, lookup de pedidos, recuperación de carrito y los tres lugares donde los equipos se traban."
+slug: shopify-ai-agent-integration
+locale: es
+publishedAt: "2026-10-15"
+updatedAt: "2026-10-15"
+category: Caso
+tags:
+  - shopify
+  - agentes-ia
+  - ecommerce
+coverImage: "https://picsum.photos/seed/dq-shopify-api/1200/750"
+coverImageAlt: "Dashboard de Shopify con un overlay de agente de IA mostrando una recuperación de carrito abandonado"
+directAnswer: "Un agente de IA en Shopify sale a producción en aproximadamente cuatro semanas cuando seguís un path específico: semana uno es sync de catálogo y auth, semana dos es lookup de pedidos, semana tres es recuperación de carrito y semana cuatro son evals más guardrails. Los tres lugares donde los equipos se traban son cache de stock, inferencia de promociones y path de escalación."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Agentes de IA para e-commerce
+  href: /es/services
+faq:
+  - question: ¿Necesito el plan Shopify Plus?
+    answer: "No. La Storefront API y la Admin API de los planes estándar de Shopify alcanzan para la mayoría de los agentes. Plus ayuda si necesitás customizar el checkout."
+  - question: ¿Y las features de IA del propio Shopify?
+    answer: "Son útiles para búsqueda de producto dentro del admin. Para un agente orientado al comprador que transaccione, lo construís arriba de las APIs."
+---
+
+Una marca direct-to-consumer en Shopify quería un agente de IA que contestara a compradores en WhatsApp, recuperara carritos abandonados y hiciera lookup de status de pedidos. Lo deployamos en cuatro semanas. El path es el mismo para la mayoría de las tiendas Shopify.
+
+## ¿Qué pasa en cada semana?
+
+| Semana | Scope | Entregable |
+| --- | --- | --- |
+| 1 | Sync de catálogo, auth, búsqueda de producto | El agente devuelve ítems en stock con precios reales |
+| 2 | Lookup de pedidos, status, tracking | El agente responde "dónde está mi pedido" desde datos en vivo |
+| 3 | Recuperación de carrito, outreach a abandonados | El agente contacta con los ítems y la promo exactos |
+| 4 | Evals, topes de costo, path de escalación | El agente está listo para producción con guardrails |
+
+## ¿Dónde se traban los equipos?
+
+- **Cache de stock.** El equipo cachea el catálogo semanalmente para ahorrar llamadas. El agente vende un ítem sin stock. Fix: lookup de stock en tiempo real con cache de TTL corto.
+- **Inferencia de promociones.** El agente lee un banner de marketing y empieza a ofrecer un descuento que nadie aprobó. Fix: las promos solo vienen de la API de precios.
+- **Path de escalación.** Un cliente tipea "cancelar mi pedido" y el agente sigue respondiendo como si fuera búsqueda. Fix: intents de escalación explícitos, entrenados antes del go-live.
+
+## Preguntas frecuentes
+
+### ¿Necesito el plan Shopify Plus?
+
+No. La Storefront API y la Admin API de los planes estándar de Shopify alcanzan para la mayoría de los agentes. Plus ayuda si necesitás customizar el checkout.
+
+### ¿Y las features de IA del propio Shopify?
+
+Son útiles para búsqueda de producto dentro del admin. Para un agente orientado al comprador que transaccione, lo construís arriba de las APIs.

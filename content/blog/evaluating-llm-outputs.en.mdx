@@ -1,0 +1,49 @@
+---
+title: "Evaluating LLM outputs: a practical harness for small teams"
+description: "A small-team guide to building an evaluation harness: fixture sets, pass thresholds, model-release drift checks, and the review workflow."
+slug: evaluating-llm-outputs
+locale: en
+publishedAt: "2026-10-16"
+updatedAt: "2026-10-16"
+category: Guide
+tags:
+  - evaluation
+  - ai-agents
+  - production
+coverImage: "https://picsum.photos/seed/dq-llm-eval/1200/750"
+coverImageAlt: "Spreadsheet of LLM evaluation fixtures with pass rates"
+directAnswer: "A practical LLM evaluation harness for a small team is three things: a versioned fixture set of 50 to 200 real examples with known-good answers, a CI job that reruns the set on every prompt or model change, and a pass threshold below which the change does not merge."
+author:
+  name: DevQueens
+  role: Agency focused on AI solutions
+  bio: "DevQueens builds AI automations, agent surfaces, and GEO marketing under one roof. We assemble a senior team per case."
+relatedService:
+  label: Agent engineering services
+  href: /services
+faq:
+  - question: Do I need an eval harness for an MVP?
+    answer: "If the MVP touches real customers, yes. If it is an internal demo, you can defer. The cost of adding one later is small until a model release breaks production. Then it is expensive."
+  - question: Who owns the fixture set?
+    answer: "The team closest to the user. Engineering helps automate it, but product or support picks the examples."
+---
+
+A team shipped a chatbot that answered support questions. Six weeks later the model released a point upgrade. Overnight, the chatbot started confusing refund policy with return policy. No one had an eval harness.
+
+## What belongs in the fixture set?
+
+- **Real examples.** Not synthetic. Pull from your actual logs.
+- **Known-good answers.** A human wrote them, a second human reviewed them.
+- **Edge cases.** The three or four phrasings that always confused the previous version.
+- **Adversarial prompts.** The jailbreaks you have already seen.
+
+50 fixtures is enough to catch regressions on a simple surface. 200 for anything production-facing.
+
+## FAQ
+
+### Do I need an eval harness for an MVP?
+
+If the MVP touches real customers, yes. If it is an internal demo, you can defer. The cost of adding one later is small until a model release breaks production. Then it is expensive.
+
+### Who owns the fixture set?
+
+The team closest to the user. Engineering helps automate it, but product or support picks the examples.

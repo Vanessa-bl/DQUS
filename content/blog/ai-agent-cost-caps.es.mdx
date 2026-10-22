@@ -1,0 +1,51 @@
+---
+title: "Cómo setear topes de costo en un agente de IA antes de deployar"
+description: "Una guía corta para proteger tu runway de facturas de LLM descontroladas: máximo de tokens por llamada, retries, tope diario por usuario y kill switch."
+slug: ai-agent-cost-caps
+locale: es
+publishedAt: "2026-10-17"
+updatedAt: "2026-10-17"
+category: Guía
+tags:
+  - agentes-ia
+  - control-costos
+  - produccion
+coverImage: "https://picsum.photos/seed/dq-cost-caps/1200/750"
+coverImageAlt: "Gráfico de uso de tokens de un LLM con una línea de tope de costo"
+directAnswer: "Los topes de costo en un agente de IA son cuatro cosas: máximo de tokens por llamada, máximo de retries, tope diario por usuario y un kill switch que corta al agente al cruzar un umbral de gasto. Los equipos que entregan los cuatro nunca reciben una factura sorpresa."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Ingeniería de agentes de IA
+  href: /es/services
+faq:
+  - question: ¿Cuál es un máximo de tokens razonable?
+    answer: "Para lookups de status, 2.000 tokens. Para llamadas de razonamiento, 8.000. Para planning o research, 32.000. Seteá por endpoint, no por equipo."
+  - question: ¿Necesito un kill switch si ya tengo topes?
+    answer: "Sí. Los topes protegen por llamada. El kill switch protege a la cuenta de un loop que no previste."
+---
+
+Una startup deployó un agente de soporte un viernes a la tarde. El lunes a la mañana, la factura de OpenAI era de $8.400 por el fin de semana. Una pregunta edge disparó un loop de retries. No había topes.
+
+## ¿Cuáles son los cuatro topes de costo que todo agente en producción necesita?
+
+- **Máximo de tokens por llamada.** El techo de una invocación. Si el agente necesita más contexto, resume y reintenta.
+- **Máximo de retries.** Tres es un límite razonable. Después escala a un humano.
+- **Tope diario por usuario.** Una sesión abusiva o en loop no puede gastar más de un monto documentado por día.
+- **Kill switch a nivel de cuenta.** Cuando el gasto diario de la cuenta cruza un umbral, todas las llamadas devuelven un fallback cacheado hasta que un humano resetea.
+
+## ¿Cómo elegís los números?
+
+Elegilos contra tu peor caso de usuario, no contra el promedio. El promedio te dice la factura. El peor caso te dice la sorpresa.
+
+## Preguntas frecuentes
+
+### ¿Cuál es un máximo de tokens razonable?
+
+Para lookups de status, 2.000 tokens. Para llamadas de razonamiento, 8.000. Para planning o research, 32.000. Seteá por endpoint, no por equipo.
+
+### ¿Necesito un kill switch si ya tengo topes?
+
+Sí. Los topes protegen por llamada. El kill switch protege a la cuenta de un loop que no previste.

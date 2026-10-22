@@ -104,6 +104,16 @@ export const Header: React.FC<HeaderProps> = ({
                   </AnimatedLink>
                 </li>
                 <li>
+                  <AnimatedLink to="/results" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.results", "Go to Results")}>
+                    {t("header.results", "Results")}
+                  </AnimatedLink>
+                </li>
+                <li>
+                  <AnimatedLink to="/blog" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.blog", "Go to Blog")}>
+                    {t("header.blog", "Blog")}
+                  </AnimatedLink>
+                </li>
+                <li>
                   <AnimatedLink to="/about" size="0.85rem" className="header__nav-link" aria-label={t("header.nav.about", "Go to About")}>
                     {t("header.about", "About")}
                   </AnimatedLink>

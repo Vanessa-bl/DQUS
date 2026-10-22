@@ -1,0 +1,29 @@
+---
+title: "Security hardening for a real estate marketplace portal"
+description: "A B2B engagement running a red-team-driven security hardening across the portal, admin surface, and partner API of a growing real estate marketplace before its Series B diligence."
+slug: real-estate-portal-security
+locale: en
+publishedAt: "2026-07-30"
+updatedAt: "2026-07-30"
+category: "REAL ESTATE / SECURITY"
+tags:
+  - security
+  - owasp
+  - real-estate
+client: "Real estate marketplace portal (anonymized)"
+highlight: "Blocked 100% of OWASP top-10 attempts in a production red-team drill."
+outcome: "A hardened portal, admin surface, and partner API that passed a Series B security review without any critical findings."
+metrics:
+  - value: "100%"
+    label: "OWASP top-10 attempts blocked in red-team drill"
+  - value: "0"
+    label: "Critical findings at diligence"
+  - value: "6 weeks"
+    label: "From engagement to clean report"
+---
+
+A real estate marketplace preparing for a Series B had an exposed admin surface, a partner API without rate limits, and a session model that leaked tenancy under certain concurrency conditions. The investor security review was eight weeks out.
+
+Over six weeks, we threat-modeled the three surfaces, patched the tenancy leak, added rate limits plus authenticated signatures to the partner API, hardened the admin surface against the OWASP top-10, and ran a red-team drill against the production environment with a signed scope.
+
+The red team blocked every top-10 attempt, the diligence report came back with zero critical findings, and the funding round closed on schedule. The hardening approach is now the baseline for every new partner integration.

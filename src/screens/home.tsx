@@ -86,9 +86,9 @@ export const Home: React.FC = () => {
             {t("home.work.eyebrow", "Recent work")}
           </span>
           <h2 id="work-title" className="hs__headline">
-            {t("home.work.headline.line1", "Receipts.")}<br />
+            {t("home.work.headline.line1", "Shipped. Measured.")}<br />
             <span className="hs__headline-mark">
-              {t("home.work.headline.line2", "Not slides.")}
+              {t("home.work.headline.line2", "Yours.")}
             </span>
           </h2>
           <p className="hs__desc">
@@ -104,30 +104,30 @@ export const Home: React.FC = () => {
             href="mailto:hello@devqueens.us"
             inverted
             areaService={t("home.work.card4.area", "AGGREGATE IMPACT")}
-            title={t("home.work.card4.title", "40h/week returned.")}
+            title={t("home.work.card4.title", "40h returned per week.")}
             content={t(
               "home.work.card4.content",
-              "Average team hours recovered per client. Approvals automated, exceptions routed with evidence, manual review removed from the loop."
+              "Hours we return to the client team on average. Approvals automated, exceptions routed with evidence, manual review out of the loop."
             )}
           />
           <Card
             href="mailto:hello@devqueens.us"
             inverted
             areaService={t("home.work.card5.area", "WHO WRITES THE CODE")}
-            title={t("home.work.card5.title", "Senior builders only.")}
+            title={t("home.work.card5.title", "Senior builders throughout.")}
             content={t(
               "home.work.card5.content",
-              "Every line is written by someone who has shipped this before. No training on your tab. No handoffs mid-project."
+              "Every line is written by someone who has shipped this kind of work before. The same team stays with you from kickoff to production."
             )}
           />
           <Card
             href="mailto:hello@devqueens.us"
             inverted
             areaService={t("home.work.card6.area", "WHAT YOU KEEP")}
-            title={t("home.work.card6.title", "Code you own, day one.")}
+            title={t("home.work.card6.title", "Code you own, from day one.")}
             content={t(
               "home.work.card6.content",
-              "Your repos, your infra, your runbooks. Documentation, evals, and cost caps stay with the project. If you want to take it in-house, you can."
+              "Your repos, your infra, your runbooks. Documentation, evaluations, and cost caps live with the project — so you can keep running it with us or take it in-house whenever you want."
             )}
           />
         </div>

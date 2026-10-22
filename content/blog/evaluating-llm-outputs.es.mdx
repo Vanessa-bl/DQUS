@@ -1,0 +1,49 @@
+---
+title: "Evaluar outputs de LLM: un harness práctico para equipos chicos"
+description: "Una guía para equipos chicos sobre cómo armar un harness de evaluación: set de fixtures, thresholds de pass, chequeos de drift por release de modelo y workflow de review."
+slug: evaluating-llm-outputs
+locale: es
+publishedAt: "2026-10-16"
+updatedAt: "2026-10-16"
+category: Guía
+tags:
+  - evaluacion
+  - agentes-ia
+  - produccion
+coverImage: "https://picsum.photos/seed/dq-llm-eval/1200/750"
+coverImageAlt: "Planilla de fixtures de evaluación de LLM con tasas de pass"
+directAnswer: "Un harness de evaluación de LLM práctico para un equipo chico son tres cosas: un set versionado de 50 a 200 ejemplos reales con respuestas correctas conocidas, un job de CI que corre el set en cada cambio de prompt o modelo, y un threshold de pass debajo del cual el cambio no mergea."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Servicios de ingeniería de agentes
+  href: /es/services
+faq:
+  - question: ¿Necesito un harness para un MVP?
+    answer: "Si el MVP toca clientes reales, sí. Si es un demo interno, podés diferirlo. El costo de agregarlo después es chico hasta que un release de modelo rompe producción. Ahí es caro."
+  - question: ¿Quién es dueño del set de fixtures?
+    answer: "El equipo más cercano al usuario. Ingeniería ayuda a automatizarlo, pero producto o soporte elige los ejemplos."
+---
+
+Un equipo deployó un chatbot que respondía preguntas de soporte. Seis semanas después, el modelo liberó un upgrade de versión. De un día para otro, el chatbot empezó a confundir la política de devolución con la de reembolso. Nadie tenía harness de evaluación.
+
+## ¿Qué va adentro del set de fixtures?
+
+- **Ejemplos reales.** No sintéticos. Sacalos de tus logs reales.
+- **Respuestas correctas conocidas.** Las escribió un humano, un segundo humano las revisó.
+- **Edge cases.** Las tres o cuatro frases que siempre confundieron a la versión anterior.
+- **Prompts adversariales.** Los jailbreaks que ya viste.
+
+50 fixtures alcanzan para atrapar regresiones en una superficie simple. 200 para cualquier cosa que toque producción.
+
+## Preguntas frecuentes
+
+### ¿Necesito un harness para un MVP?
+
+Si el MVP toca clientes reales, sí. Si es un demo interno, podés diferirlo. El costo de agregarlo después es chico hasta que un release de modelo rompe producción. Ahí es caro.
+
+### ¿Quién es dueño del set de fixtures?
+
+El equipo más cercano al usuario. Ingeniería ayuda a automatizarlo, pero producto o soporte elige los ejemplos.

@@ -1,0 +1,51 @@
+---
+title: "How to set cost caps on an AI agent before you ship"
+description: "A short guide to protecting your runway from runaway LLM bills: max tokens per call, retry limits, per-user daily caps, and the kill switch."
+slug: ai-agent-cost-caps
+locale: en
+publishedAt: "2026-10-17"
+updatedAt: "2026-10-17"
+category: Guide
+tags:
+  - ai-agents
+  - cost-control
+  - production
+coverImage: "https://picsum.photos/seed/dq-cost-caps/1200/750"
+coverImageAlt: "Chart of LLM token usage with a cost cap line"
+directAnswer: "Cost caps on an AI agent are four things: a max token budget per call, a max retry count, a per-user daily cap, and a kill switch that cuts the agent off at a dollar threshold. Teams that ship all four never get a surprise bill."
+author:
+  name: DevQueens
+  role: Agency focused on AI solutions
+  bio: "DevQueens builds AI automations, agent surfaces, and GEO marketing under one roof. We assemble a senior team per case."
+relatedService:
+  label: AI agent engineering
+  href: /services
+faq:
+  - question: What is a sane default max token budget?
+    answer: "For status-lookup calls, 2,000 tokens. For reasoning calls, 8,000. For planning or research calls, 32,000. Set it per endpoint, not per team."
+  - question: Do I need a kill switch if I have cost caps?
+    answer: "Yes. Caps protect per call. The kill switch protects the account from a loop you did not foresee."
+---
+
+A startup shipped an AI support agent on a Friday afternoon. On Monday morning the OpenAI bill was $8,400 for the weekend. One edge-case question triggered a retry loop. There were no caps.
+
+## What are the four cost caps every production agent needs?
+
+- **Max tokens per call.** The ceiling on a single model invocation. If the agent needs more context, it summarizes and tries again.
+- **Max retries.** Three is a reasonable upper bound. After three, the agent escalates to a human.
+- **Per-user daily cap.** A single abusive or looped session cannot consume more than a documented dollar amount per day.
+- **Account-level kill switch.** When the daily account spend crosses a threshold, every agent call returns a cached fallback until a human resets it.
+
+## How do you pick the numbers?
+
+Pick them against your worst-case user, not your average user. Average tells you the bill. Worst case tells you the surprise.
+
+## FAQ
+
+### What is a sane default max token budget?
+
+For status-lookup calls, 2,000 tokens. For reasoning calls, 8,000. For planning or research calls, 32,000. Set it per endpoint, not per team.
+
+### Do I need a kill switch if I have cost caps?
+
+Yes. Caps protect per call. The kill switch protects the account from a loop you did not foresee.
