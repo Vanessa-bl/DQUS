@@ -1,0 +1,55 @@
+---
+title: "Shipping an AI agent on Shopify: a 4-week integration path"
+description: "A concrete integration path for a Shopify storefront: catalog sync, order lookup, cart recovery, and the three places teams get stuck."
+slug: shopify-ai-agent-integration
+locale: en
+publishedAt: "2026-10-15"
+updatedAt: "2026-10-15"
+category: Case
+tags:
+  - shopify
+  - ai-agents
+  - ecommerce
+coverImage: "https://picsum.photos/seed/dq-shopify-api/1200/750"
+coverImageAlt: "Shopify dashboard with an AI agent overlay showing an abandoned cart recovery"
+directAnswer: "An AI agent on Shopify ships in roughly four weeks when you follow a specific path: week one is catalog sync and auth, week two is order lookup, week three is cart recovery, and week four is evals plus guardrails. The three places teams get stuck are stock caching, promotion inference, and escalation paths."
+author:
+  name: DevQueens
+  role: Agency focused on AI solutions
+  bio: "DevQueens builds AI automations, agent surfaces, and GEO marketing under one roof. We assemble a senior team per case."
+relatedService:
+  label: AI agents for e-commerce
+  href: /services
+faq:
+  - question: Do I need a Shopify Plus plan?
+    answer: "No. The Storefront API and Admin API available on Shopify's standard plans are enough for most agent surfaces. Plus helps if you need checkout customization."
+  - question: What about Shopify's own AI features?
+    answer: "They are useful for product search inside the admin. For a buyer-facing agent that transacts, you build on top of the APIs."
+---
+
+A direct-to-consumer brand on Shopify wanted an AI agent that could answer buyers in WhatsApp, recover abandoned carts, and look up order status. We shipped it in four weeks. The path is the same for most Shopify stores.
+
+## What happens in each week?
+
+| Week | Scope | Deliverable |
+| --- | --- | --- |
+| 1 | Catalog sync, auth, product search | Agent returns in-stock items with real prices |
+| 2 | Order lookup, status, tracking | Agent answers "where is my order" from live data |
+| 3 | Cart recovery, abandoned-cart outreach | Agent reaches out with the exact items and promo |
+| 4 | Evals, cost caps, escalation path | Agent is production-ready with guardrails |
+
+## Where do teams get stuck?
+
+- **Stock caching.** The team caches the catalog weekly to save API calls. The agent sells an out-of-stock item. Fix: real-time stock lookups with a short TTL cache.
+- **Promotion inference.** The agent reads a marketing banner and starts offering a discount nobody approved. Fix: promotions only come from the pricing API.
+- **Escalation path.** A customer types "cancel my order" and the agent keeps answering as if it were a product search. Fix: explicit escalation intents, trained before go-live.
+
+## FAQ
+
+### Do I need a Shopify Plus plan?
+
+No. The Storefront API and Admin API available on Shopify's standard plans are enough for most agent surfaces. Plus helps if you need checkout customization.
+
+### What about Shopify's own AI features?
+
+They are useful for product search inside the admin. For a buyer-facing agent that transacts, you build on top of the APIs.

@@ -1,0 +1,70 @@
+---
+title: "Prompt engineering for product teams, without the mystique"
+description: "The five patterns we use across every production agent: role framing, structured output, evaluation harness, cost caps, and escalation. Nothing proprietary."
+slug: prompt-engineering-for-teams
+locale: en
+publishedAt: "2026-10-19"
+updatedAt: "2026-10-19"
+category: Guide
+tags:
+  - prompt-engineering
+  - ai-agents
+  - evaluation
+coverImage: "https://picsum.photos/seed/dq-terminal-ide/1200/750"
+coverImageAlt: "A product team reviewing a prompt evaluation dashboard with pass and fail rates"
+directAnswer: "Prompt engineering for a production agent is five patterns, not a dark art: a tight role frame, a strict structured output contract, an evaluation harness that runs on every change, hard cost caps on every call, and a documented escalation path. Teams that ship all five rarely need to re-platform."
+author:
+  name: DevQueens
+  role: Agency focused on AI solutions
+  bio: "DevQueens builds AI automations, agent surfaces, and GEO marketing under one roof. We assemble a senior team per case."
+relatedService:
+  label: Agent engineering services
+  href: /services
+faq:
+  - question: Do I need a prompt engineer on the team?
+    answer: "You need someone who treats prompts like code: version control, tests, and a diff review process. That person is usually already on the team."
+  - question: Which model should I start with?
+    answer: "Start with whichever model your evaluation harness scores highest on your actual tasks. Model preference without evaluation is a vibe."
+---
+
+Product teams get sold the idea that prompt engineering is a secret skill. It is not. It is five patterns, applied with discipline, and the teams that get them right ship agents that stay in production.
+
+## What are the five patterns?
+
+- **Role framing.** The first lines of the prompt tell the model what it is and what it is not. "You are a three-way-matching agent. You do not write marketing copy. You do not invent SKUs." Explicit boundaries reduce drift.
+- **Structured output.** Every agent call returns JSON with a schema you own. No prose. If the model cannot fill the schema, it says so and escalates.
+- **Evaluation harness.** Every prompt change runs against a set of real examples with known-good answers. Pass rate goes down, change rolls back.
+- **Cost caps.** Every call has a maximum token spend and a maximum retry count. No infinite loops. No surprise bills.
+- **Escalation path.** When the agent cannot answer, it hands off to a human with the exact context, the question, and the attempted answer.
+
+## How do I evaluate prompts over time?
+
+A production evaluation harness has three pieces:
+
+1. **A fixture set.** 50 to 200 real examples with known-good answers, versioned in your repo.
+2. **An automated runner.** A CI job that re-runs the fixture set on every prompt change and every model release.
+3. **A pass threshold.** A number below which the change does not merge, no matter who wrote it.
+
+Teams that skip the harness end up re-platforming every six months because they cannot tell which change broke which workflow.
+
+## What is a reasonable cost cap?
+
+For most production agent calls, we see three tiers:
+
+| Tier | Max tokens | Max retries | Typical use |
+| --- | --- | --- | --- |
+| Fast | 2,000 | 1 | Status lookups, simple answers |
+| Standard | 8,000 | 2 | Reasoning over a document |
+| Deep | 32,000 | 3 | Multi-step research or planning |
+
+Pick the tier per endpoint, not per team. One endpoint, one cap.
+
+## FAQ
+
+### Do I need a prompt engineer on the team?
+
+You need someone who treats prompts like code: version control, tests, and a diff review process. That person is usually already on the team.
+
+### Which model should I start with?
+
+Start with whichever model your evaluation harness scores highest on your actual tasks. Model preference without evaluation is a vibe.

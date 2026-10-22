@@ -1,0 +1,88 @@
+---
+title: "Agentes de IA en tu e-commerce: Qué hacen y cuándo generan ingresos"
+description: "Qué hacen los agentes de IA dentro de un e-commerce, cuándo generan ingresos reales y las tres integraciones que mueven la aguja: búsqueda, recuperación de carrito y soporte."
+slug: ecommerce-ai-agents
+locale: es
+publishedAt: "2026-10-21"
+updatedAt: "2026-10-21"
+category: Caso
+tags:
+  - ecommerce
+  - agentes-ia
+  - conversion
+coverImage: "https://picsum.photos/seed/dq-ecommerce-ai/1200/750"
+coverImageAlt: "Tienda e-commerce con un agente de IA manejando búsqueda de producto y recuperación de carrito"
+directAnswer: "Los agentes de IA en un e-commerce manejan búsqueda de producto, recuperación de carrito y soporte conversacional. Generan ingresos cuando transaccionan contra tu catálogo e inventario real, no cuando recitan copy de marketing. Las tres integraciones que mueven la aguja son búsqueda de producto con stock real, recuperación de carrito con precio real y soporte con status de pedido real."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Agentes de IA para e-commerce
+  href: /es/services
+faq:
+  - question: ¿El agente de IA va a reemplazar a mi equipo de soporte?
+    answer: "No. El agente maneja las preguntas de primera línea que son repetitivas y ya tienen respuesta en tu base de conocimiento. Tu equipo se queda con las escalaciones que necesitan una decisión humana."
+  - question: ¿Qué plataformas soportan?
+    answer: "Integramos con Shopify, WooCommerce, Magento y stacks custom. El trabajo de integración está en la API, no en el storefront, así que la plataforma importa menos que la calidad de su API."
+  - question: ¿Cómo miden los ingresos que genera un agente de IA?
+    answer: "Con tasa de conversión en sesiones donde el agente fue invocado, tasa de recuperación de carrito en sesiones abandonadas y net promoter score en interacciones de soporte. El baseline se setea en las primeras dos semanas."
+---
+
+Una marca direct-to-consumer vende 2.000 unidades al mes a través de un storefront de Shopify. Su inbox de soporte recibe 300 tickets por semana, el 70 por ciento de los cuales son "cuál es el status de mi pedido" y "¿tenés esto en talle M?". Su tasa de abandono de carrito está en 68 por ciento. Un agente de IA que lee su catálogo, su inventario y su sistema de pedidos saca la carga de soporte de primera línea y recupera un chunk medible de los carritos abandonados. Ahí es donde arrancan los agentes de IA en e-commerce.
+
+## ¿Qué hace exactamente un agente de IA en un e-commerce?
+
+Un agente de IA en un e-commerce hace tres cosas concretas:
+
+- **Búsqueda de producto.** El cliente describe lo que quiere en lenguaje natural ("necesito una zapatilla de running para clima húmedo, talle 42") y el agente devuelve los productos reales que están en stock, con precio real y disponibilidad real.
+- **Recuperación de carrito.** Cuando el cliente abandona el carrito, el agente lo contacta por WhatsApp, email o el mismo storefront con los items reales, el precio real y la promoción real a la que el cliente es elegible.
+- **Soporte conversacional.** Status de pedido, política de devolución, consultas de talle, estimados de entrega. El agente responde desde datos reales que vienen de tus APIs, no desde una base de conocimiento estática que queda desactualizada después del primer cambio de catálogo.
+
+Lo que el agente no hace: no escribe copy de marketing, no inventa descuentos ni recomienda productos que no vendés. Cada respuesta está anclada en un registro verificable.
+
+## ¿Cuándo genera ingresos reales un agente de IA en e-commerce?
+
+El agente genera ingresos cuando se cumplen tres condiciones:
+
+1. **El catálogo es accesible por una API.** Shopify, WooCommerce, Magento, stacks custom: todo sirve. Lo que importa es que status de stock, precios y atributos de SKU estén disponibles en tiempo real.
+2. **El sistema de pedidos es accesible.** El agente necesita buscar un pedido específico para responder "¿dónde está mi paquete?" sin derivar a un humano.
+3. **El flujo de pago está en el storefront.** El agente cierra el loop mandando al cliente a un carrito prellenado, no procesando el pago él mismo.
+
+Cuando esos tres se cumplen, el agente mueve la tasa de recuperación de carrito, el ticket promedio en sesiones asistidas por el agente y el volumen de tickets de soporte. El orden de magnitud que vemos en los proyectos es un lift del 8 al 15 por ciento en conversión para sesiones donde el agente fue invocado.
+
+## ¿Cuáles son las tres integraciones que importan?
+
+En los proyectos de agentes de e-commerce que entregamos, se repiten las mismas tres integraciones:
+
+| Integración | Qué habilita | Uplift típico |
+| --- | --- | --- |
+| Búsqueda de producto con stock real | Consultas en lenguaje natural que devuelven productos en stock con precios actuales | Lift del 8 al 15 por ciento en conversión en sesiones invocadas |
+| Recuperación de carrito con precio real | Outreach por WhatsApp o email a carritos abandonados con los items, precio y promoción exactos | Entre 12 y 25 por ciento de carritos abandonados recuperados en 72 horas |
+| Soporte con status de pedido real | Soporte de primera línea respondido desde datos de pedidos en vivo en vez de una base de conocimiento desactualizada | 40 a 60 por ciento de reducción en tickets de soporte de primera línea |
+
+Los números de uplift son consistentes con la [investigación de UX en e-commerce de Baymard Institute de 2026](https://baymard.com/research), que atribuye la mayor parte de la oportunidad al gap entre lo que el comprador pregunta y lo que el buscador entiende.
+
+## ¿Cuáles son los modos de falla más comunes?
+
+Tres fallas aparecen repetidamente:
+
+- **El agente alucina el status de stock.** El equipo de ingeniería cacheó el catálogo semanalmente y el agente vendió feliz un producto que estaba agotado. Fix: lookup de stock en tiempo real, con un cache de TTL corto para performance.
+- **El agente ofrece un descuento que nadie autorizó.** El agente infirió una promoción desde el copy de marketing y empezó a aplicarla. Fix: el agente solo aplica promociones que devuelve la API de precios.
+- **El agente se pierde en el path de escalación.** Un cliente frustrado tipeó "cancelar mi pedido" y el agente siguió respondiendo como si fuera una búsqueda de producto. Fix: una política de escalación explícita, entrenada antes del go-live y evaluada semanalmente.
+
+Cada una de estas fallas es predecible, y cada una se detecta en la semana de la prueba de concepto antes de que el agente toque un cliente real.
+
+## Preguntas frecuentes
+
+### ¿El agente de IA va a reemplazar a mi equipo de soporte?
+
+No. El agente maneja las preguntas de primera línea que son repetitivas y ya tienen respuesta en tu base de conocimiento. Tu equipo se queda con las escalaciones que necesitan una decisión humana.
+
+### ¿Qué plataformas soportan?
+
+Integramos con Shopify, WooCommerce, Magento y stacks custom. El trabajo de integración está en la API, no en el storefront, así que la plataforma importa menos que la calidad de su API.
+
+### ¿Cómo miden los ingresos que genera un agente de IA?
+
+Con tasa de conversión en sesiones donde el agente fue invocado, tasa de recuperación de carrito en sesiones abandonadas y net promoter score en interacciones de soporte. El baseline se setea en las primeras dos semanas.

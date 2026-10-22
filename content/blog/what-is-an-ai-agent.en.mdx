@@ -1,0 +1,56 @@
+---
+title: "What is an AI agent (and what it isn't)"
+description: "A short explainer on what counts as an AI agent in 2026, the four capabilities that define one, and the common misuses that cost teams money."
+slug: what-is-an-ai-agent
+locale: en
+publishedAt: "2026-10-20"
+updatedAt: "2026-10-20"
+category: Guide
+tags:
+  - ai-agents
+  - foundations
+coverImage: "https://picsum.photos/seed/dq-brain-chip/1200/750"
+coverImageAlt: "Diagram comparing an AI chatbot and an AI agent transacting through an API"
+directAnswer: "An AI agent is software that takes an instruction, decides on a plan, calls real tools or APIs to execute it, and reports back with evidence. Four capabilities define one: tool use, memory, autonomous planning, and verifiable output. A chatbot that only generates text is not an agent."
+author:
+  name: DevQueens
+  role: Agency focused on AI solutions
+  bio: "DevQueens builds AI automations, agent surfaces, and GEO marketing under one roof. We assemble a senior team per case."
+relatedService:
+  label: AI agent development
+  href: /services
+faq:
+  - question: Is ChatGPT an AI agent?
+    answer: "ChatGPT in its default chat mode is a language model with a UI. When it uses tools, browses the web, or executes code on your behalf, it operates as an agent for that session."
+  - question: Do I need an agent or an automation?
+    answer: "If the task has rules and runs on a schedule, an automation is cheaper and more reliable. If the task needs reasoning across unstructured inputs, an agent is the right fit."
+---
+
+A finance team asks "process this invoice." A chatbot writes a nice email about invoice processing. An agent reads the invoice, matches it against the purchase order, routes any discrepancy to the right approver, and returns a receipt. That is the difference.
+
+## What are the four capabilities that define an AI agent?
+
+The four capabilities that separate an agent from a language model with a chat interface:
+
+- **Tool use.** The agent can call real APIs, read a database, browse the web, or execute code. Without tool use, it is a text generator.
+- **Memory.** The agent remembers prior context across turns or sessions. Short-term memory is table stakes. Long-term memory, grounded in a vector store or structured store, is what makes it feel competent.
+- **Autonomous planning.** The agent decomposes a goal into steps and picks the right tool for each one. It is not following a script you wrote.
+- **Verifiable output.** The agent returns evidence: a transaction ID, a changed record, a URL, a receipt. If you cannot verify what it did, you cannot trust it in production.
+
+## When is an agent the wrong tool?
+
+Three signals that an agent is overkill:
+
+1. **The workflow is already rule-based.** A deterministic automation is cheaper, faster, and does not hallucinate.
+2. **The latency budget is tight.** Agents loop. Loops add latency. If the user is waiting under 500ms, use a classical API.
+3. **The failure cost is high and oversight is low.** Agents are statistical. Statistical systems need evaluation harnesses, cost caps, and escalation paths. If you do not have budget for those, do not ship an agent.
+
+## FAQ
+
+### Is ChatGPT an AI agent?
+
+ChatGPT in its default chat mode is a language model with a UI. When it uses tools, browses the web, or executes code on your behalf, it operates as an agent for that session.
+
+### Do I need an agent or an automation?
+
+If the task has rules and runs on a schedule, an automation is cheaper and more reliable. If the task needs reasoning across unstructured inputs, an agent is the right fit.

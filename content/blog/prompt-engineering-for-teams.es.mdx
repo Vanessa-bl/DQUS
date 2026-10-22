@@ -1,0 +1,70 @@
+---
+title: "Prompt engineering para equipos de producto, sin mística"
+description: "Los cinco patrones que usamos en todo agente de producción: role framing, output estructurado, harness de evaluación, topes de costo y escalación. Nada propietario."
+slug: prompt-engineering-for-teams
+locale: es
+publishedAt: "2026-10-19"
+updatedAt: "2026-10-19"
+category: Guía
+tags:
+  - prompt-engineering
+  - agentes-ia
+  - evaluacion
+coverImage: "https://picsum.photos/seed/dq-terminal-ide/1200/750"
+coverImageAlt: "Equipo de producto revisando un dashboard de evaluación de prompts con tasas de pass y fail"
+directAnswer: "El prompt engineering para un agente de producción son cinco patrones, no un arte oculto: un role frame apretado, un contrato de output estructurado estricto, un harness de evaluación que corre en cada cambio, topes de costo duros en cada llamada y un path de escalación documentado. Los equipos que entregan los cinco rara vez necesitan re-plataformar."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Servicios de ingeniería de agentes
+  href: /es/services
+faq:
+  - question: ¿Necesito un prompt engineer en el equipo?
+    answer: "Necesitás a alguien que trate los prompts como código: control de versiones, tests y proceso de review de diffs. Esa persona generalmente ya está en el equipo."
+  - question: ¿Con qué modelo arranco?
+    answer: "Arrancá con el modelo que tu harness de evaluación puntúe más alto en tus tareas reales. La preferencia de modelo sin evaluación es un vibe."
+---
+
+A los equipos de producto les venden que el prompt engineering es una habilidad secreta. No lo es. Son cinco patrones, aplicados con disciplina, y los equipos que los aplican bien son los que entregan agentes que se quedan en producción.
+
+## ¿Cuáles son los cinco patrones?
+
+- **Role framing.** Las primeras líneas del prompt le dicen al modelo qué es y qué no es. "Sos un agente de matching a tres vías. No escribís copy de marketing. No inventás SKUs." Los límites explícitos reducen el drift.
+- **Output estructurado.** Cada llamada del agente devuelve JSON con un schema que vos controlás. Nada de prosa. Si el modelo no puede llenar el schema, lo dice y escala.
+- **Harness de evaluación.** Cada cambio de prompt corre contra un set de ejemplos reales con respuestas correctas conocidas. Baja el pass rate, se revierte el cambio.
+- **Topes de costo.** Cada llamada tiene un máximo de tokens y un máximo de retries. Sin loops infinitos. Sin facturas sorpresa.
+- **Path de escalación.** Cuando el agente no puede responder, pasa a un humano con el contexto exacto, la pregunta y la respuesta intentada.
+
+## ¿Cómo evalúo prompts en el tiempo?
+
+Un harness de evaluación de producción tiene tres piezas:
+
+1. **Un set de fixtures.** 50 a 200 ejemplos reales con respuestas correctas conocidas, versionados en tu repo.
+2. **Un runner automatizado.** Un job de CI que re-corre el set en cada cambio de prompt y en cada release de modelo.
+3. **Un threshold de pass.** Un número debajo del cual el cambio no mergea, sin importar quién lo escribió.
+
+Los equipos que se saltean el harness terminan re-plataformando cada seis meses porque no pueden decir qué cambio rompió qué flujo.
+
+## ¿Cuál es un tope de costo razonable?
+
+Para la mayoría de los llamados de agente en producción vemos tres niveles:
+
+| Nivel | Máx tokens | Máx retries | Uso típico |
+| --- | --- | --- | --- |
+| Rápido | 2.000 | 1 | Lookups de status, respuestas simples |
+| Estándar | 8.000 | 2 | Razonamiento sobre un documento |
+| Profundo | 32.000 | 3 | Research o planning multi-step |
+
+Elegí el nivel por endpoint, no por equipo. Un endpoint, un tope.
+
+## Preguntas frecuentes
+
+### ¿Necesito un prompt engineer en el equipo?
+
+Necesitás a alguien que trate los prompts como código: control de versiones, tests y proceso de review de diffs. Esa persona generalmente ya está en el equipo.
+
+### ¿Con qué modelo arranco?
+
+Arrancá con el modelo que tu harness de evaluación puntúe más alto en tus tareas reales. La preferencia de modelo sin evaluación es un vibe.

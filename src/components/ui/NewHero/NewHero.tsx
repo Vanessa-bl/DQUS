@@ -5,20 +5,20 @@ const FEATURES = [
   {
     dot: "1",
     key: "feat1",
-    title: "Proof first. Ship fast.",
-    desc: "A proof of concept in 5 to 10 days. One real action against your real data. Your team watches it work before you sign off on production.",
+    title: "Enterprise volume, from day one.",
+    desc: "Built for B2B teams running millions of records, hundreds of integrations, or thousands of users. Our architecture scales with your real traffic, not with a sandbox demo.",
   },
   {
     dot: "2",
     key: "feat2",
-    title: "Anchored to outcomes.",
-    desc: "An automation that returns 40 approver hours a week. An agent that captures 50 bookings a week. We anchor to what you capture, not to what we clock.",
+    title: "Measurable outcomes, every quarter.",
+    desc: "We anchor to the numbers that matter to your board: hours returned, revenue captured, risk reduced. Every milestone is tied to a measurable result you can defend.",
   },
   {
     dot: "3",
     key: "feat3",
-    title: "Maintenance included.",
-    desc: "APIs break. Schemas drift. Models update overnight. Someone watches, patches, and reruns the evals every week, including the security ones. No surprise SOWs.",
+    title: "Confidential by default. Secure by design.",
+    desc: "Every engagement runs under a strict NDA. Your data, your know-how, and your architecture stay with your team — we never share learnings between clients in the same market. Security built to the bar of regulated industries, from day one.",
   },
 ] as const;
 
@@ -48,10 +48,10 @@ export default function NewHero({
             {t(`${tPrefix}.eyebrow`, "How we work")}
           </span>
           <h2 className="nh__headline">
-            {t(`${tPrefix}.headline.line1`, "From proof.")}
+            {t(`${tPrefix}.headline.line1`, "We automate")}
             <br />
             <span className="nh__headline-mark">
-              {t(`${tPrefix}.headline.line2`, "To production.")}
+              {t(`${tPrefix}.headline.line2`, "your processes.")}
             </span>
           </h2>
         </div>
@@ -60,7 +60,7 @@ export default function NewHero({
           <p className="nh__desc">
             {t(
               `${tPrefix}.desc`,
-              "Automations, agents, and AI marketing. Shipped under one roof. Proof of concept in 10 days. Fixed scope and timeline.",
+              "Automations, agents, and AI marketing. All under one roof. Proof of concept in 10 days. Fixed scope and timeline.",
             )}
           </p>
           <a href={startHref} className="nh__cta">

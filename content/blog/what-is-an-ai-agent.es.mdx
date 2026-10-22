@@ -1,0 +1,56 @@
+---
+title: "Qué es un agente de IA (y qué no lo es)"
+description: "Un explainer corto sobre qué cuenta como agente de IA en 2026, las cuatro capacidades que lo definen y los usos equivocados que le cuestan plata a los equipos."
+slug: what-is-an-ai-agent
+locale: es
+publishedAt: "2026-10-20"
+updatedAt: "2026-10-20"
+category: Guía
+tags:
+  - agentes-ia
+  - fundamentos
+coverImage: "https://picsum.photos/seed/dq-brain-chip/1200/750"
+coverImageAlt: "Diagrama que compara un chatbot de IA con un agente de IA transaccionando a través de una API"
+directAnswer: "Un agente de IA es software que toma una instrucción, decide un plan, llama a herramientas o APIs reales para ejecutarlo y reporta con evidencia. Cuatro capacidades lo definen: uso de herramientas, memoria, planificación autónoma y output verificable. Un chatbot que solo genera texto no es un agente."
+author:
+  name: DevQueens
+  role: Agencia dedicada a soluciones en IA
+  bio: "DevQueens construye automatizaciones con IA, superficies de agente y marketing GEO en un solo lugar. Armamos un equipo senior por caso."
+relatedService:
+  label: Desarrollo de agentes de IA
+  href: /es/services
+faq:
+  - question: ¿ChatGPT es un agente de IA?
+    answer: "ChatGPT en modo chat por defecto es un modelo de lenguaje con una UI. Cuando usa herramientas, navega la web o ejecuta código por vos, opera como agente para esa sesión."
+  - question: ¿Necesito un agente o una automatización?
+    answer: "Si la tarea tiene reglas y corre en un schedule, una automatización es más barata y más confiable. Si la tarea necesita razonamiento sobre inputs no estructurados, un agente es la pieza correcta."
+---
+
+Un equipo financiero pide "procesá esta factura". Un chatbot escribe un lindo email sobre procesamiento de facturas. Un agente lee la factura, la confronta contra la orden de compra, rutea cualquier discrepancia al aprobador correspondiente y devuelve un recibo. Esa es la diferencia.
+
+## ¿Cuáles son las cuatro capacidades que definen a un agente de IA?
+
+Las cuatro capacidades que separan a un agente de un modelo de lenguaje con interfaz de chat:
+
+- **Uso de herramientas.** El agente puede llamar APIs reales, leer una base de datos, navegar la web o ejecutar código. Sin uso de herramientas, es un generador de texto.
+- **Memoria.** El agente recuerda contexto previo entre turnos o sesiones. La memoria corta es lo mínimo. La memoria larga, anclada a un vector store o store estructurado, es lo que lo hace sentir competente.
+- **Planificación autónoma.** El agente descompone un objetivo en pasos y elige la herramienta correcta para cada uno. No está siguiendo un script que vos escribiste.
+- **Output verificable.** El agente devuelve evidencia: un ID de transacción, un registro modificado, una URL, un recibo. Si no podés verificar lo que hizo, no podés confiarle producción.
+
+## ¿Cuándo el agente es la herramienta equivocada?
+
+Tres señales de que un agente es excesivo:
+
+1. **El flujo ya es por reglas.** Una automatización determinística es más barata, más rápida y no alucina.
+2. **El budget de latencia es ajustado.** Los agentes hacen loops. Los loops suman latencia. Si el usuario espera menos de 500ms, usá una API clásica.
+3. **El costo de falla es alto y la supervisión es baja.** Los agentes son estadísticos. Los sistemas estadísticos necesitan harness de evaluación, topes de costo y paths de escalación. Si no tenés budget para eso, no deployees un agente.
+
+## Preguntas frecuentes
+
+### ¿ChatGPT es un agente de IA?
+
+ChatGPT en modo chat por defecto es un modelo de lenguaje con una UI. Cuando usa herramientas, navega la web o ejecuta código por vos, opera como agente para esa sesión.
+
+### ¿Necesito un agente o una automatización?
+
+Si la tarea tiene reglas y corre en un schedule, una automatización es más barata y más confiable. Si la tarea necesita razonamiento sobre inputs no estructurados, un agente es la pieza correcta.

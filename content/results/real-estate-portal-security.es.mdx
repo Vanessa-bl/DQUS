@@ -1,0 +1,29 @@
+---
+title: "Hardening de seguridad para un portal de marketplace inmobiliario"
+description: "Un proyecto B2B que ejecutó un hardening de seguridad guiado por red-team sobre el portal, la superficie de admin y la API de partners de un marketplace inmobiliario antes de su due diligence de Serie B."
+slug: real-estate-portal-security
+locale: es
+publishedAt: "2026-07-30"
+updatedAt: "2026-07-30"
+category: "INMOBILIARIA / SEGURIDAD"
+tags:
+  - seguridad
+  - owasp
+  - inmobiliaria
+client: "Portal de marketplace inmobiliario (anonimizado)"
+highlight: "Bloqueó el 100% de intentos del OWASP top-10 en un ejercicio red-team en producción."
+outcome: "Un portal, superficie de admin y API de partners endurecidos que pasaron un review de seguridad de Serie B sin un solo hallazgo crítico."
+metrics:
+  - value: "100%"
+    label: "Intentos del OWASP top-10 bloqueados en el red-team"
+  - value: "0"
+    label: "Hallazgos críticos en la diligencia"
+  - value: "6 semanas"
+    label: "Del arranque al reporte limpio"
+---
+
+Un marketplace inmobiliario preparándose para su Serie B tenía una superficie de admin expuesta, una API de partners sin rate limits y un modelo de sesión que filtraba tenancy bajo ciertas condiciones de concurrencia. El review de seguridad de los inversores era en ocho semanas.
+
+En seis semanas, modelamos amenazas sobre las tres superficies, parchamos la filtración de tenancy, sumamos rate limits y firmas autenticadas a la API de partners, endurecimos la superficie de admin contra el OWASP top-10 y corrimos un ejercicio red-team contra el ambiente de producción con un scope firmado.
+
+El red team bloqueó cada intento del top-10, el reporte de diligencia volvió con cero hallazgos críticos y la ronda cerró en fecha. El approach de hardening es ahora el baseline para cada nueva integración de partners.

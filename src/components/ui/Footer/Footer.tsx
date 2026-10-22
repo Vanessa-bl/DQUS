@@ -171,6 +171,12 @@ const Footer: React.FC<FooterProps> = ({
                 {t("footer.company", "Company")}
               </h4>
               <nav className="footer-nav">
+                <AnimatedLink to="/results" size="0.9rem" style={linkStyle}>
+                  {t("footer.company.results", "Results")}
+                </AnimatedLink>
+                <AnimatedLink to="/blog" size="0.9rem" style={linkStyle}>
+                  {t("footer.company.blog", "Blog")}
+                </AnimatedLink>
                 <AnimatedLink to="/about" size="0.9rem" style={linkStyle}>
                   {t("footer.company.about", "About us")}
                 </AnimatedLink>
