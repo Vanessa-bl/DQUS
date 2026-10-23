@@ -9,21 +9,45 @@
    ================================================================= */
 
 :root {
-  --rea-dark: #0f0d1c;
-  --rea-dark-soft: #15132a;
-  --rea-light: #FAFAF8;
+  /* A++ editorial-SaaS palette (2026 pattern — Follow Up Boss, Structurely,
+     Smart Alto, Respond.io). White dominates for trust and legibility;
+     WhatsApp green is reserved for CTAs, icons, and the chat module only.
+     The product IS a WhatsApp agent, but the LANDING must feel like a
+     real-estate SaaS, not a mint-themed brochure. */
+  --rea-dark: #ffffff;              /* primary surface — crisp white */
+  --rea-dark-soft: #ffffff;
+  --rea-light: #F7F8F7;             /* subtle warm neutral for 1-2 alt sections */
   --rea-light-soft: #ffffff;
-  --rea-ink-on-dark: #ffffff;
-  --rea-ink-on-dark-dim: rgba(255, 255, 255, 0.68);
-  --rea-ink-on-dark-faint: rgba(255, 255, 255, 0.4);
-  --rea-ink-on-light: #0f0d1c;
-  --rea-ink-on-light-dim: rgba(15, 13, 28, 0.68);
-  --rea-ink-on-light-faint: rgba(15, 13, 28, 0.42);
-  --rea-accent: #e9336f;
-  --rea-accent-soft: rgba(233, 51, 112, 0.1);
-  --rea-border-dark: rgba(255, 255, 255, 0.08);
-  --rea-border-light: rgba(15, 13, 28, 0.08);
+  --rea-ink-on-dark: #0A0F0D;       /* editorial near-black, lightly tinted */
+  --rea-ink-on-dark-dim: #4B5563;
+  --rea-ink-on-dark-faint: #6B7280;
+  --rea-ink-on-light: #0A0F0D;
+  --rea-ink-on-light-dim: #4B5563;
+  --rea-ink-on-light-faint: #6B7280;
+  --rea-accent: #0A7B5B;            /* WhatsApp Business green — accent only */
+  --rea-accent-strong: #075E54;     /* hover + inverse section bg */
+  --rea-accent-bright: #25D366;     /* chat highlight bright */
+  --rea-accent-soft: rgba(10, 123, 91, 0.06);
+  --rea-border-dark: rgba(10, 15, 13, 0.08);
+  --rea-border-light: rgba(10, 15, 13, 0.08);
+
+  /* Reserved for the final-cta closer so it earns the scroll stop */
+  --rea-inverse: #0A0F0D;
+  --rea-inverse-soft: #141A17;
+  --rea-ink-on-inverse: #ffffff;
+  --rea-ink-on-inverse-dim: rgba(255, 255, 255, 0.72);
 }
+
+/* Final CTA + any section that opts into inverse mode */
+.rea-section--inverse {
+  background: var(--rea-inverse) !important;
+  color: var(--rea-ink-on-inverse) !important;
+}
+.rea-section--inverse .rea-h2,
+.rea-section--inverse h2,
+.rea-section--inverse h3 { color: var(--rea-ink-on-inverse); }
+.rea-section--inverse p,
+.rea-section--inverse li { color: var(--rea-ink-on-inverse-dim); }
 
 /* ---------- Reset for the landing root ---------- */
 
@@ -39,10 +63,10 @@ main {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(15, 13, 28, 0.9);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--rea-border-dark);
+  border-bottom: 1px solid var(--rea-border-light);
 }
 
 .rea-nav__inner {
@@ -95,11 +119,29 @@ main {
 
 .rea-section {
   width: 100%;
-  padding: 9rem 1.5rem;
+  padding: 4.5rem 1.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Hero kept untouched by request. */
+.rea-hero {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+
+/* Final CTA — mid breathing room so it still signals landing closer. */
+.rea-final {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+@media (max-width: 768px) {
+  .rea-section { padding: 3.5rem 1.5rem; }
+  .rea-hero { padding-top: 6rem; padding-bottom: 6rem; }
+  .rea-final { padding-top: 4rem; padding-bottom: 4rem; }
 }
 
 .rea-section--dark {
@@ -135,7 +177,7 @@ main {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--rea-ink-on-dark-faint);
-  margin: 0 0 1.75rem;
+  margin: 0 0 1rem;
 }
 
 .rea-eyebrow--light {
@@ -144,13 +186,13 @@ main {
 
 .rea-h2 {
   font-family: "DM Sans", sans-serif;
-  font-weight: 800;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-  color: var(--rea-ink-on-dark);
-  margin: 0 0 3rem;
-  max-width: 920px;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: #111827;
+  margin: 0 0 1.5rem;
+  max-width: 760px;
 }
 
 .rea-h2--light {
@@ -331,11 +373,11 @@ main {
 
 .rea-chat {
   width: 100%;
-  background: #0b0a16;
-  border: 1px solid var(--rea-border-dark);
+  background: #ECE5DD;
+  border: 1px solid rgba(10, 10, 10, 0.06);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 24px 48px -20px rgba(17, 24, 39, 0.18), 0 2px 8px rgba(17, 24, 39, 0.05);
   display: flex;
   flex-direction: column;
   /* Fixed height so el marco no crece. Body hace scroll interno. */
@@ -348,10 +390,14 @@ main {
   align-items: center;
   gap: 0.75rem;
   padding: 0.9rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--rea-border-dark);
+  background: #075E54;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
+
+.rea-chat__name { color: #ffffff !important; }
+.rea-chat__state { color: rgba(255, 255, 255, 0.78) !important; }
+.rea-chat__avatar { background: #25D366 !important; color: #075E54 !important; }
 
 .rea-chat__avatar {
   width: 36px;
@@ -411,13 +457,17 @@ main {
 }
 
 .rea-chat__msg--in {
-  background: rgba(255, 255, 255, 0.06);
+  background: #ffffff;
+  color: #0A0A0A;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   align-self: flex-start;
   border-top-left-radius: 4px;
 }
 
 .rea-chat__msg--out {
-  background: var(--rea-accent);
+  background: #D9FDD3;
+  color: #0B2D28;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   align-self: flex-end;
   border-top-right-radius: 4px;
 }
@@ -501,6 +551,88 @@ main {
 }
 
 /* =================================================================
+   1b. STAT BAR · trust anchor (Job Today pattern)
+================================================================= */
+
+.rea-stats {
+  background: #ffffff;
+  border-top: 1px solid #F3F4F6;
+  border-bottom: 1px solid #F3F4F6;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.rea-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.rea-stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.rea-stats__item + .rea-stats__item::before {
+  content: "";
+  position: absolute;
+  left: -1.25rem;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: #E5E7EB;
+}
+
+.rea-stats__num {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--rea-accent-strong);
+}
+
+.rea-stats__label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1F2937;
+  font-weight: 600;
+  max-width: 280px;
+  margin-top: 0.5rem;
+}
+
+.rea-stats__source {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.72rem;
+  color: #9CA3AF;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 260px;
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 760px) {
+  .rea-stats__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .rea-stats__item + .rea-stats__item::before {
+    left: 10%;
+    right: 10%;
+    top: -1.25rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+  }
+}
+
+/* =================================================================
    2. PROBLEMA
 ================================================================= */
 
@@ -509,26 +641,31 @@ main {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 1.5rem;
+  gap: 1.1rem;
 }
 
 .rea-problem__list li {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  color: var(--rea-ink-on-dark-dim);
-  padding-left: 1.75rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4B5563;
+  padding-left: 2rem;
   position: relative;
 }
 
 .rea-problem__list li::before {
+  /* Checkmark icon (inline SVG via data URI) in brand green */
   content: "";
   position: absolute;
   left: 0;
-  top: 0.85rem;
-  width: 12px;
-  height: 2px;
-  background: var(--rea-ink-on-dark-faint);
+  top: 0.35rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rea-accent-soft);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M5 10.5l3.2 3.2L15 7' stroke='%230A7B5B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* =================================================================
@@ -612,6 +749,135 @@ main {
   font-size: 0.9rem;
   color: var(--rea-ink-on-dark-faint);
   font-style: italic;
+}
+
+/* =================================================================
+   4b. COMPARATIVA · operativa tradicional vs. asistente
+================================================================= */
+
+.rea-compare {
+  background: #F7F8F7;
+}
+
+.rea-compare__wrap { text-align: center; }
+
+.rea-compare__wrap .rea-eyebrow,
+.rea-compare__wrap .rea-h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rea-compare__lead {
+  margin: 1rem auto 3rem;
+  max-width: 640px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rea-ink-on-dark-dim);
+}
+
+.rea-compare__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.rea-compare__col {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rea-compare__col--new {
+  border-color: var(--rea-accent);
+  box-shadow:
+    0 1px 2px rgba(10, 123, 91, 0.06),
+    0 24px 48px -24px rgba(10, 123, 91, 0.2),
+    0 12px 24px -12px rgba(10, 15, 13, 0.08);
+}
+
+.rea-compare__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.rea-compare__tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.3rem 0.65rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.rea-compare__tag--old {
+  color: #991B1B;
+  background: #FEE2E2;
+}
+
+.rea-compare__tag--new {
+  color: #065F46;
+  background: #D1FAE5;
+}
+
+.rea-compare__title {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0A0F0D;
+  letter-spacing: -0.012em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.rea-compare__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rea-compare__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1F2937;
+}
+
+.rea-compare__col--old .rea-compare__list li { color: #4B5563; }
+
+.rea-compare__list li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rea-compare__col--new .rea-compare__list li svg {
+  color: var(--rea-accent);
+}
+
+@media (max-width: 760px) {
+  .rea-compare__grid {
+    grid-template-columns: 1fr;
+  }
+  .rea-compare__col { padding: 1.5rem; }
 }
 
 /* =================================================================
@@ -763,29 +1029,153 @@ main {
 }
 
 .rea-result {
-  padding: 0;
+  padding: 2rem 1.75rem;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.rea-result svg {
-  color: var(--rea-accent);
-  margin-bottom: 1rem;
+.rea-result:hover {
+  border-color: var(--rea-accent);
+  transform: translateY(-2px);
+}
+
+.rea-result__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #D1FAE5;
+  color: var(--rea-accent-strong);
+  margin-bottom: 0.5rem;
+}
+
+.rea-result__num {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 4.5vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--rea-accent-strong);
+  margin: 0.25rem 0 0.75rem;
 }
 
 .rea-result h3 {
   font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
   color: var(--rea-ink-on-light);
-  margin: 0 0 0.6rem;
-  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.012em;
 }
 
 .rea-result p {
   font-family: "Nunito Sans", sans-serif;
   color: var(--rea-ink-on-light-dim);
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0;
+  font-size: 0.95rem;
+}
+
+/* =================================================================
+   6b. TESTIMONIOS · light · anonimizados (Job Today pattern)
+================================================================= */
+
+.rea-testi {
+  background: #ffffff;
+}
+
+.rea-testi__intro {
+  font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rea-ink-on-light-dim);
+  max-width: 620px;
+  margin: 0 0 3rem;
+}
+
+.rea-testi__grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 820px) {
+  .rea-testi__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.rea-testi__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 1.75rem;
+  margin: 0;
+  background: #F7F8F7;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.rea-testi__card:hover {
+  border-color: var(--rea-accent);
+  transform: translateY(-2px);
+}
+
+.rea-testi__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #F59E0B;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.rea-testi__card blockquote {
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #1F2937;
+  flex: 1;
+}
+
+.rea-testi__card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.rea-testi__card figcaption strong {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0A0F0D;
+  letter-spacing: -0.01em;
+}
+
+.rea-testi__card figcaption span {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  color: #6B7280;
+  line-height: 1.4;
+}
+
+.rea-testi__note {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.8rem;
+  color: #9CA3AF;
+  font-style: italic;
+  margin: 1.5rem 0 0;
+  text-align: center;
 }
 
 /* =================================================================
@@ -989,65 +1379,165 @@ main {
 }
 
 /* =================================================================
-   10. CUMPLIMIENTO · light
+   Split pattern · reusable editorial layout (title + content)
 ================================================================= */
 
-.rea-compliance__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.rea-split {
   display: grid;
-  gap: 1rem;
-  max-width: 760px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 4.5rem;
+  align-items: start;
 }
 
-.rea-compliance__list li {
+.rea-split__head {
+  position: sticky;
+  top: 6rem;
   display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 1.2rem 1.4rem;
-  border: 1px solid var(--rea-border-light);
-  border-radius: 12px;
-  background: var(--rea-light-soft);
-  font-family: "Nunito Sans", sans-serif;
-  color: var(--rea-ink-on-light);
-  font-size: 1rem;
-  line-height: 1.4;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.rea-compliance__list svg {
-  color: var(--rea-ink-on-light);
-  flex-shrink: 0;
+.rea-split__head .rea-h2 { margin: 0; max-width: 420px; }
+.rea-split__head .rea-eyebrow { margin: 0; }
+
+.rea-split__lead {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rea-ink-on-light-dim);
+  margin: 0;
+  max-width: 400px;
+}
+
+.rea-split__head .rea-link {
+  margin-top: 0.5rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  color: var(--rea-accent-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.rea-split__head .rea-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .rea-split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .rea-split__head {
+    position: static;
+    top: auto;
+  }
 }
 
 /* =================================================================
-   11. FAQ · light
+   10. CUMPLIMIENTO · light · cards grid
+================================================================= */
+
+.rea-compliance__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.rea-compliance__card {
+  padding: 1.75rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.rea-compliance__card:hover {
+  border-color: var(--rea-accent);
+  transform: translateY(-2px);
+}
+
+.rea-compliance__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #D1FAE5;
+  color: var(--rea-accent-strong);
+  margin-bottom: 0.25rem;
+}
+
+.rea-compliance__card h3 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--rea-ink-on-light);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.rea-compliance__card p {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--rea-ink-on-light-dim);
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .rea-compliance__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================================================================
+   11. FAQ · light · accordion refined
 ================================================================= */
 
 .rea-faq__list {
-  display: grid;
-  gap: 0.75rem;
-  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .rea-faq__item {
-  border: 1px solid var(--rea-border-light);
-  border-radius: 12px;
-  background: var(--rea-light-soft);
+  border: none;
+  border-bottom: 1px solid #E5E7EB;
+  border-radius: 0;
+  background: transparent;
   overflow: hidden;
+  padding: 0;
+}
+
+.rea-faq__item:first-child {
+  border-top: 1px solid #E5E7EB;
 }
 
 .rea-faq__item summary {
   cursor: pointer;
-  padding: 1.2rem 1.4rem;
+  padding: 1.5rem 0;
   font-family: "DM Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--rea-ink-on-light);
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.05rem;
+  letter-spacing: -0.012em;
+  gap: 1rem;
+  transition: color 0.15s ease;
+}
+
+.rea-faq__item summary:hover {
+  color: var(--rea-accent-strong);
 }
 
 .rea-faq__item summary::-webkit-details-marker {
@@ -1055,22 +1545,28 @@ main {
 }
 
 .rea-faq__item summary::after {
-  content: "+";
-  color: var(--rea-ink-on-light);
-  font-weight: 400;
-  font-size: 1.5rem;
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A7B5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 5v14M5 12h14'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
 }
 
 .rea-faq__item[open] summary::after {
-  content: "–";
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A7B5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14'/></svg>");
 }
 
 .rea-faq__item p {
-  padding: 0 1.4rem 1.4rem;
+  padding: 0 2.5rem 1.5rem 0;
   font-family: "Nunito Sans", sans-serif;
   color: var(--rea-ink-on-light-dim);
   line-height: 1.6;
   margin: 0;
+  font-size: 0.95rem;
 }
 
 /* =================================================================
@@ -1078,7 +1574,25 @@ main {
 ================================================================= */
 
 .rea-final .rea-h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  max-width: 520px;
+}
+
+.rea-final__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: center;
+}
+
+.rea-final__text { min-width: 0; }
+
+.rea-final__eyebrow {
+  color: var(--rea-ink-on-dark-faint);
+}
+
+.rea-final__title {
+  color: #ffffff;
 }
 
 .rea-final__sub {
@@ -1086,12 +1600,207 @@ main {
   color: var(--rea-ink-on-dark-dim);
   font-size: 1.1rem;
   line-height: 1.6;
-  margin: 0 auto 2.5rem;
-  max-width: 540px;
+  margin: 0 0 2rem;
+  max-width: 520px;
 }
 
 .rea-final__ctas {
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.rea-final__trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.rea-final__trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: var(--rea-ink-on-dark-dim);
+  font-weight: 500;
+}
+
+.rea-final__trust li svg {
+  color: var(--rea-accent-bright);
+  flex-shrink: 0;
+}
+
+/* Final CTA phone mockup — "Pruébalo" with scheduled visit badge */
+.rea-final__visual {
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.rea-final__phone {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  background: #ECE5DD;
+  border-radius: 36px;
+  padding: 1.5rem 0.6rem 1.1rem;
+  border: 10px solid #0A0F0D;
+  box-shadow:
+    0 1px 2px rgba(10, 123, 91, 0.08),
+    0 32px 64px -28px rgba(10, 123, 91, 0.4),
+    0 16px 32px -16px rgba(10, 15, 13, 0.4);
+}
+
+.rea-final__phone-notch {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 20px;
+  background: #0A0F0D;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.rea-final__phone-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.75rem 0.9rem;
+  border-bottom: 1px solid rgba(10, 15, 13, 0.06);
+  margin-bottom: 0.75rem;
+}
+
+.rea-final__phone-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--rea-accent-strong);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.rea-final__phone-head-text {
+  line-height: 1.2;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.rea-final__phone-head-text strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0A0F0D;
+}
+
+.rea-final__phone-head-text span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: #6B7280;
+  margin-top: 2px;
+}
+
+.rea-final__phone-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.18);
+  font-style: normal;
+}
+
+.rea-final__phone-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0 0.4rem 0.3rem;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.rea-final__phone-msg {
+  max-width: 86%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  border-radius: 10px;
+  color: #0A0F0D;
+  box-shadow: 0 1px 1px rgba(10, 15, 13, 0.05);
+  margin-top: 0.5rem;
+}
+
+.rea-final__phone-msg--in {
+  background: #ffffff;
+  align-self: flex-start;
+  border-top-left-radius: 2px;
+}
+
+.rea-final__phone-msg--out {
+  background: #D9FDD3;
+  align-self: flex-end;
+  border-top-right-radius: 2px;
+}
+
+.rea-final__phone-time {
+  font-size: 0.62rem;
+  color: #9CA3AF;
+  margin-top: 0.2rem;
+  align-self: flex-start;
+  padding-left: 0.25rem;
+}
+
+.rea-final__phone-time--out {
+  align-self: flex-end;
+  padding-left: 0;
+  padding-right: 0.25rem;
+  color: var(--rea-accent-strong);
+  font-weight: 600;
+}
+
+.rea-final__phone-badge {
+  margin: 0.75rem auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  background: var(--rea-accent-strong);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-radius: 999px;
+  align-self: center;
+}
+
+@media (max-width: 820px) {
+  .rea-final__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  .rea-final .rea-h2,
+  .rea-final__sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .rea-final__ctas {
+    justify-content: center;
+  }
+  .rea-final__trust {
+    justify-content: center;
+  }
+  .rea-final__phone {
+    max-width: 300px;
+  }
 }
 
 /* =================================================================
@@ -1218,5 +1927,226 @@ main {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- Problem section: editorial 2-col (Brown Jordan vibe) ---------- */
+
+/* Ambient background behind the whole grid — radial glow extending from
+   the portrait so the section feels like one scene, not two columns. */
+.rea-problem {
+  position: relative;
+  overflow: hidden;
+}
+
+.rea-problem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 50%, rgba(10, 123, 91, 0.07) 0%, transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(10, 123, 91, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rea-problem > * { position: relative; z-index: 1; }
+
+.rea-problem__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 5rem;
+  align-items: center;
+}
+
+.rea-problem__text { min-width: 0; max-width: 540px; }
+
+/* Trust strip — typographic badges, no corporate logos (Job Today pattern) */
+.rea-problem__trust {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.rea-problem__trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1F2937;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 999px;
+  letter-spacing: 0.005em;
+}
+
+.rea-problem__trust-item svg {
+  color: var(--rea-accent);
+  flex-shrink: 0;
+}
+
+/* Right column — phone mockup + stat caption */
+.rea-problem__mockup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  justify-self: end;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Response-time comparison chart — differentiates from the hero chat mockup */
+.rea-problem__chart {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow:
+    0 1px 2px rgba(10, 15, 13, 0.04),
+    0 24px 48px -24px rgba(10, 15, 13, 0.12);
+}
+
+.rea-problem__chart-title {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6B7280;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.rea-problem__bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rea-problem__bar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.rea-problem__bar-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1F2937;
+  line-height: 1.3;
+}
+
+.rea-problem__bar-value {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rea-problem__bar-value--new { color: var(--rea-accent-strong); }
+.rea-problem__bar-value--old { color: #9CA3AF; }
+
+.rea-problem__bar-track {
+  width: 100%;
+  height: 10px;
+  background: #F3F4F6;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rea-problem__bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.rea-problem__bar-fill--new {
+  background: var(--rea-accent);
+}
+
+.rea-problem__bar-fill--old {
+  background: repeating-linear-gradient(
+    45deg,
+    #E5E7EB,
+    #E5E7EB 6px,
+    #F3F4F6 6px,
+    #F3F4F6 12px
+  );
+}
+
+.rea-problem__chart-source {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.7rem;
+  color: #9CA3AF;
+  font-style: italic;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid #F3F4F6;
+}
+
+/* Stat caption — editorial under the mockup with cited source */
+.rea-problem__stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 1px 2px rgba(10, 15, 13, 0.04);
+}
+
+.rea-problem__stat-num {
+  font-family: "DM Sans", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--rea-accent-strong);
+}
+
+.rea-problem__stat-label {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #1F2937;
+  font-weight: 600;
+}
+
+.rea-problem__stat-source {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.68rem;
+  color: #6B7280;
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 900px) {
+  .rea-problem__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .rea-problem__mockup {
+    order: -1;
+    margin: 0 auto;
+    justify-self: center;
   }
 }
