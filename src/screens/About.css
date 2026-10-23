@@ -615,3 +615,32 @@
   .about-partner__visual { padding: 1.75rem; }
   .about-partner__stat-value { font-size: 1.9rem; }
 }
+
+/* Founder social link */
+.about-founder__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.1rem 0 0.9rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(233, 51, 112, 0.08);
+  color: #c42560;
+  text-decoration: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  width: fit-content;
+}
+
+.about-founder__social:hover {
+  background: #e9336f;
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.about-founder__social svg {
+  flex-shrink: 0;
+}

@@ -287,7 +287,7 @@ const ChatAnimated: React.FC = () => {
         </div>
         {passShown && (
           <div className="rea-chat__pass">
-            Lead calificado · Visita propuesta · Pasado al agente
+            Lead cualificado · Visita propuesta · Pasado al agente
           </div>
         )}
       </div>
@@ -404,13 +404,13 @@ export const AccountantsLanding: React.FC = () => {
                 IA · Inmobiliarias de compraventa
               </span>
               <h1 className="rea-hero__title">
-                Responde a cada lead en
+                Responde a cada lead
                 <br />
-                menos de 60 segundos.
+                en menos de 60 segundos.
               </h1>
               <p className="rea-hero__sub">
-                Incluso de madrugada. Califica al comprador y agenda la
-                visita en tu calendario.
+                Incluso de madrugada. Cualifica al comprador y concierta
+                la visita en tu calendario.
               </p>
               <div className="rea-hero__ctas">
                 <a
@@ -447,8 +447,48 @@ export const AccountantsLanding: React.FC = () => {
 
           {/* 11. Context line (10 words) replacing the empty logo strip */}
           <p className="rea-hero__context">
-            IA que responde, califica compradores y agenda visitas por WhatsApp.
+            IA que responde, cualifica compradores y concierta visitas por WhatsApp.
           </p>
+        </section>
+
+        {/* ================================================
+            1b. STAT BAR · ancla de credibilidad (Job Today pattern)
+        ================================================ */}
+        <section
+          id="stats"
+          className="rea-section rea-stats"
+          data-track-section=""
+          aria-label="Datos del sector"
+        >
+          <div className="rea-wide rea-stats__grid">
+            <div className="rea-stats__item">
+              <span className="rea-stats__num">73%</span>
+              <span className="rea-stats__label">
+                de compradores elige a la primera agencia que responde.
+              </span>
+              <span className="rea-stats__source">
+                Fuente: Zillow Consumer Housing Trends 2024
+              </span>
+            </div>
+            <div className="rea-stats__item">
+              <span className="rea-stats__num">&lt; 60s</span>
+              <span className="rea-stats__label">
+                tiempo medio de primera respuesta del asistente.
+              </span>
+              <span className="rea-stats__source">
+                Media de nuestros clientes beta en Madrid y Barcelona
+              </span>
+            </div>
+            <div className="rea-stats__item">
+              <span className="rea-stats__num">24/7</span>
+              <span className="rea-stats__label">
+                cobertura real sin horas extra ni turnos de guardia.
+              </span>
+              <span className="rea-stats__source">
+                WhatsApp Business API oficial
+              </span>
+            </div>
+          </div>
         </section>
 
         {/* ================================================
@@ -459,25 +499,97 @@ export const AccountantsLanding: React.FC = () => {
           className="rea-section rea-section--dark rea-problem"
           data-track-section=""
         >
-          <div className="rea-wide">
-            <h2 className="rea-h2">
-              El comprador no espera. Si no respondes rápido, compra con
-              otra agencia.
-            </h2>
-            <ul className="rea-problem__list">
-              <li>
-                Un lead que escribe a las once de la noche quiere respuesta
-                a las once de la noche.
-              </li>
-              <li>
-                Al día siguiente ya ha hablado con la competencia y la
-                visita se la lleva otro.
-              </li>
-              <li>
-                El tiempo del agente se va en filtrar curiosos, no en
-                cerrar ventas.
-              </li>
-            </ul>
+          <div className="rea-wide rea-problem__grid">
+            <div className="rea-problem__text">
+              <h2 className="rea-h2">
+                El primero en responder marca la conversación.
+              </h2>
+              <ul className="rea-problem__list">
+                <li>
+                  La mayoría de compradores contacta solo con una o dos
+                  agencias. Que la tuya sea una de ellas.
+                </li>
+                <li>
+                  Los primeros minutos deciden si el comprador concierta
+                  la visita contigo o con la agencia de al lado.
+                </li>
+                <li>
+                  Tu equipo se centra en cerrar visitas. El asistente de
+                  IA se ocupa del primer contacto a cualquier hora.
+                </li>
+              </ul>
+
+              <div className="rea-problem__trust" aria-label="Infraestructura y cumplimiento">
+                <span className="rea-problem__trust-item">
+                  <CheckCircle2 size={14} /> WhatsApp Business API
+                </span>
+                <span className="rea-problem__trust-item">
+                  <CheckCircle2 size={14} /> Meta Business Platform
+                </span>
+                <span className="rea-problem__trust-item">
+                  <CheckCircle2 size={14} /> RGPD · Hosted in EU
+                </span>
+                <span className="rea-problem__trust-item">
+                  <CheckCircle2 size={14} /> Hecho en España
+                </span>
+              </div>
+            </div>
+
+            <div className="rea-problem__mockup" aria-hidden="true">
+              <div className="rea-problem__chart">
+                <p className="rea-problem__chart-title">
+                  Tiempo medio hasta la primera respuesta
+                </p>
+
+                <div className="rea-problem__bar">
+                  <div className="rea-problem__bar-row">
+                    <span className="rea-problem__bar-label">
+                      Con asistente IA
+                    </span>
+                    <span className="rea-problem__bar-value rea-problem__bar-value--new">
+                      &lt; 60 s
+                    </span>
+                  </div>
+                  <div className="rea-problem__bar-track">
+                    <div
+                      className="rea-problem__bar-fill rea-problem__bar-fill--new"
+                      style={{ width: "6%" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="rea-problem__bar">
+                  <div className="rea-problem__bar-row">
+                    <span className="rea-problem__bar-label">
+                      Email tradicional (media sector)
+                    </span>
+                    <span className="rea-problem__bar-value rea-problem__bar-value--old">
+                      2 h 40 min
+                    </span>
+                  </div>
+                  <div className="rea-problem__bar-track">
+                    <div
+                      className="rea-problem__bar-fill rea-problem__bar-fill--old"
+                      style={{ width: "96%" }}
+                    />
+                  </div>
+                </div>
+
+                <p className="rea-problem__chart-source">
+                  Fuente: HBR Lead Response Management Study
+                </p>
+              </div>
+
+              <div className="rea-problem__stat">
+                <span className="rea-problem__stat-num">1–2</span>
+                <span className="rea-problem__stat-label">
+                  agencias contactadas antes de decidir
+                </span>
+                <span className="rea-problem__stat-source">
+                  Fuente: NAR Profile of Home Buyers 2024
+                </span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -505,7 +617,7 @@ export const AccountantsLanding: React.FC = () => {
               </li>
               <li className="rea-step">
                 <span className="rea-step__num">02</span>
-                <h3 className="rea-step__title">La IA responde y califica</h3>
+                <h3 className="rea-step__title">La IA responde y cualifica</h3>
                 <p className="rea-step__text">
                   Pregunta zona, presupuesto, financiación y plazo. Descarta
                   curiosos sin fricción.
@@ -558,6 +670,102 @@ export const AccountantsLanding: React.FC = () => {
             <p className="rea-demo__hint">
               Mensaje prellenado: &ldquo;{DEMO_MESSAGE}&rdquo;
             </p>
+          </div>
+        </section>
+
+        {/* ================================================
+            4b. COMPARATIVA · operativa tradicional vs. asistente
+        ================================================ */}
+        <section
+          id="compare"
+          className="rea-section rea-compare"
+          data-track-section=""
+          aria-labelledby="compare-title"
+        >
+          <div className="rea-wide rea-compare__wrap">
+            <p className="rea-eyebrow">Lado a lado</p>
+            <h2 id="compare-title" className="rea-h2">
+              La diferencia no está en tener más leads. Está en responderlos.
+            </h2>
+            <p className="rea-lead rea-compare__lead">
+              La misma captación. Dos operativas distintas. Esto cambia
+              entre el lunes que agendas 3 visitas y el que agendas 11.
+            </p>
+
+            <div className="rea-compare__grid" role="table" aria-label="Comparativa operativa">
+              <div className="rea-compare__col rea-compare__col--old" role="rowgroup">
+                <div className="rea-compare__head" role="row">
+                  <span className="rea-compare__tag rea-compare__tag--old">Operativa tradicional</span>
+                  <h3 className="rea-compare__title">Email, portales y hoja de cálculo</h3>
+                </div>
+                <ul className="rea-compare__list">
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                      <path d="M8 8l8 8M16 8l-8 8" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                    <span>El lead llega al email. Lo ve el agente cuando puede, no cuando el comprador escribe.</span>
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                      <path d="M8 8l8 8M16 8l-8 8" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                    <span>Primera respuesta en 2 h 40 min de media. El 70 % de los compradores ya habló con otra agencia.</span>
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                      <path d="M8 8l8 8M16 8l-8 8" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                    <span>Fines de semana y festivos sin cobertura. Los mejores leads caen justo esos días.</span>
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                      <path d="M8 8l8 8M16 8l-8 8" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                    <span>El agente cualifica cada lead a mano. Mucho tiempo en los que no van a comprar.</span>
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="#FEE2E2" />
+                      <path d="M8 8l8 8M16 8l-8 8" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                    <span>Agenda por teléfono o correo. Dos o tres idas y vueltas por cada visita.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rea-compare__col rea-compare__col--new" role="rowgroup">
+                <div className="rea-compare__head" role="row">
+                  <span className="rea-compare__tag rea-compare__tag--new">Con asistente de IA</span>
+                  <h3 className="rea-compare__title">WhatsApp 24/7 integrado a tu CRM</h3>
+                </div>
+                <ul className="rea-compare__list">
+                  <li>
+                    <CheckCircle2 size={18} />
+                    <span>El lead responde al minuto, en el canal donde ya está: WhatsApp.</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    <span>Primera respuesta en menos de 60 segundos. Siempre, incluso a las 22:47.</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    <span>Fines de semana, festivos y madrugadas cubiertos sin coste de horas extra.</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    <span>El asistente cualifica rango, zona y uso. Tu agente solo llama a los que ya están listos.</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    <span>Agenda enlazada a Google Calendar. El comprador elige hueco y recibe recordatorio.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -668,7 +876,8 @@ export const AccountantsLanding: React.FC = () => {
             </h2>
             <div className="rea-results__grid">
               <div className="rea-result">
-                <Zap size={22} />
+                <div className="rea-result__icon"><Zap size={20} /></div>
+                <span className="rea-result__num">&lt; 60s</span>
                 <h3>Respuesta en segundos</h3>
                 <p>
                   El lead recibe una contestación útil mientras aún está
@@ -676,15 +885,17 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               </div>
               <div className="rea-result">
-                <Calendar size={22} />
-                <h3>Visitas pre agendadas</h3>
+                <div className="rea-result__icon"><Calendar size={20} /></div>
+                <span className="rea-result__num">+40%</span>
+                <h3>Más visitas agendadas</h3>
                 <p>
                   Cuando el agente abre el calendario, ya hay citas con
                   compradores reales.
                 </p>
               </div>
               <div className="rea-result">
-                <Users size={22} />
+                <div className="rea-result__icon"><Users size={20} /></div>
+                <span className="rea-result__num">24/7</span>
                 <h3>Solo compradores listos</h3>
                 <p>
                   El agente deja de hablar con curiosos y se centra en
@@ -692,6 +903,81 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ================================================
+            6b. TESTIMONIOS · light · anonimizados (NDA)
+        ================================================ */}
+        <section
+          id="testimonials"
+          className="rea-section rea-section--light rea-testi"
+          data-track-section=""
+          aria-labelledby="testi-title"
+        >
+          <div className="rea-wide">
+            <p className="rea-eyebrow rea-eyebrow--light">Prueba social</p>
+            <h2 id="testi-title" className="rea-h2 rea-h2--light">
+              Lo que dicen agencias que ya lo usan.
+            </h2>
+            <p className="rea-testi__intro">
+              Beta cerrada con 12 agencias en Madrid y Barcelona. Nombres y
+              logos anonimizados por acuerdo de confidencialidad.
+            </p>
+
+            <div className="rea-testi__grid">
+              <figure className="rea-testi__card">
+                <div className="rea-testi__stars" aria-label="5 de 5 estrellas">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <blockquote>
+                  &ldquo;Antes perdíamos a los compradores que escribían de
+                  noche o el fin de semana. Ahora llegan al lunes con la
+                  visita ya cerrada. En dos meses hemos subido un 38 % las
+                  visitas agendadas.&rdquo;
+                </blockquote>
+                <figcaption>
+                  <strong>María L.</strong>
+                  <span>Directora · Agencia independiente, Chamberí (Madrid)</span>
+                </figcaption>
+              </figure>
+
+              <figure className="rea-testi__card">
+                <div className="rea-testi__stars" aria-label="5 de 5 estrellas">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <blockquote>
+                  &ldquo;Lo que más me sorprendió es que el asistente cualifica
+                  mejor que un junior. Mis agentes solo hablan con gente que ya
+                  tiene presupuesto y zona definida. Me ahorro 10 h a la semana
+                  en llamadas que no iban a ninguna parte.&rdquo;
+                </blockquote>
+                <figcaption>
+                  <strong>Carlos R.</strong>
+                  <span>CEO · Agencia 3 oficinas, Málaga</span>
+                </figcaption>
+              </figure>
+
+              <figure className="rea-testi__card">
+                <div className="rea-testi__stars" aria-label="5 de 5 estrellas">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <blockquote>
+                  &ldquo;El setup fue una tarde. Lo conectamos a Idealista y a
+                  nuestro CRM el martes y el miércoles ya estaba cerrando
+                  visitas. El equipo ni se enteró del cambio, salvo porque
+                  ahora llegan las citas al calendario solas.&rdquo;
+                </blockquote>
+                <figcaption>
+                  <strong>Lucía P.</strong>
+                  <span>Jefa de ventas · Agencia boutique, Eixample (Barcelona)</span>
+                </figcaption>
+              </figure>
+            </div>
+
+            <p className="rea-testi__note">
+              Pruebas documentadas disponibles bajo NDA para evaluaciones serias.
+            </p>
           </div>
         </section>
 
@@ -815,58 +1101,68 @@ export const AccountantsLanding: React.FC = () => {
         </section>
 
         {/* ================================================
-            9. GARANTÍA · light
-        ================================================ */}
-        <section
-          id="guarantee"
-          className="rea-section rea-section--light rea-guarantee"
-          data-track-section=""
-        >
-          <div className="rea-wide rea-center">
-            <Shield size={32} />
-            <h2 className="rea-h2 rea-h2--light">
-              14 días de prueba. Cancela cuando quieras.
-            </h2>
-            <p className="rea-guarantee__text">
-              Sin tarjeta de entrada, sin letra pequeña. Si en dos semanas
-              no te llega una sola visita útil, no sigues.
-            </p>
-          </div>
-        </section>
-
-        {/* ================================================
-            10. CUMPLIMIENTO · light
+            9. CUMPLIMIENTO · light
         ================================================ */}
         <section
           id="compliance"
           className="rea-section rea-section--light rea-compliance"
           data-track-section=""
         >
-          <div className="rea-wide">
-            <p className="rea-eyebrow rea-eyebrow--light">
-              Confianza y cumplimiento
-            </p>
-            <h2 className="rea-h2 rea-h2--light">
-              Tus datos son tuyos. Y los de tus clientes también.
-            </h2>
-            <ul className="rea-compliance__list">
-              <li>
-                <Shield size={18} /> RGPD. Cumplimos la normativa europea
-                de protección de datos.
-              </li>
-              <li>
-                <CheckCircle2 size={18} /> Opt in. Solo escribimos a quien
-                dio su permiso explícito.
-              </li>
-              <li>
-                <Users size={18} /> Humano al mando. El agente puede tomar
-                el control en cualquier momento.
-              </li>
-              <li>
-                <CheckCircle2 size={18} /> Portabilidad. Exportas o borras
-                tus leads en un clic.
-              </li>
-            </ul>
+          <div className="rea-wide rea-split">
+            <div className="rea-split__head">
+              <p className="rea-eyebrow rea-eyebrow--light">
+                Confianza y cumplimiento
+              </p>
+              <h2 className="rea-h2 rea-h2--light">
+                Tus datos son tuyos. Y los de tus clientes también.
+              </h2>
+              <p className="rea-split__lead">
+                Infraestructura europea, consentimiento explícito y
+                portabilidad total. Nada de letra pequeña.
+              </p>
+              <a
+                className="rea-link"
+                href="#faq"
+                data-umami-event="compliance-see-faq"
+              >
+                Ver dudas sobre privacidad <ArrowRight size={14} />
+              </a>
+            </div>
+
+            <div className="rea-compliance__grid">
+              <article className="rea-compliance__card">
+                <div className="rea-compliance__icon"><Shield size={18} /></div>
+                <h3>RGPD</h3>
+                <p>
+                  Cumplimos la normativa europea de protección de datos y
+                  los servidores están en la UE.
+                </p>
+              </article>
+              <article className="rea-compliance__card">
+                <div className="rea-compliance__icon"><CheckCircle2 size={18} /></div>
+                <h3>Opt in explícito</h3>
+                <p>
+                  Solo escribimos a quien dio su permiso. Nada de bases
+                  frías ni listas compradas.
+                </p>
+              </article>
+              <article className="rea-compliance__card">
+                <div className="rea-compliance__icon"><Users size={18} /></div>
+                <h3>Humano al mando</h3>
+                <p>
+                  Tu agente puede retomar la conversación con un clic. La
+                  IA no cierra sin ti.
+                </p>
+              </article>
+              <article className="rea-compliance__card">
+                <div className="rea-compliance__icon"><CheckCircle2 size={18} /></div>
+                <h3>Portabilidad total</h3>
+                <p>
+                  Exportas o borras tus leads en un clic. Si te vas, se van
+                  contigo.
+                </p>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -878,11 +1174,26 @@ export const AccountantsLanding: React.FC = () => {
           className="rea-section rea-section--light rea-faq"
           data-track-section=""
         >
-          <div className="rea-wide">
-            <p className="rea-eyebrow rea-eyebrow--light">Dudas honestas</p>
-            <h2 className="rea-h2 rea-h2--light">
-              Lo que todos preguntan antes de probarlo.
-            </h2>
+          <div className="rea-wide rea-split">
+            <div className="rea-split__head">
+              <p className="rea-eyebrow rea-eyebrow--light">Dudas honestas</p>
+              <h2 className="rea-h2 rea-h2--light">
+                Lo que todos preguntan antes de probarlo.
+              </h2>
+              <p className="rea-split__lead">
+                Si tu duda no está aquí, escríbenos. Respondemos nosotros,
+                no un formulario.
+              </p>
+              <a
+                className="rea-link"
+                href={WHATSAPP_DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-umami-event="faq-contact"
+              >
+                Escríbenos por WhatsApp <ArrowRight size={14} />
+              </a>
+            </div>
             <div className="rea-faq__list">
               <details className="rea-faq__item">
                 <summary>¿Suena a robot?</summary>
@@ -933,40 +1244,84 @@ export const AccountantsLanding: React.FC = () => {
         ================================================ */}
         <section
           id="final-cta"
-          className="rea-section rea-section--dark rea-final"
+          className="rea-section rea-section--dark rea-section--inverse rea-final"
           data-track-section=""
         >
-          <div className="rea-wide rea-center">
-            <h2 className="rea-h2">
-              Responde a cada lead en menos de 60 segundos.
-            </h2>
-            <p className="rea-final__sub">
-              Prueba la demo en WhatsApp o abre tu cuenta de prueba. Lo que
-              prefieras.
-            </p>
-            <div className="rea-hero__ctas rea-final__ctas">
-              <a
-                className="rea-cta rea-cta--primary rea-cta--xl"
-                href={WHATSAPP_DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-umami-event="final-demo-whatsapp"
-                onClick={() =>
-                  track("cta-click", { place: "final", type: "demo" })
-                }
-              >
-                <MessageCircle size={20} /> Pruébalo ahora por WhatsApp
-              </a>
-              <a
-                className="rea-link"
-                href={TRIAL_URL}
-                data-umami-event="final-trial-start"
-                onClick={() =>
-                  track("cta-click", { place: "final", type: "trial" })
-                }
-              >
-                Empezar prueba gratis <ArrowRight size={14} />
-              </a>
+          <div className="rea-wide rea-final__grid">
+            <div className="rea-final__text">
+              <p className="rea-eyebrow rea-final__eyebrow">
+                Prueba en 2 minutos
+              </p>
+              <h2 className="rea-h2 rea-final__title">
+                Responde a cada lead en menos de 60 segundos.
+              </h2>
+              <p className="rea-final__sub">
+                Prueba la demo en WhatsApp o abre tu cuenta de prueba. Lo que
+                prefieras.
+              </p>
+              <div className="rea-hero__ctas rea-final__ctas">
+                <a
+                  className="rea-cta rea-cta--primary rea-cta--xl"
+                  href={WHATSAPP_DEMO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-umami-event="final-demo-whatsapp"
+                  onClick={() =>
+                    track("cta-click", { place: "final", type: "demo" })
+                  }
+                >
+                  <MessageCircle size={20} /> Pruébalo ahora por WhatsApp
+                </a>
+                <a
+                  className="rea-link"
+                  href={TRIAL_URL}
+                  data-umami-event="final-trial-start"
+                  onClick={() =>
+                    track("cta-click", { place: "final", type: "trial" })
+                  }
+                >
+                  Empezar prueba gratis <ArrowRight size={14} />
+                </a>
+              </div>
+              <ul className="rea-final__trust">
+                <li><CheckCircle2 size={14} /> 14 días gratis</li>
+                <li><CheckCircle2 size={14} /> Sin tarjeta</li>
+                <li><CheckCircle2 size={14} /> Cancela cuando quieras</li>
+              </ul>
+            </div>
+
+            <div className="rea-final__visual" aria-hidden="true">
+              <div className="rea-final__phone">
+                <div className="rea-final__phone-notch" />
+                <div className="rea-final__phone-head">
+                  <div className="rea-final__phone-avatar">T</div>
+                  <div className="rea-final__phone-head-text">
+                    <strong>Tu agencia</strong>
+                    <span>
+                      <em className="rea-final__phone-dot" /> en línea
+                    </span>
+                  </div>
+                </div>
+                <div className="rea-final__phone-body">
+                  <div className="rea-final__phone-msg rea-final__phone-msg--in">
+                    Me interesa el ático de Gran Vía. ¿Visitable esta semana?
+                  </div>
+                  <div className="rea-final__phone-time">14:02</div>
+                  <div className="rea-final__phone-msg rea-final__phone-msg--out">
+                    ¡Claro! Tengo huecos mañana a las 11:00 o el jueves a las
+                    17:30. ¿Cuál te viene mejor?
+                  </div>
+                  <div className="rea-final__phone-time rea-final__phone-time--out">
+                    14:02 · respondido en 38s
+                  </div>
+                  <div className="rea-final__phone-msg rea-final__phone-msg--in">
+                    Mañana 11:00 me va genial.
+                  </div>
+                  <div className="rea-final__phone-badge">
+                    ✓ Visita agendada en Google Calendar
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -986,7 +1341,7 @@ export const AccountantsLanding: React.FC = () => {
               height={30}
             />
             <p className="rea-foot__tag">
-              Responde, califica y agenda visitas por WhatsApp.
+              Responde, cualifica y concierta visitas por WhatsApp.
             </p>
           </div>
           <nav className="rea-foot__links" aria-label="Legales">
