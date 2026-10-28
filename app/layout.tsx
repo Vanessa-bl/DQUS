@@ -346,6 +346,10 @@ export default async function RootLayout({
         />
         <link
           rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap"
+        />
+        <link
+          rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
         <script

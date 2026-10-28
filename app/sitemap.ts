@@ -26,6 +26,7 @@ const PATHS: Entry[] = [
   { path: "contact", priority: 0.7, changeFrequency: "monthly" },
   { path: "conversion-audit", priority: 0.6, changeFrequency: "monthly" },
   { path: "accountants", priority: 0.5, changeFrequency: "monthly" },
+  { path: "real-estate", priority: 0.5, changeFrequency: "monthly" },
   { path: "blog", priority: 0.8, changeFrequency: "weekly" },
   { path: "results", priority: 0.9, changeFrequency: "monthly" },
 ];
