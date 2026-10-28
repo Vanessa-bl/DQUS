@@ -5,7 +5,11 @@ import {
   MessageCircle,
   Calendar,
   CheckCircle2,
-  Shield,
+  ShieldCheck,
+  UserCheck,
+  Headset,
+  Download,
+  Lock,
   Zap,
   Users,
   ArrowRight,
@@ -1108,7 +1112,7 @@ export const AccountantsLanding: React.FC = () => {
           className="rea-section rea-section--light rea-compliance"
           data-track-section=""
         >
-          <div className="rea-wide rea-split">
+          <div className="rea-wide rea-split rea-split--compliance">
             <div className="rea-split__head">
               <p className="rea-eyebrow rea-eyebrow--light">
                 Confianza y cumplimiento
@@ -1120,48 +1124,84 @@ export const AccountantsLanding: React.FC = () => {
                 Infraestructura europea, consentimiento explícito y
                 portabilidad total. Nada de letra pequeña.
               </p>
-              <a
-                className="rea-link"
-                href="#faq"
-                data-umami-event="compliance-see-faq"
-              >
-                Ver dudas sobre privacidad <ArrowRight size={14} />
-              </a>
             </div>
 
-            <div className="rea-compliance__grid">
-              <article className="rea-compliance__card">
-                <div className="rea-compliance__icon"><Shield size={18} /></div>
-                <h3>RGPD</h3>
-                <p>
-                  Cumplimos la normativa europea de protección de datos y
-                  los servidores están en la UE.
-                </p>
-              </article>
-              <article className="rea-compliance__card">
-                <div className="rea-compliance__icon"><CheckCircle2 size={18} /></div>
-                <h3>Opt in explícito</h3>
-                <p>
-                  Solo escribimos a quien dio su permiso. Nada de bases
-                  frías ni listas compradas.
-                </p>
-              </article>
-              <article className="rea-compliance__card">
-                <div className="rea-compliance__icon"><Users size={18} /></div>
-                <h3>Humano al mando</h3>
-                <p>
-                  Tu agente puede retomar la conversación con un clic. La
-                  IA no cierra sin ti.
-                </p>
-              </article>
-              <article className="rea-compliance__card">
-                <div className="rea-compliance__icon"><CheckCircle2 size={18} /></div>
-                <h3>Portabilidad total</h3>
-                <p>
-                  Exportas o borras tus leads en un clic. Si te vas, se van
-                  contigo.
-                </p>
-              </article>
+            <div className="rea-compliance__panel">
+              <div className="rea-compliance__panel-head">
+                <span className="rea-compliance__panel-icon" aria-hidden="true">
+                  <Lock size={15} />
+                </span>
+                <span className="rea-compliance__panel-title">
+                  Tus datos, bajo tu control
+                </span>
+                <span className="rea-compliance__panel-tag">
+                  Servidores en la UE
+                </span>
+              </div>
+
+              <ul className="rea-compliance__list">
+                <li className="rea-compliance__row">
+                  <span className="rea-compliance__icon" aria-hidden="true">
+                    <ShieldCheck size={18} />
+                  </span>
+                  <div className="rea-compliance__body">
+                    <h3>RGPD</h3>
+                    <p>
+                      Cumplimos la normativa europea de protección de datos y
+                      los servidores están en la UE.
+                    </p>
+                  </div>
+                </li>
+                <li className="rea-compliance__row">
+                  <span className="rea-compliance__icon" aria-hidden="true">
+                    <UserCheck size={18} />
+                  </span>
+                  <div className="rea-compliance__body">
+                    <h3>Opt in explícito</h3>
+                    <p>
+                      Solo escribimos a quien dio su permiso. Nada de bases
+                      frías ni listas compradas.
+                    </p>
+                  </div>
+                </li>
+                <li className="rea-compliance__row">
+                  <span className="rea-compliance__icon" aria-hidden="true">
+                    <Headset size={18} />
+                  </span>
+                  <div className="rea-compliance__body">
+                    <h3>Humano al mando</h3>
+                    <p>
+                      Tu agente puede retomar la conversación con un clic. La
+                      IA no cierra sin ti.
+                    </p>
+                  </div>
+                </li>
+                <li className="rea-compliance__row">
+                  <span className="rea-compliance__icon" aria-hidden="true">
+                    <Download size={18} />
+                  </span>
+                  <div className="rea-compliance__body">
+                    <h3>Portabilidad total</h3>
+                    <p>
+                      Exportas o borras tus leads en un clic. Si te vas, se van
+                      contigo.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+
+              <div className="rea-compliance__foot">
+                <span className="rea-compliance__foot-note">
+                  ¿Dudas sobre privacidad?
+                </span>
+                <a
+                  className="rea-compliance__foot-link"
+                  href="#faq"
+                  data-umami-event="compliance-see-faq"
+                >
+                  Ver preguntas frecuentes <ArrowRight size={14} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -1174,7 +1214,7 @@ export const AccountantsLanding: React.FC = () => {
           className="rea-section rea-section--light rea-faq"
           data-track-section=""
         >
-          <div className="rea-wide rea-split">
+          <div className="rea-wide rea-split rea-split--faq">
             <div className="rea-split__head">
               <p className="rea-eyebrow rea-eyebrow--light">Dudas honestas</p>
               <h2 className="rea-h2 rea-h2--light">
@@ -1184,19 +1224,14 @@ export const AccountantsLanding: React.FC = () => {
                 Si tu duda no está aquí, escríbenos. Respondemos nosotros,
                 no un formulario.
               </p>
-              <a
-                className="rea-link"
-                href={WHATSAPP_DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-umami-event="faq-contact"
-              >
-                Escríbenos por WhatsApp <ArrowRight size={14} />
-              </a>
             </div>
             <div className="rea-faq__list">
               <details className="rea-faq__item">
-                <summary>¿Suena a robot?</summary>
+                <summary>
+                  <span className="rea-faq__num">01</span>
+                  <span className="rea-faq__q">¿Suena a robot?</span>
+                  <span className="rea-faq__icon" aria-hidden="true" />
+                </summary>
                 <p>
                   No. La IA se presenta como asistente de tu inmobiliaria,
                   habla en el tono que configuras y en cuanto el lead está
@@ -1205,7 +1240,11 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               </details>
               <details className="rea-faq__item">
-                <summary>¿Y si no sabe responder algo?</summary>
+                <summary>
+                  <span className="rea-faq__num">02</span>
+                  <span className="rea-faq__q">¿Y si no sabe responder algo?</span>
+                  <span className="rea-faq__icon" aria-hidden="true" />
+                </summary>
                 <p>
                   Avisa al lead de que te consulta y transfiere la
                   conversación a tu agente. Nunca inventa. Si la
@@ -1213,7 +1252,13 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               </details>
               <details className="rea-faq__item">
-                <summary>¿Necesito cuenta oficial de WhatsApp Business?</summary>
+                <summary>
+                  <span className="rea-faq__num">03</span>
+                  <span className="rea-faq__q">
+                    ¿Necesito cuenta oficial de WhatsApp Business?
+                  </span>
+                  <span className="rea-faq__icon" aria-hidden="true" />
+                </summary>
                 <p>
                   Sí, WhatsApp Business API. Si aún no la tienes, te
                   ayudamos en el alta durante el setup. Es gratis darla de
@@ -1221,20 +1266,42 @@ export const AccountantsLanding: React.FC = () => {
                 </p>
               </details>
               <details className="rea-faq__item">
-                <summary>¿Cuánto tarda en estar listo?</summary>
+                <summary>
+                  <span className="rea-faq__num">04</span>
+                  <span className="rea-faq__q">¿Cuánto tarda en estar listo?</span>
+                  <span className="rea-faq__icon" aria-hidden="true" />
+                </summary>
                 <p>
                   Una tarde si ya tienes WhatsApp Business API. Dos días
                   si hay que darla de alta por primera vez.
                 </p>
               </details>
               <details className="rea-faq__item">
-                <summary>¿Qué pasa con mis leads si cancelo?</summary>
+                <summary>
+                  <span className="rea-faq__num">05</span>
+                  <span className="rea-faq__q">
+                    ¿Qué pasa con mis leads si cancelo?
+                  </span>
+                  <span className="rea-faq__icon" aria-hidden="true" />
+                </summary>
                 <p>
                   Son tuyos siempre. Los exportas en un clic antes de irte
                   y los borramos de nuestros servidores a las 48 horas de
                   cancelar.
                 </p>
               </details>
+              <div className="rea-faq__foot">
+                <span className="rea-faq__foot-note">¿Te quedó otra duda?</span>
+                <a
+                  className="rea-faq__foot-link"
+                  href={WHATSAPP_DEMO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-umami-event="faq-contact"
+                >
+                  Escríbenos por WhatsApp <ArrowRight size={14} />
+                </a>
+              </div>
             </div>
           </div>
         </section>

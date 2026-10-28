@@ -91,6 +91,9 @@ main {
   width: auto;
   display: block;
   object-fit: contain;
+  /* Force the brand mark to solid black on the light sticky nav,
+     regardless of the source asset color. Alpha is preserved. */
+  filter: brightness(0);
 }
 
 .rea-nav__cta {
@@ -1437,74 +1440,184 @@ main {
 }
 
 /* =================================================================
-   10. CUMPLIMIENTO · light · cards grid
+   10. CUMPLIMIENTO · light · unified trust panel
 ================================================================= */
 
-.rea-compliance__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.rea-compliance__card {
-  padding: 1.75rem 1.5rem;
+.rea-compliance__panel {
   background: #ffffff;
   border: 1px solid #E5E7EB;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(10, 15, 13, 0.04),
+    0 24px 48px -28px rgba(10, 15, 13, 0.14);
 }
 
-.rea-compliance__card:hover {
-  border-color: var(--rea-accent);
-  transform: translateY(-2px);
+.rea-compliance__panel-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.5rem;
+  background: #FBFCFB;
+  border-bottom: 1px solid #ECEFED;
+}
+
+.rea-compliance__panel-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--rea-accent-soft);
+  color: var(--rea-accent-strong);
+  flex-shrink: 0;
+}
+
+.rea-compliance__panel-title {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rea-ink-on-light-dim);
+}
+
+.rea-compliance__panel-tag {
+  margin-left: auto;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--rea-accent-strong);
+  background: var(--rea-accent-soft);
+  border: 1px solid rgba(10, 123, 91, 0.14);
+  border-radius: 999px;
+  padding: 0.28rem 0.65rem;
+  white-space: nowrap;
+}
+
+.rea-compliance__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rea-compliance__row {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.35rem 1.5rem;
+}
+
+.rea-compliance__row + .rea-compliance__row {
+  border-top: 1px solid #F1F3F2;
 }
 
 .rea-compliance__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
-  background: #D1FAE5;
+  background: #F7F8F7;
+  border: 1px solid #ECEFED;
   color: var(--rea-accent-strong);
-  margin-bottom: 0.25rem;
+  flex-shrink: 0;
 }
 
-.rea-compliance__card h3 {
+.rea-compliance__body {
+  min-width: 0;
+}
+
+.rea-compliance__body h3 {
   font-family: "DM Sans", sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--rea-ink-on-light);
-  margin: 0;
+  margin: 0 0 0.25rem;
   letter-spacing: -0.01em;
 }
 
-.rea-compliance__card p {
+.rea-compliance__body p {
   font-family: "Nunito Sans", sans-serif;
   color: var(--rea-ink-on-light-dim);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
   font-size: 0.9rem;
 }
 
+.rea-compliance__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #ECEFED;
+  background: #FBFCFB;
+}
+
+.rea-compliance__foot-note {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.82rem;
+  color: var(--rea-ink-on-light-faint);
+}
+
+.rea-compliance__foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rea-accent-strong);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: gap 0.2s ease;
+}
+
+.rea-compliance__foot-link:hover {
+  gap: 0.55rem;
+}
+
 @media (max-width: 600px) {
-  .rea-compliance__grid {
-    grid-template-columns: 1fr;
+  .rea-compliance__panel-head {
+    flex-wrap: wrap;
+  }
+  .rea-compliance__panel-tag {
+    margin-left: 0;
+  }
+  .rea-compliance__row {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 0.85rem;
+    padding: 1.15rem;
+  }
+  .rea-compliance__icon {
+    width: 34px;
+    height: 34px;
+  }
+  .rea-compliance__foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 1.15rem;
   }
 }
 
 /* =================================================================
-   11. FAQ · light · accordion refined
+   11. FAQ · white · numbered editorial accordion
 ================================================================= */
+
+.rea-faq {
+  background: #ffffff;
+}
 
 .rea-faq__list {
   display: flex;
   flex-direction: column;
   margin: 0;
+  border-top: 1px solid #E5E7EB;
 }
 
 .rea-faq__item {
@@ -1516,23 +1629,20 @@ main {
   padding: 0;
 }
 
-.rea-faq__item:first-child {
-  border-top: 1px solid #E5E7EB;
-}
-
 .rea-faq__item summary {
   cursor: pointer;
-  padding: 1.5rem 0;
+  padding: 1.45rem 0;
   font-family: "DM Sans", sans-serif;
   font-weight: 600;
   color: var(--rea-ink-on-light);
   list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.05rem;
-  letter-spacing: -0.012em;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) 32px;
   gap: 1rem;
+  align-items: start;
+  font-size: 1.06rem;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
   transition: color 0.15s ease;
 }
 
@@ -1544,29 +1654,149 @@ main {
   display: none;
 }
 
-.rea-faq__item summary::after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A7B5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 5v14M5 12h14'/></svg>");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: transform 0.2s ease;
+.rea-faq__num {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+  padding-top: 0.38rem;
+  transition: color 0.15s ease;
 }
 
-.rea-faq__item[open] summary::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A7B5B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14'/></svg>");
+.rea-faq__q {
+  min-width: 0;
+}
+
+.rea-faq__icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #DDE3DF;
+  color: var(--rea-ink-on-light);
+  margin-top: -0.1rem;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.rea-faq__icon::before,
+.rea-faq__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.rea-faq__icon::before {
+  width: 12px;
+  height: 1.5px;
+}
+
+.rea-faq__icon::after {
+  width: 1.5px;
+  height: 12px;
+  transition: transform 0.18s ease;
+}
+
+.rea-faq__item summary:hover .rea-faq__icon {
+  border-color: var(--rea-accent);
+  color: var(--rea-accent-strong);
+}
+
+.rea-faq__item[open] summary {
+  color: var(--rea-accent-strong);
+}
+
+.rea-faq__item[open] .rea-faq__num {
+  color: var(--rea-accent-strong);
+}
+
+.rea-faq__item[open] .rea-faq__icon {
+  background: var(--rea-accent);
+  border-color: var(--rea-accent);
+  color: #ffffff;
+}
+
+.rea-faq__item[open] .rea-faq__icon::after {
+  transform: translate(-50%, -50%) scaleY(0);
 }
 
 .rea-faq__item p {
-  padding: 0 2.5rem 1.5rem 0;
+  padding: 0 3.5rem 1.5rem 3.25rem;
   font-family: "Nunito Sans", sans-serif;
   color: var(--rea-ink-on-light-dim);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
   font-size: 0.95rem;
+  max-width: 62ch;
+  animation: rea-faq-reveal 0.22s ease;
+}
+
+@keyframes rea-faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rea-faq__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.35rem;
+}
+
+.rea-faq__foot-note {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.85rem;
+  color: var(--rea-ink-on-light-faint);
+}
+
+.rea-faq__foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--rea-accent-strong);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.rea-faq__foot-link:hover {
+  gap: 0.55rem;
+}
+
+@media (max-width: 600px) {
+  .rea-faq__item summary {
+    grid-template-columns: 1.75rem minmax(0, 1fr) 28px;
+    gap: 0.75rem;
+    font-size: 1rem;
+  }
+  .rea-faq__icon {
+    width: 28px;
+    height: 28px;
+  }
+  .rea-faq__item p {
+    padding: 0 0 1.35rem 2.5rem;
+  }
+  .rea-faq__foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 /* =================================================================
@@ -1923,7 +2153,8 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
   .rea-chat__msg,
-  .rea-chat__pass {
+  .rea-chat__pass,
+  .rea-faq__item p {
     animation: none;
     opacity: 1;
     transform: none;
