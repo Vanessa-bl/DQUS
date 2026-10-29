@@ -155,7 +155,7 @@ export const AgenticLanding: React.FC<AgenticLandingProps> = ({ vertical }) => {
             />
             <span className="dq-nav__brand-tag">
               <span className="dq-nav__brand-dot" aria-hidden="true" />
-              A DevQueens studio
+              Automation agency
             </span>
           </a>
 

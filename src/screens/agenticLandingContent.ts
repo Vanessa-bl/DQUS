@@ -448,7 +448,7 @@ export const accountingLanding: LandingContent = {
     note: "It's free, there's no deck, and we reply within one business day.",
   },
   footer: {
-    tagline: "Process automation studio for accounting firms.",
+    tagline: "Automation agency for accounting firms.",
     links: [
       { label: "Services", href: "/services" },
       { label: "Selected work", href: "/results" },
@@ -743,7 +743,7 @@ export const realEstateLanding: LandingContent = {
     note: "It's free, there's no deck, and we reply within one business day.",
   },
   footer: {
-    tagline: "Process automation studio for real estate teams.",
+    tagline: "Automation agency for real estate teams.",
     links: [
       { label: "Services", href: "/services" },
       { label: "Selected work", href: "/results" },
