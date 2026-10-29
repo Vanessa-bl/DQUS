@@ -99,7 +99,10 @@ export const AgenticLanding: React.FC<AgenticLandingProps> = ({ vertical }) => {
   const offerCard = (
     <div className="dq-offer__card">
       <div className="dq-offer__top">
-        <p className="dq-offer__kicker">Automation product</p>
+        <p className="dq-offer__kicker">
+          <span className="dq-offer__brand-dot" aria-hidden="true" />
+          A DevQueens product
+        </p>
         <span className="dq-offer__tag">No pilot</span>
       </div>
 
@@ -150,6 +153,10 @@ export const AgenticLanding: React.FC<AgenticLandingProps> = ({ vertical }) => {
               width={140}
               height={47}
             />
+            <span className="dq-nav__brand-tag">
+              <span className="dq-nav__brand-dot" aria-hidden="true" />
+              A DevQueens studio
+            </span>
           </a>
 
           <nav className="dq-nav__links" aria-label="Page sections">
@@ -610,13 +617,20 @@ export const AgenticLanding: React.FC<AgenticLandingProps> = ({ vertical }) => {
       <footer className="dq-footer">
         <div className="dq-wrap dq-footer__inner">
           <div className="dq-footer__brand">
-            <img
-              className="dq-footer__logo"
-              src="/logodq.png"
-              alt="DevQueens"
-              width={140}
-              height={47}
-            />
+            <a
+              className="dq-footer__logo-link"
+              href="/"
+              aria-label="DevQueens home"
+            >
+              <img
+                className="dq-footer__logo"
+                src="/logodq.png"
+                alt="DevQueens"
+                width={140}
+                height={47}
+              />
+              <span className="dq-footer__brand-dot" aria-hidden="true" />
+            </a>
             <p>{content.footer.tagline}</p>
           </div>
 
