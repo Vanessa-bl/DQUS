@@ -32,11 +32,11 @@ body:has(.dq-landing) {
   --dq-accent-contrast: #6f3d1c;
   --dq-accent-on-dark: #d8b184;
   --dq-brand-pink: #e9336f;
-  --dq-brand-gradient: linear-gradient(
+  --dq-btn-gradient: linear-gradient(
     135deg,
-    #5f1b7a 0%,
-    #92238f 52%,
-    #c92aa6 100%
+    #080e1a 0%,
+    #0e1a30 55%,
+    #172a4a 100%
   );
   --dq-radius: 14px;
   --dq-radius-sm: 4px;
@@ -260,16 +260,16 @@ body:has(.dq-landing) {
 }
 
 .dq-landing .dq-btn--primary {
-  background: var(--dq-brand-gradient);
+  background: var(--dq-btn-gradient);
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(95, 27, 122, 0.26);
+  box-shadow: 0 6px 20px rgba(8, 14, 26, 0.32);
 }
 
 .dq-landing .dq-btn--primary:hover {
-  background: var(--dq-brand-gradient);
+  background: var(--dq-btn-gradient);
   color: #ffffff;
-  filter: brightness(1.06);
-  box-shadow: 0 8px 24px rgba(146, 35, 143, 0.32);
+  filter: brightness(1.22);
+  box-shadow: 0 8px 24px rgba(8, 14, 26, 0.4);
   transform: translateY(-1px);
 }
 
