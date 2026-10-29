@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
-import { AccountantsLanding } from "@/src/screens/AccountantsLanding";
+import { AgenticLanding } from "@/src/screens/AgenticLanding";
+import { agenticLandings } from "@/src/screens/agenticLandingContent";
 
-// Edit this per-locale copy to match the product name once set.
-const copyByLocale: Record<string, { title: string; description: string }> = {
-  en: {
-    title: "[PON_AQUÍ_EL_NOMBRE] — AI agent for real estate",
-    description:
-      "AI agent that answers real estate leads in under 60 seconds on WhatsApp, qualifies the buyer and books the showing in the agent's calendar. 14-day free trial.",
-  },
-  es: {
-    title: "[PON_AQUÍ_EL_NOMBRE] — Agente IA para inmobiliarias",
-    description:
-      "Agente de IA que responde a cada lead en menos de 60 segundos por WhatsApp, califica al comprador y agenda la visita en el calendario del agente. Prueba gratis 14 días.",
-  },
-};
+const content = agenticLandings.accounting;
+const path = "/accountants";
 
 export async function generateMetadata({
   params,
@@ -21,23 +11,44 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const copy = copyByLocale[locale] ?? copyByLocale.en;
+  const canonical = locale === "en" ? path : `/${locale}${path}`;
+
   return {
-    // absolute override: the global template "%s | DevQueens" does not
-    // apply here. This page shows only the product brand on the tab.
-    title: { absolute: copy.title },
-    description: copy.description,
+    // absolute override: the product landing carries its own title.
+    title: { absolute: content.meta.title },
+    description: content.meta.description,
     alternates: {
-      canonical: locale === "en" ? "/accountants" : `/${locale}/accountants`,
+      canonical,
       languages: {
-        en: "/accountants",
-        es: "/es/accountants",
-        "x-default": "/accountants",
+        en: path,
+        es: `/es${path}`,
+        "x-default": path,
       },
+    },
+    openGraph: {
+      type: "website",
+      locale: locale === "es" ? "es_ES" : "en_US",
+      url: canonical,
+      title: content.meta.title,
+      description: content.meta.description,
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: content.meta.ogAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: content.meta.title,
+      description: content.meta.description,
+      images: [{ url: "/og-image.jpg", alt: content.meta.ogAlt }],
     },
   };
 }
 
 export default function AccountantsPage() {
-  return <AccountantsLanding />;
+  return <AgenticLanding vertical="accounting" />;
 }

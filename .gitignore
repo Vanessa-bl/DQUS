@@ -16,6 +16,11 @@ dist-ssr
 .next/
 next-env.d.ts
 
+# Environment variables
+.env
+.env.*
+!.env.example
+
 google-apps-script.js
 
 # gentle-ai skill-registry (auto-generated, local only)
