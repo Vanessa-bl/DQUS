@@ -34,9 +34,9 @@ body:has(.dq-landing) {
   --dq-brand-pink: #e9336f;
   --dq-brand-gradient: linear-gradient(
     135deg,
-    #6f1238 0%,
-    #8f1a47 55%,
-    #b32458 100%
+    #5f1b7a 0%,
+    #92238f 52%,
+    #c92aa6 100%
   );
   --dq-radius: 14px;
   --dq-radius-sm: 4px;
@@ -262,14 +262,14 @@ body:has(.dq-landing) {
 .dq-landing .dq-btn--primary {
   background: var(--dq-brand-gradient);
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(111, 18, 56, 0.24);
+  box-shadow: 0 6px 20px rgba(95, 27, 122, 0.26);
 }
 
 .dq-landing .dq-btn--primary:hover {
   background: var(--dq-brand-gradient);
   color: #ffffff;
   filter: brightness(1.06);
-  box-shadow: 0 8px 24px rgba(111, 18, 56, 0.32);
+  box-shadow: 0 8px 24px rgba(146, 35, 143, 0.32);
   transform: translateY(-1px);
 }
 
